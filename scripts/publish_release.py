@@ -135,7 +135,10 @@ def main() -> int:
         else:
             # the tag object records who released it; if the machine has no git identity, ask the token whose
             # permissions are already in use rather than inventing one or hardcoding a person into the script
-            if sh("git", "config", "user.email").strip() == "":
+            # `git config user.email` exits 1 when unset, so this probe must not run under check=True:
+            # an unset identity is the condition we are testing for, not an error to die on
+            unset = sh("git", "config", "user.email", check=False).strip() == ""
+            if unset and not sh("git", "config", "--global", "user.email", check=False).strip():
                 u = json.loads(api("/user")[1] or b"{}")
                 login, nm = u.get("login") or "unknown", u.get("name") or u.get("login") or "unknown"
                 mail = u.get("email") or f"{u.get('id')}-{login}@users.noreply.github.com"
