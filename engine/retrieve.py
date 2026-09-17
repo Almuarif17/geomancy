@@ -154,7 +154,6 @@ def build():
     bundles()
     print(f"indexes: {len(by_figure)} figures, {len(by_house)} houses, {len(by_outcome)} outcomes, "
           f"{len(_jsonl(IDX / 'by_work.jsonl'))} works")
-    print("bundles: " + ", ".join(f"{k}({v['bytes']//1024}K)" for k, v in bundle["screens"].items()))
     return 0
 
 
@@ -192,6 +191,7 @@ def bundles() -> None:
         bundle["screens"][name] = {"files": [r["path"] for r in res if not r.get("missing")],
                                    "resolved": res, "bytes": sum(r["bytes"] for r in res)}
     (DS / "bundles.json").write_text(json.dumps(bundle, indent=1) + chr(10))
+    print("bundles: " + ", ".join(f"{k}({v[chr(39)+chr(98)+chr(121)+chr(116)+chr(101)+chr(115)+chr(39)]//1024}K)" for k, v in bundle["screens"].items()))
 
 
 def _yaml(p):
