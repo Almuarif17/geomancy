@@ -32,6 +32,22 @@ jobs:
           distribution: temurin
           java-version: "17"
 
+      # Without a stored key each run signs with a fresh one, which is fine for an artefact you are testing and
+      # useless for an upgrade path. Store DEBUG_KEYSTORE_B64 (base64 of android/keys/debug.keystore) in the
+      # repository secrets and every build - CI or local - replaces installs instead of being refused.
+      - name: Use the shared signing key when one is configured
+        env:
+          KEY_B64: ${{ secrets.DEBUG_KEYSTORE_B64 }}
+        run: |
+          if [ -n "$KEY_B64" ]; then
+            printf '%s' "$KEY_B64" | base64 -d > "$RUNNER_TEMP/debug.keystore"
+            echo "DEBUG_KEYSTORE=$RUNNER_TEMP/debug.keystore" >> "$GITHUB_ENV"
+            echo "signed with the repository's debug key" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "DEBUG_KEYSTORE_B64 is not set: this build gets a throwaway key and cannot replace an install" \
+              | tee -a "$GITHUB_STEP_SUMMARY"
+          fi
+
       - name: Build the APK (fetches build-tools and the platform jar, then compiles and signs)
         run: |
           mkdir -p "$ANDROID_HOME"

@@ -59,7 +59,11 @@ PYC
 )"
 have_tools() { need aapt2 && need d8 && need zipalign && need apksigner && [ -f "$sdk/platforms/android-33/android.jar" ]; }
 
-if [ "${1:-}" = "--clean" ]; then rm -rf "$B" "$D"; echo "cleaned"; exit 0; fi
+if [ "${1:-}" = "--clean" ]; then
+  rm -rf "$B" "$D"
+  echo "cleaned build output (android/keys/ is left alone on purpose: that is the signing identity, not a build product)"
+  exit 0
+fi
 
 if [ "${1:-}" = "--check" ]; then
   python3 "$A/prepare.py" --check
@@ -90,6 +94,8 @@ for src, must, why in [
     (sh, 'touch -d "@${SOURCE' '_DATE_EPOCH', "every entry needs a fixed mtime, or a published sha256 of the APK "
                                             "is worth nothing and nobody can verify a download"),
     (sh, 'zip -q -X -D' ' -j', "the dex is added without directory entries or extra fields, for the same reason"),
+    (sh, 'KS="${DEBUG_KEYSTORE:-$A/keys', "the default key must live outside the directory this script wipes, "
+                                        "or every rebuild changes the signature and no install can be upgraded"),
 ]:
     if must.lower() not in src.lower():
         sys.exit("FAIL: {} is gone - {}".format(must, why))
@@ -191,9 +197,13 @@ zipalign -f 4 "$B/shell.apk" "$B/aligned.apk"
 
 # The signing identity, not a secret. Any self-signed key installs fine; what matters is that the *same* one is
 # used next time, because Android refuses to upgrade a package signed by a different key and the user then has to
-# uninstall, losing the charts in the app's storage. So the key lives wherever you point $DEBUG_KEYSTORE, and a
-# clean tree without one generates a fresh key rather than shipping a committed one.
-KS="${DEBUG_KEYSTORE:-$B/debug.keystore}"
+# uninstall, losing the charts in the app's storage.
+#
+# Which is why the default is keys/ and not build/: this script wipes build/ on every run, and the first version
+# kept the key in there - so "clean rebuild, same bytes, same signature" was true only when a key was handed in
+# from outside, and GitHub's runner found that out by failing the reproducibility step. keys/ survives a rebuild,
+# stays out of git through *.keystore, and deleting it is the deliberate way to start a new identity.
+KS="${DEBUG_KEYSTORE:-$A/keys/debug.keystore}"
 if [ ! -f "$KS" ]; then
   need keytool || die "keytool not found - it ships with the JDK, so put \$JAVA_HOME/bin on PATH"
   mkdir -p "$(dirname "$KS")"

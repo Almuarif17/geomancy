@@ -79,9 +79,12 @@ no dependencies.
 
 ## Signing, and what it is for
 
-`debug.keystore` is created in `build/` on a clean tree (alias `geomancy`, both passwords `android`, 10 000 days)
-and never committed. Point `DEBUG_KEYSTORE` at a file you keep somewhere - it is the only thing standing between
-"install the new version" and "uninstall the old one and lose the charts stored inside it":
+`debug.keystore` is created in `android/keys/` on first use (alias `geomancy`, both passwords `android`, 10 000
+days) and never committed - `*.keystore` is in `.gitignore`, and `app/test_app.py` fails if one is ever tracked.
+It is *not* in `build/`, because `build/` is wiped by every run, and a key that is regenerated per build means
+nobody can install a new version over an old one; that was the first version of this script, and CI caught it by
+failing the reproducibility step. To keep the identity somewhere of your own, or to let CI sign with the release
+key, point `DEBUG_KEYSTORE` at it:
 
 ```bash
 DEBUG_KEYSTORE=~/keys/geomancy-debug.keystore python3 android/build.sh
