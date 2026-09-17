@@ -2,7 +2,7 @@
 """Close the digest loop: manifest.json after the indexes, bundles.json after the manifest.
 
 Build order matters here. build_core_facts.py writes the CC0 layer first so the manifest can hash it;
-build_dataset.py hashes the index files; engine/retrieve.py --build then
+gen_types.py writes openapi.yaml for the same reason; build_dataset.py hashes the index files; engine/retrieve.py --build then
 rewrites them; and bundles.json digests manifest.json. Run this as the last build step and a fresh clone
 reproduces the shipped tree byte-for-byte, which is what the CI guard "Generated artefacts must be
 committed" checks. Doing it in the wrong order is how v0.2.1-v0.2.2 CI went red while every local gate
@@ -21,6 +21,11 @@ def run(*cmd: str) -> None:
 
 
 run("library/tools/build_core_facts.py")
+# gen_types before the manifest, not after: it writes library/dataset/openapi.yaml, which the manifest
+# digests. Running it later - which is what CI's step order did - left the manifest one build behind every
+# time a schema changed shape, and the drift only appeared in a fresh clone. Reproducibility has to survive
+# edits, not just repeats.
+run("library/tools/gen_types.py")
 run("library/tools/build_dataset.py", "--manifest-only")
 run("engine/retrieve.py", "--bundles-only")
 print("dataset is finalised: manifest then bundles, in that order")
