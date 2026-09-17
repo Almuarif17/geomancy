@@ -10,16 +10,16 @@
    "resolved": [
     {
      "path": "library/dataset/index/by_outcome.jsonl",
-     "bytes": 51782,
-     "sha256": "7a5ffb8278bc70c1"
+     "bytes": 51471,
+     "sha256": "31e52e362d912478"
     },
     {
      "path": "library/dataset/index/by_figure.jsonl",
-     "bytes": 25012,
-     "sha256": "5a154f4e78925804"
+     "bytes": 26207,
+     "sha256": "07dee3566149a0e2"
     }
    ],
-   "bytes": 76794
+   "bytes": 77678
   },
   "reading": {
    "files": [
@@ -33,18 +33,18 @@
    "resolved": [
     {
      "path": "library/dataset/index/by_outcome.jsonl",
-     "bytes": 51782,
-     "sha256": "7a5ffb8278bc70c1"
+     "bytes": 51471,
+     "sha256": "31e52e362d912478"
     },
     {
      "path": "library/dataset/index/by_figure.jsonl",
-     "bytes": 25012,
-     "sha256": "5a154f4e78925804"
+     "bytes": 26207,
+     "sha256": "07dee3566149a0e2"
     },
     {
      "path": "library/dataset/index/by_house.jsonl",
-     "bytes": 36754,
-     "sha256": "5e53b8546509c466"
+     "bytes": 37758,
+     "sha256": "c898c6fc6f4982f6"
     },
     {
      "path": "library/dataset/shards/rules.jsonl",
@@ -62,7 +62,7 @@
      "sha256": "4e98c31d5cb446c2"
     }
    ],
-   "bytes": 161683
+   "bytes": 163571
   },
   "verdict": {
    "files": [
@@ -72,8 +72,8 @@
    "resolved": [
     {
      "path": "library/dataset/index/by_house.jsonl",
-     "bytes": 36754,
-     "sha256": "5e53b8546509c466"
+     "bytes": 37758,
+     "sha256": "c898c6fc6f4982f6"
     },
     {
      "path": "library/dataset/shards/passages.jsonl",
@@ -81,7 +81,7 @@
      "sha256": "b492d6e459ce7325"
     }
    ],
-   "bytes": 361869
+   "bytes": 362873
   },
   "topics": {
    "files": [
@@ -90,11 +90,11 @@
    "resolved": [
     {
      "path": "library/dataset/index/by_outcome.jsonl",
-     "bytes": 51782,
-     "sha256": "7a5ffb8278bc70c1"
+     "bytes": 51471,
+     "sha256": "31e52e362d912478"
     }
    ],
-   "bytes": 51782
+   "bytes": 51471
   },
   "search": {
    "files": [

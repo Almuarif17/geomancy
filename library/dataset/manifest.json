@@ -2,7 +2,7 @@
  "dataset": "geomancy-kb",
  "generated": "content-addressed",
  "counts": {
-  "passages": 1098,
+  "passages": 1140,
   "rules": 23,
   "works": 9,
   "cite_only": 7
@@ -40,7 +40,7 @@
  "build_warnings": [],
  "built_from": {
   "alfagini_quaestiones.json": "861c01e4c14f9fea",
-  "calatarama_grid.json": "fa2362d0456a65cd",
+  "calatarama_grid.json": "5b1201af308fc105",
   "calibration.json": "bd9088137fe665f4",
   "cattan1591_dangers.json": "bef80393320d97c6",
   "cattan_motus_bank.json": "85e1a8f62d185c98",
@@ -56,15 +56,15 @@
  },
  "files": {
   "evaluation.json": "50d0498063fddb1a",
-  "index/by_figure.jsonl": "5a154f4e78925804",
-  "index/by_house.jsonl": "5e53b8546509c466",
-  "index/by_outcome.jsonl": "7a5ffb8278bc70c1",
+  "index/by_figure.jsonl": "07dee3566149a0e2",
+  "index/by_house.jsonl": "c898c6fc6f4982f6",
+  "index/by_outcome.jsonl": "31e52e362d912478",
   "index/by_work.jsonl": "796edf326049ec32",
   "openapi.yaml": "e3c48130040e80a1",
-  "shards/passages.jsonl": "b492d6e459ce7325",
+  "shards/passages.jsonl": "63ab1a2d2ffd99ee",
   "shards/rules.jsonl": "7f07209de5a546b0",
   "tables/alfagini_quaestiones.json": "861c01e4c14f9fea",
-  "tables/calatarama_grid.json": "d3b6055ee5854c30",
+  "tables/calatarama_grid.json": "c53c20d41731cb8f",
   "tables/calibration.json": "bd9088137fe665f4",
   "tables/cattan1591_dangers.json": "bef80393320d97c6",
   "tables/cattan_motus_bank.json": "85e1a8f62d185c98",

@@ -338,6 +338,50 @@ even-pointed figures ever appear as judge). Two consequences:
 
 ## 21. What the Calatarama grid does *not* contain (measured, not assumed)
 
+`kb/calatarama_grid.json` carries **184 of a possible 192** figure×house cells across **all twelve
+houses**. It used to carry 142 over ten, and the difference was not the manuscript: it was three
+defects in `scripts/extract_calatarama_grid.py`, each one of which made a tooling failure look like a
+historical silence.
+
+1. **The alias map omitted the canonical name `Carcer`.** The tables label that figure `[Carcer]` in
+   eleven places; the map had `Carçel` and `Carcel` but not `Carcer`, so one row vanished from every
+   table and the figure that governs detention, prison and death appeared to be judged nowhere.
+2. **A strict header pattern skipped two whole tables.** Eleven universal tables are headed
+   `Meaning of the Geomantic Figures in the N House (f. ..)`, but house VIII reads *"...geomantic
+   **house** in the VIII House"* and house X drops the article. Both tables exist, complete, at f.50
+   and f.56v; both were simply never opened.
+3. **Sections were cut by headings quoted in commentary**, and the last table ran unbounded into
+   Appendix 2, so house XII's `Via` cell ended up holding 600 characters of the transcriber's note on
+   editorial brackets instead of a judgement.
+
+Repairing these also corrected a **misattribution that was already published**: the v0.2.0 grid filed
+house X's `Laetitia` row under house IX. The rows in these tables follow a fixed order, so an
+off-by-one in section slicing moves a judgement to the wrong house silently; the offsets now prove
+each cell sits inside its own table.
+
+Two cells remain empty and both are **the source's own omissions**, recorded in
+`_meta.editorial_notes` rather than papered over:
+
+- **house XII / Populus** — the table prints `[Populo]` with no text and footnote 706 says
+  *"No information is given for this figure."* A lacuna with a citation is a finding.
+- **house VIII / Acquisitio** — the table has sixteen rows but labels `Puela` twice; the row whose
+  position is Acquisitio's reads *"Paying debts, acquiring an inheritance and the sick person, if
+  danger."* The content and the row order of the other ten tables both point at Acquisitio, but the
+  label does not, so the cell stays empty until Barcelona MS 84.7.4 f.50 is re-read. Guessing here
+  would put words in a 13th-century hand.
+
+House I has **no universal table by design**: the manual presents the first house through the example
+casting (Finan's Table 8, f.24v-25), and those ten rows are cited from there.
+
+The structural lesson is in the code, not just here: the parser now emits
+`_meta.unmatched_labels` (any bracketed label it could not resolve — empty means every row was
+claimed), and `engine/retrieve.py --build` writes `missing_figure_rulings` into every house row and
+`missing_house_rulings` into every figure row, so an app can render "this table does not speak to
+this" instead of showing a silently shorter list. Coverage is asserted against the data by
+`library/tools/check_calatarama_grid.py`, which fails when a figure is missing from *every* house —
+the signature of a parser bug rather than a source gap.
+
+
 `kb/calatarama_grid.json` carries **142 of a possible 192** figure×house cells (10 of 12 houses).
 `_meta.coverage` now states it per house: **VIII and X have no table at all** in our extraction, house I
 is thin (10/16), and the remaining houses miss one or two figures each. The absences are scattered

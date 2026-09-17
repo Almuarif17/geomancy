@@ -1,9 +1,15 @@
 {
  "_meta": {
+  "unmatched_labels": {
+   "are": 1
+  },
+  "unmatched_note": "bracketed labels the parser could not resolve to a figure; empty means every row in the appendix tables was claimed",
   "source": "Libro de los juysios de calatarama, universal chapter tables, as translated in Appendix 1 of A.J.C. Finan, 'The Book of the Judgements of Calatarama' (Univ. of Toronto, 2023)",
   "why": "a figure x house ruling grid from the 13th-15th c. Arabic-derived tradition; typed translation, no OCR loss",
   "usage": "quote with the folio; it is a translation of one manuscript, not a universal rule",
   "coverage": {
+   "cells_present": 184,
+   "cells_possible": 192,
    "houses_tabulated": [
     "I",
     "II",
@@ -12,47 +18,13 @@
     "V",
     "VI",
     "VII",
+    "VIII",
     "IX",
+    "X",
     "XI",
     "XII"
    ],
-   "houses_absent": [
-    "VIII",
-    "X"
-   ],
-   "cells_present": 142,
-   "cells_possible": 192,
-   "gaps": {
-    "II": [
-     "Carcer"
-    ],
-    "III": [
-     "Carcer"
-    ],
-    "IV": [
-     "Carcer"
-    ],
-    "V": [
-     "Carcer",
-     "Conjunctio"
-    ],
-    "VI": [
-     "Carcer"
-    ],
-    "VII": [
-     "Carcer"
-    ],
-    "IX": [
-     "Carcer"
-    ],
-    "XI": [
-     "Carcer",
-     "Tristitia"
-    ],
-    "XII": [
-     "Carcer",
-     "Populus"
-    ],
+   "per_house_shortfall": {
     "I": [
      "Carcer",
      "Fortuna Major",
@@ -60,31 +32,123 @@
      "Puer",
      "Tristitia",
      "Via"
+    ],
+    "VIII": [
+     "Acquisitio"
+    ],
+    "XII": [
+     "Populus"
     ]
    },
-   "reading_of_the_pattern": "the absences are scattered across figures (no single figure is missing everywhere), so this is not a systematic exclusion of one figure - it is a mix of (a) folios whose table our extraction did not reach and (b) genuine lacunae in the manuscript tables. VIII and X, absent whole, are the first targets: re-read the Appendix-1 pages for those two houses in Finan 2023 before concluding the source lacks them.",
-   "next_action": "scripts/extract_calatarama_grid.py --houses VIII,X then diff; expect +32 cells or a recorded lacuna"
+   "recomputed_at": "2026-09-17",
+   "unmatched_labels": {
+    "are": 1
+   },
+   "reading_of_the_pattern": "see FINDINGS 21",
+   "note": "cells are the union of the published extraction and the corrected re-parse; the re-parse wins on disagreement and every disagreement is listed in meta.text_conflicts"
   },
-  "missing_houses": "VIII and X have no such table in this manuscript (the thesis marks them N/A)"
+  "text_conflicts": [
+   {
+    "house": "VII",
+    "figure": "Puella",
+    "was": "Attaining a whorish woman and bad faith Paying debts, acquiring an inheritance and the sic",
+    "now": "Attaining a whorish woman and bad faith"
+   },
+   {
+    "house": "VII",
+    "figure": "Puer",
+    "was": "[Cousins]704, friends Prostitution Attack and fear of enemies and the sick man perhaps wil",
+    "now": "[Cousins]704, friends Prostitution"
+   },
+   {
+    "house": "VII",
+    "figure": "Via",
+    "was": "Withdrawal of a woman or of some thing. Meaning of the geomantic house in the VIII House (",
+    "now": "Withdrawal of a woman or of some thing"
+   },
+   {
+    "house": "IX",
+    "figure": "Cauda Draconis",
+    "was": "It shows fleeing and thieves Descent from status and it is serious for all businesses of g",
+    "now": "It shows fleeing and thieves"
+   },
+   {
+    "house": "IX",
+    "figure": "Laetitia",
+    "was": "Achievement of rural office and lordship and that which he wants from the king and health",
+    "now": "Science and fear of God and good with cloth"
+   },
+   {
+    "house": "IX",
+    "figure": "Puer",
+    "was": "Far movement and little faith Greatness of service of a king and joy of a great woman or m",
+    "now": "Far movement and little faith"
+   },
+   {
+    "house": "IX",
+    "figure": "Via",
+    "was": "Something sent and a distant journey. Meaning of geomantic figures in the X House (f. 56v)",
+    "now": "Something sent and a distant journey"
+   }
+  ],
+  "editorial_notes": [
+   {
+    "house": "XII",
+    "figure": "Populus",
+    "status": "source_lacuna",
+    "evidence": "the table prints [Populo] with no text; footnote 706 reads: No information is given for this figure.",
+    "ruling": "publish as no-ruling; a cited silence is a finding, not a gap to fill"
+   },
+   {
+    "house": "VIII",
+    "figure": "Acquisitio",
+    "status": "suspected_mislabel",
+    "evidence": "sixteen rows but Puela labels two of them; the row in Acquisitio position reads 'Paying debts, acquiring an inheritance and the sick person, if danger', matching Acquisitio in the eighth house and the fixed row order of the other ten tables",
+    "ruling": "left empty on purpose; re-read Barcelona MS 84.7.4 f.50 before assigning it"
+   },
+   {
+    "house": "IX",
+    "figure": "Laetitia",
+    "status": "corrected",
+    "evidence": "v0.2.0 carried the house X row here; per-table offsets now place 'Science and fear of God' in IX and 'Achievement of rural office' in X",
+    "ruling": "re-parsed with per-table bounds"
+   }
+  ]
  },
  "grid": {
+  "I": {
+   "folio": "24v-25 (thesis Table 8)",
+   "entries": {
+    "Acquisitio": "Loss of inheritance and liberation from fear and capture and illness It shows going out quickly",
+    "Albus": "Success with things that are white and health and joy Greatness and status",
+    "Amissio": "Greatness and status and a good sign in his faith and joy on the part of a woman",
+    "Caput Draconis": "Health and joy and arrangement of the town A king and a great man Achieving his wish Moving on a journey",
+    "Cauda Draconis": "Movement without success and loss and illness A good life",
+    "Conjunctio": "A wise official and a desire with a woman or a friend and a strong town. And if near this figure there is another good figure it is good and if the opposite",
+    "Laetitia": "Sighing. And anxiety and owing money and a false and deceptive man",
+    "Populus": "Uniting peoples for weddings or another thing Joy and agreement",
+    "Puella": "Joy and agreement of a woman and falsity and a lie and a thief and cunning",
+    "Rubeus": "Illness and fear and fighting and quarrel and red things Loss"
+   }
+  },
   "II": {
    "folio": "26v",
    "entries": {
     "Acquisitio": "Great success in a good sign and success in commodities and purchases",
-    "Rubeus": "Loss of money in robbery or theft or fight and it is difficult to recover it",
-    "Amissio": "Thieves and robbers Ambushes in order to steal Shops or commodities",
     "Albus": "Success in honour, in commerce and duty",
-    "Fortuna Major": "Achieving a desire with wealth and having great honour and gifts",
+    "Amissio": "Thieves and robbers Ambushes in order to steal Shops or commodities",
     "Caput Draconis": "Excessive greatness and recovery of losses and profit from purchases in inheritances or houses",
-    "Fortuna Minor": "Achievement of honour and fulfillment of desire and good commerce",
+    "Carcer": "Money or something else hidden under the earth",
     "Cauda Draconis": "Loss of inheritance and of money and the losses will not be found",
-    "Laetitia": "Wealth and earning in whatever thing except wheat",
     "Conjunctio": "Gallantry in duty and achieving a lost thing may be difficult",
-    "Tristitia": "Corruption in commerce and a serious sign and companion of thieves",
-    "Puer": "Profit in duty and success by the hand of a woman or a youth",
+    "Fortuna Major": "Achieving a desire with wealth and having great honour and gifts",
+    "Fortuna Minor": "Achievement of honour and fulfillment of desire and good commerce",
+    "Laetitia": "Wealth and earning in whatever thing except wheat",
     "Populus": "A community inclined to receive money or to give it",
     "Puella": "Success in commerce of women",
+    "Puer": "Profit in duty and success by the hand of a woman or a youth",
+    "Rubeus": "Loss of money in robbery or theft or fight and it is difficult to recover it",
+    "Tristitia": "Corruption in commerce and a serious sign and companion of thieves",
     "Via": "Little success"
    }
   },
@@ -92,19 +156,20 @@
    "folio": "29v",
    "entries": {
     "Acquisitio": "Love and status with one’s parents",
-    "Rubeus": "Enmity with parents, and quick to injure. Gift of something vermilion from a certain relative. The heart and the mouth not equal",
-    "Amissio": "Conflict with one’s parents",
     "Albus": "Loving parents and wisemen and fulfilling his desire. Writings that come from away, the messenger healthy and happy",
-    "Fortuna Major": "Greatness with great knowledge and joy with one’s parents and faithfully loved",
+    "Amissio": "Conflict with one’s parents",
     "Caput Draconis": "Honour between his parents and concerning a friend who is coming",
+    "Carcer": "Steady love with parents and steady profit and detention or imprisonment of a parent",
+    "Cauda Draconis": "Conflict with friends and separation from a friend because the mouth and the hear [are] not equal",
+    "Conjunctio": "Companionship with parents to become accustomed to or learn and a lost thing is returned",
+    "Fortuna Major": "Greatness with great knowledge and joy with one’s parents and faithfully loved",
     "Fortuna Minor": "Loving wisemen and parents with fielty",
-    "Cauda Draconis": "Conflict with friends and separation from a friend because the mouth and the hear",
     "Laetitia": "Excessive knowledge and a multitude of friends and peace of parents and health of their bodies",
-    "Conjunctio": "Companionship with parents to become accustomed to or learn and a lost thing is returned. 261",
-    "Tristitia": "Fighting in a related community and false703 love and constancy of faith",
-    "Puer": "Love, success with friends and relatives, health. Beloved with whom he cannot join",
     "Populus": "Companionship with a friend on a journey or in a city and messages passed through the community",
     "Puella": "Union of friends with profit and success in merchandise",
+    "Puer": "Love, success with friends and relatives, health. Beloved with whom he cannot join",
+    "Rubeus": "Enmity with parents, and quick to injure. Gift of something vermilion from a certain relative. The heart and the mouth not equal",
+    "Tristitia": "Fighting in a related community and false703 love and constancy of faith",
     "Via": "Achieving one’s will in moving with fear"
    }
   },
@@ -112,19 +177,20 @@
    "folio": "32",
    "entries": {
     "Acquisitio": "Success with inheritances and with agreements with his father and it is good to buy inheritance",
-    "Rubeus": "It shows inheritance of pasture; bleeding; fire; riot and grave illness",
-    "Amissio": "Loss of inheritance. And death and the loss of his father’s possessions",
     "Albus": "Success in inheritances; joy of parents and sending etc",
-    "Fortuna Major": "Multitude of inheritances and heritage and health of lineage",
+    "Amissio": "Loss of inheritance. And death and the loss of his father’s possessions",
     "Caput Draconis": "Multitude of inheritances with great profit and return of a messenger. The health of one who is ill. Forge house",
-    "Fortuna Minor": "Achieving inheritance and honour with one’s parents and the health of one who is ill",
+    "Carcer": "Profit from inheritances and it shows treasure. And some parent captured or detained. 703 The text here appears to read faso, which I have interpreted as falso, with the ‘l’ omitted accidentally",
     "Cauda Draconis": "Loss of inheritances and destruction of houses and inheritances and they will not return",
-    "Laetitia": "Profit from inheritance and finding treasure and success and inheritance",
-    "Tristitia": "Transfer of inheritance of a father and conflict with bad men",
-    "Populus": "Settling of a town for the purchasing of inheritance or for making it",
-    "Puer": "Success with one’s father and mother. A sometimes conflict and being healthy and good",
     "Conjunctio": "Finding treasure by the road. Of science and joining with his parents",
+    "Fortuna Major": "Multitude of inheritances and heritage and health of lineage",
+    "Fortuna Minor": "Achieving inheritance and honour with one’s parents and the health of one who is ill",
+    "Laetitia": "Profit from inheritance and finding treasure and success and inheritance",
+    "Populus": "Settling of a town for the purchasing of inheritance or for making it",
     "Puella": "Small inheritances and a man to wants to betray him",
+    "Puer": "Success with one’s father and mother. A sometimes conflict and being healthy and good",
+    "Rubeus": "It shows inheritance of pasture; bleeding; fire; riot and grave illness",
+    "Tristitia": "Transfer of inheritance of a father and conflict with bad men",
     "Via": "Loss of inheritances"
    }
   },
@@ -132,18 +198,20 @@
    "folio": "36",
    "entries": {
     "Acquisitio": "A good son and a present and success in working the land",
-    "Rubeus": "Few sons and it shows a wound or bleeding, it also shows about a woman",
-    "Amissio": "Wicked sons and loss of heritage, inheritance with struggle and good for the sick man and a male child and difficult to give birth",
     "Albus": "Hope of a son and present and a multitude of sons and good news",
-    "Fortuna Major": "Few sons. Rewarding for his father and return of a son and his health and love of the people",
+    "Amissio": "Wicked sons and loss of heritage, inheritance with struggle and good for the sick man and a male child and difficult to give birth",
     "Caput Draconis": "Many rich sons, and they are great and healthy and profit from a house and heritage",
+    "Carcer": "Pregnancy and few children and she will give birth to a daughter",
+    "Cauda Draconis": "Few sons and they are poor and will die in his life and they will be exiled. It also shows a daughter",
+    "Conjunctio": "Writings about good things and male children",
+    "Fortuna Major": "Few sons. Rewarding for his father and return of a son and his health and love of the people",
     "Fortuna Minor": "Greatness of heart and honour and gift of sons and the pregnant woman will give birth to a girl and medicine of the son and it shows his returning",
-    "Cauda Draconis": "Few sons and they are poor and will die in his life and they will be exiled. It also shows a daughter. 263",
     "Laetitia": "Giving birth to a son and the health of sons and greatness in his faith and prosperous because of them",
-    "Tristitia": "Anxiety and captivity and evil and meanness and illness",
-    "Puer": "Gift from a lord and sometimes a bastard son, and others say daughter",
     "Populus": "Estrangement from a town for a son or for a birth or for a wedding",
     "Puella": "A wicked, rebellious son and success in an office and in writings",
+    "Puer": "Gift from a lord and sometimes a bastard son, and others say daughter",
+    "Rubeus": "Few sons and it shows a wound or bleeding, it also shows about a woman",
+    "Tristitia": "Anxiety and captivity and evil and meanness and illness",
     "Via": "Few children and messengers and writings"
    }
   },
@@ -151,19 +219,20 @@
    "folio": "41v",
    "entries": {
     "Acquisitio": "A lengthy illness and in the end he will get well",
-    "Rubeus": "Illness of blood or choler and it shows death if the 1st or 8th figure and it shows loss of beasts",
-    "Amissio": "Medicine according to some and sometimes death and all according to the first or the eighth",
     "Albus": "It shows a weighty illness and sometimes good or evil",
-    "Fortuna Major": "Medicine of a sick person and profit in slaves or animals",
+    "Amissio": "Medicine according to some and sometimes death and all according to the first or the eighth",
     "Caput Draconis": "A lengthy illness with the body",
-    "Fortuna Minor": "Medicine and profit with servants and beasts and pulling breaths and illness",
-    "Cauda Draconis": "It shows death according to the other figures and sometimes in the eleventh. 264",
-    "Laetitia": "Health of a sick person and sometimes sickening of thoughts and it shows purchases of servants",
+    "Carcer": "A lengthy illness and cerate",
+    "Cauda Draconis": "It shows death according to the other figures and sometimes in the eleventh",
     "Conjunctio": "It shows danger of the death of a bad man and everything according to I and VIII",
-    "Tristitia": "It shows sickness and badly broken and sighing",
-    "Puer": "Women’s illnesses and anxieties and thoughts and it also shows illness of slaves and beasts",
+    "Fortuna Major": "Medicine of a sick person and profit in slaves or animals",
+    "Fortuna Minor": "Medicine and profit with servants and beasts and pulling breaths and illness",
+    "Laetitia": "Health of a sick person and sometimes sickening of thoughts and it shows purchases of servants",
     "Populus": "Illness and those bound near a sick man and in the end it will be good",
     "Puella": "If bad figures are in the I House it shows death and sometimes physical and the return of an illness",
+    "Puer": "Women’s illnesses and anxieties and thoughts and it also shows illness of slaves and beasts",
+    "Rubeus": "Illness of blood or choler and it shows death if the 1st or 8th figure and it shows loss of beasts",
+    "Tristitia": "It shows sickness and badly broken and sighing",
     "Via": "Shows the health of one who is sick"
    }
   },
@@ -171,58 +240,103 @@
    "folio": "47v",
    "entries": {
     "Acquisitio": "Good company and defeat of an enemy. And good marriages and good women",
-    "Rubeus": "Boredom of a woman and fornication and removal and corrupted virgins Sudden death by sword and loss of inheritances and a sick man in danger",
-    "Amissio": "Companionship with a woman or a friend and conflict with a woman Loss of inheritance and sometimes death of a sick man if the other figures are in agreement",
-    "Albus": "A good woman and a good love with a pregnant woman Great fear and death in waters and at times good for a sick man",
-    "Fortuna Major": "Companionship of a good women and love of a friend and good betrothals Certainty of fear and acquiring an inheritance and finding losses",
-    "Caput Draconis": "A good woman and pregnant with a son and good for betrothals Danger for a sick man and finding a loss",
-    "Fortuna Minor": "Good companionship with a man and the love of friendship Health of a great man and others say death of a great man",
-    "Cauda Draconis": "A barren woman who will not give birth. And removal of a woman or of a friend. 265 Death and loss of sense. 704 Text is unclear here. 266",
-    "Laetitia": "Good company with a good woman. Conquest in a lawsuit and a woman in love Excessive inheritance from the part of dead men and health of an sick man",
-    "Conjunctio": "Companionship with a woman in the form of fornication or betrayal Death of a sick man and joining of words over him",
-    "Tristitia": "Conquest of an enemy and a prostitute woman Madness and pain and fear and death and inheritance from dead men",
-    "Puer": "[Cousins]704, friends Prostitution Attack and fear of enemies and the sick man perhaps will die",
-    "Populus": "Allegation because of a woman and an argument and reasons of hatred Certainty of death and in a serious illness",
-    "Puella": "Attaining a whorish woman and bad faith Paying debts, acquiring an inheritance and the sick person, if danger Death by sword and the sick man is poorly",
-    "Via": "Withdrawal of a woman or of some thing. Meaning of the geomantic house in the VIII House (f. 50) It shows death if the other figures thus agree with it"
+    "Albus": "A good woman and a good love with a pregnant woman",
+    "Amissio": "Companionship with a woman or a friend and conflict with a woman",
+    "Caput Draconis": "A good woman and pregnant with a son and good for betrothals",
+    "Carcer": "Marriages with a woman with fornication and some detention",
+    "Cauda Draconis": "A barren woman who will not give birth. And removal of a woman or of a friend",
+    "Conjunctio": "Companionship with a woman in the form of fornication or betrayal",
+    "Fortuna Major": "Companionship of a good women and love of a friend and good betrothals",
+    "Fortuna Minor": "Good companionship with a man and the love of friendship",
+    "Laetitia": "Good company with a good woman. Conquest in a lawsuit and a woman in love",
+    "Populus": "Allegation because of a woman and an argument and reasons of hatred",
+    "Puella": "Attaining a whorish woman and bad faith",
+    "Puer": "[Cousins]704, friends Prostitution",
+    "Rubeus": "Boredom of a woman and fornication and removal and corrupted virgins",
+    "Tristitia": "Conquest of an enemy and a prostitute woman",
+    "Via": "Withdrawal of a woman or of some thing"
+   }
+  },
+  "VIII": {
+   "folio": "50",
+   "entries": {
+    "Albus": "Great fear and death in waters and at times good for a sick man",
+    "Amissio": "Loss of inheritance and sometimes death of a sick man if the other figures are in agreement",
+    "Caput Draconis": "Danger for a sick man and finding a loss",
+    "Carcer": "Death of sick men and acquiring inheritances",
+    "Cauda Draconis": "Death and loss of sense. 704 Text is unclear here",
+    "Conjunctio": "Death of a sick man and joining of words over him",
+    "Fortuna Major": "Certainty of fear and acquiring an inheritance and finding losses",
+    "Fortuna Minor": "Health of a great man and others say death of a great man",
+    "Laetitia": "Excessive inheritance from the part of dead men and health of an sick man",
+    "Populus": "Certainty of death and in a serious illness",
+    "Puella": "Paying debts, acquiring an inheritance and the sick person, if danger Death by sword and the sick man is poorly",
+    "Puer": "Attack and fear of enemies and the sick man perhaps will die",
+    "Rubeus": "Sudden death by sword and loss of inheritances and a sick man in danger",
+    "Tristitia": "Madness and pain and fear and death and inheritance from dead men",
+    "Via": "It shows death if the other figures thus agree with it"
    }
   },
   "IX": {
    "folio": "53",
    "entries": {
-    "Acquisitio": "Success in moving and he will return with profit and healthy and in the moving it at times shows fear Profit with his lord and gift from a man and much earning",
-    "Rubeus": "Thieves and sins and difficulty for the messenger and danger for the traveler Abhorrence of great men and every man and a suspicious judge and bad lordship",
-    "Amissio": "Moving without success and damage in the merchandise and danger Little honour and loss of earning and error of deals and of the king",
-    "Albus": "Excessive knowing and a watery path and return of a messenger and in the hand …705 or a white thing Achieving a demand from an honoured man and fulfilment of a promise from a white house of a great man. 268",
-    "Fortuna Minor": "Science and knowing and profit with the those far away and good trades and he who journeys will return Rising in rank up to the end and the honour of the king and conquest in judgement",
-    "Caput Draconis": "The traveler returns quickly and response from he who is not there. 705 Text is unclear here. 267 Status with honour and achievement of a desire of all businesses of power",
-    "Fortuna Major": "Science and fear of God and profit on a journey and gift from the messenger Great with the lords of the land and health of kings",
-    "Cauda Draconis": "It shows fleeing and thieves Descent from status and it is serious for all businesses of great men",
+    "Acquisitio": "Success in moving and he will return with profit and healthy and in the moving it at times shows fear",
+    "Albus": "Excessive knowing and a watery path and return of a messenger and in the hand …705 or a white thing",
+    "Amissio": "Moving without success and damage in the merchandise and danger",
+    "Caput Draconis": "The traveler returns quickly and response from he who is not there. 705 Text is unclear here",
+    "Carcer": "Danger on the road, he who is not there will die, and detention on the road and about a ship at sea",
+    "Cauda Draconis": "It shows fleeing and thieves",
     "Conjunctio": "Harm in the sea or on dry land and thieves on the road",
-    "Tristitia": "Movement without success, knowing too much. Servants of altars Loss of status because of a great man and greatness",
-    "Puer": "Far movement and little faith Greatness of service of a king and joy of a great woman or merchant",
-    "Populus": "Companionship that comes on the road or a king who comes to his house. And a son or a brother who return to his house Establishment of a village by order of a king and if he comes to do something before the king it is good",
-    "Puella": "Duty in another land, wicked thought, the messenger lies without love nor friendship Profit or honour of a great man with work and achievement but not of everything",
-    "Via": "Something sent and a distant journey. Meaning of geomantic figures in the X House (f. 56v) It is good to come before the king or lord",
-    "Laetitia": "Achievement of rural office and lordship and that which he wants from the king and health"
+    "Fortuna Major": "Science and fear of God and profit on a journey and gift from the messenger",
+    "Fortuna Minor": "Science and knowing and profit with the those far away and good trades and he who journeys will return",
+    "Laetitia": "Science and fear of God and good with cloth",
+    "Populus": "Companionship that comes on the road or a king who comes to his house. And a son or a brother who return to his house",
+    "Puella": "Duty in another land, wicked thought, the messenger lies without love nor friendship",
+    "Puer": "Far movement and little faith",
+    "Rubeus": "Thieves and sins and difficulty for the messenger and danger for the traveler",
+    "Tristitia": "Movement without success, knowing too much. Servants of altars",
+    "Via": "Something sent and a distant journey"
+   }
+  },
+  "X": {
+   "folio": "56v",
+   "entries": {
+    "Acquisitio": "Profit with his lord and gift from a man and much earning",
+    "Albus": "Achieving a demand from an honoured man and fulfilment of a promise from a white house of a great man",
+    "Amissio": "Little honour and loss of earning and error of deals and of the king",
+    "Caput Draconis": "Status with honour and achievement of a desire of all businesses of power",
+    "Carcer": "Being in honour by force of a great woman and the king is captured",
+    "Cauda Draconis": "Descent from status and it is serious for all businesses of great men",
+    "Conjunctio": "It shows status or minister of a great man",
+    "Fortuna Major": "Great with the lords of the land and health of kings",
+    "Fortuna Minor": "Rising in rank up to the end and the honour of the king and conquest in judgement",
+    "Laetitia": "Achievement of rural office and lordship and that which he wants from the king and health",
+    "Populus": "Establishment of a village by order of a king and if he comes to do something before the king it is good",
+    "Puella": "Profit or honour of a great man with work and achievement but not of everything",
+    "Puer": "Greatness of service of a king and joy of a great woman or merchant",
+    "Rubeus": "Abhorrence of great men and every man and a suspicious judge and bad lordship",
+    "Tristitia": "Loss of status because of a great man and greatness",
+    "Via": "It is good to come before the king or lord"
    }
   },
   "XI": {
    "folio": "59",
    "entries": {
     "Acquisitio": "A good sign and good friends and good hope",
-    "Rubeus": "A bad accident with one’s friends and loved ones and it is good to bleed and little hope",
+    "Albus": "Success on the part of his friends and on the part of good men and good hope",
     "Amissio": "Loss of a friend and a bad sign in any commerce and false hope",
-    "Albus": "Success on the part of his friends and on the part of good men and good hope. 269",
-    "Fortuna Major": "Good joining of a woman and friends and greatness on the part of a lord and strong hope",
     "Caput Draconis": "Good happiness and good hope with work",
-    "Fortuna Minor": "Increase of friends and good hope",
+    "Carcer": "Smoothing and fatigue and strong hope",
     "Cauda Draconis": "Bad happiness and good hope",
-    "Laetitia": "Increase of friends and good men",
     "Conjunctio": "Good happiness and good hope and the loss returning and success in the duty",
-    "Puer": "Joy of friends and good hope",
+    "Fortuna Major": "Good joining of a woman and friends and greatness on the part of a lord and strong hope",
+    "Fortuna Minor": "Increase of friends and good hope",
+    "Laetitia": "Increase of friends and good men",
     "Populus": "Hope will be with fixation",
     "Puella": "Good happiness in the duty but the hope will not be certain",
+    "Puer": "Joy of friends and good hope",
+    "Rubeus": "A bad accident with one’s friends and loved ones and it is good to bleed and little hope",
+    "Tristitia": "Boredom of friends with malice and false hope",
     "Via": "Joy of friends and a messenger bearing good news"
    }
   },
@@ -230,34 +344,20 @@
    "folio": "61v",
    "entries": {
     "Acquisitio": "Working for a great price, others say poverty",
-    "Rubeus": "Enemies and pettiness in another land and working without profit",
+    "Albus": "Escaping from houses of prison, and profit in beasts and from his work he will achieve joy",
     "Amissio": "Loss of animals and paying debts, working without profit",
-    "Albus": "Escaping from houses of prison, and profit in beasts and from his work he will achieve joy. 270",
-    "Fortuna Major": "Conquest of an enemy and a good prize and escape from fear",
     "Caput Draconis": "Profit in beasts and escaping from jail and strong fear",
-    "Fortuna Minor": "Escape from fear and profit in beasts and it shows harm of the lordship",
+    "Carcer": "A foolish and secluded man by a sign loaded with a burden, the work relieved and its end is good",
     "Cauda Draconis": "Loss of money through theft and robbery and working without success",
-    "Laetitia": "Escape from fear and profit in beasts and slaves and working the land",
     "Conjunctio": "Grouping with bad men to a bad end and illness and anxiety and he works for the book by companionship with others, it also shows the return of a loss with work",
-    "Tristitia": "Many enemies and anxiety and prison and loss of slaves and beasts and working without profit",
-    "Puer": "Prize and harm of an enemy and a friend with art",
+    "Fortuna Major": "Conquest of an enemy and a good prize and escape from fear",
+    "Fortuna Minor": "Escape from fear and profit in beasts and it shows harm of the lordship",
+    "Laetitia": "Escape from fear and profit in beasts and slaves and working the land",
     "Puella": "Anger with a knight without fulfilling his will and work without success",
-    "Via": "Escaping from fear and anxiety over his enemies. 706 No information is given for this figure. 271"
-   }
-  },
-  "I": {
-   "folio": "24v-25 (thesis Table 8)",
-   "entries": {
-    "Acquisitio": "Loss of inheritance and liberation from fear and capture and illness It shows going out quickly",
-    "Rubeus": "Illness and fear and fighting and quarrel and red things Loss",
-    "Amissio": "Greatness and status and a good sign in his faith and joy on the part of a woman",
-    "Albus": "Success with things that are white and health and joy Greatness and status",
-    "Caput Draconis": "Health and joy and arrangement of the town A king and a great man Achieving his wish Moving on a journey",
-    "Cauda Draconis": "Movement without success and loss and illness A good life",
-    "Laetitia": "Sighing. And anxiety and owing money and a false and deceptive man",
-    "Conjunctio": "A wise official and a desire with a woman or a friend and a strong town. And if near this figure there is another good figure it is good and if the opposite",
-    "Populus": "Uniting peoples for weddings or another thing Joy and agreement",
-    "Puella": "Joy and agreement of a woman and falsity and a lie and a thief and cunning"
+    "Puer": "Prize and harm of an enemy and a friend with art",
+    "Rubeus": "Enemies and pettiness in another land and working without profit",
+    "Tristitia": "Many enemies and anxiety and prison and loss of slaves and beasts and working without profit",
+    "Via": "Escaping from fear and anxiety over his enemies. 706 No information is given for this figure"
    }
   }
  }

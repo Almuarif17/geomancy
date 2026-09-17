@@ -82,3 +82,12 @@ against 321 here. Decision: keep this tree as source of truth, adopt its two goo
   the ones our enumeration produces. **Open:** the Carcer block (0/256) and 1,189 other cells, which
   need page-level OCR because IA's text layer for `b24884145` stops before the appendix (173 KB, two
   mentions of Carcer); and a cell-by-cell re-OCR diff of the 32 Calatarama leaves.
+
+- **Coverage is measured, and the last coverage failure was ours, not the sources.**
+  `kb/calatarama_grid.json` holds 184 of 192 figure-by-house rulings across all twelve houses. Two cells stay
+  empty because the source itself is silent or corrupt (XII/Populus: "No information is given for this
+  figure", fn. 706; VIII/Acquisitio: a duplicated label in the Castilian), and `\_meta.editorial_notes`
+  says which is which. `library/tools/check_calatarama_grid.py` fails the build when a figure is missing
+  from every house, because that is what a broken extractor looks like - which is how 42 real rulings were
+  lost in 0.2.0 while the findings text explained them away.
+

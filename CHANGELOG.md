@@ -1,5 +1,36 @@
 # Changelog
 
+## 0.2.2 - 2026-09-17
+
+**Fourty-two cells that were never missing from the manuscript.** The Calatarama grid goes from
+142 rulings over 10 houses to **184 over all 12**, and the shortfall that remained turns out to be the
+sources own, with a citation attached.
+
+### Fixed
+- `scripts/extract_calatarama_grid.py` dropped every `[Carcer]` row: the alias map listed `Carcel` and
+  `Carcel`-with-ccedilla but not the canonical spelling, so the traditions figure of detention and death
+  seemed judged in no house at all. Names now resolve through `kb/figures.yaml`, and anything the parser
+  cannot place is reported in `_meta.coverage.unmatched_labels` instead of being discarded.
+- Houses VIII and X were skipped whole because those two tables are headed irregularly ("Meaning of the
+  geomantic **house** in the VIII House"; "Meaning of geomantic figures in the X House", without "the").
+- Section slices are now bounded at `Appendix 2:` and choose the richest occurrence per house, so headings
+  quoted in the thesis commentary cannot cut a table in half (house XIIs `Via` cell held 600 characters of
+  transcription conventions before this).
+- A transcriber insertion bracket (`the hear[are] not equal`) was being read as a figure label; a bracket
+  only opens a row when whitespace precedes it.
+- **Wrong data shipped in v0.2.0**: house Xs `Laetitia` ruling had been filed under house IX.
+- `library/tools/sync_corpus.py` wrote PDF bytes into `.txt` files; PDFs are stored as binaries and flagged
+  for text extraction instead of producing a corrupt corpus file.
+
+### Added
+- `kb/calatarama_grid.json` `_meta.coverage` recomputed (184/192, per-house shortfalls),
+  `_meta.editorial_notes` (the two deliberate absences) and `_meta.text_conflicts` (7 cells where the
+  corrected parse differs from the published one, each with both texts so the change is auditable).
+- `library/tools/check_calatarama_grid.py`: fails the build when a figure is absent from every house - the
+  shape of a broken extractor dressed up as a source gap - or when a house with a shortfall carries no note.
+- FINDINGS 21 rewritten. It had asserted the absences were "scattered across figures ... not a systematic
+  exclusion of one figure", a claim the same runs output disproved; the corrected section names each defect.
+
 ## 0.2.1 - 2026-09-17
 
 * `library/tools/verify_release.py`: downloads a release's `SHA256SUMS.txt` and every asset, checks
