@@ -1,0 +1,222 @@
+{
+ "_meta": {
+  "source": "Fasciculus geomanticus (1704), Alfagini Quaestiones Geomantici",
+  "identifier": "b3299753x",
+  "how": "my own tesseract pass (lat+eng, 400dpi, psm 6) on the 32 pages carrying QUAESTIO",
+  "confidence": "MED: early-modern Latin print; check leaf_pdf before quoting a line",
+  "note": "32 of the book's ~100 quaestiones - the rest sit on pages not sampled; extend by adding pages to scripts/ocr_pages.py"
+ },
+ "count": 42,
+ "items": [
+  {
+   "leaf_pdf": 448,
+   "topic_latin": "",
+   "rule_latin": ": Quo men\u00e9 aliquis natus fc | | QUAESTIO I. \u00c1 s n p figuram prime & dic eum natum I\" fuiffe eo menfequem figura reprefentat. | Siautem figura non reperitur in{chemates c cum natum illius menfis prima hebdo-"
+  },
+  {
+   "leaf_pdf": 448,
+   "topic_latin": "",
+   "rule_latin": "p figuram prime & dic eum natum I\" fuiffe eo menfequem figura reprefentat. | Siautem figura non reperitur in{chemates c cum natum illius menfis prima hebdo- ada; fi tranfitin domum fecundam, dic \u2014 - tuminfecundahebdomada;fiintertiam, \u2014 ."
+  },
+  {
+   "leaf_pdf": 452,
+   "topic_latin": "De Nati fubflantia & divitus. \u2014 E",
+   "rule_latin": "DTE promitutbona figura in fecunda domo, | nonimpedita; malapaupertarem. \u2014\u2014 | V Dedivitiarum quantitate. Wee OuaSTIO IL * ^77 | so LL o 009. | oo e oh prima, & o o in fecunda, con-"
+  },
+  {
+   "leaf_pdf": 453,
+   "topic_latin": "De Lucro",
+   "rule_latin": "S! infecundam domumcadant 4 00 00,00 O0 00 00 00 0o /0 OO o) o 0 Oo oo o 00 go lucrum denotant, fi occurrant domibus. etiam | ^ , quibus quaritur lucrum, utin fexta pro animali. bus minimis ,aut fervis,in decima fecunda proar-, . ments & animalibus magnis, qued fi in fecun-"
+  },
+  {
+   "leaf_pdf": 460,
+   "topic_latin": "De Itineribus brevibus. i",
+   "rule_latin": "Roitineribus brevibusjudica pro ratione mfra in quzftionibusnonz domus. Pro leribus longius pofitis, reductis iame\u00e1 \u2014\u2014\u2014\u2014 \u2014 tertiam domumjudicis, \u2014 ^. . = | "
+  },
+  {
+   "leaf_pdf": 463,
+   "topic_latin": "An bonum fit plantare aut ferere",
+   "rule_latin": "JE CE quartam cum fuis fociis ,'& | fint aquez figure, &in a\u00e9rea conjun Gtione, fertilitatem indicabunt in fatis & - plantatis. Siignez in ignea conjunctione, aut te rez in terrea, fterilitatem. : Si int a\u00e9cez, abundantiam; maxime con fentientibus angulis. \u2014 m"
+  },
+  {
+   "leaf_pdf": 463,
+   "topic_latin": "De hareditate paterna. \u2014",
+   "rule_latin": "| AN hereditatem \u00e0 patre, focero, &c,o | *^tenturus fit , videatur quarta figura. \u2014., fortunata fit & intrans, & fi in fecunda,{pe confequutionis oftendit , & \u20ac contrario; exiens\u00edit, & infortunata, nec fitin fecund . , necprima aut fecundatranfeantin quinta \" autundecimam, fiprima & quarta fint co trariz, nonobtenturum indicant,"
+  },
+  {
+   "leaf_pdf": 464,
+   "topic_latin": "An bareditas amiffa recuperatitur",
+   "rule_latin": "pronerim: petitori, quarta hereditati; \u2014 : | quinta& undecima fpei , & feptima ad- (ario. Vide primam & octavam quz re- icit hereditatem , que fi fitfiguralucri\u00f3c \u2014 | quifitionis , '& quatuor anguli fiat fortu- : 3 iti, & prima recepta fit feu. conveniens im quarta, confequutionem, &c. tm E 7"
+  },
+  {
+   "leaf_pdf": 464,
+   "topic_latin": "An fitbonum edificare. \u2014\u2014\u2014",
+   "rule_latin": "N principio & ante omnia, zdificare vo- lens, refpiciat quartam figuram , fiintrans fixa; bonumindicat , & \u00edi maxime decima nfentiat & conveniat quartz, & primafit \u2014 iam fixa & intrans, | Siquarta fit bona & mobilis, bonum qui- mindicat, fed non durabile zdificium. \u2014 Si quarta mobilis & exiens, & ipfi quinta"
+  },
+  {
+   "leaf_pdf": 465,
+   "topic_latin": "De Abundantia aut Charitate",
+   "rule_latin": "4 Qu intrans, fixa, & fortunata, annum abundantem , & eo magis fi terrea re | | eique anguli & decimaquinta confentiantj ae fi fitexiens & infortunata,penuriams fimas xim\u00e9 ignea fit, eique anguli & decimaquinta confentiant, | \" Id cognofcetur etiam ex figura educta .\u2014 quarta & quinta , judicando fecund\u00fcm illi"
+  },
+  {
+   "leaf_pdf": 465,
+   "topic_latin": "De'Urbe, Civitate,aut Caftello obfeffis, m - an expugnabuntur",
+   "rule_latin": "| DRim plebem , quarta caftellum aut civi tatem, feptima adverfarios indicat. ; ~ Si prima & quarta fint fortunate,& prim a quarta feparetur , non expugnabitur. . Sifeptima prime, & quartz prevaleat, conjungatur , aut recipiatur \u00e0 quinta, fext . A undecima, & duodecima, fubjugabitur. 2 t s. De Albano."
+  },
+  {
+   "leaf_pdf": 472,
+   "topic_latin": "An mulier apetente fit impragnata",
+   "rule_latin": ")Rima detur petitori,quintarei perit , fi \u2014 prima tran\u00edeat in quintam, dec\u00fcram, idecimam , aut fi feptima in fecundam, intam , & decimam , ipfa erit gravida. \u2014 a v. ORES Mte ten Pain, cr rrosctgpin, SS CT \"ln filius fit legitimus. \"ial : QUAESTIO VI. : e hic queftionem quartam. \u2014 |"
+  },
+  {
+   "leaf_pdf": 472,
+   "topic_latin": "",
+   "rule_latin": "e hic queftionem quartam. \u2014 | Caterum prima quarenti datur,quins ; foetui,feptima mulieri , que confiderantur im angulis,teftibus, & Judice. Siomnes _ it bong, autex majori parte, & concors intes, fetum legitimum, alioquin fpurium dlegitimum. = ^ - eco. dM \u2014 \u2014\u00c0 \u2014\u2014 \u2014\u2014 \u2014 \u2014\u2014 \u00e0"
+  },
+  {
+   "leaf_pdf": 472,
+   "topic_latin": "De filiorum bona vel mala natura",
+   "rule_latin": "7YOnfidera primam,quartam, quintam,fe- \u2014 | ~otimam , &\u00edextam,fi intrantes fint& bos 1 z ;bonosliberos, mala, malos indicant. \u2014 | FF \u00a7 Quod "
+  },
+  {
+   "leaf_pdf": 473,
+   "topic_latin": "",
+   "rule_latin": "| met c TEN \u2014 Anin morbumincurfurus fft aliquis: bj MM on M | | Figuram primam & fextam confidet que fibonz fint, fanitatem, male ve . contrarium indicabunt, eoq; magis fi pri ' inforcunatain fextameranfeat, aut fextai 1! fortunatain feptimam tranfeat , aut fi fex"
+  },
+  {
+   "leaf_pdf": 474,
+   "topic_latin": "De agroto an moriturus eo morbo fit",
+   "rule_latin": "Vin primam, octavam, & decimam fecun- ! dam, cadat figura pj aut g*, mortem, fi vialis una fit in prima, & ttanfeat cadem | octavam , falutem; fed fi non tran\u00edeat, | Pjjtum expecta. | Si illic quedam lunaris aut Malis in- Lm dat figura, idem efto judicium , ut fi..."
+  },
+  {
+   "leaf_pdf": 480,
+   "topic_latin": "",
+   "rule_latin": "SEPTIM &. | CAPUT VIEL \" | | | so De Amore. | | QUAESTIO I. | * \u2014\u2014 n amor. fit durabilis. | A Morem firme fixeque in feptima | | . 4 figure, fixumindicant, mobiles mo. . lem, bicorporez mediocrein."
+  },
+  {
+   "leaf_pdf": 480,
+   "topic_latin": "De Amore",
+   "rule_latin": "* \u2014\u2014 n amor. fit durabilis. | A Morem firme fixeque in feptima | | . 4 figure, fixumindicant, mobiles mo. . lem, bicorporez mediocrein. Idem indicat, fi maxime fixe figure fine \u2014 Langulis, aut mobiles in cadentibus, &c. c his mediocritatem invenies, An quis ab amafia optatum fit :"
+  },
+  {
+   "leaf_pdf": 480,
+   "topic_latin": "An quis ab amafia optatum fit : ovo -confequnurus. \u00ab",
+   "rule_latin": "*] prima & feptima (int bonz, fortunatz, Pintrantes, & conformes, bonam indicant votisobtentionem, & confequutionema- anti, fi prima tranfeat in octavam , aut fex- - m , tunc res protrahetur , & follicitatione digebit, proindeipfeeam quefituruserit, \u2014.\u2014\u2014\u2014 Quod fi fitin (ecunda, ipla eum adibit & | ueret,& confequeturremobtatam,inloce , . |"
+  },
+  {
+   "leaf_pdf": 490,
+   "topic_latin": "",
+   "rule_latin": "Nfpice primam & feptimam, fi enim pro muliere fiat quz\u00edtio prima , fipro viro fe- ima eft infpicienda. Siautem in prima eft figura intrans , & fe- | inda fit etiam bona, & fi feptima fit exiens. eu bonum aut malum portendat ) homi- em pri\u00fcs moriturum. Siin feptima fit figura intrans & conver- |"
+  },
+  {
+   "leaf_pdf": 490,
+   "topic_latin": "De lite aut bello",
+   "rule_latin": "proli belloque fufcipiendo, detur prf- 'g ma quarenti, fecunda ejus facultatibus ,' | quat- "
+  },
+  {
+   "leaf_pdf": 498,
+   "topic_latin": "De abfente",
+   "rule_latin": "D -- \u2014 - . on [ o ficin tertia & in odtava, peticus \u2014 \u2014 o o lumab igneipfiminatur. - ^\" oo Oe Z So na\u00edcatur ex prima, & feptima & er, \u00e0 | 00"
+  },
+  {
+   "leaf_pdf": 498,
+   "topic_latin": "De bello aut pace",
+   "rule_latin": "| Bellumne an pax futura. ne primauni ex exercitibus, & fepti= maalteri, vide ubinam fint malz fi- | Hh2 ^ gu "
+  },
+  {
+   "leaf_pdf": 500,
+   "topic_latin": "An bonum fit in bellum profici{ci",
+   "rule_latin": "l-o- 0-0 00: 00 .0 ; o loo 9-0.-00.'0 ;9,9 0@ O10. Q^: 0,00 o o0 o Oo 05:500 7:0 E o0 | -\u2014 0 oO fint in conjunctione mala {cili- o .cetcum figura B aut g* (intque | o o arientales, id eft in plaga Orien-"
+  },
+  {
+   "leaf_pdf": 501,
+   "topic_latin": "An quis babeat inimicos. i",
+   "rule_latin": "lys prima querenti, fecundaacqui tioni, feptima publicis inimicis, duod cima privatis inimicis, decima victoria. . ' Siibifintfigurz amorem fignificantes,a in omnibus, aut majori earum parte, nu losaut faltem non timendos indicat inim cos .. Quod ft in illis (int male figure, & max"
+  },
+  {
+   "leaf_pdf": 502,
+   "topic_latin": "",
+   "rule_latin": "I feptima fit fortunata & benevola mi^ | 7 nimi momenti inimicitias indicabit , nifi | uerit mulier inimica , cujus animus vindi- | tamfempercupit: \u2014\u2014 | Si feptima infortunata, fortisque fit, int- icitiam gravem potentemque indicat ini \u2014 icum,eoque magis fi in duodecima fitma- igna, decima quinta confentiens: judica"
+  },
+  {
+   "leaf_pdf": 506,
+   "topic_latin": "",
+   "rule_latin": "^ Abjentisflatum C reditum t- a -\u2014 x dagare. . po datur querenti, octava ab\u00edenti, primabona & fortunata , tran {rens in Os lavam, aut o&ava tranfiensin bonam ali- i\u00bb | uam domum, bonum indicat , ablentem idelicet valere.. .....5.\u2014: Si octava uranfeat in fextam, ant duodeci-"
+  },
+  {
+   "leaf_pdf": 509,
+   "topic_latin": "An iter fit faciendum",
+   "rule_latin": " | ee: fi fic inftituenda profectio in pal a .J tesalias, aut peregtinas, qu\u00f3ve die fit in cipienda , vide fiin nonam bona figura ca /. dat, cum profperitate incipiendum indica"
+  },
+  {
+   "leaf_pdf": 519,
+   "topic_latin": "De fomnio an verum aut falfum fir",
+   "rule_latin": "DE prima fomnianti, nona fomnio, tertia, fexta; undecima, quindecima rei petite; figure ma\u00edculinz, veritatem, famis , minz, fal\u00editatemindicant. T - DE BENEFICIO. | Anfit beneficium quisobtenturus, \u2014 | J QU4STIO IV... | S I prima & nona fint fortunata bonam in=\u2019"
+  },
+  {
+   "leaf_pdf": 521,
+   "topic_latin": "",
+   "rule_latin": "| DECIM &. | \u2014. Deemporis varia mutatione. \u2014 ^ | QUAESTIO I. [jLnentan magisabundans in quzftio. | ne in prima maxime & decima domo ! temporis qualitatem delignabit, Ignis enim fanitatem, a\u00e9r, ventum & fani: i tatem; aqua, a\u00e9ris corruptionem , & beftias"
+  },
+  {
+   "leaf_pdf": 521,
+   "topic_latin": "",
+   "rule_latin": "[jLnentan magisabundans in quzftio. | ne in prima maxime & decima domo ! temporis qualitatem delignabit, Ignis enim fanitatem, a\u00e9r, ventum & fani: i tatem; aqua, a\u00e9ris corruptionem , & beftias rum, terra frigiditatem & ficcitatem. : Vide fi in prima, decima , & undecima | fint figura aquez , ipfe enimpluvias, terrea,"
+  },
+  {
+   "leaf_pdf": 525,
+   "topic_latin": "",
+   "rule_latin": "RE datur decima, ut & regno, & fid - *- decimatertia f\u00e9rvisregiis , & magna bus, primaaulicis, fecunda populo. Hz quatuor cum aliis angulis funt co ! | fiderandz , fi enim figura decime fit in pi [ ma, fitque bona, ftabilitatem indicat, | Sifit in fecunda , benevolentiam popu 2 cum bonorum proventu. |"
+  },
+  {
+   "leaf_pdf": 526,
+   "topic_latin": "De vittoria uter eam fit repere Eno 000 MEIMTHIS",
+   "rule_latin": "puc hzc quzftio ad domum litis & | | belli,qua eft feptima,meli\u00fcs referri via eretur, tamen quiain hac eft quoddam ie cium, eoque ad decimam pertineat, hic am collocabimus. | | P. Si in feptima fit figurag*, & in octava fi- ira, acin prima domo fit figura medio- is , print de feptima reportabit victo-"
+  },
+  {
+   "leaf_pdf": 526,
+   "topic_latin": "de eligenda, \u2014\u2014",
+   "rule_latin": "hee 3 prima cum decima, & judi- ! - -^ ca fecund\u00fcm illarum fignificationem & \u00bbrrefpondentiam , fi maxime fecunda & - 'cima quinta fint conformes , alioquin | nnfideretur omnium melior pars, = & "
+  },
+  {
+   "leaf_pdf": 528,
+   "topic_latin": "An dominiumfit aliquis obtenturus",
+   "rule_latin": " PRima& decimaintrantes, fortunate, & 4 fixe.aut minis ejusdemque qualitatisauc \u2014- \u2014 conjuncte,{pem confequutionisdant,edque _ inagie 2/ ected ye: i | ^d Kk s "
+  },
+  {
+   "leaf_pdf": 531,
+   "topic_latin": "",
+   "rule_latin": "] CIM.E DOMUS. ; | CAYr@ a. . A tee | \u2014 Mhn[ervicr amici fent fideles. \u2014 QU \u00a3STIO.I. | Be & exact\u00e9 confideranda eft prima & . undecima domus,fi enim fint fortunate. . intrantes & bonz,fidelitatem indicat, e\u00f3qui"
+  },
+  {
+   "leaf_pdf": 531,
+   "topic_latin": "",
+   "rule_latin": " / DE ptima petitori; fecunda, quinta, undecima dono; fi fintbonz, bonum; | male, malum indicant, d \u2018 , Si prima fit in quarta, quinta, decima,aut | . undecima bonum, fitranfeat in malum lo- ' E cun meum 2 923 !"
+  },
+  {
+   "leaf_pdf": 532,
+   "topic_latin": "",
+   "rule_latin": "DUODECIMA. | De Carcere d an aliquis incarcerabitur. QUAESTIO I x | Dverte an figura prime & decima- tertiz domus, fit figura exiftens in duo- decima domo, aut cum ea conjuncta, ideft \u2014 \u2014 in decima aut undecima exiftens; Si enim ihfortunatz fint, incarcerationem indica-"
+  },
+  {
+   "leaf_pdf": 532,
+   "topic_latin": "De Carcere d an aliquis incarcerabitur",
+   "rule_latin": "| Dverte an figura prime & decima- tertiz domus, fit figura exiftens in duo- decima domo, aut cum ea conjuncta, ideft \u2014 \u2014 in decima aut undecima exiftens; Si enim ihfortunatz fint, incarcerationem indica- bunt, edque magisfi feptima & octava fint \u2014 infortunate. ISi prima fitin undecima,& quinta & fexta ;"
+  },
+  {
+   "leaf_pdf": 575,
+   "topic_latin": "",
+   "rule_latin": "\" ''^ Domus Quarta. . E Sl aliauts filius quaerit de f\u00e9 C patre fa quis prius moriatur ? Signum 1. Domu | i attende;quod eft flit petentis , & 4. D. quo - eftpatris , & quod fortiusfuerit ex eis, ali . beruma fignis infortunatis & 8. D. iftediu - \" tiusvivet, fiDeus voluerit, Et fi Pater. d |. filio quxfierit primum fignum quodeft pa"
+  },
+  {
+   "leaf_pdf": 606,
+   "topic_latin": "",
+   "rule_latin": "SEXT E. D - (Utrum ager vivet vel morietur ? Ignum1. D. confidera; Quod fi in 8. D. velinejus conjunctione fuerit & cardi- \u2014 \u2014 esadver\u00edi, fignum erit mortis; Etfi (ignum liquod inter hos fignificatores translatio- em fecerit, & quattio infortunata fuerit, ortale fignum erit; fi fortunata timorem"
+  },
+  {
+   "leaf_pdf": 641,
+   "topic_latin": "",
+   "rule_latin": "- OCTAVA, | a Mn abfens vivat velnon? | | Signum 1. D. abfentitribue , quod fiin 8. | V D. fuerit, mortemindicat , & fi in con- | junctione ipfius 8, D. reperiantur fignamo- | 00 0 0\u00e0\u00d3 o^ bilia, malevola, aut o o. vel oo o = OO |. 0000"
+  }
+ ]
+}

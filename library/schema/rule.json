@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Rule",
+  "description": "A computable procedure published in the dataset (from kb/techniques.yaml).",
+  "type": "object",
+  "required": ["id", "conf", "source"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+    "name": {"type": "string"},
+    "answers": {"type": ["string", "null"]},
+    "conf": {"type": "string", "enum": ["HIGH", "MED", "LOW"]},
+    "status": {"type": "string", "enum": ["NAMED_ONLY", "IMPLEMENTED"]},
+    "source": {"type": "string", "minLength": 4},
+    "procedure": {"type": "string"},
+    "test_case": {"type": "object"},
+    "notes": {"type": ["string", "object", "null"]}
+  },
+  "additionalProperties": true
+}

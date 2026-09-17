@@ -1,0 +1,155 @@
+{
+ "_meta": {
+  "source": "Christopher Cattan, The Geomancie (1608), book III ('A brief deduction of the original and signification of the sixteen figures')",
+  "identifier": "bim_early-english-books-1475-1640_the-geomancie-of-maister_cattan-christophe-de_1608",
+  "method": "figure-name-anchored block split, then 'to the Nth' clause split; raw OCR retained",
+  "confidence": "MED - use as leads to verify against a collated edition, not as quotation",
+  "coverage": "11 figures / 24 transitions (filtered for truncation)"
+ },
+ "records": [
+  {
+   "figure": "Fortuna Major",
+   "from_house": 1,
+   "to_house": 2,
+   "ocr_text": "it \u017figniftetha great gainein gods, moueables as gold \u017filuer, and tich vten\u017fllles"
+  },
+  {
+   "figure": "Fortuna Major",
+   "from_house": 1,
+   "to_house": 3,
+   "ocr_text": "it ignifleth to haue much fub\u017ftance by the meanes of the kindzed : it is al\u017fo good foz \u017fmall and \u017fhozt voyages"
+  },
+  {
+   "figure": "Fortuna Major",
+   "from_house": 1,
+   "to_house": 5,
+   "ocr_text": "it \u017figniflethioy , plea\u017fure, to be in good 02der , well appointed and clothed , toeate and dzinke well, and to haue fewe child\ua75ben and they \u017fhall be or red colour"
+  },
+  {
+   "figure": "Fortuna Major",
+   "from_house": 1,
+   "to_house": 10,
+   "ocr_text": "it \u017fignifyeth to hane dignitie with I, Kings aud P\ua75bintes, and with the other, and to haue vido- rie ouer his enemies"
+  },
+  {
+   "figure": "Fortuna Minor",
+   "from_house": 1,
+   "to_house": 3,
+   "ocr_text": "it \u017fignifpeth top of \u00de Kinsfolkes, 1 it is al\u017fo good \u017fo2 a \u017fho\ua75bt voyage, and \u017figni\u017fieth that it \u017fhall be quickly ended, it is al\u017fo good foz friendes"
+  },
+  {
+   "figure": "Fortuna Minor",
+   "from_house": 1,
+   "to_house": 11,
+   "ocr_text": "it \u017fignifieth good and tru\u017ftie \" friendes, and a good end of the thing where in hope is put"
+  },
+  {
+   "figure": "Rubeus",
+   "from_house": 1,
+   "to_house": 4,
+   "ocr_text": "it \u017fignifyeth to winne his \u017fute it u al\u017fo good in the demaundes which may be made vpon the fa- ther,fignifping as wellin them (as in al others) a good i\u017f\u017fut 0z end"
+  },
+  {
+   "figure": "Rubeus",
+   "from_house": 1,
+   "to_house": 11,
+   "ocr_text": "it b\ua75bingeth good lucke, and al\u017fo fo2 letters which \u017fhall come on their part"
+  },
+  {
+   "figure": "Caput Draconis",
+   "from_house": 1,
+   "to_house": 3,
+   "ocr_text": "it \u017fignifyeth the kinfolkes to be of good amitie, it is al\u017fo good fo2 \u017fhozt voyages , but that there \u017fhall be \u017fome flownelle therein"
+  },
+  {
+   "figure": "Caput Draconis",
+   "from_house": 1,
+   "to_house": 5,
+   "ocr_text": "it \u017fignifyeth many Child\ua75ben, which \u017fhall be wi\u017fe and wittie,it \u017fheweth al\u017fo a heartine\u017f\u017fe to eate and dainke"
+  },
+  {
+   "figure": "Caput Draconis",
+   "from_house": 1,
+   "to_house": 8,
+   "ocr_text": "it ignifpeth death without reme\u2e17 die, and \u017fometime in this place it \u017fignifyeth to winne inhe ri\u2e17 tances"
+  },
+  {
+   "figure": "Laetitia",
+   "from_house": 1,
+   "to_house": 2,
+   "ocr_text": "it \u017fignifieth a mediocritie of gaine by white things, and in things of the Church"
+  },
+  {
+   "figure": "Laetitia",
+   "from_house": 1,
+   "to_house": 3,
+   "ocr_text": "it \u017figni\u017fteth the kinsfolkes tobe merry and in good di\u017fpo\u017fition and in health of body it is al\u017fo good fo2 \u017fmall and \u017fho\ua75bt voyages"
+  },
+  {
+   "figure": "Laetitia",
+   "from_house": 1,
+   "to_house": 5,
+   "ocr_text": "it good fo2 child\ua75ben, and to eate and d\ua75binke, and to \u017fing mu\u017ficke, and fignifieth a great light\u017fome\u2e17 ne\u017f\u017fe of heart"
+  },
+  {
+   "figure": "Tristitia",
+   "from_house": 1,
+   "to_house": 2,
+   "ocr_text": "it \u017fignifieth \u017fmal p2ofit but in things of the earth | | as vines, medowes, wodes, and lands earrable, inallthev | ther hou\u017fes this figure is ill , but in the fourth and eight \u201e tages, and becau\u017fe J haue largelp declared here befoze , JI wh"
+  },
+  {
+   "figure": "Puella",
+   "from_house": 1,
+   "to_house": 2,
+   "ocr_text": "\u017fignifteth gaine by women, and by whi te things, in all theo ther hou\u017fes where this figure pa\u017f\u017feth,\u017fhe is good, e\u017fpecially in the hou\u017fe where \u017fhe \u017figmfieth topfulne\u017f\u017fe: but in the eight the \u017figmfieth death, and in the twelfth imp\ua75bi\u017fonment"
+  },
+  {
+   "figure": "Conjunctio",
+   "from_house": 1,
+   "to_house": 2,
+   "ocr_text": "it \u017fignifieth gaine by books and w\ua75bittings, in all other hou\u017fes this figure is indifferent, but in the \u017feuenth where it is good foz marriage, and in the ninth to put \u017fcholers to \u017ftudie, and in the eight it is ill, fo\ua75b it alwaies \u017fignifieth"
+  },
+  {
+   "figure": "Populus",
+   "from_house": 1,
+   "to_house": 3,
+   "ocr_text": "it is god to make voyage by water, it \u017figni\u0169eth death in the eight and in the ninth, and in the twelfth to be taken p2i\u017foner"
+  },
+  {
+   "figure": "Via",
+   "from_house": 1,
+   "to_house": 2,
+   "ocr_text": "it \u017figni\u2e17 fieth \u017fmall gaine, i it pa\u017f\u017fe into the third it is god fo2 \u017fho\ua75bt vo\u2e17 vages:in all the other hou\u017fes this figure is ill"
+  },
+  {
+   "figure": "Acquisitio",
+   "from_house": 1,
+   "to_house": 4,
+   "ocr_text": "/ oz into any other, vnto the rwelfth,\u017fo \u017fhall ve doe by the fourth if it pa\u017f\u017fe into the fift, o\ua75b into any of the other hou\u017fes following:and \u017fo all the others iudging as is afo\ua75be\u017faide, acco\ua75bding to the \u017fignifications of the hou\u017fes where the"
+  },
+  {
+   "figure": "Acquisitio",
+   "from_house": 1,
+   "to_house": 1,
+   "ocr_text": "and \u017fuperiour and p2incipall Element of all the other, the \u017fecond to the Aire the third to the water, the kourth to the Carth"
+  },
+  {
+   "figure": "Puella",
+   "from_house": 1,
+   "to_house": 3,
+   "ocr_text": "oz from the fir\u017ft to theeleuenth,o2 from the to ther as is befoze declared vnto you moze The quadzate A\u017fpectis from foure to foure , the Trim from fine to flus, the Oppo\u017fition from \u017feuen to \u017feuen"
+  },
+  {
+   "figure": "Puella",
+   "from_house": 1,
+   "to_house": 1,
+   "ocr_text": "onc to the \u017fecond, one to the third and \u017fo con \u2e17 \u017fequently vnto all the others, vntil \u00bb al the points be be\u017ftow\u2e17 td, and then if the point remaine on the fir\u017ft hou\u017fe, it \u017fignt- fleth thereby that the per\u017fon hath de\u017fired to haue that fygure"
+  },
+  {
+   "figure": "Puella",
+   "from_house": 1,
+   "to_house": 12,
+   "ocr_text": "and the vneuen points,being in number foure and twentic, and thereby hay uing twice run oner all the figures , I found the la\u017ft point to fall vppon the 12"
+  }
+ ]
+}

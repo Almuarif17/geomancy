@@ -1,0 +1,67 @@
+{
+ "_meta": {
+  "source": "Jean de la Taille (seigneur de Bondaroy), La Geomancie - French, via IA item LaGeomanceAbregeeDeIeanDeLaTailleDeBondaroy",
+  "grid": "8 figure-house rulings across 1 houses",
+  "extra_rules": [
+   "'files figures eftoient mobiles ou communes, preferez le jugement felon les qualitez des maisons' - a mobile or common figure hands the verdict over to the house's own quality (the tie-break rule)",
+   "'la quatriefme avec la quinziefme la fin' - read the 4th together with the 15th for the END of any matter",
+   "'le Thresor cache eft en la garde du Diable' - Populus in the 4th: the hidden treasure is under the Devil's keeping",
+   "the figure attributions run their own course here (Perte=Amissio is 'of Venus retrograde, in Scorpio, of the element of Fire')"
+  ],
+  "confidence": "MED: 16th-c. French print with long-s; OCR repairs names, so check before quoting",
+  "language": "fr",
+  "coverage_note": "only houses whose section headings survive in this abridged print are populated (II...XII headings are lost to the OCR except 4, 7, 12); the body repeats 'cette Maison' 100+ times, so the full grid is there in the scan and needs page-by-page reading, not regex",
+  "figures_confirmed": [
+   "Albus",
+   "Amissio",
+   "Cauda Draconis",
+   "Fortuna Major",
+   "Fortuna Minor",
+   "Puer",
+   "Rubeus",
+   "Via"
+  ]
+ },
+ "grid": [
+  {
+   "house": 4,
+   "figure": "Albus",
+   "ruling_fr": "qui fignifieque lettres viendront de quel- que part dans trois i ours , eft bonne pour toutes De- mandes. Si Conion&ion fc trouuc en cefte Maifon, &: la figure fuftfai\u00a3te pour Mariage , il fc fera pour certain. Et pour toute ch oie d\u00e9di\u00e9e \u00e0 cefte Maifon elle eft moyenn e. Sichefau Dragon, qui d\u00e9note les enfans dcuoir cftre d\u00e9grade fageflc,h on eu r & humilit\u00e9, le Fils n cftre mort, mais venir bien toft &c qu'il eft l\u00e9gitime, cft bonne figure pour toutes Demandes"
+  },
+  {
+   "house": 4,
+   "figure": "Amissio",
+   "ruling_fr": "qui fignif\u00eee le naturel de l'Enfant mauuais, perte d'h\u00e9ritages par Proc\u00e8s, le Meft\u00e0ger venir bicn-toft auec mauuaifes nouuclles, le Fils n eftremort, nyprifon- mer, D V i \u00a3 1 C, OS. C 6 S D A E. O V. I ? hier, nuis malade & non\u00eecgitimc)fctrouucen cefte Mai- fon,e!le eft mauuaiic>fors qu'elle demonftrc bonne au en- turc aux chofes de Vcnus( qui faimeicy) auf\u00ef\u00ef guerifonau malade, & Tann\u00e9e dcuoir cftre abondante en grains, mais fechc en frui&s. SiTriftcffe,qui fignific trifteffe\u00a3c malheur pour l'En- fant &r pour toutes demandes"
+  },
+  {
+   "house": 4,
+   "figure": "Cauda Draconis",
+   "ruling_fr": "Le lieu eft public, & pr\u00e8s de l\u00e0 eft fouuent le paffage d'hommes^ de b eft es"
+  },
+  {
+   "house": 4,
+   "figure": "Fortuna Major",
+   "ruling_fr": "que Y ennemy publie cft fort Se puif- fant , 5c de bonne cQnaition,que la femme cft charte & fi- dcl!c,qucla femme future cft fort ri ch \u00e9gayant grand ma- riagc,que le pourfumant lu y fera bon, le proc\u00e8s fc gaigne- ra. Au refte elle cft fcmblable en (\u00efgnifianec \u00e0ccIIcd'Ac- queft (hors mis pour l'honneur de la femme ) & pour tou- tes Demandes bonne figure"
+  },
+  {
+   "house": 4,
+   "figure": "Fortuna Minor",
+   "ruling_fr": "que l'en cm y cft mauuais &: puiffant, & de mauuaifc intentionn\u00e9 Proc\u00e8s fe gaignera,maisaucc grand traua\u00ee! ,\u00f4\u00a3 diligente folicitation,qucIa femme eft col\u00e8re, le Mariage ne fe fera pas,pour\u00eee peu de profit qui y dldc ioueur perdra, la guerre fera grande, la femme en- uoye fon mary en Cornouaillc, que la fille a laii\u00efc cueil- lir \u00e0 dautre fa premi\u00e8re fleur, la femme future n'eft pas des plus riches , le larron ne fe retrouucra point ny la cho- fe perdue, Taccord ou rappointement ne ri\u00e9dra point. Hn toutes Demandes elle eft mauiiaife,forsqu en choies de guerre &: d'amours gaillardes"
+  },
+  {
+   "house": 4,
+   "figure": "Puer",
+   "ruling_fr": "qui m\u00f4ftrc T Enfant cftrc mal obeifiant \u00e0 Pc- reoumerc^Que la ville afliegee ne feraprife,Qifau chc- minyapluficurs voIcurSjQuc le fils neft mort, mais bief fc^qu'iln cft l\u00e9gitime, elle eft mauuaife"
+  },
+  {
+   "house": 4,
+   "figure": "Rubeus",
+   "ruling_fr": "en toutes chofes qu'on de m ad c il dcmoflrc mauuaife f\u00een^fors qif e chofes de Feu, d\u00e9not\u00e2t toujours mort viol ente^ou lang epandu, & nuls Thrcfors cachez"
+  },
+  {
+   "house": 4,
+   "figure": "Via",
+   "ruling_fr": "de Voyages, de McfTagcrs , ou de perte d'Ar* gent"
+  }
+ ]
+}

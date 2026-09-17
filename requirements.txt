@@ -1,0 +1,11 @@
+# core (engine + dataset build)
+PyYAML>=6.0
+# harvesters and OCR pipeline (scripts/ only)
+requests>=2.31
+beautifulsoup4>=4.12
+lxml>=4.9
+PyMuPDF>=1.24
+# gates (library/tools/check_schema.py)
+jsonschema>=4.21
+# optional: pandas is used by one analysis script; not needed by the engine
+# pandas>=2.0

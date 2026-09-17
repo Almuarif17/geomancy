@@ -1,0 +1,50 @@
+name: Validate Library
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: python -m pip install --upgrade pip && pip install -r requirements.txt
+
+    - name: Build dataset
+      run: python library/tools/build_dataset.py
+
+    - name: Build outcome indexes and app bundles
+      run: python engine/retrieve.py --build
+
+    - name: Generate app contract artefacts
+      run: python library/tools/gen_types.py
+
+    - name: Run validation gate
+      run: python library/tools/validate.py --build library/dataset
+
+    - name: Scan for identity / credential leakage
+      run: python library/tools/check_public_leaks.py
+
+    - name: Check schema contract
+      run: python library/tools/check_schema.py
+
+    - name: Run engine self-checks
+      run: python engine/test_deep_read.py
+
+    - name: Differential verification against the independent oracle
+      run: python engine/evaluate.py
+
+    - name: Generated artefacts must be committed
+      run: |
+        git diff --exit-code library/dataset/index library/dataset/bundles.json types/geomancy.d.ts \
+          || { echo "generated files are stale - run: make build && make index && make types"; exit 1; }

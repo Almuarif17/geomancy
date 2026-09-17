@@ -1,0 +1,10 @@
+* text=auto eol=lf
+*.py text
+*.md text
+*.yaml text
+*.yml text
+*.json text
+# generated artefacts: don't count them as source, don't diff them in review
+library/dataset/shards/*.jsonl text linguist-generated
+library/dataset/manifest.json text linguist-generated
+*.sqlite binary

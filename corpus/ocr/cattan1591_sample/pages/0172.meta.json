@@ -1,0 +1,18 @@
+{
+ "page": 172,
+ "method": "tesseract(frk+eng,psm6,conf>=70,dpi400,crop)",
+ "keyword_hits": 2,
+ "of": 8,
+ "tesseract_words": 203,
+ "embedded_chars": 1986,
+ "hits": {
+  "judge": false,
+  "house": false,
+  "figure": true,
+  "signify": false,
+  "thief": false,
+  "enem": false,
+  "mother": true,
+  "prison": false
+ }
+}

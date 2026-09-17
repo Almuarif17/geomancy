@@ -1,0 +1,14 @@
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+Applies to: library/dataset/ (the JSONL shards and manifest), kb/, docs/FINDINGS.md, data/fixtures/.
+Code in this repository is MIT-licensed; see LICENSE.
+
+You are free to copy and redistribute the material in any medium or format and to remix, transform, and
+build upon the material for any purpose, even commercially, provided that you give appropriate credit,
+link to the licence, and indicate if changes were made.
+
+Two obligations this dataset imposes on you, in addition to the licence terms:
+1. Preserve the per-passage provenance (work + locator). A ruling without a citation cannot be checked,
+   and an uncited chain of quotations is how a documented tradition turns into folklore.
+2. Do not add Ifá verses, taboos or prescriptions, or any other living-tradition material, without the
+   consent and attribution of the lineage or practitioner who holds it (see NOTICE).

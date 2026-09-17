@@ -1,0 +1,193 @@
+{
+ "_meta": {
+  "source": "Cattan 1591 (b30337860), book III, pages 140-180, my OCR pass",
+  "purpose": "pointer index to the concrete-fate particulars (weapons, poison, prison, sickness, money, travel) per figure per house",
+  "warning": "OCR quality on 16th-c blackletter is ~65% recall; these strings are leads to the PAGE IMAGE, not quotations. For a quotable text you need HTR (Transkribus/Kraken) or a collated edition."
+ },
+ "records": [
+  {
+   "page": 140,
+   "figure": "Rubeus",
+   "house": null,
+   "topic": "weapon_words",
+   "raw": "e tooman is not berp rich : in all the DematmDes tobicb pe P* op aims in this boufe this figure is ill, fautwg for loue, and for $tgromancte, ^hereunto ft is g\u00a95. JMmg this figure %ubew in tines eight boufe, tbeman * ^ is ojthall be fiaiwe ioptb a f\u00fciojDeoj a ftaffe, the fiche perfsn is ^ in Danger to Die if the other ",
+   "confidence": "LOW-MED (blackletter OCR; verify on the page image)"
+  },
+  {
+   "page": 140,
+   "figure": "Puer",
+   "house": null,
+   "topic": "travel_delay",
+   "raw": "bicb pe map demaunde in this boufe this Jftfiuce it g\u00a9d, except in $igroitrancie. Cbis figure P\u00bber tntbis boufe, tbe man (ball be flaine, ft ^ is ill fo^tbe fiche pecfon,fo? ft figntfpetb Death tftbe others eon^ ^ # Cent tbcremtto : the fiefeenes (hall not be long, the cotmfafler of ^ the ennemp and pf the Me is ill, a",
+   "confidence": "LOW-MED (blackletter OCR; verify on the page image)"
+  },
+  {
+   "page": 141,
+   "figure": "Cauda",
+   "house": null,
+   "topic": "prison_bonds",
+   "raw": "the fa*, tber (ball line long, be that to from borne fball profit in bis boy* age : fo? all the DemaunDes Mich map be pjopounDeDtn this boufe this figure is gcoD. ; jrintJtng in this boufe cauda \u00e0mcon\u00f9 tbe, perfon fijafl b\u00e9 longfickeanDinDaungerof Death, tbe prifoner is in Datmger ofljis life, tbe man GjaU not baue tbe",
+   "confidence": "LOW-MED (blackletter OCR; verify on the page image)"
+  },
+  {
+   "page": 141,
+   "figure": "Cauda",
+   "house": null,
+   "topic": "travel_delay",
+   "raw": "* -X . * -K * * * * Hr Hr Hr * IV. The f\u00e9cond Bookc tljal be quite ficltucreo,but not Mbcut great erpences f co ffe * the man ffyaU boue bis inheritance ano ouercome the partietibe man is Mbout feare,tbe cotmfellour is an bonett man, the fa*, tber (ball line long, be that to from borne fball profit in bis boy* age : fo",
+   "confidence": "LOW-MED (blackletter OCR; verify on the page image)"
+  },
+  {
+   "page": 141,
+   "figure": "Populus",
+   "house": null,
+   "topic": "travel_delay",
+   "raw": "gh, but b\u00ae is in Danger to be rofebeoby tbe My tin al tbe quefitons tobicb map bee pjepounteD in this boufe this iftgure is cuill (ercept\u00e8it boe fo? ^igremancie ) fo? tbe Micb it is marurilous g\u00a9o. ^in&tng this figure Popuim in tbis boufe tbe Ocfeenes toil be long,awD tbe patient in Danger of oeatb,bat vtt in long time",
+   "confidence": "LOW-MED (blackletter OCR; verify on the page image)"
+  },
+  {
+   "page": 154,
+   "figure": "Carcer",
+   "house": null,
+   "topic": "prison_bonds",
+   "raw": "eth) of the Realme, Dominion and fo2 > matter ts uery fap no other thing at this that in all queffions and demaunds it death, X freafon and of gwds and fo fell pou at two wozdes \u201ethis uery ill but fo? warre, fo2 it fignifpeth treafon , make fire 92 and figure Carcer inthis boule, the person Hail 3 of the 02 by meanes o",
+   "confidence": "LOW-MED (blackletter OCR; verify on the page image)"
+  },
+  {
+   "page": 154,
+   "figure": "Carcer",
+   "house": null,
+   "topic": "betrayal_friend",
+   "raw": "es peace. Dracons in this house + eth) of the Realme, Dominion and fo2 > matter ts uery fap no other thing at this that in all queffions and demaunds it death, X freafon and of gwds and fo fell pou at two wozdes \u201ethis uery ill but fo? warre, fo2 it fignifpeth treafon , make fire 92 and figure Carcer inthis boule, the p",
+   "confidence": "LOW-MED (blackletter OCR; verify on the page image)"
+  },
+  {
+   "page": 154,
+   "figure": "Carcer",
+   "house": null,
+   "topic": "woman_marriage",
+   "raw": "her thing at this that in all queffions and demaunds it death, X freafon and of gwds and fo fell pou at two wozdes \u201ethis uery ill but fo? warre, fo2 it fignifpeth treafon , make fire 92 and figure Carcer inthis boule, the person Hail 3 of the 02 by meanes ofa woman: sometime tt fignifpeth detention and of a Bing, Xx an",
+   "confidence": "LOW-MED (blackletter OCR; verify on the page image)"
+  },
+  {
+   "page": 154,
+   "figure": "Carcer",
+   "house": null,
+   "topic": "money_loss",
+   "raw": "re Carcer inthis boule, the person Hail 3 of the 02 by meanes ofa woman: sometime tt fignifpeth detention and of a Bing, Xx andhis great miscontentment : the boule that he is in old and bzoken : if of goods if is for the medecine : the thing willi neuer foundagaine : the mother is the friendis not king nothing: the oth",
+   "confidence": "LOW-MED (blackletter OCR; verify on the page image)"
+  },
+  {
+   "page": 158,
+   "figure": "Puer",
+   "house": null,
+   "topic": "betrayal_friend",
+   "raw": "peare foall be fruftefull, anb abounbe in all goeb fomgs,at an mbtfferent prtce : in all foinges hfoich pas mapbemaunb in this boufe this figure to goeb, efpeciaKp foj foe lone of Habits, anbto be in foeir fauour. ifinbing fors fpgure \u2018Puer in fois boufe, foe friend to good, anb reabp to boe pleafure, anb efpeciallp hn",
+   "confidence": "LOW-MED (blackletter OCR; verify on the page image)"
+  },
+  {
+   "page": 160,
+   "figure": "Populus",
+   "house": null,
+   "topic": "travel_delay",
+   "raw": "his eleuenth houle figoeficth the fyp tune of the querant to be meanc,anS alfo a flofones in al things: the friens ans companion is fatthfull ansfecrete, the friend ans mother haue much monep^but fhep k\u00e2pe it clofe : the thing sc> fires is gees, but itihallbe long in taking effect : it is not goes fi& the king to make ",
+   "confidence": "LOW-MED (blackletter OCR; verify on the page image)"
+  },
+  {
+   "page": 163,
+   "figure": "Amissio",
+   "house": null,
+   "topic": "prison_bonds",
+   "raw": "make tc* maunte in tbis boufe but tbis figure is gets therein, , SUbis figure TrtUuu in tbis boufe fignifietb a great mum ber of ennemies migbtieano fttong : there ibail be greatbeaiu neffe for tbe Io\u00a3Tc of a fermant, ants of beates, anti to: long fi\u00a9 ping in prifon tmb forment thereof, 2UIm figure is fcrrp tlifoj ail ",
+   "confidence": "LOW-MED (blackletter OCR; verify on the page image)"
+  },
+  {
+   "page": 163,
+   "figure": "Amissio",
+   "house": null,
+   "topic": "travel_delay",
+   "raw": "for Mptb pc map make tc* maunte in tbis boufe but tbis figure is gets therein, , SUbis figure TrtUuu in tbis boufe fignifietb a great mum ber of ennemies migbtieano fttong : there ibail be greatbeaiu neffe for tbe Io\u00a3Tc of a fermant, ants of beates, anti to: long fi\u00a9 ping in prifon tmb forment thereof, 2UIm figure is f",
+   "confidence": "LOW-MED (blackletter OCR; verify on the page image)"
+  },
+  {
+   "page": 164,
+   "figure": "Amissio",
+   "house": null,
+   "topic": "money_loss",
+   "raw": "all the DemaunDes of this heufc, I\u00a3bis figure Alb tu in tin's boufc figntfieth \u00fbjojte D\u00e9lme* rance ont of pfrfon : it is not good to me\u00fb\u00fble forth tie ennemie : the perfon (frail net be psifonen-rt is herp good to bun great beads, fo? thereof bsill arife much gaine : if is goes to labour the eartfrimb to bap herefage0,a",
+   "confidence": "LOW-MED (blackletter OCR; verify on the page image)"
+  },
+  {
+   "page": 164,
+   "figure": "Caput",
+   "house": null,
+   "topic": "money_loss",
+   "raw": "onen-rt is herp good to bun great beads, fo? thereof bsill arife much gaine : if is goes to labour the eartfrimb to bap herefage0,anD to hp?e a feruant : the bo?fe fofrch pe foowlo bup (ball be gooD anD ffotft, tbe bo?fc 0? ether thing loll toil! not retnrnc again? : the man can not pap his Deb tes : it is good togoe t",
+   "confidence": "LOW-MED (blackletter OCR; verify on the page image)"
+  },
+  {
+   "page": 165,
+   "figure": "Amissio",
+   "house": null,
+   "topic": "travel_delay",
+   "raw": "s tobicb pe map make in this boute tbts ligure ts ill. finding tins figure career m tbt's boute, if is but m\u00e9telp fortune foj tbe pjtfsncr, 0? to bim tobteb tooulb afiault bt* ene* mp to ouertome btm : tbe perfon fijali be taken p?tfoncr,but be tball not btbe long tberettt : touching bupmg ofbeaffs, anb ttl* ling of ea",
+   "confidence": "LOW-MED (blackletter OCR; verify on the page image)"
+  },
+  {
+   "page": 167,
+   "figure": "Amissio",
+   "house": null,
+   "topic": "woman_marriage",
+   "raw": "na pleafurc, to eate ana BjtnUe, ana to bee toell dofhea. 3f that toe goe from the fir\u00ae to toe firt, it fignifneth profita ana gooa lue he fo; femanfs, ana to bun fn tall csitelh Sf toe goe into the feuentb, it flgmfpcth to make a contract of enemies, to make marriages, ana to get honour ana the lotte of perfons, ana t",
+   "confidence": "LOW-MED (blackletter OCR; verify on the page image)"
+  },
+  {
+   "page": 169,
+   "figure": "Amissio",
+   "house": null,
+   "topic": "woman_marriage",
+   "raw": "cloth^ fis eafe mmfa\u00e8 foelL anb to bane fefocehitojen, miD th# foatlbe of reb colour. \u2019 1 & f fife itttyii fignifpeth fibdifte in Cernantes, anb that the ficke perfon (hall amenai it is alfo gab fin fmall beattes. \u2022 If fo& page info the feaentl^itis ttcob fo? marriage an# fignifpeth that the enemie foiltiwtahe peace : ",
+   "confidence": "LOW-MED (blackletter OCR; verify on the page image)"
+  },
+  {
+   "page": 170,
+   "figure": "Amissio",
+   "house": null,
+   "topic": "betrayal_friend",
+   "raw": "men teamed, to make a dosage it isgae\u00f4. 9f it goe into the tenth, it Ogmfpetb tobaue dignifie toith kings and pjinces, and toith the mother, and tobaue fcietojie oner hie enemies. 3!f Ityfe pnffetnto the elcuefh it \u00fbgnifpeth a gf\u00f4d iffue bpon a gaed hope, g\u00a9& friendes and facco\u00eeahter 5Sf it goe into the ttoelfth it \u00dbgn",
+   "confidence": "LOW-MED (blackletter OCR; verify on the page image)"
+  },
+  {
+   "page": 170,
+   "figure": "Amissio",
+   "house": null,
+   "topic": "woman_marriage",
+   "raw": "cafurc, to cate and toinkc, and to be coffip and toeU apparelled. 0nd if fhe go into the Hrt, it \u00dbgnifpeth g\u00aed to hap fmall rat* tie, it is indifferent fo? feroants, and \u00fbgnifpeth that thep fhaU he toittie and toife* ifi t paffe info the fenenfh, it \u00dbgnifpeth marriage, and that 1 \u00ab 7 it ftjali fee toith ffrife and cont",
+   "confidence": "LOW-MED (blackletter OCR; verify on the page image)"
+  },
+  {
+   "page": 170,
+   "figure": "Amissio",
+   "house": null,
+   "topic": "travel_delay",
+   "raw": "nemie is ff rong and mighfie, the toeman is toife, xtuotiUm cafe of lo\u00abe, fej it ihali he diteonereh. gf \u00fc)\u00e9 gee into the eight, if \u00fbgnifpeth death, and alfo tori I! m all things efefpjite, as spagicke and imiocations. if it paffe into the ninth, it \u00fbgnifpeth long hopagrs toith all g&ofpmtie ana g\u00aed lathe, and the amit",
+   "confidence": "LOW-MED (blackletter OCR; verify on the page image)"
+  },
+  {
+   "page": 171,
+   "figure": "Amissio",
+   "house": null,
+   "topic": "woman_marriage",
+   "raw": "ged time 3. and that letters come the fourth , it to + gov in the 'demaundes which maybe made | tyer , as wellin 4 gm | 4f the passe the it haue man delight in ta anddzinke a pany often tines withlearned men, 6 the the leruants be and fr\u00fc | | 4f inte the the marriage bee | take ta the great contentment and of t andthe ",
+   "confidence": "LOW-MED (blackletter OCR; verify on the page image)"
+  },
+  {
+   "page": 176,
+   "figure": "Carcer",
+   "house": null,
+   "topic": "prison_bonds",
+   "raw": "ny times fignifpeth foundinthe Honfe fo make a tudgentent as ts tolue you the is ilin fourth in all. the other , lauing in demaundes, good in all that pe-map tn the uery the and houses, uerpillin all the quettions and which: made , inthe second, be meane. m + Carcer \u00fclinall ally and houles, and to . is and il with and ",
+   "confidence": "LOW-MED (blackletter OCR; verify on the page image)"
+  }
+ ]
+}

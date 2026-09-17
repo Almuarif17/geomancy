@@ -1,0 +1,6149 @@
+{
+ "_meta": {
+  "source": "Franz Hartmann, The Principles of Astrological Geomancy (London, 1889), appendix '2,048 Answers to Questions'",
+  "identifier": "b24884145",
+  "method_note": "Hartmann's own casting rule is NOT the classical shield: he takes the total points of the punctuation, divides by 12, and the remainder is the house of the Judge ('there have been 152 points ... there will still remain 8; 8 is therefore in this case the Judge'). Read his answers as an appendix oracle keyed to figures, not as the medieval judgment.",
+  "cells_recovered": 859,
+  "of_2048": "partial - the OCR breaks some section boundaries",
+  "questions": {
+   "1": "Will the person inquired about have a long life?",
+   "2": "Will he become rich?",
+   "3": "Will the proposed undertaking succeed?",
+   "4": "How will the undertaking end?",
+   "5": "Is the expected child a boy or a girl?",
+   "6": "Are the servants honest?",
+   "7": "Will the patient recover?",
+   "8": "Will the lover succeed?",
+   "9": "Will the inheritance be obtained?",
+   "10": "Will the lawsuit be gained?",
+   "11": "Will the desired position be had?",
+   "12": "What will be the kind of death?",
+   "13": "Will the expected letters arrive?",
+   "14": "Will the voyage be fortunate?",
+   "15": "Will good news arrive?",
+   "16": "Will the adversary be conquered?"
+  },
+  "grid_shape": "8 attainable Judges x 16 cofigures x 16 questions = 2,048 (NOT 16x16x8: q runs 1..16 and only even-pointed figures occur as judge)",
+  "cross_check_2026_09_17": {
+   "parity_law": "every 'judge' figure in the extracted table is even in points - independent corroboration of the parity law our exhaustive sweep proves",
+   "attainable_judges": "all 7 judge figures that appear are inside the 8 the shield can produce; none outside",
+   "absent_judge_block": [
+    "Carcer"
+   ],
+   "cells_extracted": 859,
+   "cells_total": 2048,
+   "coverage_pct": 41.94,
+   "note": "Carcer's whole block is missing, which is why coverage is 41.9% and not a scatter of holes"
+  },
+  "next_extraction": {
+   "target": "kb/hartmann_casebook.json - fill (judge,cofigure,question) cells in this order",
+   "first": [
+    {
+     "judge": "Carcer",
+     "cells": 256
+    },
+    {
+     "judge": "Conjunctio",
+     "cells": 155
+    },
+    {
+     "judge": "Via",
+     "cells": 153
+    }
+   ],
+   "method": "scripts/ocr_ingest.py over IA b24884145 appendix pages, then re-run scripts/extract_hartmann.py",
+   "why_first": "a complete 8x16x16 grid lets the app answer any (Judge, cofigure, question) triple from a printed 1889 source instead of from our prose"
+  },
+  "blocking_fact_2026_09_17": "IA's b24884145_djvu.txt is only 173 KB / 2 'carcer' mentions and stops before the appendix - the 2,048-answer table is NOT in the text layer. That is the whole reason coverage is 41.9%: the extracted cells came from our own page OCR (scripts/ocr_pages.py), not from IA. To finish the grid, OCR the appendix pages from the item's page images and re-run scripts/extract_hartmann.py; do not re-fetch the djvu.txt expecting it to contain the table."
+ },
+ "figure_table": {
+  "Acquisitio": {
+   "number": 7,
+   "element": "airy",
+   "gloss": "Acquisitio, Success, obtaining, absorbing, receiving, is a good figure. Its nature corresponds to if, its element is airy, its zodiacal sign T , and it number 7"
+  },
+  "Amissio": {
+   "number": 8,
+   "element": "fiery",
+   "gloss": "Amissio, Loss, that which is taken away. It is a bad figure. It nature corresponds to ? , its element is fiery, its zodiacal sign and its number 8"
+  },
+  "Fortuna major": {
+   "number": 12,
+   "element": "earthy",
+   "gloss": "Fortuna major. Great Fortune, success, interior aid and protection, is a very good sign. Its nature cor- responds to O , its element is earthy, its zodiacal sign .CC7, its number 12"
+  },
+  "Fortuna minor": {
+   "number": 10,
+   "element": "fiery",
+   "gloss": "Fortuna minor. Little Fortune, external aid and protection, is not a very good figure. Its nature corresponds to 0, its element is fiery, its zodiacal sign b , and its number 10"
+  },
+  "Populus": {
+   "number": 16,
+   "element": "watery",
+   "gloss": "Populus, People, is likewise indifferent. Its nature corresponds to • , its element is watery, its zodiacal sign 1^, and its number 16"
+  },
+  "Via": {
+   "number": 7,
+   "element": "watery",
+   "gloss": "Via, Street or Way, Is neither good nor bad ; its quality, like those of all the rest, is determined by its position in the house of the astrological figure. Its nature corresponds to d, its element i"
+  },
+  "Conjunctio": {
+   "number": 10,
+   "element": "airy",
+   "gloss": "Conjunctio, union or coming together, is rather good than bad. Its nature corresponds to ^ , its element is airy, its zodiacal sign and its number ii. Career, prison, or to be bound, is good or bad, a"
+  },
+  "Laetitia": {
+   "number": 15,
+   "element": "airy",
+   "gloss": "Laetitia, Joy, health, laughing, is good. Its nature corresponds to if, its element is airy, its zodiacal sign y , and its number 15"
+  },
+  "Tristitia": {
+   "number": 14,
+   "element": "earthy",
+   "gloss": "Tristitia, Sorrow, grief, perversion, condemnation, is bad. Its nature corresponds to 1? > its element is earthy, its zodiacal sign and its number 14"
+  },
+  "Puella": {
+   "number": 2,
+   "element": "watery",
+   "gloss": "Puella, Girl, pretty face, is pleasant but not very fortunate. Its nature corresponds to 5 , its element is watery, its zodiacal sign =5r, and its number 2"
+  },
+  "Albus": {
+   "number": 7,
+   "element": "watery",
+   "gloss": "Albus. O O O O O O O Rubens. O O o o o o o Tristitia 11 Canda Draconis. 32 gromancy. o o O O O O O O O O O O O O O O O O O O O O O O o o o o o o o o o o o o o o o o o o o- o o o o o o o o o o o o o o"
+  },
+  "Caput Draconis": {
+   "number": 4,
+   "element": null,
+   "gloss": "Caput Draconis, Dragon’s head, entrance, threshold, upper kingdom, is good. Its symbol is its zodi- acal sign njj, its element earthy, and its number 4"
+  },
+  "Cauda Draconis": {
+   "number": 5,
+   "element": null,
+   "gloss": "Cauda Draconis, Dragon’s tail, exit, lower kingdom, is bad. Its symbol is its zodiacal sign p, its element fiery, and its number 5"
+  }
+ },
+ "composition_rules": [
+  "A good figure made of two good ones is good.",
+  "A bad figure made of two bad ones is bad.",
+  "A good figure made of one good and one bad figure means success, but delay and vexation.",
+  "If the two witnesses are good and the judge bad, the result will be obtained ; but it will be unfortunate in the end.",
+  "If the first witness is good and the second bad, the success will be very doubtful.",
+  "If the first witness is bad and the second one good, the unfortunate beginning will take a good turn."
+ ],
+ "answers": [
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Carcer",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "A long and happy life."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Carcer",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Will be rich in old age."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Carcer",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "It will be successful."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Carcer",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "The object will be slowly attained."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Carcer",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "A boy."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Carcer",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Do not trust them too much."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Carcer",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "He dies after a long sick- ness."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Carcer",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "Success."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Carcer",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Money will gain the day."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Carcer",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "No success."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Carcer",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Dropsy."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Carcer",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Fortunate, but slow."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Carcer",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Good news will arrive."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Carcer",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "After waiting a long time."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Carcer",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "At last something will be had."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Carcer",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "The judge is favourably inclined."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Carcer",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "The aspect is favourable if it refers to lawyers."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Carcer",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Death by water or watery diseases."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Carcer",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Slowly."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Carcer",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Fortunate."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Carcer",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Tolerable."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Carcer",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "The adversary is stronger than you."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Carcer",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Average."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Carcer",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "A little in the beginning, but nothing in the end."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Carcer",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Doubtful."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Carcer",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Tolerable."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Carcer",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Daughter."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Carcer",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "They are thieves."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Carcer",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Dies."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Carcer",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "She is inconstant."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Carcer",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "The inheritance is not good."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Carcer",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Success through women."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Carcer",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Fortunate with ladies of high position."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Carcer",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "The fever will kill him."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Carcer",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "A good voyage on land in female company."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Carcer",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Only tolerable news."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Carcer",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "Victory."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Laetitia",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Strong in youth, feeble in old age."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Laetitia",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "That which is inherited will nearly all be lost 3."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Laetitia",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "A good beginning and a bad end."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Laetitia",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Reliable."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Laetitia",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Recovers."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Laetitia",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "He will obtain his wish, g."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Laetitia",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Gains."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Laetitia",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Success with clergymen."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Laetitia",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Congestion or apoplexy."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Laetitia",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "They will arrive."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Laetitia",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "No obstacles."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Laetitia",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "News about advancement in office."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Laetitia",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "The adversary loses."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Tristitia",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Short and painful life."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Tristitia",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Be not deluded."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Tristitia",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Cease to think of it."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Tristitia",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Bad end."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Tristitia",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "They steal secretly and openly."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Tristitia",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "He will have to go."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Tristitia",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "Vain hope, g."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Tristitia",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Loses."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Tristitia",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Unluck}G 12."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Tristitia",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Waits in vain."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Tristitia",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Wounded during the voyage."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Tristitia",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Bad news."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Tristitia",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "The adversary gains by cheating."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Tristitia",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "The legacy is worthless."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Tristitia",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Beware of fire and lead."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Albus",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Long life."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Albus",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Fortune acquired b}' writ- ing."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Albus",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Fortunate."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Albus",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Good end."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Albus",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Daughter."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Albus",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Honest and industrious."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Albus",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Recovers after a long ill- ness."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Albus",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "Will ultimately succeed."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Albus",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Settlement."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Albus",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Fortunate with mercurial people."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Albus",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Dies quietly in bed."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Albus",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Soon."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Albus",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Good but slow."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Albus",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Agreeable."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Albus",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "Adversary is feeble and desires to settle."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Caput Draconis",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Happy old age."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Caput Draconis",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "A fortune by marriage and employes."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Caput Draconis",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Keep your undertaking ."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Caput Draconis",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "The end is as it is desired."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Caput Draconis",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Daughter."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Caput Draconis",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Faithful and discreet."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Caput Draconis",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "The adversar}^ has the ad- vantage."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Caput Draconis",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Fortunate with clergymen and ladies."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Caput Draconis",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Natural death."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Caput Draconis",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Soon."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Caput Draconis",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Fortunate."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Caput Draconis",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Good."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Caput Draconis",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "You ^yill \\yish to settle."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Caput Draconis",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Dies."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Caput Draconis",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "Obtains her."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Puella",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Gains through the in- fluence of women."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Puella",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Fortunate with ladies."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Puella",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Dies of venereal disease."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Puella",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "The letters will arrive."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Puella",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Happy voyage, but great expenses."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Puella",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "News about love affairs."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Puella",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "You will be victorious over your malicious enem3\\ Puella."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Puella",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Feeble youthjhappy old age 2."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Puella",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "If the object is robberjg it will succeed."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Puella",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "The end is better than the beginning."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Puella",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Thievish and unchaste."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Puella",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Dies."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Puella",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "There are enemies in the g."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Puella",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Rich by trade."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Puella",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Doubtful."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Puella",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Tolerable."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Puella",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Daughter."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Puella",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Faithful."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Puella",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Dies."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Puella",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "Obtains the legac5x 10."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Puella",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Fortunate by means of the pen."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Puella",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Dies in his bed."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Puella",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Soon."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Puella",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Quick and fortunate."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Puella",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Advantageous."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Puella",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "You will conquer."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Puella",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Great riches."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Puella",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Daughter."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Puella",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "Obtains an excellent in- heritance."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Puella",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Average."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Puella",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Fortune through ladies."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Puella",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Final success."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Puella",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Tolerable."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Puella",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Vain and idle."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Puella",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Recovery."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Puella",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "Success."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Puella",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Gain."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Puella",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Some success."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Puella",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Dies of a fever."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Puella",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "No letters."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Puella",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Tolerable."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Puella",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Letters from high person- ages."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Puella",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "You will not gain."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Puella",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Short and feeble life."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Puella",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Small fortune."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Puella",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Disappointment."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Puella",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Unsuccessful."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Puella",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Quick, but unchaste."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Puella",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Dies."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Puella",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "Loses her on account of a long vo}^age."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Puella",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Neither one of the oppos- ing parties will have an advantage."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Puella",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Unfortunate."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Puella",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Danger of drowning."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Puella",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Soon."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Puella",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "He will go to see his sweetheart."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Puella",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "News about voyages."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Puella",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "The eneiu}^ will do no harm."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Puella",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Feeble and short life."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Puella",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Fortune easily lost."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Puella",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Untimely love is injurious."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Puella",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "A bad end."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Puella",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Careless and unfaithful."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Puella",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Recovery."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Puella",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "He will obtain his wish."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Puella",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "The opponent has the ad vantage."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Puella",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Success by being genteel."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Puella",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Danger of death by vene real disease."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Puella",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Delay."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Puella",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Interference from water."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Puella",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Contents are love affairs."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Puella",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "You will conquer all cue mies."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Puella",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Daughter."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Laetitia",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "Another one will get the 2."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Laetitia",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "\\^er}^ good prospect."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Laetitia",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Girl."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Tristitia",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "The contents are love mat- ters."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Tristitia",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Long but troubled life."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Tristitia",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "A little by agriculture and hard labour."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Tristitia",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Useless."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Tristitia",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Worthless."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Tristitia",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Girl."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Tristitia",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Idle and dishonest."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Tristitia",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Recovery."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Tristitia",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "Lost on account of care- lessness, 9."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Tristitia",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "The adversar}^ gains."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Tristitia",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Unlucky in the countr}’."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Tristitia",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Gloom and discourage- ment."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Tristitia",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "No letters."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Tristitia",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Slow."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Tristitia",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Bad news."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Tristitia",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "The enemj^ gains tlie da\\’."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Caput Draconis",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Nothing to be expected 10."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Caput Draconis",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Unsuccessful."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Caput Draconis",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Beware of fire."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Caput Draconis",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Bloody."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Caput Draconis",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Soon."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Caput Draconis",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Dangerous."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Caput Draconis",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Average."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Caput Draconis",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "News about war."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Caput Draconis",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Will gain strength."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Caput Draconis",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "Your enemy is too sly for 8."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Caput Draconis",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "The marriage will not afterwards."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Caput Draconis",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Girl."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Cauda Draconis",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Long life."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Cauda Draconis",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Considerable means."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Cauda Draconis",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Good success."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Cauda Draconis",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Fortunate end."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Cauda Draconis",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Daughter."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Cauda Draconis",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Average."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Cauda Draconis",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Dies."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Cauda Draconis",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "It will come to nothing."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Cauda Draconis",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "A small amount."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Cauda Draconis",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "It will not be to your advantage."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Cauda Draconis",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "A good position at the Court."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Cauda Draconis",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Taking cold."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Cauda Draconis",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Soon."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Cauda Draconis",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Fortnnate."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Cauda Draconis",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Good."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Cauda Draconis",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "You are superior to the other."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Rubeus",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Feeble youth, heathy old age."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Rubeus",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Obtains some means in old age."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Rubeus",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "It will be abandoned."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Rubeus",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Unfortunate."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Rubeus",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Worthless."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Rubeus",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Dies."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Rubeus",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "The marriage will take place."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Rubeus",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "Another person will get it."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Cauda Draconis",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Long life."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Cauda Draconis",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Abundance."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Cauda Draconis",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "There will be some success."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Cauda Draconis",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "The end will be as desired."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Cauda Draconis",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Girl."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Cauda Draconis",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Good and useful."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Cauda Draconis",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "This time he will escape."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Cauda Draconis",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "Fie will not get his darling, g."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Cauda Draconis",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "The judgment will be in your favour."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Cauda Draconis",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Success in view."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Cauda Draconis",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Quietly."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Cauda Draconis",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Fortunate but slow."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Cauda Draconis",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "News speaking of persons of high rank."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Cauda Draconis",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "Take courage."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Cauda Draconis",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "iVveriigc and changeful."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Cauda Draconis",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Fortune by trade."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Cauda Draconis",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Will be abandoned."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Cauda Draconis",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Tolerable."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Cauda Draconis",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Twins."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Cauda Draconis",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "They are of the average kind."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Cauda Draconis",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Dies."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Cauda Draconis",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "He must have her."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Cauda Draconis",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "The legacy will be lost."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Cauda Draconis",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "You will want a settlement."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Cauda Draconis",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Your fortune is in trading^ 12."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Cauda Draconis",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "The messenger is entering the house."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Cauda Draconis",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Fortunate."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Cauda Draconis",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Good."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Cauda Draconis",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "Your adversary is very fortunate."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Cauda Draconis",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "The adversary offers a set- tlement."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Cauda Draconis",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Advantage."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Cauda Draconis",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Hot fever."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Cauda Draconis",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Slow messages."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Cauda Draconis",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Average."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Cauda Draconis",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Agreeable."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Cauda Draconis",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "Take courage and go ahead."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Cauda Draconis",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Slowly."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Cauda Draconis",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "Inheritance."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Cauda Draconis",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Natural."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Cauda Draconis",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Sufficient money."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Cauda Draconis",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Success."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Cauda Draconis",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "The end is good."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Cauda Draconis",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "You may hire the servant."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Cauda Draconis",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "He will die at last in spite of all hope."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Cauda Draconis",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "The marriage will take place."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Cauda Draconis",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "You will gain by settling the matter."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Cauda Draconis",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Fortunate with lawyers."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Cauda Draconis",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Painless and peaceful."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Cauda Draconis",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "The messenger is on the way."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Cauda Draconis",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Very good ending."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Cauda Draconis",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "As desired."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Cauda Draconis",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "Your enemy offers a settle- ment."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Cauda Draconis",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "P'ortunate and healthy."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Caput Draconis",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Short and sickly life."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Caput Draconis",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "What has been gained in youth will be lost in old age."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Caput Draconis",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Some success."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Caput Draconis",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Good."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Caput Draconis",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Daughter."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Caput Draconis",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Intelligent but dishonest."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Caput Draconis",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Favourable judgment."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Caput Draconis",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Fortunate among ladies."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Caput Draconis",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Natural death."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Caput Draconis",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Slowly."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Caput Draconis",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Fortunate."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Caput Draconis",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Good."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Caput Draconis",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "You will get the best of your enemy."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Caput Draconis",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Death will release him."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Caput Draconis",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "You are in danger of death on account of your sweetheart."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Caput Draconis",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "You may inherit a lawsuit."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Puer",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Short and painful life."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Puer",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Poverty and misery."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Puer",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "It will be a miscarriage."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Puer",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Useless."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Puer",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Lazy, idle, dishonest, thievish."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Puer",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Let him make his pre- parations for death."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Puer",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "It will be useless to think of marriage."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Puer",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "The lawyers will divide it among themselves."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Puer",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "The lawsuit will be lost."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Puer",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Unfortunate ever}'where except in the war."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Puer",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Death by water, drowning or dropsy, etc."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Puer",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "No letters will come."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Puer",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "A great deal of misfortune."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Puer",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Nothing agreeable."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Puer",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "The enemy is too power- ful for 3mu."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Puer",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Long but sickly life."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Puer",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Inconstant fortune."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Puer",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Useless thoughts about love."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Puer",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Good ending."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Puer",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Daughter."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Puer",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Idle and dishonest."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Puer",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Recover}’."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Puer",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "The engagement will be broken up."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Puer",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Cease to think of it."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Puer",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "In bed."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Puer",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "They will arrive at last."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Puer",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "It will be slow."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Puer",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Trifles."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Puer",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "Doubtful ending."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Puer",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Girl."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Tristitia",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Long and healthy life."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Tristitia",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Riches through writing."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Tristitia",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Success."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Tristitia",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "The desired end."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Tristitia",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Daughter."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Tristitia",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Honest."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Tristitia",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Will get well."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Tristitia",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "The marriage bells will ring."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Tristitia",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "Good luck."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Tristitia",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Gains."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Tristitia",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Fortunate in the legisla- tion."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Tristitia",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Natural death."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Tristitia",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Fortunate and rapid."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Tristitia",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Contents are good."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Tristitia",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "Victor}'."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Tristitia",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Slowly."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Tristitia",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "Doubtful."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Tristitia",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Loses."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Tristitia",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Some means by trading on II."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Tristitia",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Painless."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Tristitia",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "The letters will come."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Tristitia",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Quick and fortunate."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Tristitia",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "They will do well enough."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Tristitia",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Tolerable."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Tristitia",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "The enemy will do no 8."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Tristitia",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Average duration."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Tristitia",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "It will succeed."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Tristitia",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "The end is good."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Tristitia",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Dies."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Tristitia",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "The wedding will take place, 9."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Tristitia",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Changeable."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Rubeus",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Short, unhealthy life."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Rubeus",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Loss of property."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Rubeus",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "It will go the wrong way."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Rubeus",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Unfortunate, 5."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Rubeus",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Thievish."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Rubeus",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Dies."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Rubeus",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "Marriage."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Rubeus",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "Worthless."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Rubeus",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Loss."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Rubeus",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Fortunate in the army."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Rubeus",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Forcible death."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Rubeus",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "The letters will be stolen."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Rubeus",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Unfortunate."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Rubeus",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Disagreeable."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Rubeus",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "The enemy will come out first best."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Laetitia",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Long and healthy."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Laetitia",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Rich from rents."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Laetitia",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "It will take place."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Laetitia",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "The end is good."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Laetitia",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Good."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Laetitia",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Recovery."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Laetitia",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "You will be left in the cold."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Laetitia",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "A good legacy."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Laetitia",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Gains."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Laetitia",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Fortunate among the clergy."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Laetitia",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Dies a natural death."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Laetitia",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Soon."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Laetitia",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Fortunate."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Laetitia",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Good news."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Laetitia",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "Your enemy will give way."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Tristitia",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Daughter."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Caput Draconis",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Average duration of life."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Caput Draconis",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "A fortune through mar- riage."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Caput Draconis",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Fulfilment of wish."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Caput Draconis",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "A good end."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Caput Draconis",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Faithful."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Caput Draconis",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Will recover his health."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Caput Draconis",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "The beloved one will be obtained."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Caput Draconis",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Gains."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Caput Draconis",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "There is some hope."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Caput Draconis",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "A natural death."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Caput Draconis",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "The letters will arrive."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Caput Draconis",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Gay and happy voyage."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Caput Draconis",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Agreeable news."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Caput Draconis",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "A settlement is advisable."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Caput Draconis",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Daughter."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Albus",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Long but unhealthy life."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Albus",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Rich by trade."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Albus",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Success."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Albus",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Good ending."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Albus",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Daughter."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Albus",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Dies."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Albus",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Good."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Albus",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "Never in this case, g."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Albus",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Gains."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Albus",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "A natural death."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Albus",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Very soon."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Albus",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Fortunate."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Albus",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Good news."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Albus",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "You will be the master."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Cauda Draconis",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Short but healthy life."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Cauda Draconis",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Poverty and misery."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Cauda Draconis",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Wrongly calculated."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Cauda Draconis",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Worthless."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Cauda Draconis",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "They are useless."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Cauda Draconis",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Dies."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Cauda Draconis",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "All his efforts are in vain, g."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Cauda Draconis",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Short life, but very fortu- 2."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Cauda Draconis",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Will be abandoned."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Cauda Draconis",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Doubtful."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Cauda Draconis",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Daughter."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Cauda Draconis",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Average."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Cauda Draconis",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Must die."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Cauda Draconis",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "He will not get her."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Cauda Draconis",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "It is worthless."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Cauda Draconis",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Lost."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Cauda Draconis",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Unfortunate."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Cauda Draconis",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "A natural death."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Cauda Draconis",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Soon."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Cauda Draconis",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Quick and happy."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Cauda Draconis",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Of the average kind."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Cauda Draconis",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "Avoid him."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Fortuna Minor",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Long and healthy life."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Fortuna Minor",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Riches."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Fortuna Minor",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Fulfilment."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Fortuna Minor",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "A good end."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Fortuna Minor",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Daughter."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Fortuna Minor",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Faithful."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Fortuna Minor",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Recovery."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Fortuna Minor",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "' Success."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Fortuna Minor",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Gains."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Fortuna Minor",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Very fortunate this time."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Fortuna Minor",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Natural."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Fortuna Minor",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Slow."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Fortuna Minor",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Fortunate."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Fortuna Minor",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Good news."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Fortuna Minor",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "You will conquer."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Fortuna Minor",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "You will be disappointed."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Fortuna Minor",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Long and happy."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Fortuna Minor",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Abundance."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Fortuna Minor",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "You will give up the idea."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Fortuna Minor",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Average success."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Fortuna Minor",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Girl."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Fortuna Minor",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Faithful."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Fortuna Minor",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Dies."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Fortuna Minor",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "His wish will be granted."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Fortuna Minor",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Doubtful."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Fortuna Minor",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Fortunate."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Fortuna Minor",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Natural."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Fortuna Minor",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Delay."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Fortuna Minor",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Slow but fortunate."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Fortuna Minor",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Good."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Fortuna Minor",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "You wilPdo him no harm."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Fortuna Minor",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Very feeble health."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Fortuna Minor",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Poverty and misery."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Fortuna Minor",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "The plans will be de- stroyed."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Fortuna Minor",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Worthless."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Fortuna Minor",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Girl."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Fortuna Minor",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "They are useless."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Fortuna Minor",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Dies."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Fortuna Minor",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "No prospect whatever."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Fortuna Minor",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Lost."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Fortuna Minor",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Pie will obtain nothing."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Fortuna Minor",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Will be killed."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Fortuna Minor",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Soon."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Fortuna Minor",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Unfortunate."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Fortuna Minor",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Bad news."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Fortuna Minor",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "Loss on both sides."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Laetitia",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Long and healthy life."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Laetitia",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Riches."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Laetitia",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "The idea is very good."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Laetitia",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "A good end."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Laetitia",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "They are good."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Laetitia",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Recovery."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Laetitia",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "She will be his."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Laetitia",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Settlement."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Laetitia",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Luck."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Laetitia",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Painless and peaceful."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Laetitia",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Soon."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Laetitia",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Fortunate."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Laetitia",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Good."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Laetitia",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "Settlement."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Tristitia",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Long and troubled."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Tristitia",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "A little by hard work."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Tristitia",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Missed."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Tristitia",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Painful."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Tristitia",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Girl."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Tristitia",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Useless."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Tristitia",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Dies."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Tristitia",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "He will not get her."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Tristitia",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "Worthless."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Tristitia",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Lost."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Tristitia",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Nothing to be expected."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Tristitia",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Natural."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Tristitia",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Slow voyage."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Tristitia",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Useless."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Tristitia",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "A tricky enemy."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Caput Draconis",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Rich by service."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Caput Draconis",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Settlement."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Caput Draconis",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "It will work, but slowly."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Caput Draconis",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Good."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Caput Draconis",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Natural."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Caput Draconis",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Girl."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Caput Draconis",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Good."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Caput Draconis",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Unfortunate."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Caput Draconis",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Recovers."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Caput Draconis",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "He will get her in spite of 16."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Caput Draconis",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Weak and feeble."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Caput Draconis",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "He will get nothing."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Cauda Draconis",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Lost."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Cauda Draconis",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Ill-luck."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Cauda Draconis",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Will be killed."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Cauda Draconis",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Unfortunate."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Cauda Draconis",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "The enemies are a worth- less set."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Puella",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "A son."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Puer",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Poverty in consequence of 10."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Puer",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Non-success."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Puer",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Forcible."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Puer",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Useless."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Puer",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "No letters."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Puer",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Quick."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Puer",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Worthless."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Puer",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Useless."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Puer",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Dies."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Puer",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "The enemy 8."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Albus",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Settlement, 2."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Albus",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "It will take place."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Albus",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Good."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Albus",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Natural."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Albus",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Daughter."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Albus",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Soon."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Albus",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Good."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Albus",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Happy."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Albus",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Dies."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Albus",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Good."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Albus",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "He will succeed."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Albus",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "PI arm less."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Albus",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Abundance."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Albus",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Instabilit3^ 12."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Albus",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Long and happ3^ 2."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Albus",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Fortunate in the mercan- tile business."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Via",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Sufficient means."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Via",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "In vain."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Via",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Tolerable."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Via",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Daughter."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Via",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Average."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Via",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Dies."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Via",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "He is going to obtain her."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Via",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "Without any value."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Via",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Gained."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Via",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Changeable luck."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Via",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "In bed."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Via",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Soon."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Via",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Quick and fortunate."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Via",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Tolerably good."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Via",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "You are master."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Via",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Missed the time."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Via",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Mediocrit}^ II."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Via",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Natural."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Via",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Fortunate on land."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Via",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Useless."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Via",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "The enemy appears to be 8."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Via",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Short hut health3u 2."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Via",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Useless to try it."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Via",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Deplorable end."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Via",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Faithful."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Via",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Recovery."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Via",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "All attempts are in vain."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Via",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Lost."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Via",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "It is worthless."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Via",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Natural death."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Via",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Soon."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Via",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Quick and fortunate."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Via",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Disagreeable."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Via",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "The enemy remains on the ?"
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Via",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Long but not strong."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Via",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Good success."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Via",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Average."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Via",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "He will regain his health."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Via",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "Of course."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Via",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "A good legacy."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Via",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Success among law3’ers."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Via",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Slowly."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Via",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "As desired."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Caput Draconis",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Average and healtlij’."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Caput Draconis",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Sufficient."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Caput Draconis",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "A mistake."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Caput Draconis",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Good."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Caput Draconis",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Daughter."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Caput Draconis",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Faithful."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Caput Draconis",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Recovery."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Caput Draconis",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "He will."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Caput Draconis",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Settlement."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Caput Draconis",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "It is not a ver}^ good one."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Caput Draconis",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "In bed."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Caput Draconis",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Slowly."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Caput Draconis",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "He will not regret it."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Caput Draconis",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Pleasant."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Caput Draconis",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "The enemy becomes a friend."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Laetitia",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Abundance."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Laetitia",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "He will be fortunate."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Laetitia",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Natural."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Laetitia",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Good."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Laetitia",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Fortunate."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Laetitia",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "He will obtain his heart’s 16."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Cauda Draconis",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Very little."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Tristitia",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Miserable, but long."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Tristitia",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "A little by hard work."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Tristitia",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Carrying water in a sieve."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Tristitia",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Girl."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Tristitia",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Idle."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Tristitia",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Dies."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Tristitia",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "She will refuse his offer."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Tristitia",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "There is a little to be in- 10."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Tristitia",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Natural."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Tristitia",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Delay."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Tristitia",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Mournful news."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Tristitia",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "The enemy loses."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Rubeus",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Short."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Rubeus",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Disappointment."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Rubeus",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Entirely worthless."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Rubeus",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Dishonest."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Rubeus",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "He will give up the ghost."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Rubeus",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "You may go ahead."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Rubeus",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "The inheritance escapes."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Rubeus",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Loses."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Rubeus",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Fever."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Rubeus",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "No letters."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Rubeus",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Dangerous."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Rubeus",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "The enemy has the advan- tage."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Rubeus",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Tolerable."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Puella",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Gains."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Puella",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Luck."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Puella",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Natural."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Puella",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Soon."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Puella",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Happy."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Puella",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Good."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Puella",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "You are superior to him."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Puer",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Long but feeble."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Puer",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Tolerable."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Puer",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "P'ailure."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Puer",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Pleasant."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Puer",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Girl."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Puer",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Dies."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Puer",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "The marriage will take place."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Puer",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Gains."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Puer",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "A good prospect."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Puer",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Natural."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Puer",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Certainly."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Puer",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Fortunate."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Puer",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Good."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Puer",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "You will make him squirm 0 3 Albus."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Puer",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Dishonest."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Via",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Girl."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Via",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "It will be decided in your 2."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Via",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Natural."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Via",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Average."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Via",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Tolerably good."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Via",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Indifferent."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Via",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "He will be very lucky."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Via",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "The enemy is a loser."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Via",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Long life, indifferent health."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Via",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Tolerable."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Via",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "False."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Via",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Indifferent."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Via",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Daughter."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Via",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Dies."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Via",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "No luck."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Via",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Soon."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Acquisitio",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "Certainl3G 2."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Acquisitio",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Gains."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Acquisitio",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Natural."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Acquisitio",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Slowl}G 6."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Acquisitio",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Slow."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Acquisitio",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Good news."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Acquisitio",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "Marriage."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Acquisitio",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "Enemy remains victorious APPENDIX."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Acquisitio",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Feeble and short."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Acquisitio",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Little."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Acquisitio",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Deluded hope."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Acquisitio",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Tolerably good."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Acquisitio",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Not the best."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Acquisitio",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Recovers."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Acquisitio",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "A bad legacy."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Acquisitio",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Inconstant luck."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Acquisitio",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Success."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Acquisitio",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Natural."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Acquisitio",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Soon."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Acquisitio",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "In vain."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Acquisitio",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Useless."
+  },
+  {
+   "judge": "Fortuna Minor",
+   "cofigure": "Acquisitio",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "You will succeed."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Acquisitio",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "Cease to think of it."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Acquisitio",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Loses."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Acquisitio",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Nothing."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Acquisitio",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Fever."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Acquisitio",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Soon."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Acquisitio",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Worthless."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Laetitia",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Short but healthy."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Laetitia",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "All in vain."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Laetitia",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Useless."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Laetitia",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Girl."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Laetitia",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Treacherous."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Laetitia",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Dies."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Laetitia",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "The engagement will be broken up."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Laetitia",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Lost."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Laetitia",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Misfortune."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Laetitia",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Forcible."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Laetitia",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Soon."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Laetitia",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Quick."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Laetitia",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Good."
+  },
+  {
+   "judge": "Amissio",
+   "cofigure": "Laetitia",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "The enemy will be vie torious."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Laetitia",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Long and happy."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Laetitia",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Enough."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Laetitia",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Success."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Laetitia",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Good."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Laetitia",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Honest."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Laetitia",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Recovery."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Laetitia",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "Success, g."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Laetitia",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Gains."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Laetitia",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "A good prospect."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Laetitia",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Natural."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Laetitia",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "They will come."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Laetitia",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Glad."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Laetitia",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "Enemy will have to leave the field."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Caput Draconis",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Long life."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Caput Draconis",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Tolerable."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Caput Draconis",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Failure."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Caput Draconis",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Indifferent."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Caput Draconis",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Daughter."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Caput Draconis",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Unfaithful."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Caput Draconis",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Dies."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Caput Draconis",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "Vain hope."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Caput Draconis",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Loses."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Caput Draconis",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "The stars are against you."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Caput Draconis",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Natural."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Caput Draconis",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "They are coming."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Caput Draconis",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Disagreeable."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Caput Draconis",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Worthless."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Caput Draconis",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "Your enemy will be 3mur judge."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Caput Draconis",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "A good legacy, pair."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Albus",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Gains."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Albus",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Favourable."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Albus",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Natural."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Albus",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Soon."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Albus",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Dangerous."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Albus",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Good."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Albus",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "The adversary loses."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Rubeus",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Loss."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Rubeus",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Forcible."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Rubeus",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "None."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Rubeus",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Useless."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Rubeus",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Slowly."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Rubeus",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "Dies."
+  },
+  {
+   "judge": "Conjunctio",
+   "cofigure": "Rubeus",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Vexatious."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Rubeus",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Daughter."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Rubeus",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Indifferent luck."
+  },
+  {
+   "judge": "Via",
+   "cofigure": "Rubeus",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Indifferent."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Rubeus",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Long."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Rubeus",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Tolerably good fortune in the country."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Rubeus",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Backward."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Rubeus",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Tolerable."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Rubeus",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Daughter."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Rubeus",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Average."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Rubeus",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Must go."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Rubeus",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "Cease to think of her."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Rubeus",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "Things look bad."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Rubeus",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Too late."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Rubeus",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Nothing to be obtained."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Rubeus",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Natural."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Rubeus",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Letters."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Rubeus",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Delay."
+  },
+  {
+   "judge": "Populus",
+   "cofigure": "Rubeus",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "The enemy conquers."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Rubeus",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Short and happ3^ 2."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Rubeus",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "In vain."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Rubeus",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Good."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Rubeus",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Good."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Rubeus",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Recover3^ 8."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Rubeus",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "The legacy is against 3'ou."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Rubeus",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Lost."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Rubeus",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Lucky, but inconstant 12."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Rubeus",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Soon."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Rubeus",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Tolerable."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Rubeus",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "You lose."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Rubeus",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Tolerable."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Rubeus",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "Wedding."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Rubeus",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Natural."
+  },
+  {
+   "judge": "Acquisitio",
+   "cofigure": "Rubeus",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Soon."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Amissio",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Poverty and misery."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Amissio",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Gains."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Amissio",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "In bed."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Amissio",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "They have been captured."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Amissio",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Useless."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Amissio",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "It will cause you a loss."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Amissio",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Contents are vile."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Amissio",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "2 is against you."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Amissio",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "Your enemy will step upon 132 GEOMANCY."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Laetitia",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Long life."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Laetitia",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "Disappointment."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Laetitia",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Daughter."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Laetitia",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Lazy."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Laetitia",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Good-bye."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Laetitia",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "At a very late hour."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Laetitia",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "Some success."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Laetitia",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Gains."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Laetitia",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Good luck."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Laetitia",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Natural."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Laetitia",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Soon."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Laetitia",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Fortunate."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Laetitia",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Glad."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Laetitia",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "Enemy must give way."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Albus",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Good."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Albus",
+   "q": 3,
+   "question": "Will the proposed undertaking succeed?",
+   "answer": "It is well thought out."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Albus",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Good."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Albus",
+   "q": 5,
+   "question": "Is the expected child a boy or a girl?",
+   "answer": "Daughter."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Albus",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Good."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Albus",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Dies."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Albus",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "The stars are against him."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Albus",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "It is not very big."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Albus",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Gains."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Albus",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "We congratulate."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Albus",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Natural."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Albus",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Soon."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Albus",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Fortunate."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Albus",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Good."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Albus",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "The enemy will come out second best."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Albus",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Short but happy."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Puella",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Gains."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Puella",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Good luck."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Puella",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Natural."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Puella",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "Soon."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Puella",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Fortunate."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Puella",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Good."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Puella",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "The victory is doubtful."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Rubeus",
+   "q": 1,
+   "question": "Will the person inquired about have a long life?",
+   "answer": "Long life."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Rubeus",
+   "q": 2,
+   "question": "Will he become rich?",
+   "answer": "Loss of property 3."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Rubeus",
+   "q": 4,
+   "question": "How will the undertaking end?",
+   "answer": "Misery."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Rubeus",
+   "q": 6,
+   "question": "Are the servants honest?",
+   "answer": "Thievish."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Rubeus",
+   "q": 7,
+   "question": "Will the patient recover?",
+   "answer": "Dies."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Rubeus",
+   "q": 8,
+   "question": "Will the lover succeed?",
+   "answer": "The marriage will be postponed for ever."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Rubeus",
+   "q": 9,
+   "question": "Will the inheritance be obtained?",
+   "answer": "Nothing but quarrels."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Rubeus",
+   "q": 10,
+   "question": "Will the lawsuit be gained?",
+   "answer": "Gains, but will receive no advantage from it."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Rubeus",
+   "q": 11,
+   "question": "Will the desired position be had?",
+   "answer": "Avoid it."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Rubeus",
+   "q": 12,
+   "question": "What will be the kind of death?",
+   "answer": "Forcible."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Rubeus",
+   "q": 13,
+   "question": "Will the expected letters arrive?",
+   "answer": "None."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Rubeus",
+   "q": 14,
+   "question": "Will the voyage be fortunate?",
+   "answer": "Dangerous."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Rubeus",
+   "q": 15,
+   "question": "Will good news arrive?",
+   "answer": "Throw them into the fire."
+  },
+  {
+   "judge": "Fortuna Major",
+   "cofigure": "Rubeus",
+   "q": 16,
+   "question": "Will the adversary be conquered?",
+   "answer": "Victory."
+  }
+ ]
+}

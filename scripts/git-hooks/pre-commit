@@ -1,0 +1,16 @@
+#!/bin/sh
+# Fast local mirror of the CI gate. Enable once per clone:
+#   git config core.hooksPath scripts/git-hooks
+# It runs the two things that are expensive to discover later: the leakage scan (a public repo
+# keeps what it once published, forever) and the licence/provenance gate.
+set -e
+cd "$(git rev-parse --show-toplevel)"
+echo "[pre-commit] leakage scan"
+python3 library/tools/check_public_leaks.py >/dev/null
+if [ -f library/dataset/manifest.json ]; then
+  echo "[pre-commit] library gate (validate.py)"
+  python3 library/tools/validate.py >/dev/null
+else
+  echo "[pre-commit] dataset not built yet - skipping validate.py (run: make build)"
+fi
+echo "[pre-commit] ok"

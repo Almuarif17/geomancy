@@ -1,0 +1,25 @@
+{
+  "generated": "2026-09-17T00:02:41+00:00",
+  "sources": {
+    "fasciculus_1704": {
+      "locator": "b3299753x",
+      "host": "archive.org",
+      "fetched": true,
+      "path": "corpus/raw/fasciculus_1704.txt",
+      "bytes": 898230,
+      "sha256": "f278b8a6c2393f85fccf050977f8c14b40d0e035e6c2869d1bfb073f4a7f756f",
+      "sha256_prefix": "f278b8a6c2393f85",
+      "retrieved_at": "2026-09-17T00:02:36+00:00"
+    },
+    "hartmann_1889": {
+      "locator": "b24884145",
+      "host": "archive.org",
+      "fetched": true,
+      "path": "corpus/raw/hartmann_1889.txt",
+      "bytes": 173771,
+      "sha256": "e6738f298fb0ad4bd3557bbedd9b080fb213c5b68ce1a551b64033305c81cbe5",
+      "sha256_prefix": "e6738f298fb0ad4b",
+      "retrieved_at": "2026-09-17T00:02:40+00:00"
+    }
+  }
+}

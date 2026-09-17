@@ -1,0 +1,96 @@
+{
+ "judge_population": {
+  "Populus": {
+   "n": 8192,
+   "pct": 12.5,
+   "quality": "communal"
+  },
+  "Via": {
+   "n": 8192,
+   "pct": 12.5,
+   "quality": "communal"
+  },
+  "Fortuna Minor": {
+   "n": 8192,
+   "pct": 12.5,
+   "quality": "communal"
+  },
+  "Carcer": {
+   "n": 8192,
+   "pct": 12.5,
+   "quality": "bad"
+  },
+  "Conjunctio": {
+   "n": 8192,
+   "pct": 12.5,
+   "quality": "communal"
+  },
+  "Fortuna Major": {
+   "n": 8192,
+   "pct": 12.5,
+   "quality": "good"
+  },
+  "Amissio": {
+   "n": 8192,
+   "pct": 12.5,
+   "quality": "bad"
+  },
+  "Acquisitio": {
+   "n": 8192,
+   "pct": 12.5,
+   "quality": "good"
+  }
+ },
+ "outcome_priors": {
+  "good": 25.0,
+  "bad": 25.0,
+  "communal": 50.0
+ },
+ "note": "Only 8 figures can ever be Judge and they are exactly equiprobable (8192 casts each). Under the quality table in kb/figures.yaml this makes a 'good' verdict and a 'bad' verdict unequal, so the oracle is optimistic by construction; a bare Judge cannot be read as a 50/50 coin.",
+ "attainable_figures_per_house": {
+  "I": 16,
+  "II": 16,
+  "III": 16,
+  "IV": 16,
+  "V": 16,
+  "VI": 16,
+  "VII": 16,
+  "VIII": 16,
+  "IX": 16,
+  "X": 16,
+  "XI": 16,
+  "XII": 16,
+  "XIII": 16,
+  "XIV": 16,
+  "XV": 8,
+  "XVI": 16
+ },
+ "surprisal_bits_by_house": {
+  "I": 4.0,
+  "II": 4.0,
+  "III": 4.0,
+  "IV": 4.0,
+  "V": 4.0,
+  "VI": 4.0,
+  "VII": 4.0,
+  "VIII": 4.0,
+  "IX": 4.0,
+  "X": 4.0,
+  "XI": 4.0,
+  "XII": 4.0,
+  "XIII": 4.0,
+  "XIV": 4.0,
+  "XV": 3.0,
+  "XVI": 4.0
+ },
+ "judge_optimism": "With the good/bad/communal labels in figures.yaml the 8 possible Judges split 2 good / 2 bad / 4 communal, i.e. exactly even odds of a good vs bad verdict and half the time the verdict is a 'communal' figure that takes its colour from the question. al-Zan\u0101t\u012b's own counts (5 happy + 3 strong-happy vs 4 distressful, 5 mixed, of 16) are optimistic, but that optimism is a property of his classification, not of the machinery - do not quote 'geomancy is rigged favourable' without naming which quality list you used.",
+ "judge_information": "the Judge carries 3 bits (8 equiprobable outcomes); a Mother carries 4. The Court is compressed by construction.",
+ "pessimism_check": {
+  "claim": "van Binsbergen: 'pessimistic outcomes are less frequent' because only 8 figures can be Judge",
+  "measured_with_the_quality_labels_in_this_kb": {
+   "bad_share_if_judge_were_a_free_figure": 37.5,
+   "bad_share_among_the_8_attainable_judges": 25.0
+  },
+  "conclusion": "the claim reproduces: ill figures are 37.5% of the 16 but only 25% of attainable Judges (and the excluded set is 50% ill) - the compression of the mechanism, not the cosmos, flatters the answer. It is label-dependent: swap the good/bad table and the numbers move."
+ }
+}

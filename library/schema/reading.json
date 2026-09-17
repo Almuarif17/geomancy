@@ -1,0 +1,354 @@
+{
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "$id": "https://example.org/geomancy/reading-1.0.json",
+ "title": "Geomancy reading (deterministic engine output)",
+ "type": "object",
+ "required": [
+  "chart",
+  "court",
+  "flags",
+  "gaps",
+  "input",
+  "relations",
+  "schema",
+  "specifics",
+  "trace",
+  "validity",
+  "verdict"
+ ],
+ "properties": {
+  "schema": {
+   "const": "1.0"
+  },
+  "input": {
+   "type": "object",
+   "required": [
+    "mothers",
+    "topic"
+   ],
+   "properties": {
+    "mothers": {
+     "type": "array",
+     "minItems": 4,
+     "maxItems": 4,
+     "items": {
+      "type": "string"
+     }
+    },
+    "topic": {
+     "type": "string"
+    },
+    "day": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "planetary_hour": {
+     "type": [
+      "integer",
+      "null"
+     ]
+    },
+    "night": {
+     "type": "boolean"
+    }
+   }
+  },
+  "chart": {
+   "type": "array",
+   "minItems": 15,
+   "maxItems": 16,
+   "items": {
+    "type": "object",
+    "required": [
+     "house",
+     "figure",
+     "pattern",
+     "points"
+    ],
+    "properties": {
+     "house": {
+      "type": "string"
+     },
+     "figure": {
+      "type": "string"
+     },
+     "pattern": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+       "enum": [
+        1,
+        2
+       ]
+      }
+     },
+     "points": {
+      "type": "integer",
+      "minimum": 4,
+      "maximum": 8
+     }
+    }
+   }
+  },
+  "court": {
+   "type": "object",
+   "required": [
+    "judge",
+    "sentence",
+    "sentence_rule"
+   ],
+   "properties": {
+    "judge": {
+     "type": "string"
+    },
+    "judge_points": {
+     "type": "integer"
+    },
+    "sentence": {
+     "type": "string"
+    },
+    "sentence_rule": {
+     "type": "string",
+     "description": "must name XV + Mother I"
+    }
+   }
+  },
+  "validity": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "flag",
+     "note"
+    ]
+   }
+  },
+  "relations": {
+   "type": "object",
+   "required": [
+    "perfection"
+   ],
+   "properties": {
+    "perfection": {
+     "type": "object",
+     "required": [
+      "mode",
+      "verdict"
+     ],
+     "properties": {
+      "mode": {
+       "type": "string"
+      },
+      "verdict": {
+       "type": "string"
+      },
+      "base_rate_pct": {
+       "type": "number"
+      },
+      "news_value": {
+       "enum": [
+        "newsworthy",
+        "ordinary",
+        "default - weak evidence"
+       ]
+      },
+      "degenerate": {
+       "type": "boolean"
+      }
+     }
+    },
+    "parentage": {
+     "type": "array",
+     "items": {
+      "type": "object",
+      "required": [
+       "house",
+       "tone",
+       "parents"
+      ],
+      "properties": {
+       "parents": {
+        "type": "object",
+        "required": [
+         "kind"
+        ]
+       }
+      }
+     }
+    }
+   }
+  },
+  "trace": {
+   "type": "object",
+   "required": [
+    "via_puncti"
+   ],
+   "properties": {
+    "via_puncti": {
+     "type": "object",
+     "required": [
+      "endpoints",
+      "formed",
+      "path"
+     ],
+     "properties": {
+      "path": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "required": [
+         "house",
+         "figure"
+        ]
+       }
+      },
+      "branches": {
+       "type": "array"
+      },
+      "formed": {
+       "type": "boolean"
+      },
+      "endpoints": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "house": {
+          "type": "integer"
+         },
+         "figure": {
+          "type": "string"
+         },
+         "kind": {
+          "type": "string",
+          "enum": [
+           "root",
+           "died"
+          ]
+         }
+        },
+        "required": [
+         "house",
+         "figure",
+         "kind"
+        ]
+       }
+      },
+      "branch_count": {
+       "type": "integer",
+       "minimum": 1
+      }
+     }
+    }
+   }
+  },
+  "specifics": {
+   "type": "object"
+  },
+  "sub_questions": {
+   "type": "object",
+   "additionalProperties": {
+    "type": "object",
+    "required": [
+     "rule",
+     "leaf",
+     "call"
+    ],
+    "properties": {
+     "leaf": {
+      "type": "integer"
+     },
+     "rule": {
+      "type": "string"
+     },
+     "call": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "cross_read": {
+   "type": "object"
+  },
+  "gaps": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "flags": {
+   "type": "array",
+   "items": {
+    "type": "string"
+   }
+  },
+  "verdict": {
+   "type": "object",
+   "description": "one object the UI renders first: does the matter perfect, how newsworthy that is, and what blocks it",
+   "properties": {
+    "does_it_perfect": {
+     "type": "string",
+     "enum": [
+      "yes",
+      "no",
+      "qualified"
+     ]
+    },
+    "mode": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "base_rate_pct": {
+     "type": [
+      "number",
+      "null"
+     ]
+    },
+    "news_value": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "judge": {
+     "type": "string"
+    },
+    "sentence": {
+     "type": "string"
+    },
+    "blockers": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "planetary_gate": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "headline": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "trace_heads": {
+     "type": "integer",
+     "minimum": 1
+    }
+   },
+   "required": [
+    "does_it_perfect",
+    "judge",
+    "sentence"
+   ]
+  }
+ }
+}

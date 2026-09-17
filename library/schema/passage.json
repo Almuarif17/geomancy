@@ -1,0 +1,11 @@
+{
+  "$schema":"http://json-schema.org/draft-07/schema#","$id":"geomancy/passage-1.0",
+  "title":"A passage in the library: text is never allowed without provenance",
+  "type":"object","required":["work","kind","locator","text","confidence"],
+  "properties":{"work":{"type":"string"},"kind":{"type":"string"},
+    "figure":{"type":["string","null"]},"house":{"type":["string","integer","null"]},
+    "locator":{"type":"string","minLength":3,"description":"folio/leaf/page - what a reader would cite"},
+    "text":{"type":"string","minLength":2},
+    "confidence":{"type":"string","description":"HIGH / MED / LOW + why"}},
+  "additionalProperties": true
+}

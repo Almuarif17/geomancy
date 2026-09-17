@@ -1,0 +1,295 @@
+{
+ "_meta": {
+  "population": "all 16^4 = 65,536 casts",
+  "engine": "deep_read.classify conventions: querent = house I, quesited = the question's house, adjacency = the two flanking houses",
+  "use": "a mode only means something if it is rarer than its prior share"
+ },
+ "priors": {
+  "question_in_house_II": {
+   "no relation": {
+    "n": 45887,
+    "pct": 70.018
+   },
+   "mutation": {
+    "n": 5022,
+    "pct": 7.663
+   },
+   "occupation": {
+    "n": 4096,
+    "pct": 6.25
+   },
+   "conjunction(needs work)": {
+    "n": 3840,
+    "pct": 5.859
+   },
+   "conjunction(no effort)": {
+    "n": 3600,
+    "pct": 5.493
+   },
+   "translation": {
+    "n": 3091,
+    "pct": 4.716
+   }
+  },
+  "question_in_house_III": {
+   "no relation": {
+    "n": 36416,
+    "pct": 55.566
+   },
+   "translation": {
+    "n": 8118,
+    "pct": 12.387
+   },
+   "conjunction(needs work)": {
+    "n": 7440,
+    "pct": 11.353
+   },
+   "conjunction(no effort)": {
+    "n": 6750,
+    "pct": 10.3
+   },
+   "occupation": {
+    "n": 4096,
+    "pct": 6.25
+   },
+   "mutation": {
+    "n": 2716,
+    "pct": 4.144
+   }
+  },
+  "question_in_house_IV": {
+   "no relation": {
+    "n": 33285,
+    "pct": 50.789
+   },
+   "conjunction(needs work)": {
+    "n": 11040,
+    "pct": 16.846
+   },
+   "translation": {
+    "n": 8804,
+    "pct": 13.434
+   },
+   "conjunction(no effort)": {
+    "n": 6124,
+    "pct": 9.344
+   },
+   "occupation": {
+    "n": 4096,
+    "pct": 6.25
+   },
+   "mutation": {
+    "n": 2187,
+    "pct": 3.337
+   }
+  },
+  "question_in_house_V": {
+   "no relation": {
+    "n": 31667,
+    "pct": 48.32
+   },
+   "translation": {
+    "n": 10988,
+    "pct": 16.766
+   },
+   "occupation": {
+    "n": 8192,
+    "pct": 12.5
+   },
+   "conjunction(needs work)": {
+    "n": 6976,
+    "pct": 10.645
+   },
+   "conjunction(no effort)": {
+    "n": 5776,
+    "pct": 8.813
+   },
+   "mutation": {
+    "n": 1937,
+    "pct": 2.956
+   }
+  },
+  "question_in_house_VI": {
+   "no relation": {
+    "n": 30869,
+    "pct": 47.102
+   },
+   "conjunction(needs work)": {
+    "n": 11040,
+    "pct": 16.846
+   },
+   "translation": {
+    "n": 9065,
+    "pct": 13.832
+   },
+   "conjunction(no effort)": {
+    "n": 8256,
+    "pct": 12.598
+   },
+   "occupation": {
+    "n": 4096,
+    "pct": 6.25
+   },
+   "mutation": {
+    "n": 2210,
+    "pct": 3.372
+   }
+  },
+  "question_in_house_VII": {
+   "no relation": {
+    "n": 32279,
+    "pct": 49.254
+   },
+   "translation": {
+    "n": 12323,
+    "pct": 18.803
+   },
+   "conjunction(needs work)": {
+    "n": 7440,
+    "pct": 11.353
+   },
+   "conjunction(no effort)": {
+    "n": 6440,
+    "pct": 9.827
+   },
+   "occupation": {
+    "n": 4096,
+    "pct": 6.25
+   },
+   "mutation": {
+    "n": 2958,
+    "pct": 4.514
+   }
+  },
+  "question_in_house_VIII": {
+   "no relation": {
+    "n": 34088,
+    "pct": 52.014
+   },
+   "translation": {
+    "n": 10261,
+    "pct": 15.657
+   },
+   "conjunction(needs work)": {
+    "n": 7456,
+    "pct": 11.377
+   },
+   "conjunction(no effort)": {
+    "n": 5984,
+    "pct": 9.131
+   },
+   "occupation": {
+    "n": 4096,
+    "pct": 6.25
+   },
+   "mutation": {
+    "n": 3651,
+    "pct": 5.571
+   }
+  },
+  "question_in_house_IX": {
+   "no relation": {
+    "n": 33115,
+    "pct": 50.529
+   },
+   "translation": {
+    "n": 11901,
+    "pct": 18.159
+   },
+   "conjunction(needs work)": {
+    "n": 7440,
+    "pct": 11.353
+   },
+   "conjunction(no effort)": {
+    "n": 6440,
+    "pct": 9.827
+   },
+   "occupation": {
+    "n": 4096,
+    "pct": 6.25
+   },
+   "mutation": {
+    "n": 2544,
+    "pct": 3.882
+   }
+  },
+  "question_in_house_X": {
+   "no relation": {
+    "n": 33687,
+    "pct": 51.402
+   },
+   "conjunction(no effort)": {
+    "n": 9836,
+    "pct": 15.009
+   },
+   "translation": {
+    "n": 8544,
+    "pct": 13.037
+   },
+   "conjunction(needs work)": {
+    "n": 7200,
+    "pct": 10.986
+   },
+   "occupation": {
+    "n": 4096,
+    "pct": 6.25
+   },
+   "mutation": {
+    "n": 2173,
+    "pct": 3.316
+   }
+  },
+  "question_in_house_XI": {
+   "no relation": {
+    "n": 33930,
+    "pct": 51.773
+   },
+   "translation": {
+    "n": 10866,
+    "pct": 16.58
+   },
+   "conjunction(needs work)": {
+    "n": 7232,
+    "pct": 11.035
+   },
+   "conjunction(no effort)": {
+    "n": 6592,
+    "pct": 10.059
+   },
+   "occupation": {
+    "n": 4096,
+    "pct": 6.25
+   },
+   "mutation": {
+    "n": 2820,
+    "pct": 4.303
+   }
+  },
+  "question_in_house_XII": {
+   "no relation": {
+    "n": 46685,
+    "pct": 71.236
+   },
+   "mutation": {
+    "n": 4195,
+    "pct": 6.401
+   },
+   "occupation": {
+    "n": 4096,
+    "pct": 6.25
+   },
+   "conjunction(needs work)": {
+    "n": 3840,
+    "pct": 5.859
+   },
+   "conjunction(no effort)": {
+    "n": 3616,
+    "pct": 5.518
+   },
+   "translation": {
+    "n": 3104,
+    "pct": 4.736
+   }
+  }
+ }
+}

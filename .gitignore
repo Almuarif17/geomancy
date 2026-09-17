@@ -1,0 +1,54 @@
+# --- third-party bulk material: fetched, not redistributed (see library/LICENSE_POLICY.md) ---
+corpus/raw/
+# corpus/ocr is our own OCR of public-domain works: the evidence behind the extraction claims.
+# Tracked deliberately (it is small); the bulk scans and IA text dumps stay out.
+corpus/ocr/**
+!corpus/ocr/INDEX.md
+!corpus/ocr/*.ocr.txt
+!corpus/ocr/**/
+!corpus/ocr/**/*.txt
+!corpus/ocr/**/*.meta.json
+corpus/ocr/**/*.tif
+corpus/ocr/**/*.png
+corpus/ocr/**/*.jpg
+corpus/scratch/
+work/
+uploads/
+*.pdf
+*.pdf.pdf
+*.epub
+*.epub.*
+*.djvu
+*.gz
+*.zip
+
+# --- personal castings and generated reports (see PRIVACY.md) ---
+readings/
+
+# --- harvest caches: regenerable by scripts/ia_harvest_all.py, large, not part of the product ---
+corpus/ia/ia_catalog.json
+corpus/ia/ia_catalog2.json
+corpus/ia/ia_full.json
+corpus/ia/meta_cache.json
+docs/access_probe.json
+docs/api_probe.json
+
+# --- derived, reproducible artefacts ---
+library/dataset/*.sqlite
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.env
+
+# --- editors / OS ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+# generated search index: rebuild with `make build`, ship as a release asset
+library/dataset/geomancy.sqlite
+__pycache__/
+*.pyc

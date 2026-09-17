@@ -1,0 +1,108 @@
+[
+ {
+  "name": "prasna_marga_raman",
+  "id": "PrasnaMargaBVR",
+  "words": 107270,
+  "hits": {
+   "thief": 931,
+   "lost": 145,
+   "direction": 854,
+   "caste": 116,
+   "figure": 85,
+   "remedy": 69,
+   "question": 263,
+   "omen": 790
+  }
+ },
+ {
+  "name": "prashna_chandeshwara",
+  "id": "PrashnaChandeshwaraSanskritHindi",
+  "words": 18277,
+  "hits": {}
+ },
+ {
+  "name": "shatpanchashika_sanskrit",
+  "id": "ShatpanchashikaVSSastri",
+  "words": 16802,
+  "hits": {
+   "thief": 232,
+   "lost": 43,
+   "direction": 29,
+   "omen": 107
+  }
+ },
+ {
+  "name": "indian_horary_shatpanchashika",
+  "id": "IndianHoraryShatpanchashikaVAKAyer",
+  "words": 9572,
+  "hits": {
+   "thief": 145,
+   "lost": 53,
+   "direction": 28,
+   "question": 33,
+   "omen": 60
+  }
+ },
+ {
+  "name": "kerala_prasna_shastra",
+  "id": "kerala-prasna-shastra",
+  "words": 24359,
+  "hits": {
+   "direction": 32,
+   "remedy": 52
+  }
+ },
+ {
+  "name": "lal_kitab_1941",
+  "id": "LalKitab1941",
+  "words": 23190,
+  "hits": {}
+ },
+ {
+  "name": "lal_kitab_1939_hindi",
+  "id": "lalkitabist75_gmail",
+  "words": 78563,
+  "hits": {
+   "remedy": 100
+  }
+ },
+ {
+  "name": "lal_kitab_1939_urdu",
+  "id": "lal-kitab-1939_202006",
+  "words": 13602,
+  "hits": {}
+ },
+ {
+  "name": "thorndike_magic_science_v1",
+  "id": "thorndike-01-1923-history-magic-science",
+  "words": 330961,
+  "hits": {
+   "thief": 2618,
+   "lost": 420,
+   "direction": 404,
+   "figure": 119,
+   "remedy": 115,
+   "question": 166,
+   "omen": 667
+  }
+ },
+ {
+  "name": "beinecke_sirr_al_asrar_ar",
+  "id": "mscodex1918",
+  "words": 31377,
+  "hits": {}
+ },
+ {
+  "name": "ifaglobe_igbo_ifa_16_odu",
+  "id": "IgboIfaEncontroComOs16Odu",
+  "err": "no text layer"
+ },
+ {
+  "name": "ifa_binary_intelligence",
+  "id": "ajarn-shaman-shu-ifa-binary-intelligence-2026",
+  "words": 4940,
+  "hits": {
+   "thief": 50
+  }
+ }
+]

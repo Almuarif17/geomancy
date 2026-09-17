@@ -1,0 +1,1287 @@
+{
+ "total_casts": 65536,
+ "per_house": {
+  "I": {
+   "Via": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Populus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Albus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Conjunctio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Carcer": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Fortuna Major": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Fortuna Minor": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Acquisitio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Amissio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Laetitia": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Tristitia": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Puer": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Puella": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Rubeus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Caput Draconis": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Cauda Draconis": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   }
+  },
+  "II": {
+   "Via": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Populus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Albus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Conjunctio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Carcer": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Fortuna Major": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Fortuna Minor": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Acquisitio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Amissio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Laetitia": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Tristitia": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Puer": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Puella": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Rubeus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Caput Draconis": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Cauda Draconis": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   }
+  },
+  "III": {
+   "Via": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Populus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Albus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Conjunctio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Carcer": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Fortuna Major": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Fortuna Minor": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Acquisitio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Amissio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Laetitia": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Tristitia": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Puer": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Puella": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Rubeus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Caput Draconis": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Cauda Draconis": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   }
+  },
+  "IV": {
+   "Via": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Populus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Albus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Conjunctio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Carcer": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Fortuna Major": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Fortuna Minor": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Acquisitio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Amissio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Laetitia": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Tristitia": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Puer": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Puella": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Rubeus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Caput Draconis": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Cauda Draconis": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   }
+  },
+  "V": {
+   "Via": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Populus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Albus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Conjunctio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Carcer": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Fortuna Major": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Fortuna Minor": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Acquisitio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Amissio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Laetitia": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Tristitia": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Puer": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Puella": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Rubeus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Caput Draconis": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Cauda Draconis": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   }
+  },
+  "VI": {
+   "Via": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Populus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Albus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Conjunctio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Carcer": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Fortuna Major": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Fortuna Minor": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Acquisitio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Amissio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Laetitia": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Tristitia": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Puer": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Puella": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Rubeus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Caput Draconis": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Cauda Draconis": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   }
+  },
+  "VII": {
+   "Via": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Populus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Albus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Conjunctio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Carcer": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Fortuna Major": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Fortuna Minor": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Acquisitio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Amissio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Laetitia": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Tristitia": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Puer": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Puella": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Rubeus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Caput Draconis": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Cauda Draconis": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   }
+  },
+  "VIII": {
+   "Via": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Populus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Albus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Conjunctio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Carcer": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Fortuna Major": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Fortuna Minor": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Acquisitio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Amissio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Laetitia": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Tristitia": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Puer": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Puella": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Rubeus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Caput Draconis": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Cauda Draconis": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   }
+  },
+  "IX": {
+   "Via": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Populus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Albus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Conjunctio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Carcer": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Fortuna Major": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Fortuna Minor": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Acquisitio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Amissio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Laetitia": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Tristitia": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Puer": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Puella": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Rubeus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Caput Draconis": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Cauda Draconis": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   }
+  },
+  "X": {
+   "Via": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Populus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Albus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Conjunctio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Carcer": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Fortuna Major": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Fortuna Minor": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Acquisitio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Amissio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Laetitia": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Tristitia": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Puer": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Puella": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Rubeus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Caput Draconis": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Cauda Draconis": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   }
+  },
+  "XI": {
+   "Via": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Populus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Albus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Conjunctio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Carcer": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Fortuna Major": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Fortuna Minor": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Acquisitio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Amissio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Laetitia": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Tristitia": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Puer": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Puella": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Rubeus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Caput Draconis": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Cauda Draconis": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   }
+  },
+  "XII": {
+   "Via": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Populus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Albus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Conjunctio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Carcer": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Fortuna Major": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Fortuna Minor": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Acquisitio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Amissio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Laetitia": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Tristitia": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Puer": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Puella": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Rubeus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Caput Draconis": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Cauda Draconis": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   }
+  },
+  "XIII": {
+   "Via": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Populus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Albus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Conjunctio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Carcer": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Fortuna Major": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Fortuna Minor": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Acquisitio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Amissio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Laetitia": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Tristitia": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Puer": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Puella": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Rubeus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Caput Draconis": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Cauda Draconis": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   }
+  },
+  "XIV": {
+   "Via": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Populus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Albus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Conjunctio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Carcer": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Fortuna Major": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Fortuna Minor": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Acquisitio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Amissio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Laetitia": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Tristitia": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Puer": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Puella": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Rubeus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Caput Draconis": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Cauda Draconis": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   }
+  },
+  "XV": {
+   "Via": {
+    "n": 8192,
+    "p": 0.125,
+    "surprisal_bits": 3.0
+   },
+   "Populus": {
+    "n": 8192,
+    "p": 0.125,
+    "surprisal_bits": 3.0
+   },
+   "Conjunctio": {
+    "n": 8192,
+    "p": 0.125,
+    "surprisal_bits": 3.0
+   },
+   "Carcer": {
+    "n": 8192,
+    "p": 0.125,
+    "surprisal_bits": 3.0
+   },
+   "Fortuna Major": {
+    "n": 8192,
+    "p": 0.125,
+    "surprisal_bits": 3.0
+   },
+   "Fortuna Minor": {
+    "n": 8192,
+    "p": 0.125,
+    "surprisal_bits": 3.0
+   },
+   "Acquisitio": {
+    "n": 8192,
+    "p": 0.125,
+    "surprisal_bits": 3.0
+   },
+   "Amissio": {
+    "n": 8192,
+    "p": 0.125,
+    "surprisal_bits": 3.0
+   }
+  },
+  "XVI": {
+   "Via": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Populus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Albus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Conjunctio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Carcer": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Fortuna Major": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Fortuna Minor": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Acquisitio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Amissio": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Laetitia": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Tristitia": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Puer": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Puella": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Rubeus": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Caput Draconis": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   },
+   "Cauda Draconis": {
+    "n": 4096,
+    "p": 0.0625,
+    "surprisal_bits": 4.0
+   }
+  }
+ },
+ "possible_judges": {
+  "Populus": 8192,
+  "Via": 8192,
+  "Fortuna Minor": 8192,
+  "Carcer": 8192,
+  "Conjunctio": 8192,
+  "Fortuna Major": 8192,
+  "Amissio": 8192,
+  "Acquisitio": 8192
+ }
+}

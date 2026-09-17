@@ -1,0 +1,145 @@
+{
+ "README": "one entry per app screen: the exact files to ship with the screen, with byte size and a content hash for cache-busting on a CDN",
+ "generated_by": "engine/retrieve.py --build",
+ "screens": {
+  "casting": {
+   "files": [
+    "library/dataset/index/by_outcome.jsonl",
+    "library/dataset/index/by_figure.jsonl"
+   ],
+   "resolved": [
+    {
+     "path": "library/dataset/index/by_outcome.jsonl",
+     "bytes": 51782,
+     "sha256": "7a5ffb8278bc70c1"
+    },
+    {
+     "path": "library/dataset/index/by_figure.jsonl",
+     "bytes": 24460,
+     "sha256": "242742c5f46dabca"
+    }
+   ],
+   "bytes": 76242
+  },
+  "reading": {
+   "files": [
+    "library/dataset/index/by_outcome.jsonl",
+    "library/dataset/index/by_figure.jsonl",
+    "library/dataset/index/by_house.jsonl",
+    "library/dataset/shards/rules.jsonl",
+    "library/dataset/tables/priors.json",
+    "library/dataset/tables/perfection_priors.json"
+   ],
+   "resolved": [
+    {
+     "path": "library/dataset/index/by_outcome.jsonl",
+     "bytes": 51782,
+     "sha256": "7a5ffb8278bc70c1"
+    },
+    {
+     "path": "library/dataset/index/by_figure.jsonl",
+     "bytes": 24460,
+     "sha256": "242742c5f46dabca"
+    },
+    {
+     "path": "library/dataset/index/by_house.jsonl",
+     "bytes": 35820,
+     "sha256": "7951fafa7b2c7e09"
+    },
+    {
+     "path": "library/dataset/shards/rules.jsonl",
+     "bytes": 22766,
+     "sha256": "7f07209de5a546b0"
+    },
+    {
+     "path": "library/dataset/tables/priors.json",
+     "bytes": 20654,
+     "sha256": "b888cccff891667f"
+    },
+    {
+     "path": "library/dataset/tables/perfection_priors.json",
+     "bytes": 4715,
+     "sha256": "4e98c31d5cb446c2"
+    }
+   ],
+   "bytes": 160197
+  },
+  "verdict": {
+   "files": [
+    "library/dataset/index/by_house.jsonl",
+    "library/dataset/shards/passages.jsonl"
+   ],
+   "resolved": [
+    {
+     "path": "library/dataset/index/by_house.jsonl",
+     "bytes": 35820,
+     "sha256": "7951fafa7b2c7e09"
+    },
+    {
+     "path": "library/dataset/shards/passages.jsonl",
+     "bytes": 325115,
+     "sha256": "b492d6e459ce7325"
+    }
+   ],
+   "bytes": 360935
+  },
+  "topics": {
+   "files": [
+    "library/dataset/index/by_outcome.jsonl"
+   ],
+   "resolved": [
+    {
+     "path": "library/dataset/index/by_outcome.jsonl",
+     "bytes": 51782,
+     "sha256": "7a5ffb8278bc70c1"
+    }
+   ],
+   "bytes": 51782
+  },
+  "search": {
+   "files": [
+    "library/dataset/geomancy.sqlite",
+    "library/dataset/shards/passages.jsonl"
+   ],
+   "resolved": [
+    {
+     "path": "library/dataset/geomancy.sqlite",
+     "bytes": 520192,
+     "sha256": null,
+     "note": "regenerate with `make build`; not byte-stable, not hashed"
+    },
+    {
+     "path": "library/dataset/shards/passages.jsonl",
+     "bytes": 325115,
+     "sha256": "b492d6e459ce7325"
+    }
+   ],
+   "bytes": 845307
+  },
+  "offline_full": {
+   "files": [
+    "library/dataset/shards/passages.jsonl",
+    "library/dataset/shards/rules.jsonl",
+    "library/dataset/manifest.json"
+   ],
+   "resolved": [
+    {
+     "path": "library/dataset/shards/passages.jsonl",
+     "bytes": 325115,
+     "sha256": "b492d6e459ce7325"
+    },
+    {
+     "path": "library/dataset/shards/rules.jsonl",
+     "bytes": 22766,
+     "sha256": "7f07209de5a546b0"
+    },
+    {
+     "path": "library/dataset/manifest.json",
+     "bytes": 2646,
+     "sha256": "19a466629fde1ec8"
+    }
+   ],
+   "bytes": 350527
+  }
+ }
+}

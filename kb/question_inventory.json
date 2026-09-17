@@ -1,0 +1,525 @@
+{
+ "_meta": {
+  "built": "scripts/build_question_inventory.py",
+  "purpose": "An inventory of what a cast can actually be asked, with the answer-slot each source uses. The engine (engine/questions.py) reads this to tell you what to look at for a given sub-question.",
+  "slot_table": {
+   "identity_of_person": {
+    "read": "figure in the house of the quesited -> Table 4 'Demonstration and Disposition of Men' + 'Figures of Bodies of Men and Women'",
+    "source": "Calatarama Table 4 (thesis pp.103-104)"
+   },
+   "age_stage": {
+    "read": "same table, 'Ages of Men'",
+    "source": "Calatarama Table 4"
+   },
+   "direction_to_look": {
+    "read": "'Direction' of the quesited figure (North/Mideast/Midwest/West)",
+    "source": "Calatarama Table 4"
+   },
+   "place_type": {
+    "read": "'Place' of the quesited figure (rivers, locked places, towers, dark place/desert, streets)",
+    "source": "Calatarama Table 4"
+   },
+   "distance_quantity": {
+    "read": "'Numbers' of the quesited figure; for travel also the points of the figure",
+    "source": "Calatarama Table 4 + f.12"
+   },
+   "matter_substance": {
+    "read": "'Metals', 'Stones', 'Colour', 'Flavour', 'Scent'",
+    "source": "Calatarama Table 4"
+   },
+   "occupation_class": {
+    "read": "'Sciences' + 'Meaning in the events and dispositions of men' + 'Peoples'",
+    "source": "Calatarama Table 4"
+   },
+   "body_part_health": {
+    "read": "'Parts of the Body' of the figure in I or VI",
+    "source": "Calatarama Table 4"
+   },
+   "recovery_or_loss": {
+    "read": "motion: intrans/entering keeps and recovers; exiens/leaving loses",
+    "source": "Calatarama f.10v; Alfagini 'De re amortisa'"
+   },
+   "hidden_cause": {
+    "read": "figura extracta: add the two houses the rule names (often IV & V, or the house & its neighbour)",
+    "source": "Alfagini Quaestiones (leaf 465-466); Calatarama f.39v"
+   },
+   "strength_of_answer": {
+    "read": "consent of the four angles (I, IV, VII, X) + the 15th",
+    "source": "Alfagini 'quatuor anguli sint fortuna' (leaf 464)"
+   },
+   "when": {
+    "read": "unit from the figure in the quesited house, count from points",
+    "source": "Calatarama ch.6 f.12"
+   },
+   "who_else_involved": {
+    "read": "company pairs (1-2,3-4,5-6,7-8,9-10,11-12); odd=present, even=future",
+    "source": "Serena Powers / medieval practice"
+   },
+   "legal_or_moral_note": {
+    "read": "context can invert the figure's native quality",
+    "source": "Calatarama f.11"
+   }
+  },
+  "caveat": "The Prasna/horary chapter lists are used only for the SHAPE of the question inventory. Their answers are computed from lunar mansions and planetary combinations, not from figures; do not paste a horary combination into a geomantic chart."
+ },
+ "latin_quaestiones": [
+  {
+   "topic_latin": "De ptum qualitate",
+   "leaf_pdf": 451
+  },
+  {
+   "topic_latin": "De mortis periculo vide an fexta in octa",
+   "leaf_pdf": 475
+  },
+  {
+   "topic_latin": "De animalium minutorum, HLOVIHIA",
+   "leaf_pdf": 480
+  },
+  {
+   "topic_latin": "De lite aut Bello",
+   "leaf_pdf": 491
+  },
+  {
+   "topic_latin": "De facietate A ejusque qualitate Ms",
+   "leaf_pdf": 498
+  },
+  {
+   "topic_latin": "De Jtineris feytunatione",
+   "leaf_pdf": 518
+  },
+  {
+   "topic_latin": "De fomnio an verum aut falfum ffi",
+   "leaf_pdf": 520
+  },
+  {
+   "topic_latin": "De T varia mutatione",
+   "leaf_pdf": 522
+  },
+  {
+   "topic_latin": "De adificioplantationis, utrum perve",
+   "leaf_pdf": 581
+  },
+  {
+   "topic_latin": "De negotio aliquo quale initium medinm",
+   "leaf_pdf": 596
+  },
+  {
+   "topic_latin": "Utrum puer velpuella vitalis fit",
+   "leaf_pdf": 599
+  },
+  {
+   "topic_latin": "Utrum infirmctur quis",
+   "leaf_pdf": 610
+  },
+  {
+   "topic_latin": "Utrum infirmus teflatusaninteflatus",
+   "leaf_pdf": 614
+  },
+  {
+   "topic_latin": "Utrum uxorem debeat ducere",
+   "leaf_pdf": 620
+  },
+  {
+   "topic_latin": "Utrum mairimomumfiat",
+   "leaf_pdf": 621
+  },
+  {
+   "topic_latin": "De Controverfra",
+   "leaf_pdf": 624
+  },
+  {
+   "topic_latin": "De quantitate Ex\u00e9rduitos",
+   "leaf_pdf": 632
+  },
+  {
+   "topic_latin": "De latrone C ve fu rata an debeat inveniri",
+   "leaf_pdf": 634
+  },
+  {
+   "topic_latin": "De pretio rei",
+   "leaf_pdf": 641
+  },
+  {
+   "topic_latin": "Utrum ft felix",
+   "leaf_pdf": 657
+  },
+  {
+   "topic_latin": "De Regis fabflantia",
+   "leaf_pdf": 661
+  },
+  {
+   "topic_latin": "De multitudine urbem obfidere volente",
+   "leaf_pdf": 675
+  }
+ ],
+ "castilian_questions_by_house": [
+  {
+   "house": "sixth",
+   "no": null,
+   "question": "as given in the list of questions"
+  },
+  {
+   "house": "sixth",
+   "no": null,
+   "question": "was originally numbered as forty-nine, but has been corrected to fifty-one, so the numbering of the questions in the universal chapter once again corre"
+  },
+  {
+   "house": "sixth",
+   "no": null,
+   "question": "is numbered there as fifty-two"
+  },
+  {
+   "house": "sixth",
+   "no": null,
+   "question": "in the universal chapter asks instead if the woman will become pregnant"
+  },
+  {
+   "house": "sixth",
+   "no": null,
+   "question": "of the eighth house, the numbering has been corrected again so that the questions in the list and the questions in the universal chapter have the same"
+  },
+  {
+   "house": "first",
+   "no": null,
+   "question": "was given in the Libro de los juysios de Calatarama"
+  },
+  {
+   "house": "second",
+   "no": null,
+   "question": "seven reflects this as it inquires if someone will acquire a particular sum of money (f"
+  },
+  {
+   "house": "second",
+   "no": null,
+   "question": "is not necessarily the only house implicated in the interpretation of that question"
+  },
+  {
+   "house": "second",
+   "no": null,
+   "question": "seven of house II"
+  },
+  {
+   "house": "second",
+   "no": null,
+   "question": "solely to the second house, but rather the second house must be analysed in combination with other houses, in the case of question seven, specifically"
+  },
+  {
+   "house": "third",
+   "no": null,
+   "question": "asks if a treasure will be found"
+  },
+  {
+   "house": "third",
+   "no": null,
+   "question": "of whether a man has hidden treasure somewhere, Car\u00e7el in the fourth house indicates that the treasure is nearby \u201cinside an ark or tied with ropes\u201d (f"
+  },
+  {
+   "house": "fourth",
+   "no": null,
+   "question": "of where the best place is to dig a well (f"
+  },
+  {
+   "house": "fourth",
+   "no": null,
+   "question": "can be seen to be related to the previous questions of finding treasure, in that both are concerned with the location of something desirable"
+  },
+  {
+   "house": "fifth",
+   "no": null,
+   "question": "about the status of one\u2019s household, the text provides guidance by analogy with a previous question, namely question 12 of the third house which asks a"
+  },
+  {
+   "house": "fifth",
+   "no": null,
+   "question": "about one\u2019s father and household would be answered by a combination of the figures in the sixth and the fourth house, the house of parents"
+  },
+  {
+   "house": "fifth",
+   "no": null,
+   "question": "is about a sibling in one\u2019s household, then look at the sixth and the third house, the ruler of questions about siblings (f"
+  },
+  {
+   "house": "sixth",
+   "no": null,
+   "question": "continue to appear"
+  },
+  {
+   "house": "sixth",
+   "no": null,
+   "question": "are great and the number of iterations many"
+  }
+ ],
+ "cattan_motion_rulings": [
+  {
+   "figure": "Fortuna Major",
+   "from_house": 1,
+   "to_house": 2,
+   "ocr_text": "it \u017figniftetha great gainein gods, moueables as gold \u017filuer, and tich vten\u017fllles"
+  },
+  {
+   "figure": "Fortuna Major",
+   "from_house": 1,
+   "to_house": 3,
+   "ocr_text": "it ignifleth to haue much fub\u017ftance by the meanes of the kindzed : it is al\u017fo good foz \u017fmall and \u017fhozt voyages"
+  },
+  {
+   "figure": "Fortuna Major",
+   "from_house": 1,
+   "to_house": 5,
+   "ocr_text": "it \u017figniflethioy , plea\u017fure, to be in good 02der , well appointed and clothed , toeate and dzinke well, and to haue fewe child\ua75ben and they \u017fhall be or red colour"
+  },
+  {
+   "figure": "Fortuna Major",
+   "from_house": 1,
+   "to_house": 10,
+   "ocr_text": "it \u017fignifyeth to hane dignitie with I, Kings aud P\ua75bintes, and with the other, and to haue vido- rie ouer his enemies"
+  },
+  {
+   "figure": "Fortuna Minor",
+   "from_house": 1,
+   "to_house": 3,
+   "ocr_text": "it \u017fignifpeth top of \u00de Kinsfolkes, 1 it is al\u017fo good \u017fo2 a \u017fho\ua75bt voyage, and \u017figni\u017fieth that it \u017fhall be quickly ended, it is al\u017fo good foz friendes"
+  },
+  {
+   "figure": "Fortuna Minor",
+   "from_house": 1,
+   "to_house": 11,
+   "ocr_text": "it \u017fignifieth good and tru\u017ftie \" friendes, and a good end of the thing where in hope is put"
+  },
+  {
+   "figure": "Rubeus",
+   "from_house": 1,
+   "to_house": 4,
+   "ocr_text": "it \u017fignifyeth to winne his \u017fute it u al\u017fo good in the demaundes which may be made vpon the fa- ther,fignifping as wellin them (as in al others) a good i\u017f\u017fut 0z end"
+  },
+  {
+   "figure": "Rubeus",
+   "from_house": 1,
+   "to_house": 11,
+   "ocr_text": "it b\ua75bingeth good lucke, and al\u017fo fo2 letters which \u017fhall come on their part"
+  },
+  {
+   "figure": "Caput Draconis",
+   "from_house": 1,
+   "to_house": 3,
+   "ocr_text": "it \u017fignifyeth the kinfolkes to be of good amitie, it is al\u017fo good fo2 \u017fhozt voyages , but that there \u017fhall be \u017fome flownelle therein"
+  },
+  {
+   "figure": "Caput Draconis",
+   "from_house": 1,
+   "to_house": 5,
+   "ocr_text": "it \u017fignifyeth many Child\ua75ben, which \u017fhall be wi\u017fe and wittie,it \u017fheweth al\u017fo a heartine\u017f\u017fe to eate and dainke"
+  },
+  {
+   "figure": "Caput Draconis",
+   "from_house": 1,
+   "to_house": 8,
+   "ocr_text": "it ignifpeth death without reme\u2e17 die, and \u017fometime in this place it \u017fignifyeth to winne inhe ri\u2e17 tances"
+  },
+  {
+   "figure": "Laetitia",
+   "from_house": 1,
+   "to_house": 2,
+   "ocr_text": "it \u017fignifieth a mediocritie of gaine by white things, and in things of the Church"
+  },
+  {
+   "figure": "Laetitia",
+   "from_house": 1,
+   "to_house": 3,
+   "ocr_text": "it \u017figni\u017fteth the kinsfolkes tobe merry and in good di\u017fpo\u017fition and in health of body it is al\u017fo good fo2 \u017fmall and \u017fho\ua75bt voyages"
+  },
+  {
+   "figure": "Laetitia",
+   "from_house": 1,
+   "to_house": 5,
+   "ocr_text": "it good fo2 child\ua75ben, and to eate and d\ua75binke, and to \u017fing mu\u017ficke, and fignifieth a great light\u017fome\u2e17 ne\u017f\u017fe of heart"
+  },
+  {
+   "figure": "Tristitia",
+   "from_house": 1,
+   "to_house": 2,
+   "ocr_text": "it \u017fignifieth \u017fmal p2ofit but in things of the earth | | as vines, medowes, wodes, and lands earrable, inallthev | ther hou\u017fes this figure is ill , but in the fourth and eight \u201e tages, and becau\u017fe J haue largelp declared here befoze , JI wh"
+  },
+  {
+   "figure": "Puella",
+   "from_house": 1,
+   "to_house": 2,
+   "ocr_text": "\u017fignifteth gaine by women, and by whi te things, in all theo ther hou\u017fes where this figure pa\u017f\u017feth,\u017fhe is good, e\u017fpecially in the hou\u017fe where \u017fhe \u017figmfieth topfulne\u017f\u017fe: but in the eight the \u017figmfieth death, and in the twelfth imp\ua75bi\u017fonment"
+  },
+  {
+   "figure": "Conjunctio",
+   "from_house": 1,
+   "to_house": 2,
+   "ocr_text": "it \u017fignifieth gaine by books and w\ua75bittings, in all other hou\u017fes this figure is indifferent, but in the \u017feuenth where it is good foz marriage, and in the ninth to put \u017fcholers to \u017ftudie, and in the eight it is ill, fo\ua75b it alwaies \u017fignifieth"
+  },
+  {
+   "figure": "Populus",
+   "from_house": 1,
+   "to_house": 3,
+   "ocr_text": "it is god to make voyage by water, it \u017figni\u0169eth death in the eight and in the ninth, and in the twelfth to be taken p2i\u017foner"
+  },
+  {
+   "figure": "Via",
+   "from_house": 1,
+   "to_house": 2,
+   "ocr_text": "it \u017figni\u2e17 fieth \u017fmall gaine, i it pa\u017f\u017fe into the third it is god fo2 \u017fho\ua75bt vo\u2e17 vages:in all the other hou\u017fes this figure is ill"
+  },
+  {
+   "figure": "Acquisitio",
+   "from_house": 1,
+   "to_house": 4,
+   "ocr_text": "/ oz into any other, vnto the rwelfth,\u017fo \u017fhall ve doe by the fourth if it pa\u017f\u017fe into the fift, o\ua75b into any of the other hou\u017fes following:and \u017fo all the others iudging as is afo\ua75be\u017faide, acco\ua75bding to the \u017fignifications of the hou\u017fes where the"
+  },
+  {
+   "figure": "Acquisitio",
+   "from_house": 1,
+   "to_house": 1,
+   "ocr_text": "and \u017fuperiour and p2incipall Element of all the other, the \u017fecond to the Aire the third to the water, the kourth to the Carth"
+  },
+  {
+   "figure": "Puella",
+   "from_house": 1,
+   "to_house": 3,
+   "ocr_text": "oz from the fir\u017ft to theeleuenth,o2 from the to ther as is befoze declared vnto you moze The quadzate A\u017fpectis from foure to foure , the Trim from fine to flus, the Oppo\u017fition from \u017feuen to \u017feuen"
+  },
+  {
+   "figure": "Puella",
+   "from_house": 1,
+   "to_house": 1,
+   "ocr_text": "onc to the \u017fecond, one to the third and \u017fo con \u2e17 \u017fequently vnto all the others, vntil \u00bb al the points be be\u017ftow\u2e17 td, and then if the point remaine on the fir\u017ft hou\u017fe, it \u017fignt- fleth thereby that the per\u017fon hath de\u017fired to haue that fygure"
+  },
+  {
+   "figure": "Puella",
+   "from_house": 1,
+   "to_house": 12,
+   "ocr_text": "and the vneuen points,being in number foure and twentic, and thereby hay uing twice run oner all the figures , I found the la\u017ft point to fall vppon the 12"
+  }
+ ],
+ "prasna_question_taxonomy": [
+  {
+   "chapter": "Chapter 3",
+   "name": "JAYAAPAJAYAADHYAYA",
+   "questions": [
+    {
+     "no": 1,
+     "q": "Combination for the success and failure of the king"
+    },
+    {
+     "no": 2,
+     "q": "Combination for the safety and benefit of citizens and those of the invader"
+    },
+    {
+     "no": 3,
+     "q": "Conditions for the signing of peace treaty and its breakdown"
+    },
+    {
+     "no": 4,
+     "q": "Conditions for settlement of conflicts"
+    },
+    {
+     "no": 5,
+     "q": "Conditions for the safe return of contingents from abroad"
+    }
+   ]
+  },
+  {
+   "chapter": "Chapter 4",
+   "name": "SUBHAASUBHAADHYAYA",
+   "questions": [
+    {
+     "no": 1,
+     "q": "Omnibus solution for all-round success and its opposite"
+    },
+    {
+     "no": 2,
+     "q": "Combination for gain in ventures and the opposite"
+    },
+    {
+     "no": 3,
+     "q": "Combination for reaching high position, fame and money and their deterrents"
+    },
+    {
+     "no": 4,
+     "q": "Combination for receiving benefits from a woman"
+    },
+    {
+     "no": 5,
+     "q": "Combination for spelling out recovery from illness"
+    }
+   ]
+  },
+  {
+   "chapter": "Chapter 5",
+   "name": "PRAVASA-CHINTAADHYAYA",
+   "questions": [
+    {
+     "no": 1,
+     "q": "Significators for return of person gone abroad"
+    },
+    {
+     "no": 2,
+     "q": "Combination for return of person from afar or abroad"
+    },
+    {
+     "no": 3,
+     "q": "Combination for return of person with safety, profit"
+    },
+    {
+     "no": 4,
+     "q": "Combination for punishment, imprisonment, moving into another country, death overseas, for being robbed or cheated"
+    },
+    {
+     "no": 5,
+     "q": "Combination for reckoning the days for a person to arrive and for his return"
+    }
+   ]
+  },
+  {
+   "chapter": "Chapter 6",
+   "name": "NASHTA-PRAAPTlADHYAYA",
+   "questions": [
+    {
+     "no": 1,
+     "q": "Combination for an article being stolen by one\u2019s own relative and hidden in the same precincts"
+    },
+    {
+     "no": 2,
+     "q": "Combination for the object being hidden in the threshold, central hall or backyard"
+    },
+    {
+     "no": 3,
+     "q": "Combination for the early recovery of a stolen object"
+    },
+    {
+     "no": 4,
+     "q": "Direction and distance of where the lost object has been taken"
+    }
+   ]
+  },
+  {
+   "chapter": "Chapter 3",
+   "name": "Competitive",
+   "questions": [
+    {
+     "no": 31,
+     "q": "Conflict of interest, termination, of Election, as Mayor, C"
+    }
+   ]
+  },
+  {
+   "chapter": "Chapter 4",
+   "name": "Adversity",
+   "questions": []
+  },
+  {
+   "chapter": "Chapter 5",
+   "name": "Illness",
+   "questions": []
+  },
+  {
+   "chapter": "Chapter 6",
+   "name": "Article",
+   "questions": []
+  }
+ ]
+}

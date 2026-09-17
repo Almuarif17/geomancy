@@ -1,0 +1,78 @@
+# The twelve houses + the Court, with the medieval (Calatarama) layer where legible.
+# Table 5 of the Libro de los juysios (ff. 8-8v) is partly garbled in the scan; where a field is
+# not legible it is null rather than guessed.
+# "extra_houses" = Table 7: which houses must also be read for that question type (calatarama),
+# a genuinely rare piece of machinery: it tells you where to look for the answer's context.
+
+houses:
+  1: {latin: "Prima / Vita", english: "life, the querent, body, outward shape, disposition",
+      cal: {aspect: "His body", direction: "North", gender: "Feminine", element: "water",
+            body_part: "the head of the man", colour: "white",
+            "also": ["plagues, wars, conflicts, bad crops, business ventures (f.23v)"]},
+      extra_houses: [], triplicities: [[1,2,9],[5,6,9],[7,8,12]]}
+  2: {latin: "Lucrum", english: "money, gain, possessions, ready cash",
+      cal: {aspect: "Profit", "also": ["giving and taking"]},
+      extra_houses: [], triplicities: [[1,2,9],[5,6,11],[13,14,15]]}
+  3: {latin: "Fratres", english: "siblings, letters, small journeys, neighbours",
+      cal: {aspect: "Relatives; Letters; Moving nearby"},
+      extra_houses: [8,10,14], triplicities: [[3,4,10],[7,8,12]]}
+  4: {latin: "Genitor", english: "parents, property, inheritance, land, end of things",
+      cal: {aspect: "End, Estate, Treasures, Deposits, Cellars, the elderly, Inheritances"},
+      extra_houses: [9,13], triplicities: [[3,4,10],[11,12,14]]}
+  5: {latin: "Natii", english: "children, pregnancy, pleasure, food, hope",
+      cal: {aspect: "Gifts, Messengers, Pregnant women, Betrothals, Eating, Drinking, Fruits, Clothing"},
+      extra_houses: [6,11,10,9,14,15], triplicities: [[7,8,12],[6,11]]}
+  6: {latin: "Valetudo", english: "illness, servants, small cattle, prison, absent persons",
+      cal: {aspect: "Guards, Captives, Servants, Houses of prison, Houses of pains, Lying, Slanderers, Loss, Theft, Anxiety, Fear",
+            note: "for a question of imprisonment or absence this is the house to read (f.12)"},
+      extra_houses: [4,10], triplicities: [[1,2,9],[5,6,11]]}
+  7: {latin: "Uxor", english: "marriage, partner, the quesited, open enemies, contracts",
+      cal: {aspect: "Marriages, Lust, Love, Sharecropping, Foreign land, Absent, Pasture, Departing governor, Enemies, War, Thieves"},
+      extra_houses: [5], triplicities: [[7,8,12]]}
+  8: {latin: "Mors", english: "death, inheritance from others, the partner's money, curses",
+      cal: {aspect: "Pain, Sighs, Difficult spots, Fear, Inheritance, Given money, People of the enemy, Sorceries"},
+      extra_houses: [8,12,14,15], triplicities: []}
+  9: {latin: "Iter", english: "journeys, ships, religion, dreams, philosophy, long travel",
+      cal: {aspect: "Those on journeys, Signs, Miracles, Blood, Sorcerers, Philosophers, Saints, Dreams, Freeing"},
+      extra_houses: [], triplicities: [[1,2,9],[7,8,12],[13,14,15]]}
+  10: {latin: "Regnum", english: "rank, office, livelihood, the lord, fame",
+      cal: {aspect: "Beginning of his business / the land where he lives"},
+      extra_houses: [1,13], triplicities: [[3,4,10]]}
+  11: {latin: "Good Genius", english: "hope, friends, helpers, patrons",
+      cal: {aspect: "Helpers; Faith; Company; Advice"},
+      extra_houses: [1,2,11,5,6,14], triplicities: []}
+  12: {latin: "Ill Genius", english: "enemies seen and unseen, prison, bonds, debt, sorrow",
+      cal: {aspect: "Ambush; Keys; Treasures (of the enemy); Debt; Change of house",
+            note: "the figure here shows what is hidden in the matter and its inverse is the remedy"},
+      extra_houses: [1,12,6,8,7,14], triplicities: []}
+
+court:
+  13: {name: "Right Witness", asks: "the querent's own side / what they bring",
+       cal_note: "house 13 is 'the witness of money' in questions of the 2nd"}
+  14: {name: "Left Witness", asks: "the quesited / what is coming toward it"}
+  15: {name: "Judge", asks: "the verdict on the question as asked"}
+  16: {name: "Sentence / Reconciler", asks: "how the verdict lands on the querent; the after-effect"}
+
+question_to_house:   # topic -> governing house (the "1st step" of the 10-step procedure)
+  marriage: 7
+  love_partner: 7
+  wealth_money: 2
+  job_livelihood: 10
+  career_rank: 10
+  children: 5
+  pregnancy: 5
+  health: 1
+  illness: 6
+  death: 8
+  property_land: 4
+  inheritance: 4
+  travel_journey: 9
+  studies: 9
+  servants_workers: 6
+  lawsuit: 7
+  enemies_obstruction: 12
+  imprisonment_absent: 6
+  lost_things: 7        # thief/lost goods read from 7 (and 12 for the thief's condition)
+  news_message: 3
+  friends: 11
+  animals: 6

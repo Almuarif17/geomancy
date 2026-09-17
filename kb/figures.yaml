@@ -1,0 +1,439 @@
+# Geomantic figures — cross-tradition attribute base
+# Provenance key:
+#   [CAL] = Libro de los juysios de calatarama, tables 2-6, via Cameron Finan (2023) thesis,
+#           trans. from the medieval Castilian; only fields present in that table are filled.
+#   [DA]  = David Conant / The Digital Ambler, "Same Figures, but Different Names and Different
+#           Traditions" (digitalambler.com, 2017) for Arabic `ilm al-raml and Ifa correspondences.
+#   [LENZ]= Frederick Lenz, The Science of Geomancy (1937) via sacred-texts (public domain).
+#   null  = "not attested in the sources I extracted; do not invent it".
+# Quality scale in the Calatarama is textual, not numeric: it names ranks (see ranks field).
+
+figures:
+  Via:
+    pattern: [1,1,1,1]
+    points: 4
+    arabic: {name: "al-Tariq", gloss: "the Way"}          # [DA] (also given as Tariq in Olomi)
+    ifa_odu: "Ogbe"                                        # [DA] comparative correspondence only
+    element: Water            # [LENZ]/GD
+    planet: Moon
+    quality: communal         # [CAL] "comunal"
+    motion: outgoing          # [CAL] "Lack and quickly outgoing"
+    gender: masculine         # [CAL]
+    nature: "cold and wet"    # [CAL]
+    engendering: engendering  # [CAL]
+    time_unit: days           # [CAL] ch.6: days by Via, Emysio, Cola del Dragon
+    cal_details:
+      colour: "yellow and saffron"
+      direction: "Midwest"
+      place: "Rivers"
+      metal: "Silver"
+      numbers: "8"
+      peoples: null
+      sciences: "Accounts"
+      age_of_man: "Youth"
+      body_part: "Chest"
+      meaning: "Journeys, walking from place to place. Sellers of light things. Men of God and low and common men."
+      bodies: "Tall of body, round face. Small …. Large head. Broad of chest."
+
+  Populus:
+    pattern: [2,2,2,2]
+    points: 8
+    arabic: {name: "Jama'at", gloss: "the Group"}          # [DA]
+    ifa_odu: "Oyeku"
+    element: Water
+    planet: Moon
+    quality: communal
+    motion: incoming
+    gender: feminine
+    nature: "cold and wet"
+    engendering: barren
+    time_unit: null           # not assigned in [CAL] ch.6 excerpt
+    cal_details:
+      influence: "A multitude"
+      colour: "Red mixed with white"
+      direction: "Mideast"
+      place: "Locked places"
+      metal: "Argenbib (unidentified stone/metal)"
+      numbers: "2"
+      sciences: "Algorithm"
+      age_of_man: "Childhood"
+      body_part: "Shoulders, arms, hands"
+      meaning: "… or royal. Water, rivers. Happy, good, liberal men. Tall trees. Fruit of the rockrose and beasts, everything that walks on four [legs]."
+      bodies: "Full and large body. Ugly and long face. Separated teeth. Good speech. Vicious, and separated from people."
+
+  Albus:
+    pattern: [2,2,1,2]
+    points: 7
+    arabic: {name: "al-Bayad", gloss: "the White"}          # [DA] / [CAL] "Alua"
+    ifa_odu: "Oturupon"
+    element: Water
+    planet: Mercury
+    quality: good
+    motion: incoming
+    gender: masculine
+    nature: "cold and dry"
+    time_unit: years          # [CAL]: years by Cabeça de Dragon, Fortuna Mayor, Tristicia, Carçel, Alua, Leticia
+    cal_details:
+      meaning: "Peace, wisdom; also (with rain questions) dryness"
+      note: "[CAL] lists Albus among the six 'good' figures, ranked below Itisiçio and Fortuna Mayor."
+
+  Conjunctio:
+    pattern: [2,1,1,2]
+    points: 6
+    arabic: {name: "Ijtima'", gloss: "Meeting"}             # [DA]
+    ifa_odu: "Iwori"
+    element: Air
+    planet: Mercury
+    quality: communal
+    motion: incoming
+    gender: feminine
+    nature: "cold and dry"
+    time_unit: hours          # [CAL]: hours by Congregacion
+    cal_details:
+      note: "[CAL] calls this figure Congregacio; the thesis flags a name confusion with Populus."
+
+  Carcer:
+    pattern: [1,2,2,1]
+    points: 6
+    arabic: {name: "al-'Uqla", gloss: "the Shackles"}       # [DA]; [CAL] "Carçel"
+    ifa_odu: "Odi"
+    element: Earth
+    planet: Saturn
+    quality: bad
+    motion: incoming
+    gender: feminine
+    nature: "cold and dry"
+    engendering: engendering
+    time_unit: years
+    cal_details:
+      flavour: "Astringent"
+      scent: "Little scent, and unpleasant"
+      colour: "Black and yellow"
+      direction: "North, others say Mideast"
+      place: "Dark place, desert"
+      metal: "Lead"
+      numbers: "10, or 14, 2"
+      letters: "a, or q, d"
+      sciences: "Secrets"
+      age_of_man: "Old age"
+      body_part: "Testicles"
+      meaning: "Imprisoned things, the ill, imprisoned, … of the body. Slaves, low men, … fruits"
+      bodies: "Short body and slim face and yellow, round. Separated teeth, large head, short arms."
+      peoples: "Berberia"
+      special: "one of the four principal/immutable figures [CAL f.10v]; identified with Earth"
+
+  Fortuna Major:
+    pattern: [2,2,1,1]
+    points: 6
+    arabic: {name: "Nusrah al-dakhil", gloss: "Inner victory"}   # [DA]
+    ifa_odu: "Owonrin"
+    element: Fire
+    planet: Sun
+    quality: good
+    motion: incoming
+    gender: masculine
+    nature: "hot and dry"
+    time_unit: years
+    cal_details:
+      note: "ranked with Itisiçio as the best of the good figures [CAL]"
+
+  Fortuna Minor:
+    pattern: [1,1,2,2]
+    points: 6
+    arabic: {name: "Nusrah al-kharij", gloss: "Outer victory"}   # [DA]
+    ifa_odu: "Irosun"
+    element: Fire
+    planet: Sun
+    quality: communal
+    motion: outgoing
+    gender: masculine
+    nature: "hot and dry"
+    time_unit: months
+    cal_details:
+      note: "in a question of capture or long journey, stronger than Fortuna Major [CAL f.11]"
+
+  Acquisitio:
+    pattern: [2,1,2,1]
+    points: 6
+    arabic: {name: "Qabd al-dakhil", gloss: "Grasping within"}  # [DA]; [CAL] "Itisiçio"
+    ifa_odu: "Obara"
+    element: Air
+    planet: Jupiter
+    quality: good
+    motion: incoming
+    gender: masculine
+    nature: "hot and moist"
+    time_unit: null
+    cal_details:
+      meaning: "Especially money, … rich men, money and poverty…"
+      note: "one of the best [CAL]"
+
+  Amissio:
+    pattern: [1,2,1,2]
+    points: 6
+    arabic: {name: "Qabd al-kharij", gloss: "Grasping without"} # [DA]; [CAL] "Emysio"
+    ifa_odu: "Ose"
+    element: Fire
+    planet: Venus
+    quality: bad
+    motion: outgoing
+    gender: feminine
+    nature: "hot and moist"
+    time_unit: days
+    cal_details:
+      meaning: "Loss of money …, thieves and highwaymen"
+
+  Laetitia:
+    pattern: [1,2,2,2]
+    points: 7
+    arabic: {name: "al-Layhan", gloss: "the Bearded"}      # [DA]; [CAL] "Leticia"
+    ifa_odu: "Irete"
+    element: Fire
+    planet: Jupiter
+    quality: good
+    motion: outgoing
+    gender: feminine
+    nature: "hot and dry"
+    engendering: engendering
+    time_unit: years
+    cal_details:
+      flavour: "Bitter"
+      scent: "Pleasant scent"
+      colour: "Between red and yellow … red"
+      direction: "West"
+      place: "Towers, and high things"
+      metal: "Tin"
+      numbers: "3, others 6"
+      letters: "… others n, g"
+      sciences: "Laws and judgements"
+      age_of_man: "Between youth and old age"
+      body_part: "The feet"
+      meaning: "Joy and honour and status. Judgement, justice, old men, … judges, men of laws"
+      bodies: "Full body, round face, broad chest, large eyes, liberal holding, one inside and the other outside."
+      note: "in the 1st house for a rain question it signifies dryness, i.e. context inverts it [Estimaverunt Indi]"
+
+  Tristitia:
+    pattern: [2,2,2,1]
+    points: 7
+    arabic: {name: "ankis", gloss: "Reversal"}             # [DA]; [CAL] "Tristicia"
+    ifa_odu: "Okanran"
+    element: Earth
+    planet: Saturn
+    quality: bad
+    motion: incoming
+    gender: feminine
+    nature: "cold and dry"
+    engendering: barren
+    time_unit: years
+    cal_details:
+      flavour: "Acidic"
+      scent: "Bad scent"
+      colour: "Black"
+      direction: "North, others say East"
+      place: "A dark place"
+      metal: "Lead"
+      numbers: "12"
+      letters: "…, d or q, d"
+      sciences: "Prophecy, sorcery"
+      age_of_man: "Old age"
+      body_part: "The haunches"
+      meaning: "Sighing, anxiety, work, illness, harm and theft. Lepers, low men, slaves, coal sellers, heretics"
+      bodies: "A long body, dry face, yellow of fear. Inclining to black. Large teeth, long beard."
+      peoples: "Jews"
+      note: "among the worst, with Rubea and Cola del Dragon [CAL]"
+
+  Puer:
+    pattern: [1,2,1,1]
+    points: 5
+    arabic: {name: "Farih", gloss: "Joy"}                 # [DA]
+    ifa_odu: "Ogunda"
+    element: Fire
+    planet: Mars
+    quality: good
+    motion: outgoing
+    gender: masculine
+    nature: "hot and dry"
+    time_unit: months
+    cal_details:
+      flavour: "Salty, others say bitter"
+      colour: "Between white and red"
+      place: "Streets"
+      metal: "Wire"
+      numbers: "1"
+      letters: "g, y or s"
+      sciences: "Music"
+      age_of_man: "From thirteen years and up"
+      body_part: "The neck and the throat"
+      meaning: "Women, [young men], virgins, clerics, lovers, prostitution, lust, joy, birds, tall trees."
+      bodies: "A common body, greedy face, small mouth, long neck, large head, broad shoulders."
+      peoples: "Moors"
+
+  Puella:
+    pattern: [1,1,2,1]
+    points: 5
+    arabic: {name: "al-naqi", gloss: "the Pure"}          # [DA]
+    ifa_odu: "Otun"
+    element: Water
+    planet: Venus
+    quality: bad
+    motion: incoming
+    gender: feminine
+    nature: "cold and moist"
+    time_unit: months
+    cal_details:
+      note: "ranked below Emysio/Carcel in badness: Carçel is worse than Puela [CAL]"
+
+  Rubeus:
+    pattern: [2,1,2,2]
+    points: 7
+    arabic: {name: "al-Humra", gloss: "the Red"}          # [DA]; [CAL] "Rubea"
+    ifa_odu: "Osa"
+    element: Air
+    planet: Mars
+    quality: bad
+    motion: outgoing
+    gender: masculine
+    nature: "hot and dry"
+    time_unit: months
+    cal_details:
+      note: "among the worst [CAL]. Also: Rubeus in the 1st house/first mother stops the reading (see techniques.stop_and_recast)."
+
+  Caput Draconis:
+    pattern: [2,1,1,1]
+    points: 5
+    arabic: {name: "'Atabat al-dakhil", gloss: "Threshold of entering"}  # [DA]; [CAL] "Cabeça del Dragon"
+    ifa_odu: "Ika"
+    element: Earth
+    planet: North Node
+    quality: good
+    motion: incoming
+    gender: masculine
+    nature: "cold and moist"
+    time_unit: years
+
+  Cauda Draconis:
+    pattern: [1,1,1,2]
+    points: 5
+    arabic: {name: "'Atabat al-kharij", gloss: "Threshold of going out"} # [DA]; [CAL] "Cola del Dragon"
+    ifa_odu: "Ogunda"          # [DA] lists Ogunda for Cauda; the same article also maps Puer to Ogunda - see note
+    element: Fire
+    planet: South Node
+    quality: bad
+    motion: outgoing
+    gender: feminine
+    nature: "hot and dry"
+    time_unit: days
+    note: >
+      The [DA] table lists Ogunda twice (Puer and Cauda). Treat the Ifa column as an informal
+      comparative correspondence, not an authority; verify against an Ifa source before use.
+
+# ---- planetary attributions: the two systems genuinely DISAGREE ---------------------------
+# The day/hour gate and the "pace" (prolonged/short) rule both read a figure's planet, so which
+# table you use changes the answer. Do not harmonise them silently.
+planet_attribution_conflict:
+  gd_and_agrippa:
+    note: "the Golden Dawn line, i.e. what most modern books print"
+    Puer: Mars
+    Puella: Venus
+    Populus: Moon
+    Via: Moon
+    Caput_Draconis: "North Node"
+    Cauda_Draconis: "South Node"
+    Albus: Mercury
+    Fortuna_Major: Sun
+    Fortuna_Minor: Sun
+  calatarama_f5:
+    note: "thesis Table 6, f.5, read out of the days-of-the-week table itself"
+    Sun: ["Fortuna Major", "Fortuna Minor"]
+    Moon: ["Albus", "Via"]
+    Mars: ["Rubeus", "Puella"]
+    Mercury: ["Conjunctio", "Populus"]
+    Jupiter: ["Acquisitio", "Laetitia", "Caput Draconis"]
+    Venus: ["Puer", "Amissio"]
+    Saturn: ["Tristitia", "Carcer", "Cauda Draconis"]
+  where_it_bites: >
+    elections.py uses the Calatarama set (its own f.5 table); timing.pace in deep_read.py uses the
+    GD set. A figure can therefore be called "prolonging" by one layer and "short" by another -
+    that is a real disagreement in the tradition, not a bug to average away.
+
+# ---- a real conflict in the sources, not an error to hide -------------------------------
+# Puer / Puella are the only pair whose dot pattern the authorities disagree about.
+#   Britannica's plate and the Golden Dawn table:  Puer = 1-2-1-1,  Puella = 1-1-2-1   <- used here
+#   Digital Ambler (binary table, Skinner line):  Puer = 1-1-2-1,  Puella = 1-2-1-1
+# Everything else agrees. Consequence: if you follow the other convention, only these two NAMES
+# swap in any reading - the dots, the arithmetic and the derivations are identical. The engine
+# prints both when it names these two figures so a reading cannot silently mislead.
+naming_conflict:
+  pair: [Puer, Puella]
+  note: "dots are certain; the label attached to them is not. Verify against the tradition you work in."
+
+# ---- ranking of figures by strength, as stated in the Calatarama (f.10v-11) ----
+ranks:
+  best: [Acquisitio, Fortuna Major]
+  good: [Caput Draconis, Albus, Puer, Laetitia]
+  middling_communal: [Fortuna Minor, Conjunctio, Populus, Via]
+  worst: [Tristitia, Rubeus, Cauda Draconis]
+  bad: [Amissio, Puella, Carcer]
+  alzanati_counts:            # from the Binsbergen/van Binsbergen translation of al-Zanātī
+    happy: 5
+    strong_happy: 3
+    distressful_negative: 4
+    mixed: 5
+    note: "these are the categories al-Zanātī lists for configurations in the sand; they do not map 1:1 onto the good/bad/communal labels used above"
+  principle: >
+    "you have to reconcile that which is asked with the virtue of the figures and then you will
+    judge for good or ill, and following this it is possible to count the good figures for bad and
+    the bad figures for good" (f.11). The four principal figures (Carcer, Conjunctio, Populus, Via)
+    are immutable and identify with the four elements; the other twelve change meaning by location.
+
+# --- Acquisitio ---
+
+# --- Fortuna Major ---
+
+# --- Fortuna Minor ---
+
+# --- Laetitia ---
+
+# --- Tristitia ---
+
+# --- Puer ---
+
+# --- Puella ---
+
+# --- Rubeus ---
+
+# --- Carcer ---
+
+# --- Populus ---
+
+# --- Via ---
+
+# --- Albus ---
+
+# --- Conjunctio ---
+
+# --- Cauda Draconis ---
+
+# --- Caput Draconis ---
+
+# --- Amissio ---
+
+# ---- per-figure attribution status: how much of the Calatarama attribute row survives ----
+# the thesis prints the row for only some figures; the rest carry just planet/element/rank
+attribution_status:
+  Via: 8 of 8 fields extracted
+  Populus: 8 of 8 fields extracted
+  Albus: 0 of 8 fields extracted
+  Conjunctio: 0 of 8 fields extracted
+  Carcer: 8 of 8 fields extracted
+  Fortuna Major: 0 of 8 fields extracted
+  Fortuna Minor: 0 of 8 fields extracted
+  Acquisitio: 0 of 8 fields extracted
+  Amissio: 0 of 8 fields extracted
+  Laetitia: 8 of 8 fields extracted
+  Tristitia: 8 of 8 fields extracted
+  Puer: 7 of 8 fields extracted
+  Puella: 0 of 8 fields extracted
+  Rubeus: 0 of 8 fields extracted
+  Caput Draconis: 0 of 8 fields extracted
+  Cauda Draconis: 0 of 8 fields extracted

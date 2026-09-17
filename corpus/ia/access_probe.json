@@ -1,0 +1,167 @@
+[
+ {
+  "id": "PrasnaMargaBVR",
+  "title": "Prasna Marga - Dr. BV Raman",
+  "year": null,
+  "restricted": null,
+  "cc": "",
+  "coll": "opensource,community",
+  "txt": true,
+  "epub": true,
+  "files": 22
+ },
+ {
+  "id": "UJrg_prasna-tantra-by-b.-v.-raman-raman-publication",
+  "title": "Prasna Tantra By B. V. Raman Raman Publication",
+  "year": null,
+  "restricted": null,
+  "cc": "http://creativecommons.org/publicdomain/zero/1.0/",
+  "coll": "mumukshubhawhncollection,patron-library-",
+  "txt": true,
+  "epub": true,
+  "files": 17
+ },
+ {
+  "id": "PrashnaChandeshwaraSanskritHindi",
+  "title": "Prashna Chandeshwara Sanskrit Hindi",
+  "year": null,
+  "restricted": null,
+  "cc": "",
+  "coll": "opensource,community",
+  "txt": true,
+  "epub": true,
+  "files": 14
+ },
+ {
+  "id": "ShatpanchashikaVSSastri",
+  "title": "Shatpanchashika",
+  "year": null,
+  "restricted": null,
+  "cc": "",
+  "coll": "opensource,community",
+  "txt": true,
+  "epub": true,
+  "files": 21
+ },
+ {
+  "id": "IndianHoraryShatpanchashikaVAKAyer",
+  "title": "Indian Horary Astrology - V.A.K. Ayer",
+  "year": null,
+  "restricted": null,
+  "cc": "",
+  "coll": "opensource,community",
+  "txt": true,
+  "epub": true,
+  "files": 13
+ },
+ {
+  "id": "kerala-prasna-shastra",
+  "title": "\u0915\u0947\u0930\u0932\u092a\u094d\u0930\u0936\u094d\u0928\u0936\u093e\u0938\u094d\u0924\u094d\u0930 Kerala Prasna Shastra",
+  "year": null,
+  "restricted": null,
+  "cc": "",
+  "coll": "booksbylanguage_sanskrit,booksbylanguage",
+  "txt": true,
+  "epub": true,
+  "files": 19
+ },
+ {
+  "id": "LalKitab1941",
+  "title": "Lal Kitab 1941 ",
+  "year": null,
+  "restricted": null,
+  "cc": "",
+  "coll": "folkscanomy_miscellaneous,folkscanomy",
+  "txt": true,
+  "epub": true,
+  "files": 25
+ },
+ {
+  "id": "lalkitabist75_gmail",
+  "title": "\u0932\u093e\u0932 \u0915\u093f\u0924\u093e\u092c \u0967\u096f\u0969\u096f",
+  "year": null,
+  "restricted": null,
+  "cc": "",
+  "coll": "booksbylanguage_hindi,booksbylanguage",
+  "txt": true,
+  "epub": true,
+  "files": 21
+ },
+ {
+  "id": "lal-kitab-1939_202006",
+  "title": "Lal Kitab - Urdu Translation (1939)",
+  "year": null,
+  "restricted": null,
+  "cc": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+  "coll": "booksbylanguage_urdu,booksbylanguage",
+  "txt": true,
+  "epub": true,
+  "files": 19
+ },
+ {
+  "id": "thorndike-01-1923-history-magic-science",
+  "title": "A History of Magic and Experimental Science",
+  "year": null,
+  "restricted": null,
+  "cc": "",
+  "coll": "robert-bedrosian-library,patron-library-",
+  "txt": true,
+  "epub": true,
+  "files": 27
+ },
+ {
+  "id": "mscodex1918",
+  "title": "Sirr al-asra\u0304r fi\u0304 \u02bbilm al-a\u0304tha\u0304r ; Shamsi\u0304ya",
+  "year": null,
+  "restricted": null,
+  "cc": "http://creativecommons.org/publicdomain/mark/1.0/",
+  "coll": "booksbylanguage_arabic,booksbylanguage",
+  "txt": true,
+  "epub": true,
+  "files": 18
+ },
+ {
+  "id": "MS_Broxbourne_84_3",
+  "title": "Manuscript: Oxford, Bodleian Library, MS Broxo",
+  "year": "1469",
+  "restricted": null,
+  "cc": "http://creativecommons.org/publicdomain/mark/1.0/",
+  "coll": "reference",
+  "txt": false,
+  "epub": false,
+  "files": 1188
+ },
+ {
+  "id": "yahoo-groups-2017-11-21T06-24-46Z-2451e7",
+  "title": "yahoo-groups-2017-11-21T06-24-46Z-2451e7",
+  "year": null,
+  "restricted": "true",
+  "cc": "",
+  "coll": "archiveteam_yahoogroups,archiveteam",
+  "txt": false,
+  "epub": false,
+  "files": 459
+ },
+ {
+  "id": "ldpd_13892500_000",
+  "title": "Kita\u0304b-i Surkha\u0304b dar \u02bbilm-i raml",
+  "year": "1528",
+  "restricted": null,
+  "cc": "",
+  "coll": "muslim-world-manuscripts,ColumbiaUnivers",
+  "txt": true,
+  "epub": true,
+  "files": 22
+ },
+ {
+  "id": "vadic-astrology-massive-collection",
+  "title": "Vadic Astrology Massive Collection",
+  "year": null,
+  "restricted": null,
+  "cc": "",
+  "coll": "opensource",
+  "txt": false,
+  "epub": false,
+  "files": 6
+ }
+]

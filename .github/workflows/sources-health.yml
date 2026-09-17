@@ -1,0 +1,28 @@
+name: Source health (weekly)
+
+# The library's promise is that a citation still resolves in five years. This job checks that
+# every registered host still serves the identifier we address it by, and fails loudly when one
+# goes quiet - so link rot becomes a ticket, not a silent loss.
+
+on:
+  schedule:
+    - cron: '17 6 * * 1'          # Mondays ~06:17 UTC
+  workflow_dispatch:
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v5
+      with: { python-version: '3.11' }
+    - run: pip install pyyaml
+    - name: Check every registered source
+      run: python library/tools/sync_corpus.py --check | tee corpus-health.txt
+    - name: Record the report
+      uses: actions/upload-artifact@v4
+      with:
+        name: corpus-health
+        path: corpus-health.txt
+    - name: Fail on rot
+      run: grep -q "0 problems" corpus-health.txt

@@ -1,0 +1,22 @@
+{
+ "page": 146,
+ "method": "embedded-layer",
+ "keyword_hits": 1,
+ "of": 12,
+ "tesseract_words": 288,
+ "embedded_chars": 2274,
+ "hits": {
+  "judge": false,
+  "house": false,
+  "figure": true,
+  "signify": false,
+  "thief": false,
+  "enem": false,
+  "mother": false,
+  "prison": false,
+  "travell": false,
+  "marriage": false,
+  "sick": false,
+  "death": false
+ }
+}

@@ -1,0 +1,37 @@
+# NOTICE
+
+**Code** (this repository's `engine/`, `library/tools/`, `scripts/`, `tools/`): MIT licensed.
+**Dataset** (`library/dataset/*`, `kb/`, `docs/FINDINGS.md`): CC BY 4.0, © 2026 the authors.
+
+## Full-text sources
+Only public-domain or openly deposited works are quoted at length. Each carries its own record in
+`library/dataset/manifest.json` (`full_text_sources`). Extracted text is presented with normalised
+spelling where noted, and always with a locator so a reader can check it against the scan.
+
+## Cite-only sources
+Work under copyright is referenced bibliographically and never reproduced: modern practitioner systems
+(Stephen Skinner, John Michael Greer, Israel Regardie), the scholarly editions
+(M. Charmasson, *Recherches sur une technique divinatoire*, 1980; P. Tannery, *Mémoires scientifiques* II),
+and encyclopaedia articles (Encyclopaedia of Islam, "Raml"). If you hold a licence to any of these and
+want text included, open an issue with the rights statement and it can be added to the allow-list
+deliberately, not accidentally.
+
+## Deliberately excluded
+1. **Unofficial uploads of in-copyright books.** Several circulate on document sites. They were inspected
+   and not used; nothing here derives from them (see `corpus/raw/ia3/_REMOVED_because_in_copyright.txt`
+   in the working tree, and `library/LICENSE_POLICY.md` bucket C).
+2. **Living-tradition material.** Ifá odu verses, taboos (ẹ̀wọ) and prescriptions (ẹbọ) belong to a lineage
+   and to initiated practitioners; published printings are separately copyrighted. The one Ifá-related
+   table present here (`kb/figures.yaml`, the `ifa_odu` column) is a *structural correspondence* taken
+   from a modern author who himself warns that sharing sixteen figures does not make the two systems
+   behave alike. That warning ships with the data. Do not extend it without the consent and credit of a
+   practitioner.
+3. **Personal castings.** The screenshots, question text and client context used while building this
+   dataset are not redistributed; `data/fixtures/` holds only the abstract figure patterns and explains
+   how they were measured.
+
+## About the content
+Geomancy is a historical divination method. This repository documents how its practitioners computed and
+interpreted, from the sources themselves, including where they contradict each other. It makes no claim
+that the method has demonstrated predictive validity. Present it as documentation and as a discipline of
+structured reflection, not as a forecast of medical, legal or financial outcomes.

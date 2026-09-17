@@ -1,0 +1,939 @@
+{
+ "schema": "1.0",
+ "input": {
+  "mothers": [
+   "Carcer",
+   "Amissio",
+   "Caput Draconis",
+   "Populus"
+  ],
+  "topic": "marriage",
+  "day": null,
+  "planetary_hour": null,
+  "night": false
+ },
+ "chart": [
+  {
+   "house": "I",
+   "figure": "Carcer",
+   "pattern": [
+    1,
+    2,
+    2,
+    1
+   ],
+   "points": 6
+  },
+  {
+   "house": "II",
+   "figure": "Amissio",
+   "pattern": [
+    1,
+    2,
+    1,
+    2
+   ],
+   "points": 6
+  },
+  {
+   "house": "III",
+   "figure": "Caput Draconis",
+   "pattern": [
+    2,
+    1,
+    1,
+    1
+   ],
+   "points": 5
+  },
+  {
+   "house": "IV",
+   "figure": "Populus",
+   "pattern": [
+    2,
+    2,
+    2,
+    2
+   ],
+   "points": 8
+  },
+  {
+   "house": "V",
+   "figure": "Fortuna Minor",
+   "pattern": [
+    1,
+    1,
+    2,
+    2
+   ],
+   "points": 6
+  },
+  {
+   "house": "VI",
+   "figure": "Albus",
+   "pattern": [
+    2,
+    2,
+    1,
+    2
+   ],
+   "points": 7
+  },
+  {
+   "house": "VII",
+   "figure": "Conjunctio",
+   "pattern": [
+    2,
+    1,
+    1,
+    2
+   ],
+   "points": 6
+  },
+  {
+   "house": "VIII",
+   "figure": "Amissio",
+   "pattern": [
+    1,
+    2,
+    1,
+    2
+   ],
+   "points": 6
+  },
+  {
+   "house": "IX",
+   "figure": "Fortuna Major",
+   "pattern": [
+    2,
+    2,
+    1,
+    1
+   ],
+   "points": 6
+  },
+  {
+   "house": "X",
+   "figure": "Caput Draconis",
+   "pattern": [
+    2,
+    1,
+    1,
+    1
+   ],
+   "points": 5
+  },
+  {
+   "house": "XI",
+   "figure": "Cauda Draconis",
+   "pattern": [
+    1,
+    1,
+    1,
+    2
+   ],
+   "points": 5
+  },
+  {
+   "house": "XII",
+   "figure": "Fortuna Minor",
+   "pattern": [
+    1,
+    1,
+    2,
+    2
+   ],
+   "points": 6
+  },
+  {
+   "house": "XIII",
+   "figure": "Rubeus",
+   "pattern": [
+    2,
+    1,
+    2,
+    2
+   ],
+   "points": 7
+  },
+  {
+   "house": "XIV",
+   "figure": "Albus",
+   "pattern": [
+    2,
+    2,
+    1,
+    2
+   ],
+   "points": 7
+  },
+  {
+   "house": "XV",
+   "figure": "Conjunctio",
+   "pattern": [
+    2,
+    1,
+    1,
+    2
+   ],
+   "points": 6
+  },
+  {
+   "house": "XVI",
+   "figure": "Via",
+   "pattern": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "points": 4
+  }
+ ],
+ "court": {
+  "right_witness": "Rubeus",
+  "left_witness": "Albus",
+  "judge": "Conjunctio",
+  "judge_points": 6,
+  "sentence": "Via",
+  "sentence_rule": "XV + Mother I (al-Zanati: 'from the first and the fifteenth')"
+ },
+ "validity": [
+  {
+   "flag": "OK",
+   "note": "Judge is even in points (6) - arithmetically admissible."
+  },
+  {
+   "flag": "OK",
+   "note": "11 distinct figures among the 16 (a full cast must repeat at least one)."
+  },
+  {
+   "flag": "planetary_gate:UNKNOWN",
+   "note": "no day/hour supplied - the medieval gate cannot be tested. Give the weekday and the planetary hour, computed from that day's sunrise and sunset (elections.planetary_hour), not from the clock"
+  },
+  {
+   "flag": "recast_options",
+   "note": [
+    {
+     "day": "Wednesday",
+     "lord": "Mercury",
+     "hits": 3
+    },
+    {
+     "day": "Monday",
+     "lord": "Moon",
+     "hits": 3
+    },
+    {
+     "day": "Sunday",
+     "lord": "Sun",
+     "hits": 3
+    },
+    {
+     "day": "Thursday",
+     "lord": "Jupiter",
+     "hits": 2
+    },
+    {
+     "day": "Saturday",
+     "lord": "Saturn",
+     "hits": 2
+    },
+    {
+     "day": "Friday",
+     "lord": "Venus",
+     "hits": 2
+    },
+    {
+     "day": "Tuesday",
+     "lord": "Mars",
+     "hits": 1
+    }
+   ]
+  }
+ ],
+ "relations": {
+  "motus": {
+   "Amissio": [
+    2,
+    8
+   ],
+   "Caput Draconis": [
+    3,
+    10
+   ],
+   "Fortuna Minor": [
+    5,
+    12
+   ],
+   "Albus": [
+    6,
+    14
+   ],
+   "Conjunctio": [
+    7,
+    15
+   ]
+  },
+  "parentage": [
+   {
+    "house": "V",
+    "parents": {
+     "kind": "transposition",
+     "note": [
+      "Carcer",
+      "Amissio",
+      "Caput Draconis",
+      "Populus"
+     ]
+    },
+    "tone": "Daughter: row 1 of the four Mothers, read as a figure of its own"
+   },
+   {
+    "house": "VI",
+    "parents": {
+     "kind": "transposition",
+     "note": [
+      "Carcer",
+      "Amissio",
+      "Caput Draconis",
+      "Populus"
+     ]
+    },
+    "tone": "Daughter: row 2 of the four Mothers, read as a figure of its own"
+   },
+   {
+    "house": "VII",
+    "parents": {
+     "kind": "transposition",
+     "note": [
+      "Carcer",
+      "Amissio",
+      "Caput Draconis",
+      "Populus"
+     ]
+    },
+    "tone": "Daughter: row 3 of the four Mothers, read as a figure of its own"
+   },
+   {
+    "house": "VIII",
+    "parents": {
+     "kind": "transposition",
+     "note": [
+      "Carcer",
+      "Amissio",
+      "Caput Draconis",
+      "Populus"
+     ]
+    },
+    "tone": "Daughter: row 4 of the four Mothers, read as a figure of its own"
+   },
+   {
+    "house": "IX",
+    "parents": {
+     "kind": "sum",
+     "from": [
+      "I",
+      "II"
+     ],
+     "figures": [
+      "Carcer",
+      "Amissio"
+     ]
+    },
+    "tone": "evil from two parts"
+   },
+   {
+    "house": "X",
+    "parents": {
+     "kind": "sum",
+     "from": [
+      "III",
+      "IV"
+     ],
+     "figures": [
+      "Caput Draconis",
+      "Populus"
+     ]
+    },
+    "tone": "mixed with a communal parent: takes the side of the question"
+   },
+   {
+    "house": "XI",
+    "parents": {
+     "kind": "sum",
+     "from": [
+      "V",
+      "VI"
+     ],
+     "figures": [
+      "Fortuna Minor",
+      "Albus"
+     ]
+    },
+    "tone": "mixed with a communal parent: takes the side of the question"
+   },
+   {
+    "house": "XII",
+    "parents": {
+     "kind": "sum",
+     "from": [
+      "VII",
+      "VIII"
+     ],
+     "figures": [
+      "Conjunctio",
+      "Amissio"
+     ]
+    },
+    "tone": "mixed with a communal parent: takes the side of the question"
+   },
+   {
+    "house": "XIII",
+    "parents": {
+     "kind": "sum",
+     "from": [
+      "IX",
+      "X"
+     ],
+     "figures": [
+      "Fortuna Major",
+      "Caput Draconis"
+     ]
+    },
+    "tone": "good from two parts"
+   },
+   {
+    "house": "XIV",
+    "parents": {
+     "kind": "sum",
+     "from": [
+      "XI",
+      "XII"
+     ],
+     "figures": [
+      "Cauda Draconis",
+      "Fortuna Minor"
+     ]
+    },
+    "tone": "mixed with a communal parent: takes the side of the question"
+   },
+   {
+    "house": "XV",
+    "parents": {
+     "kind": "sum",
+     "from": [
+      "XIII",
+      "XIV"
+     ],
+     "figures": [
+      "Rubeus",
+      "Albus"
+     ]
+    },
+    "tone": "mixed: judge by the stronger parent for this question"
+   },
+   {
+    "house": "XVI",
+    "parents": {
+     "kind": "sum",
+     "from": [
+      "XV",
+      "I"
+     ],
+     "figures": [
+      "Conjunctio",
+      "Carcer"
+     ]
+    },
+    "tone": "mixed with a communal parent: takes the side of the question"
+   }
+  ],
+  "triplicities": {
+   "golden_dawn": {
+    "t1 self/health/outlook": [
+     "Carcer",
+     "Amissio",
+     "Fortuna Major"
+    ],
+    "t2 present events": [
+     "Caput Draconis",
+     "Populus",
+     "Caput Draconis"
+    ],
+    "t3 home/workplace": [
+     "Fortuna Minor",
+     "Albus",
+     "Cauda Draconis"
+    ],
+    "t4 friends/authority": [
+     "Conjunctio",
+     "Amissio",
+     "Fortuna Minor"
+    ]
+   },
+   "calatarama_routing": {
+    "latin": "Uxor",
+    "english": "marriage, partner, the quesited, open enemies, contracts",
+    "cal": {
+     "aspect": "Marriages, Lust, Love, Sharecropping, Foreign land, Absent, Pasture, Departing governor, Enemies, War, Thieves"
+    },
+    "extra_houses": [
+     5
+    ],
+    "triplicities": [
+     [
+      7,
+      8,
+      12
+     ]
+    ]
+   }
+  },
+  "perfection": {
+   "houses": [
+    1,
+    7
+   ],
+   "degenerate": false,
+   "mode": "Translation",
+   "verdict": "YES, but only through outside help (by Amissio) - and the helper is ill-dignified, so expect an unpleasant passage",
+   "base_rate_pct": 18.803,
+   "news_value": "ordinary"
+  }
+ },
+ "trace": {
+  "via_puncti": {
+   "path": [
+    {
+     "house": 15,
+     "figure": "Conjunctio"
+    },
+    {
+     "house": 13,
+     "figure": "Rubeus"
+    },
+    {
+     "house": 9,
+     "figure": "Fortuna Major"
+    }
+   ],
+   "branches": [
+    "Albus",
+    "Caput Draconis",
+    "Populus"
+   ],
+   "branch_count": 4,
+   "endpoints": [
+    {
+     "house": 9,
+     "figure": "Fortuna Major",
+     "kind": "died"
+    },
+    {
+     "house": 3,
+     "figure": "Caput Draconis",
+     "kind": "root"
+    },
+    {
+     "house": 4,
+     "figure": "Populus",
+     "kind": "root"
+    },
+    {
+     "house": 14,
+     "figure": "Albus",
+     "kind": "died"
+    }
+   ],
+   "formed": true,
+   "rule": "follow the Judge's head line upward to the parent that matches"
+  },
+  "projection_of_points": {
+   "single_dots": 24,
+   "house": "XII",
+   "figure": "Fortuna Minor"
+  },
+  "part_of_fortune": {
+   "total_points": 72,
+   "house": "XII",
+   "figure": "Fortuna Minor"
+  }
+ },
+ "specifics": {
+  "constitution": {
+   "tally": {
+    "cold": 4,
+    "dry": 5,
+    "hot": 1
+   },
+   "excess": "dry",
+   "remedy_reads_as": "what moistens (negotiation, softening, a letter)"
+  },
+  "who": {
+   "you (querent)": {
+    "figure": "Carcer",
+    "age": "Old age",
+    "build": "Short body and slim face and yellow, round. Separated teeth, large head, short arms.",
+    "trade_or_disposition": "Imprisoned things, the ill, imprisoned, … of the body. Slaves, low men, … fruits",
+    "peoples": "Berberia",
+    "science": "Secrets",
+    "element/planet (GD table)": "Earth/Saturn"
+   },
+   "the person/thing asked about": {
+    "figure": "Conjunctio",
+    "age": null,
+    "build": null,
+    "trade_or_disposition": null,
+    "peoples": null,
+    "science": null,
+    "element/planet (GD table)": "Air/Mercury",
+    "_gap": "no Calatarama f.7v-9 entry extracted for this figure (age, build, trade_or_disposition) - fill from thesis Table 4 columns, do not invent"
+   },
+   "helper or friend": {
+    "figure": "Cauda Draconis",
+    "age": null,
+    "build": null,
+    "trade_or_disposition": null,
+    "peoples": null,
+    "science": null,
+    "element/planet (GD table)": "Fire/South Node",
+    "_gap": "no Calatarama f.7v-9 entry extracted for this figure (age, build, trade_or_disposition) - fill from thesis Table 4 columns, do not invent"
+   },
+   "opponent or hidden obstacle": {
+    "figure": "Fortuna Minor",
+    "age": null,
+    "build": null,
+    "trade_or_disposition": null,
+    "peoples": null,
+    "science": null,
+    "element/planet (GD table)": "Fire/Sun",
+    "_gap": "no Calatarama f.7v-9 entry extracted for this figure (age, build, trade_or_disposition) - fill from thesis Table 4 columns, do not invent"
+   },
+   "partner": {
+    "figure": "Conjunctio",
+    "age": null,
+    "build": null,
+    "trade_or_disposition": null,
+    "peoples": null,
+    "science": null,
+    "element/planet (GD table)": "Air/Mercury",
+    "_gap": "no Calatarama f.7v-9 entry extracted for this figure (age, build, trade_or_disposition) - fill from thesis Table 4 columns, do not invent"
+   }
+  },
+  "where": {
+   "figure": "Conjunctio",
+   "place": null,
+   "direction": null,
+   "colour": null,
+   "metal": null,
+   "number": null
+  },
+  "when": {
+   "figure_in_question_house": "Conjunctio",
+   "unit": "hours",
+   "count_A_digitsum_of_all_points": "72 -> 9",
+   "count_B_points_of_that_figure": "6",
+   "pace": "short",
+   "note": "unit and count are read together: e.g. count 12 + unit 'days' = twelve days"
+  }
+ },
+ "cross_read": {
+  "house 1": {
+   "figure": "Carcer",
+   "arabic": "al-'Uqla",
+   "arabic_gloss": "the Shackles",
+   "ifa_odu_attested": "Odi"
+  },
+  "house 2": {
+   "figure": "Amissio",
+   "arabic": "Qabd al-kharij",
+   "arabic_gloss": "Grasping without",
+   "ifa_odu_attested": "Ose"
+  },
+  "house 3": {
+   "figure": "Caput Draconis",
+   "arabic": "'Atabat al-dakhil",
+   "arabic_gloss": "Threshold of entering",
+   "ifa_odu_attested": "Ika"
+  },
+  "house 4": {
+   "figure": "Populus",
+   "arabic": "Jama'at",
+   "arabic_gloss": "the Group",
+   "ifa_odu_attested": "Oyeku"
+  },
+  "house 5": {
+   "figure": "Fortuna Minor",
+   "arabic": "Nusrah al-kharij",
+   "arabic_gloss": "Outer victory",
+   "ifa_odu_attested": "Irosun"
+  },
+  "house 6": {
+   "figure": "Albus",
+   "arabic": "al-Bayad",
+   "arabic_gloss": "the White",
+   "ifa_odu_attested": "Oturupon"
+  },
+  "house 7": {
+   "figure": "Conjunctio",
+   "arabic": "Ijtima'",
+   "arabic_gloss": "Meeting",
+   "ifa_odu_attested": "Iwori"
+  },
+  "house 8": {
+   "figure": "Amissio",
+   "arabic": "Qabd al-kharij",
+   "arabic_gloss": "Grasping without",
+   "ifa_odu_attested": "Ose"
+  },
+  "house 9": {
+   "figure": "Fortuna Major",
+   "arabic": "Nusrah al-dakhil",
+   "arabic_gloss": "Inner victory",
+   "ifa_odu_attested": "Owonrin"
+  },
+  "house 10": {
+   "figure": "Caput Draconis",
+   "arabic": "'Atabat al-dakhil",
+   "arabic_gloss": "Threshold of entering",
+   "ifa_odu_attested": "Ika"
+  },
+  "house 11": {
+   "figure": "Cauda Draconis",
+   "arabic": "'Atabat al-kharij",
+   "arabic_gloss": "Threshold of going out",
+   "ifa_odu_attested": "Ogunda"
+  },
+  "house 12": {
+   "figure": "Fortuna Minor",
+   "arabic": "Nusrah al-kharij",
+   "arabic_gloss": "Outer victory",
+   "ifa_odu_attested": "Irosun"
+  },
+  "house 13": {
+   "figure": "Rubeus",
+   "arabic": "al-Humra",
+   "arabic_gloss": "the Red",
+   "ifa_odu_attested": "Osa"
+  },
+  "house 14": {
+   "figure": "Albus",
+   "arabic": "al-Bayad",
+   "arabic_gloss": "the White",
+   "ifa_odu_attested": "Oturupon"
+  },
+  "house 15": {
+   "figure": "Conjunctio",
+   "arabic": "Ijtima'",
+   "arabic_gloss": "Meeting",
+   "ifa_odu_attested": "Iwori"
+  },
+  "house 16": {
+   "figure": "Via",
+   "arabic": "al-Tariq",
+   "arabic_gloss": "the Way",
+   "ifa_odu_attested": "Ogbe"
+  }
+ },
+ "provenance_keys": [
+  "Via",
+  "Populus",
+  "Albus",
+  "Conjunctio",
+  "Carcer",
+  "Fortuna Major",
+  "Fortuna Minor",
+  "Acquisitio",
+  "Amissio",
+  "Laetitia",
+  "Tristitia",
+  "Puer",
+  "Puella",
+  "Rubeus",
+  "Caput Draconis",
+  "Cauda Draconis"
+ ],
+ "flags": [
+  "labels marked with * (Puer/Puella) are contested between traditions"
+ ],
+ "sub_questions": {
+  "who_dies_first": {
+   "rule": "for a woman ask of I, for a man of VII: if in I there is an ENTERING figure and in II a good one, and VII is EXITING, it presages the man dies first; if in VII the figure is entering and conforming, the contrary",
+   "leaf": 490,
+   "call": "Carcer in I: bad and entering - the harm arrives and stays",
+   "consult": [
+    {
+     "house": "I",
+     "figure": "Carcer",
+     "quality": "bad",
+     "motion": "incoming",
+     "element": "terra",
+     "gender": "feminine",
+     "domicile": "angle"
+    },
+    {
+     "house": "II",
+     "figure": "Amissio",
+     "quality": "bad",
+     "motion": "outgoing",
+     "element": "ignis",
+     "gender": "feminine",
+     "domicile": "succedent"
+    },
+    {
+     "house": "VII",
+     "figure": "Conjunctio",
+     "quality": "communal",
+     "motion": "incoming",
+     "element": "aer",
+     "gender": "feminine",
+     "domicile": "angle"
+    }
+   ],
+   "angles": {
+    "good_angles": [
+     "X"
+    ],
+    "bad_angles": [
+     "I"
+    ],
+    "score": "1/4",
+    "verdict": "partial consent",
+    "source": "Alfagini, leaf 463-465 ('maxime consentientibus angulis')"
+   },
+   "between": {
+    "figure": null,
+    "verdict": "no translation between the two - they do not speak to each other",
+    "source": "Alfagini leaf 606"
+   }
+  },
+  "love_durability": {
+   "rule": "figures that are firm and FIXED in VII signify fixed love; MOBILE ones inconstant; BICORPOREAL ones mediocre; the same is indicated if fixed figures sit in the angles or mobile ones in the cadents",
+   "leaf": 480,
+   "call": "Conjunctio in VII: communal - takes the side of the question, so read the neighbours; but the figure is communal, so the house is an angle, so it upholds the matter",
+   "consult": [
+    {
+     "house": "VII",
+     "figure": "Conjunctio",
+     "quality": "communal",
+     "motion": "incoming",
+     "element": "aer",
+     "gender": "feminine",
+     "domicile": "angle"
+    }
+   ],
+   "angles": {
+    "good_angles": [
+     "X"
+    ],
+    "bad_angles": [
+     "I"
+    ],
+    "score": "1/4",
+    "verdict": "partial consent",
+    "source": "Alfagini, leaf 463-465 ('maxime consentientibus angulis')"
+   },
+   "tiebreak": {
+    "why": "Conjunctio is communal - by la Taille, 'preferez le jugement selon les qualitez des maisons'",
+    "house_seat": "angle",
+    "settles_as": "the house is an angle, so it upholds the matter",
+    "source": "kb/techniques.yaml house_quality_tiebreak (Jean de la Taille, La Geomancie)"
+   }
+  },
+  "obtain_the_beloved": {
+   "rule": "if I and VII are good, fortunate, entering and conforming, a good obtaining of what is wished; if I passes into VIII or VI the matter is prolonged and will be sought with solicitude; if into II, she will come to him",
+   "leaf": 480,
+   "call": "Carcer in I: bad and entering - the harm arrives and stays",
+   "consult": [
+    {
+     "house": "I",
+     "figure": "Carcer",
+     "quality": "bad",
+     "motion": "incoming",
+     "element": "terra",
+     "gender": "feminine",
+     "domicile": "angle"
+    },
+    {
+     "house": "VII",
+     "figure": "Conjunctio",
+     "quality": "communal",
+     "motion": "incoming",
+     "element": "aer",
+     "gender": "feminine",
+     "domicile": "angle"
+    },
+    {
+     "house": "VIII",
+     "figure": "Amissio",
+     "quality": "bad",
+     "motion": "outgoing",
+     "element": "ignis",
+     "gender": "feminine",
+     "domicile": "succedent"
+    },
+    {
+     "house": "VI",
+     "figure": "Albus",
+     "quality": "good",
+     "motion": "incoming",
+     "element": "aqua",
+     "gender": "masculine",
+     "domicile": "cadent"
+    },
+    {
+     "house": "II",
+     "figure": "Amissio",
+     "quality": "bad",
+     "motion": "outgoing",
+     "element": "ignis",
+     "gender": "feminine",
+     "domicile": "succedent"
+    }
+   ],
+   "angles": {
+    "good_angles": [
+     "X"
+    ],
+    "bad_angles": [
+     "I"
+    ],
+    "score": "1/4",
+    "verdict": "partial consent",
+    "source": "Alfagini, leaf 463-465 ('maxime consentientibus angulis')"
+   },
+   "between": {
+    "figure": "Amissio",
+    "from_house": "II",
+    "to_house": "VIII",
+    "verdict": "TRANSLATION between the two significators - the matter is carried, so the answer comes through a third party or a change of place",
+    "source": "Alfagini leaf 606 ('si signum ... translationem fecerit'); Calatarama f.11v (judge by the second coming)"
+   }
+  }
+ },
+ "gaps": [
+  "where.colour: not in the extracted source table",
+  "where.direction: not in the extracted source table",
+  "where.metal: not in the extracted source table",
+  "where.number: not in the extracted source table",
+  "where.place: not in the extracted source table",
+  "who.age: not in the extracted source table",
+  "who.build: not in the extracted source table",
+  "who.peoples: not in the extracted source table",
+  "who.science: not in the extracted source table",
+  "who.trade_or_disposition: not in the extracted source table"
+ ],
+ "verdict": {
+  "does_it_perfect": "qualified",
+  "mode": "Translation",
+  "base_rate_pct": 18.803,
+  "news_value": "ordinary",
+  "judge": "Conjunctio",
+  "sentence": "Via",
+  "blockers": [],
+  "planetary_gate": "UNKNOWN",
+  "headline": "YES, but only through outside help (by Amissio) - and the helper is ill-dignified, so expect an unpleasant passage",
+  "trace_heads": 4
+ }
+}

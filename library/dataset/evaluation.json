@@ -1,0 +1,22 @@
+{
+ "casts_tested": 65536,
+ "exhaustive": true,
+ "agreement": {
+  "chart": 65536,
+  "sentence": 65536,
+  "via_puncti": 65536,
+  "projection": 65536,
+  "part_of_fortune": 65536,
+  "motus": 65536,
+  "judge_parity": 65536
+ },
+ "mismatches": 0,
+ "passages": 1098,
+ "passages_with_locator": 1098,
+ "rules": 23,
+ "high_techniques": 19,
+ "high_with_test_case": 19,
+ "unregistered_works": [],
+ "generated_by": "engine/evaluate.py",
+ "seed": null
+}
