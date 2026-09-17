@@ -3,7 +3,68 @@
   "source": "Libro de los juysios de calatarama, universal chapter tables, as translated in Appendix 1 of A.J.C. Finan, 'The Book of the Judgements of Calatarama' (Univ. of Toronto, 2023)",
   "why": "a figure x house ruling grid from the 13th-15th c. Arabic-derived tradition; typed translation, no OCR loss",
   "usage": "quote with the folio; it is a translation of one manuscript, not a universal rule",
-  "coverage": "142 figure-house rulings across 10 houses",
+  "coverage": {
+   "houses_tabulated": [
+    "I",
+    "II",
+    "III",
+    "IV",
+    "V",
+    "VI",
+    "VII",
+    "IX",
+    "XI",
+    "XII"
+   ],
+   "houses_absent": [
+    "VIII",
+    "X"
+   ],
+   "cells_present": 142,
+   "cells_possible": 192,
+   "gaps": {
+    "II": [
+     "Carcer"
+    ],
+    "III": [
+     "Carcer"
+    ],
+    "IV": [
+     "Carcer"
+    ],
+    "V": [
+     "Carcer",
+     "Conjunctio"
+    ],
+    "VI": [
+     "Carcer"
+    ],
+    "VII": [
+     "Carcer"
+    ],
+    "IX": [
+     "Carcer"
+    ],
+    "XI": [
+     "Carcer",
+     "Tristitia"
+    ],
+    "XII": [
+     "Carcer",
+     "Populus"
+    ],
+    "I": [
+     "Carcer",
+     "Fortuna Major",
+     "Fortuna Minor",
+     "Puer",
+     "Tristitia",
+     "Via"
+    ]
+   },
+   "reading_of_the_pattern": "the absences are scattered across figures (no single figure is missing everywhere), so this is not a systematic exclusion of one figure - it is a mix of (a) folios whose table our extraction did not reach and (b) genuine lacunae in the manuscript tables. VIII and X, absent whole, are the first targets: re-read the Appendix-1 pages for those two houses in Finan 2023 before concluding the source lacks them.",
+   "next_action": "scripts/extract_calatarama_grid.py --houses VIII,X then diff; expect +32 cells or a recorded lacuna"
+  },
   "missing_houses": "VIII and X have no such table in this manuscript (the thesis marks them N/A)"
  },
  "grid": {
@@ -30,11 +91,11 @@
   "III": {
    "folio": "29v",
    "entries": {
-    "Acquisitio": "Love and status with one\u2019s parents",
+    "Acquisitio": "Love and status with one’s parents",
     "Rubeus": "Enmity with parents, and quick to injure. Gift of something vermilion from a certain relative. The heart and the mouth not equal",
-    "Amissio": "Conflict with one\u2019s parents",
+    "Amissio": "Conflict with one’s parents",
     "Albus": "Loving parents and wisemen and fulfilling his desire. Writings that come from away, the messenger healthy and happy",
-    "Fortuna Major": "Greatness with great knowledge and joy with one\u2019s parents and faithfully loved",
+    "Fortuna Major": "Greatness with great knowledge and joy with one’s parents and faithfully loved",
     "Caput Draconis": "Honour between his parents and concerning a friend who is coming",
     "Fortuna Minor": "Loving wisemen and parents with fielty",
     "Cauda Draconis": "Conflict with friends and separation from a friend because the mouth and the hear",
@@ -44,7 +105,7 @@
     "Puer": "Love, success with friends and relatives, health. Beloved with whom he cannot join",
     "Populus": "Companionship with a friend on a journey or in a city and messages passed through the community",
     "Puella": "Union of friends with profit and success in merchandise",
-    "Via": "Achieving one\u2019s will in moving with fear"
+    "Via": "Achieving one’s will in moving with fear"
    }
   },
   "IV": {
@@ -52,16 +113,16 @@
    "entries": {
     "Acquisitio": "Success with inheritances and with agreements with his father and it is good to buy inheritance",
     "Rubeus": "It shows inheritance of pasture; bleeding; fire; riot and grave illness",
-    "Amissio": "Loss of inheritance. And death and the loss of his father\u2019s possessions",
+    "Amissio": "Loss of inheritance. And death and the loss of his father’s possessions",
     "Albus": "Success in inheritances; joy of parents and sending etc",
     "Fortuna Major": "Multitude of inheritances and heritage and health of lineage",
     "Caput Draconis": "Multitude of inheritances with great profit and return of a messenger. The health of one who is ill. Forge house",
-    "Fortuna Minor": "Achieving inheritance and honour with one\u2019s parents and the health of one who is ill",
+    "Fortuna Minor": "Achieving inheritance and honour with one’s parents and the health of one who is ill",
     "Cauda Draconis": "Loss of inheritances and destruction of houses and inheritances and they will not return",
     "Laetitia": "Profit from inheritance and finding treasure and success and inheritance",
     "Tristitia": "Transfer of inheritance of a father and conflict with bad men",
     "Populus": "Settling of a town for the purchasing of inheritance or for making it",
-    "Puer": "Success with one\u2019s father and mother. A sometimes conflict and being healthy and good",
+    "Puer": "Success with one’s father and mother. A sometimes conflict and being healthy and good",
     "Conjunctio": "Finding treasure by the road. Of science and joining with his parents",
     "Puella": "Small inheritances and a man to wants to betray him",
     "Via": "Loss of inheritances"
@@ -100,7 +161,7 @@
     "Laetitia": "Health of a sick person and sometimes sickening of thoughts and it shows purchases of servants",
     "Conjunctio": "It shows danger of the death of a bad man and everything according to I and VIII",
     "Tristitia": "It shows sickness and badly broken and sighing",
-    "Puer": "Women\u2019s illnesses and anxieties and thoughts and it also shows illness of slaves and beasts",
+    "Puer": "Women’s illnesses and anxieties and thoughts and it also shows illness of slaves and beasts",
     "Populus": "Illness and those bound near a sick man and in the end it will be good",
     "Puella": "If bad figures are in the I House it shows death and sometimes physical and the return of an illness",
     "Via": "Shows the health of one who is sick"
@@ -132,7 +193,7 @@
     "Acquisitio": "Success in moving and he will return with profit and healthy and in the moving it at times shows fear Profit with his lord and gift from a man and much earning",
     "Rubeus": "Thieves and sins and difficulty for the messenger and danger for the traveler Abhorrence of great men and every man and a suspicious judge and bad lordship",
     "Amissio": "Moving without success and damage in the merchandise and danger Little honour and loss of earning and error of deals and of the king",
-    "Albus": "Excessive knowing and a watery path and return of a messenger and in the hand \u2026705 or a white thing Achieving a demand from an honoured man and fulfilment of a promise from a white house of a great man. 268",
+    "Albus": "Excessive knowing and a watery path and return of a messenger and in the hand …705 or a white thing Achieving a demand from an honoured man and fulfilment of a promise from a white house of a great man. 268",
     "Fortuna Minor": "Science and knowing and profit with the those far away and good trades and he who journeys will return Rising in rank up to the end and the honour of the king and conquest in judgement",
     "Caput Draconis": "The traveler returns quickly and response from he who is not there. 705 Text is unclear here. 267 Status with honour and achievement of a desire of all businesses of power",
     "Fortuna Major": "Science and fear of God and profit on a journey and gift from the messenger Great with the lords of the land and health of kings",
@@ -150,7 +211,7 @@
    "folio": "59",
    "entries": {
     "Acquisitio": "A good sign and good friends and good hope",
-    "Rubeus": "A bad accident with one\u2019s friends and loved ones and it is good to bleed and little hope",
+    "Rubeus": "A bad accident with one’s friends and loved ones and it is good to bleed and little hope",
     "Amissio": "Loss of a friend and a bad sign in any commerce and false hope",
     "Albus": "Success on the part of his friends and on the part of good men and good hope. 269",
     "Fortuna Major": "Good joining of a woman and friends and greatness on the part of a lord and strong hope",

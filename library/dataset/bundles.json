@@ -15,11 +15,11 @@
     },
     {
      "path": "library/dataset/index/by_figure.jsonl",
-     "bytes": 24460,
-     "sha256": "242742c5f46dabca"
+     "bytes": 25012,
+     "sha256": "5a154f4e78925804"
     }
    ],
-   "bytes": 76242
+   "bytes": 76794
   },
   "reading": {
    "files": [
@@ -38,13 +38,13 @@
     },
     {
      "path": "library/dataset/index/by_figure.jsonl",
-     "bytes": 24460,
-     "sha256": "242742c5f46dabca"
+     "bytes": 25012,
+     "sha256": "5a154f4e78925804"
     },
     {
      "path": "library/dataset/index/by_house.jsonl",
-     "bytes": 35820,
-     "sha256": "7951fafa7b2c7e09"
+     "bytes": 36754,
+     "sha256": "5e53b8546509c466"
     },
     {
      "path": "library/dataset/shards/rules.jsonl",
@@ -62,7 +62,7 @@
      "sha256": "4e98c31d5cb446c2"
     }
    ],
-   "bytes": 160197
+   "bytes": 161683
   },
   "verdict": {
    "files": [
@@ -72,8 +72,8 @@
    "resolved": [
     {
      "path": "library/dataset/index/by_house.jsonl",
-     "bytes": 35820,
-     "sha256": "7951fafa7b2c7e09"
+     "bytes": 36754,
+     "sha256": "5e53b8546509c466"
     },
     {
      "path": "library/dataset/shards/passages.jsonl",
@@ -81,7 +81,7 @@
      "sha256": "b492d6e459ce7325"
     }
    ],
-   "bytes": 360935
+   "bytes": 361869
   },
   "topics": {
    "files": [
@@ -136,7 +136,7 @@
     {
      "path": "library/dataset/manifest.json",
      "bytes": 2646,
-     "sha256": "19a466629fde1ec8"
+     "sha256": "dfad1fd8d08a1ce5"
     }
    ],
    "bytes": 350527

@@ -90,6 +90,7 @@ def build():
         else:
             r["house_n"] = None
 
+    fig_names = list(figs)
     by_figure = {}
     for name, meta in figs.items():
         ruling = {h: grid[h]["entries"].get(name) for h in grid if name in (grid[h].get("entries") or {})}
@@ -101,7 +102,8 @@ def build():
             "quality": (meta or {}).get("quality"), "motion": (meta or {}).get("motion"),
             "gender": (meta or {}).get("gender"), "time_unit": (meta or {}).get("time_unit"),
             "attainable_as_judge": name in judges, "judge_casts": judges.get(name),
-            "house_rulings": ruling, "passages": pats[:60],
+            "house_rulings": ruling, "missing_house_rulings": sorted(set(grid) - set(ruling)),
+            "passages": pats[:60],
             "rules": sorted({r["id"] for r in rules if name.lower() in json.dumps(r, ensure_ascii=False).lower()}),
         }
     by_house = {}
@@ -118,6 +120,9 @@ def build():
             "outcomes": sorted(t for t, v in routing.items() if str(v) == str(h)),
             "passages": [r["id"] for r in passages if r.get("house_n") == int(h)][:60],
             "perfection_base_rates": pp.get(f"question_in_house_{roman}", {}),
+            # a blank in the source is information: name it, so the app renders "the source does not
+            # say" rather than silently showing a shorter list than it should
+            "missing_figure_rulings": sorted(set(fig_names) - set(entries)),
         }
     by_outcome = []
     for topic, h in routing.items():
@@ -262,7 +267,14 @@ def coverage():
     named_only = [k for k, v in tech.items() if isinstance(v, dict) and str(v.get("status", "")).upper() == "NAMED_ONLY"]
     cases = _yaml(ROOT / "kb" / "rule_tests.yaml").get("cases", []) if (ROOT / "kb" / "rule_tests.yaml").exists() else []
     tested = {c.get("rule") for c in cases}
+    holes = {}
+    for r in _jsonl(IDX / "by_house.jsonl"):
+        holes[r["house"]] = len(r.get("missing_figure_rulings") or [])
     return {"techniques": len(tech), "implemented": len(implemented), "named_only": named_only,
+            "source_table_holes": {"houses_missing_figure_rulings": holes,
+                                   "total_missing_cells": sum(holes.values()),
+                                   "meaning": "the extracted ruling grid has no entry here; the app "
+                                              "must render an explicit blank, never a guess"},
             "with_executable_case": sorted(tested), "passages": len(_jsonl(DS / "shards" / "passages.jsonl")),
             "outcomes": len(outcomes())}
 

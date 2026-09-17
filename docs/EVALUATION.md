@@ -71,6 +71,9 @@ against 321 here. Decision: keep this tree as source of truth, adopt its two goo
 ## What this does not prove
 
 * Arithmetic and rule-shape are verified; **interpretive fidelity** is bounded by the extracts.
+* **Coverage of the grids is incomplete and now measurable:** `kb/calatarama_grid.json` holds 142 of
+  192 possible figure×house cells; houses VIII and X have no table in our extraction. The dataset
+  ships `missing_figure_rulings` per house so an app cannot present a partial table as a complete one.
 * Transcription is still the weak seam. The 142 Calatarama figure×house rulings and the 859 Hartmann
   answer cells are transcriptions, and a wrong cell is invisible to both instruments above.
   **Partly closed today:** `library/tools/check_hartmann_grid.py` measures the grid against its real

@@ -40,7 +40,7 @@
  "build_warnings": [],
  "built_from": {
   "alfagini_quaestiones.json": "861c01e4c14f9fea",
-  "calatarama_grid.json": "d3b6055ee5854c30",
+  "calatarama_grid.json": "fa2362d0456a65cd",
   "calibration.json": "bd9088137fe665f4",
   "cattan1591_dangers.json": "bef80393320d97c6",
   "cattan_motus_bank.json": "85e1a8f62d185c98",
@@ -56,8 +56,8 @@
  },
  "files": {
   "evaluation.json": "50d0498063fddb1a",
-  "index/by_figure.jsonl": "242742c5f46dabca",
-  "index/by_house.jsonl": "7951fafa7b2c7e09",
+  "index/by_figure.jsonl": "5a154f4e78925804",
+  "index/by_house.jsonl": "5e53b8546509c466",
   "index/by_outcome.jsonl": "7a5ffb8278bc70c1",
   "index/by_work.jsonl": "796edf326049ec32",
   "openapi.yaml": "e3c48130040e80a1",

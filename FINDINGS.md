@@ -335,3 +335,16 @@ even-pointed figures ever appear as judge). Two consequences:
   `kb/hartmann_casebook.json` `_meta.next_extraction` names the biggest holes to OCR first.
   The blocker is identified, not vague: IA's text layer for `b24884145` ends before the appendix
   (173 KB, 2 mentions of Carcer), so only page-level OCR of the scans can finish it.
+
+## 21. What the Calatarama grid does *not* contain (measured, not assumed)
+
+`kb/calatarama_grid.json` carries **142 of a possible 192** figure×house cells (10 of 12 houses).
+`_meta.coverage` now states it per house: **VIII and X have no table at all** in our extraction, house I
+is thin (10/16), and the remaining houses miss one or two figures each. The absences are scattered
+across figures rather than concentrated on one - so this is not a doctrine that excludes a figure, it
+is an extraction boundary, and the honest move is to say so in the data: `engine/retrieve.py --build`
+writes `missing_figure_rulings` into every house row and `missing_house_rulings` into every figure
+row, so an app renders "the 13th-c. table does not speak to this" instead of a shorter list. Filling
+VIII and X is a bounded job: re-read those two Appendix-1 tables in Finan (2023), and if the folios
+truly skip them, record the lacuna in the same field so the claim survives the silence.
+

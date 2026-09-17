@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.2.1 - 2026-09-17
+
+* `library/tools/verify_release.py`: downloads a release's `SHA256SUMS.txt` and every asset, checks
+  the digests, and confirms the tarball's `manifest.json` matches a local `make build` - so
+  "content-addressed" is provable from the network, not a claim. Run against v0.2.0: 5/5 assets ok,
+  21/21 manifest digests match.
+* Gap accounting made machine-visible: `index/by_house.jsonl` carries `missing_figure_rulings` and
+  `by_figure.jsonl` carries `missing_house_rulings`; `retrieve.coverage()` reports them. Measured state
+  of the Calatarama grid: **142/192 cells, houses VIII and X absent from our extraction** - recorded in
+  `kb/calatarama_grid.json` `_meta.coverage` with the re-extraction target, and FINDINGS s.21.
+* Docs: release assets are the recommended consumption path for apps; `SETUP.md` covers a fresh clone.
+
 ## 0.2.0 - 2026-09-17
 
 * Added `registry/works.jsonl` (23 works: identifier, licence bucket, disposition, host-trust
