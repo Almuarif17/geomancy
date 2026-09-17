@@ -30,6 +30,12 @@
   in both directions; `types/geomancy.d.ts` is now 38 interfaces.
 - Docs numbers extended: `coverage_score`, `licence_layers`, `mcp_tools` are markers, so the README's claims
   are build outputs.
+- `manifest.json` - the file an app actually reads - now carries `licence_summary.outbound_licence` with the
+  three layers and their paths, and `library/schema/manifest.json` **requires** it, so a build that publishes
+  data without stating its terms fails the schema gate. `LICENSE_POLICY.md`'s advice to licence derived
+  output "CC BY 4.0", `UPSTREAM.md`'s archive.org guidance and `docs/IP_STRATEGY.md`'s "if you say go"
+  paragraph were all corrected to match what shipped; three stale licence sentences in three files is exactly
+  how a split like this becomes folklore again.
 
 ### Fixed
 - **A chart bug in our own reader.** `engine/ground.py`'s CLI and `library/tools/check_grounding.py` passed all

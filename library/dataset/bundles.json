@@ -135,11 +135,11 @@
     },
     {
      "path": "library/dataset/manifest.json",
-     "bytes": 2855,
-     "sha256": "bef0ad688bae1fc7"
+     "bytes": 3957,
+     "sha256": "f45f407519b1840a"
     }
    ],
-   "bytes": 358409
+   "bytes": 359511
   }
  }
 }

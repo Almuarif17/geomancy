@@ -36,4 +36,4 @@ paths:
 components:
   schemas:
     Reading:
-      description: generated from library/schema/reading.json (38 interfaces in types/geomancy.d.ts)
+      description: generated from library/schema/reading.json (42 interfaces in types/geomancy.d.ts)

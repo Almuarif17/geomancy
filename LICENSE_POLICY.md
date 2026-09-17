@@ -54,6 +54,8 @@ held by lineage and, for much of it, restricted to the initiated. So:
 - `manifest.json` publishes `full_text_sources`, `cite_only_sources`, `never_used` — auditable in one file.
 - Keep the raw OCR strings, not "improved" prose. Silently tidied quotations become misquotations.
 - Store a `sha256` per file: if a source changes upstream, you know which passages to re-verify.
-- Licence your own output as **CC BY 4.0** (your extracts, notes, tables, rules) and your code as
-  **MIT/Apache-2.0**. That gives others permission to fix your errors, which is the only way a corpus of
-  this kind survives, and costs you nothing.
+- Licence output in layers, the way this repo does (see `LICENSING.md`): your *code* MIT, your *definitions and
+  derived arithmetic* CC0, your *curated text* (translations, tables of rulings, glosses) CC BY-NC 4.0 with a
+  commercial licence available. CC BY 4.0 over the curated text is what 0.2.3 and earlier shipped, and it
+  handed the only saleable layer away. Attribution and the freedom to fix our errors are preserved by all
+  three: every layer requires credit, and the CC0 and MIT layers permit any use whatsoever.

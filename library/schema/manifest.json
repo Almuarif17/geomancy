@@ -1,26 +1,112 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Manifest",
-  "description": "What a build contains, how it was licensed, and every file's hash.",
-  "type": "object",
-  "required": ["dataset", "generated", "counts", "licence_summary", "files"],
-  "properties": {
-    "dataset": {"type": "string"},
-    "version": {"type": "string"},
-    "generated": {"type": "string"},
-    "counts": {"type": "object", "required": ["passages", "rules"]},
-    "fts5": {"type": "boolean"},
-    "licence_summary": {
-      "type": "object",
-      "required": ["full_text_sources", "cite_only_sources"],
-      "properties": {
-        "full_text_sources": {"type": "array", "items": {"type": "string"}},
-        "cite_only_sources": {"type": "array", "items": {"type": "string"}},
-        "never_used": {"type": "array", "items": {"type": "string"}}
-      }
-    },
-    "build_warnings": {"type": "array"},
-    "files": {"type": "object"}
+ "$schema": "http://json-schema.org/draft-07/schema#",
+ "title": "Manifest",
+ "description": "What a build contains, how it was licensed, and every file's hash.",
+ "type": "object",
+ "required": [
+  "dataset",
+  "generated",
+  "counts",
+  "licence_summary",
+  "files"
+ ],
+ "properties": {
+  "dataset": {
+   "type": "string"
   },
-  "additionalProperties": true
+  "version": {
+   "type": "string"
+  },
+  "generated": {
+   "type": "string"
+  },
+  "counts": {
+   "type": "object",
+   "required": [
+    "passages",
+    "rules"
+   ]
+  },
+  "fts5": {
+   "type": "boolean"
+  },
+  "licence_summary": {
+   "type": "object",
+   "required": [
+    "cite_only_sources",
+    "full_text_sources",
+    "outbound_licence"
+   ],
+   "properties": {
+    "full_text_sources": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "cite_only_sources": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "never_used": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "outbound_licence": {
+     "type": "object",
+     "required": [
+      "code",
+      "cc0",
+      "curated",
+      "layers"
+     ],
+     "properties": {
+      "layers": {
+       "const": 3
+      },
+      "code": {
+       "type": "object",
+       "required": [
+        "licence",
+        "paths"
+       ]
+      },
+      "cc0": {
+       "type": "object",
+       "required": [
+        "licence",
+        "paths"
+       ]
+      },
+      "curated": {
+       "type": "object",
+       "required": [
+        "licence",
+        "paths",
+        "note"
+       ]
+      },
+      "terms_files": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       }
+      }
+     },
+     "description": "what a consumer may do with the shipped artefacts, as opposed to what may enter them; declared here so an app never has to parse prose to know whether it may ship our text"
+    }
+   }
+  },
+  "build_warnings": {
+   "type": "array"
+  },
+  "files": {
+   "type": "object"
+  }
+ },
+ "additionalProperties": true
 }

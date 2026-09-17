@@ -219,6 +219,27 @@ def main():
         "cite_only_sources": sorted(CITE_ONLY),
         "never_used": sorted(BLOCKED_UPLOADS),
         "policy": "full text only from public-domain or openly licensed works; everything else is a citation",
+        # the policy above is what may come IN; this is what goes OUT. They are different questions and the
+        # manifest used to answer only the first, which left an app to guess - and a guess made the curated
+        # layer look as free as the code. Three layers, enforced by library/tools/check_licence_scope.py.
+        "outbound_licence": {
+            "layers": 3,
+            "code": {"licence": "MIT", "paths": ["engine/", "library/tools/", "scripts/", "server/",
+                                                 "library/schema/", "types/", "registry/", "tools/",
+                                                 "library/dataset/openapi.yaml"]},
+            "cc0": {"licence": "CC0-1.0", "paths": ["library/dataset/core_facts.json"],
+                    "note": "definitions plus the consequences of the arithmetic; free forever, "
+                            "including commercially"},
+            "curated": {"licence": "CC BY-NC 4.0 + commercial licence",
+                        "paths": ["kb/", "library/dataset/index/", "library/dataset/shards/",
+                                  "library/dataset/tables/", "notes/", "docs/"],
+                        "note": "every ruling, voice, gloss and adjudication note: attribution required, "
+                                "no commercial use without a licence (open an Issue titled "
+                                "\"commercial licence\")",
+                        "provenance_obligation": "keep locator, authority, work, licence and cite_only on every "
+                                                 "row you redistribute"},
+            "terms_files": ["LICENSING.md", "LICENSE_DATA.md", "LICENSE_POLICY.md"],
+        },
       },
       "build_warnings": problems,
       "built_from": {p.name: sha(p) for p in sorted(KB.iterdir()) if p.is_file()},

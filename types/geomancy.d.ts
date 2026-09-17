@@ -92,6 +92,27 @@ export interface ManifestLicenceSummary {
   full_text_sources: string[];
   cite_only_sources: string[];
   never_used?: string[];
+  outbound_licence: ManifestLicenceSummaryOutboundLicence;
+}
+
+export interface ManifestLicenceSummaryOutboundLicence {
+  layers: unknown;
+  code: ManifestLicenceSummaryOutboundLicenceCode;
+  cc0: ManifestLicenceSummaryOutboundLicenceCc0;
+  curated: ManifestLicenceSummaryOutboundLicenceCurated;
+  terms_files?: string[];
+}
+
+export interface ManifestLicenceSummaryOutboundLicenceCode {
+  [key: string]: unknown;
+}
+
+export interface ManifestLicenceSummaryOutboundLicenceCc0 {
+  [key: string]: unknown;
+}
+
+export interface ManifestLicenceSummaryOutboundLicenceCurated {
+  [key: string]: unknown;
 }
 
 export interface ManifestFiles {

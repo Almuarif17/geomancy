@@ -13,18 +13,20 @@ cited, and the licence terms on the parts people actually want. Here is the shap
 | L3 the curated layer | `kb/voices.jsonl`, the grounded readings, plain-language glosses, the adjudication notes, outcome bundles | **CC BY-NC 4.0, with a separate commercial licence on request** | this is the paid thing: NC means a company shipping it in a revenue app must talk to you; attribution means every copy still advertises you |
 
 Until 0.2.5 the whole repo was MIT (`LICENSE`), which put L3 in the public domain for commercial use; the
-README said "Dataset and notes: CC BY 4.0", which said the same thing in a friendlier font. It is now split:
+README said "Dataset and notes: CC BY 4.0", which said the same thing in a friendlier font. Shipped in 0.2.5:
 `LICENSING.md` carries the layer map, `LICENSE_DATA.md` the precise terms, and
 `library/tools/check_licence_scope.py` fails the build when a tracked path is claimed by no layer or by two,
-so the split is a property of the repo, not a paragraph someone has to remember. `LICENSE` itself now opens
-with the scope notice that it covers L1 only. Changing
-that is your call, not mine to make silently: it needs `LICENSE_DATA.md`, a `LICENSING.md` with the two
-tiers, and a line in the README. If you say go, I will write the files and the migration note.
+so the split is a property of the repo and not a paragraph someone has to remember. `LICENSE` itself opens
+with the notice that it covers L1 only. `manifest.json` now carries the same facts as `licence_summary.
+outbound_licence`, and the manifest schema requires the field: an app that reads only the machine file still
+learns that the curated layer is non-commercial.
 
-Two alternatives, and when to prefer them: **ODbL** (database right + share-alike) if you would rather
-force any derivative to stay open than sell licences; **CC BY 4.0 for L3 as well** if the goal is maximal
-adoption and citations instead of revenue. Do not pick "all rights reserved": a closed dataset in this
-field gets ignored and then independently reinvented, which is the worst outcome.
+Two alternatives, and when to prefer them: **ODbL** (database right + share-alike) if you would rather force
+any derivative to stay open than sell licences - heavier to explain, and it makes every downstream app a
+"derivative database", which is a fight to have later, not now. **CC BY 4.0 for L3 as well** if the goal is
+maximal adoption and citations instead of revenue - that is the pre-0.2.5 state, and it is the option this
+file argues against. Do not pick "all rights reserved": a closed dataset in this field gets ignored and then
+independently reinvented, which is the worst outcome.
 
 ## 2. Sell the parts a clone cannot have
 

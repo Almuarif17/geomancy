@@ -70,6 +70,11 @@ mf = out / "manifest.json"
 if mf.exists():
     m = json.loads(mf.read_text())
     chk("manifest lists licence policy", m.get("licence_summary", {}).get("policy", "").startswith("full text"))
+    ob = (m.get("licence_summary") or {}).get("outbound_licence") or {}
+    chk("manifest states the OUTBOUND terms in three layers",
+        ob.get("layers") == 3 and "NC" in str((ob.get("curated") or {}).get("licence"))
+        and (ob.get("cc0") or {}).get("licence") == "CC0-1.0",
+        f"got {ob.get('layers')} layers, curated={str((ob.get('curated') or {}).get('licence'))[:40]}")
     chk("manifest records what was never used",
         len(m.get("licence_summary", {}).get("never_used", [])) > 0,
         str(len(m.get("licence_summary", {}).get("never_used", []))) + " blocked uploads recorded")

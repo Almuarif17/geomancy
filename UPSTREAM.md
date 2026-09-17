@@ -65,7 +65,9 @@ ia upload geomancy-alfagini-quaestiones library/build/ \
    --metadata="collection:opensource" --metadata="license:CC0-1.0" \
    --metadata="title:Alfagini Quaestiones Geomantici - extracted rulings (leaf-cited)"
 ```
-Set `license` honestly: your *extracts and notes* are yours (CC0/CC BY); the underlying scan is not yours
+Set `license` honestly: your *extracts and notes* are yours (MIT for code, CC0 for definitions and derived
+arithmetic, CC BY-NC for curated text - the same three layers as `LICENSING.md`); the underlying scan is not
+yours
 to re-license — link to its identifier instead of uploading the images.
 
 ## 5. Make releases citable (this is what turns a repo into a library)
