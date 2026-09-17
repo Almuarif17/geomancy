@@ -120,8 +120,23 @@ def collect():
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default=str(ROOT / "library/dataset"))
+    ap.add_argument("--manifest-only", action="store_true",
+                    help="refresh only manifest.json digests; run this after every other build step")
     a = ap.parse_args()
     out = pathlib.Path(a.out); (out / "shards").mkdir(parents=True, exist_ok=True)
+
+    if a.manifest_only:
+        # The manifest digests the index files, but engine/retrieve.py --build rewrites those files
+        # *after* this script has run, so a manifest produced inside the normal build is always one
+        # step behind and a fresh clone can never reproduce it byte-for-byte. This mode closes the loop.
+        mf = out / "manifest.json"
+        m = json.loads(mf.read_text())
+        m["files"] = {str(q.relative_to(out)): sha(q) for q in sorted(out.rglob("*"))
+                      if q.is_file() and q.name not in ("manifest.json", "bundles.json", "geomancy.sqlite")}
+        m["built_from"] = {q.name: sha(q) for q in sorted(KB.iterdir()) if q.is_file()}
+        mf.write_text(json.dumps(m, indent=1))
+        print(f"manifest refreshed: {len(m['files'])} files, {len(m['built_from'])} kb inputs")
+        return
 
     con = sqlite3.connect(out / "geomancy.sqlite")
     cur = con.cursor()

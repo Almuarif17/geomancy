@@ -26,6 +26,8 @@ jobs:
     - name: Build outcome indexes and app bundles
       run: python engine/retrieve.py --build
 
+    - name: Finalise dataset digests (manifest, then bundles)
+      run: python library/tools/finalize_dataset.py
     - name: Generate app contract artefacts
       run: python library/tools/gen_types.py
 

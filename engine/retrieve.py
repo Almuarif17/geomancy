@@ -151,6 +151,16 @@ def build():
          "kinds": sorted({r.get("kind") for r in passages if r.get("work") == w if r.get("kind")})}
         for w in sorted({r.get("work") for r in passages if r.get("work")})])
 
+    bundles()
+    print(f"indexes: {len(by_figure)} figures, {len(by_house)} houses, {len(by_outcome)} outcomes, "
+          f"{len(_jsonl(IDX / 'by_work.jsonl'))} works")
+    print("bundles: " + ", ".join(f"{k}({v['bytes']//1024}K)" for k, v in bundle["screens"].items()))
+    return 0
+
+
+def bundles() -> None:
+    """(Re)write bundles.json. Split out of build() because the manifest is refreshed after the
+    indexes, and bundles.json digests the manifest - so it has to be the last file written."""
     bundle = {"README": ("one entry per app screen: the exact files to ship with the screen, with byte size "
                         "and a content hash for cache-busting on a CDN"),
               "generated_by": "engine/retrieve.py --build", "screens": {
@@ -182,10 +192,6 @@ def build():
         bundle["screens"][name] = {"files": [r["path"] for r in res if not r.get("missing")],
                                    "resolved": res, "bytes": sum(r["bytes"] for r in res)}
     (DS / "bundles.json").write_text(json.dumps(bundle, indent=1) + chr(10))
-    print(f"indexes: {len(by_figure)} figures, {len(by_house)} houses, {len(by_outcome)} outcomes, "
-          f"{len(_jsonl(IDX / 'by_work.jsonl'))} works")
-    print("bundles: " + ", ".join(f"{k}({v['bytes']//1024}K)" for k, v in bundle["screens"].items()))
-    return 0
 
 
 def _yaml(p):
@@ -282,12 +288,16 @@ def coverage():
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--build", action="store_true")
+    ap.add_argument("--bundles-only", action="store_true", help="rewrite bundles.json only")
     ap.add_argument("--figure"), ap.add_argument("--house"), ap.add_argument("--topic")
     ap.add_argument("--kind"), ap.add_argument("--search"), ap.add_argument("--screen")
     ap.add_argument("--coverage", action="store_true")
     ap.add_argument("--limit", type=int, default=10)
     ap.add_argument("--json", action="store_true")
     a = ap.parse_args()
+    if a.bundles_only:
+        bundles(); print("bundles.json refreshed against the current manifest"); return 0
+
     if a.build:
         return build()
     res = None

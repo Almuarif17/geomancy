@@ -38,6 +38,7 @@ clean:
 
 index:            ## rebuild the outcome indexes + app bundles
 	python3 engine/retrieve.py --build
+	@python3 library/tools/finalize_dataset.py
 
 types:            ## regenerate types/geomancy.d.ts and openapi.yaml from library/schema/
 	python3 library/tools/gen_types.py
