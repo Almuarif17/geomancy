@@ -1,0 +1,29 @@
+{
+  "name": "Geomancy - the source library, cast by hand",
+  "short_name": "Geomancy",
+  "description": "Cast geomancy by pierced sand, tapping, four rows or a held button, then read all sixteen places against named sources, with the arithmetic and the citation behind every line.",
+  "start_url": "mobile.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "fullscreen", "minimal-ui"],
+  "orientation": "portrait",
+  "background_color": "#141110",
+  "theme_color": "#141110",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["books", "lifestyle", "education"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Cast", "short_name": "Cast", "url": "mobile.html", "description": "Pierce the sand or tap out sixteen rows" },
+    { "name": "History", "short_name": "History", "url": "mobile.html", "description": "Every chart this phone has kept" }
+  ],
+  "share_target": {
+    "action": "mobile.html",
+    "method": "GET",
+    "params": { "title": "title", "text": "text", "url": "link" }
+  }
+}

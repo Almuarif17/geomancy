@@ -1,0 +1,1278 @@
+<!doctype html>
+<html lang="en" data-theme="ink">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Geomancy</title>
+<meta name="description" content="Cast geomancy by pierced sand, by tapping, by four rows, or by a held button - and read it against the named sources.">
+<meta name="theme-color" content="#141110">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+/* Two themes off one variable set: a theme change must re-paint, never re-layout. The arrangement of a shield
+   is part of the reading, so it cannot be allowed to move under the reader. */
+:root{--step:16px;--r:18px;--dur:.28s;--ease:cubic-bezier(.2,.8,.2,1);
+  --bg:#141110;--panel:#1e1a18;--panel2:#262120;--line:#3a322e;--ink:#f0e9dd;--muted:#a99c90;
+  --accent:#b795e6;--accent2:#e6c07a;--good:#7fc98a;--bad:#e08a7a;--mark:#f4efe6;--tap:#2a2422;--sleep:#191615}
+html[data-theme=parchment]{--bg:#efe7d7;--panel:#f8f3e7;--panel2:#eae0cc;--line:#cdbd9f;--ink:#221e1a;--muted:#6d6151;
+  --accent:#5d4a86;--accent2:#8a6b23;--good:#2f6b41;--bad:#8c3b2c;--mark:#241f1a;--tap:#e5dbc6;--sleep:#e8dfcd}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--ink);overscroll-behavior:none;touch-action:manipulation;user-select:none;
+  font:16px/1.5 ui-rounded,"SF Pro Rounded",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+html[data-motion=off]{--dur:0s}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+input,textarea,select{font:inherit;color:inherit}
+.hidden{display:none!important}
+#app{display:flex;flex-direction:column;height:100dvh;position:relative;isolation:isolate}
+
+header.top{display:flex;align-items:center;gap:8px;padding:10px 10px 8px;border-bottom:1px solid var(--line)}
+header.top .brand{display:flex;align-items:baseline;gap:8px;min-width:0;flex:1}
+header.top h1{font-size:17px;margin:0;letter-spacing:.02em}
+header.top .ver{font-size:11px;color:var(--muted)}
+.iconbtn{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:var(--panel);
+  border:1px solid var(--line);transition:transform var(--dur) var(--ease)}
+.iconbtn:active{transform:scale(.9)}
+.iconbtn svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.7}
+main{flex:1;position:relative;overflow:hidden}
+.view{position:absolute;inset:0;display:flex;flex-direction:column;overflow:hidden;opacity:0;transform:translateY(8px);
+  pointer-events:none;transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease)}
+.view.active{opacity:1;transform:none;pointer-events:auto}
+.scroller{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:13px var(--step) 128px}
+nav.tabs{position:absolute;left:0;right:0;bottom:0;display:flex;padding:5px 6px calc(5px + env(safe-area-inset-bottom));
+  background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:blur(16px);border-top:1px solid var(--line);z-index:5}
+nav.tabs button{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 2px;border-radius:14px;
+  font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);position:relative;transition:color var(--dur)}
+nav.tabs svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.6}
+nav.tabs button[aria-selected=true]{color:var(--ink)}
+nav.tabs button[aria-selected=true]::after{content:"";position:absolute;top:1px;width:22px;height:2px;border-radius:2px;background:var(--accent)}
+
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:13px;margin-bottom:11px}
+.card h3{margin:0 0 8px;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.pill{padding:8px 13px;border-radius:999px;background:var(--panel);border:1px solid var(--line);font-size:13.5px;
+  transition:transform var(--dur) var(--ease),background var(--dur)}
+.pill:active{transform:scale(.94)}
+.pill.on{background:var(--accent);border-color:transparent;color:#17140f;font-weight:600}
+.btn{padding:13px 15px;border-radius:14px;background:var(--accent);color:#17140f;font-weight:650;width:100%;text-align:center;
+  transition:transform var(--dur) var(--ease),opacity var(--dur)}
+.btn:disabled{opacity:.32}
+.btn:active{transform:scale(.98)}
+.btn.ghost{background:var(--panel);border:1px solid var(--line);color:var(--ink);font-weight:500;
+  white-space:nowrap;font-size:14px;padding:13px 8px}
+.btn.warn{background:var(--bad);color:#210f0b}
+.mini{font-size:12.5px;color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+.toast{position:absolute;left:50%;bottom:92px;transform:translate(-50%,12px);background:var(--ink);color:var(--bg);
+  padding:9px 15px;border-radius:999px;font-size:13px;opacity:0;transition:all var(--dur) var(--ease);z-index:40;pointer-events:none;
+  max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.offline{background:color-mix(in srgb,var(--bad) 18%,var(--panel));border-color:var(--bad);font-size:13px}
+
+.seg{display:flex;gap:3px;background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:4px;margin-bottom:11px}
+.seg button{flex:1;padding:9px 3px;border-radius:11px;font-size:12.5px;color:var(--muted);white-space:nowrap;transition:all var(--dur) var(--ease)}
+.seg button[aria-selected=true]{background:var(--panel);color:var(--ink);font-weight:600;box-shadow:0 1px 0 var(--line)}
+.qbox{width:100%;background:var(--panel2);border:1px solid var(--line);border-radius:13px;padding:11px 12px;color:var(--ink);
+  resize:none;min-height:60px;font-size:15px}
+.chips{display:flex;gap:7px;overflow-x:auto;padding:9px 1px 3px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chips .pill{flex:0 0 auto;font-size:12.5px;padding:7px 11px}
+#pips{display:flex;gap:4px;justify-content:center;margin:11px 0 4px}
+#pips i{width:7px;height:7px;border-radius:3px;background:var(--line);transition:all var(--dur) var(--ease)}
+#pips i.done{background:var(--accent)}
+#pips i.now{background:var(--accent2);transform:scale(1.5)}
+.stage{min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:13px;padding:4px 0}
+.hint{text-align:center;font-size:12.5px;color:var(--muted);min-height:18px}
+.grid16{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;width:100%}
+.mound{position:relative;aspect-ratio:1/1;border-radius:16px;background:var(--tap);border:1px solid var(--line);overflow:hidden;
+  display:grid;place-items:center;transition:transform .16s var(--ease),background var(--dur)}
+.mound:active{transform:scale(.93)}
+.mound svg{position:absolute;inset:0;width:100%;height:100%}
+.mound .dots{position:relative;display:flex;gap:6px;align-items:center;opacity:0;transform:scale(.4);transition:all .3s var(--ease)}
+.mound.open .dots{opacity:1;transform:none}
+.mound.open{background:var(--panel2)}
+.d1,.d2{width:12px;height:12px;border-radius:50%;background:var(--mark);display:inline-block}
+.d2{width:33px;height:12px;border-radius:6px}
+.mound .tag{position:absolute;bottom:3px;left:0;right:0;text-align:center;font-size:9px;color:var(--muted);letter-spacing:.05em}
+@keyframes burst{from{transform:scale(.3);opacity:.9}to{transform:scale(2.6);opacity:0}}
+.burst{position:absolute;width:24px;height:24px;border-radius:50%;border:2px solid var(--accent2);animation:burst .5s var(--ease) forwards;pointer-events:none}
+.pad{width:100%;min-height:236px;border-radius:20px;background:var(--tap);border:1px dashed var(--line);position:relative;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;transition:background var(--dur),border-color var(--dur)}
+.pad.awake{border-color:var(--accent);background:var(--panel2)}
+.pad.held{border-color:var(--accent2);background:color-mix(in srgb,var(--accent2) 10%,var(--panel2))}
+.marks{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:14px;max-width:100%}
+.marks i{width:13px;height:13px;border-radius:50%;background:var(--mark);animation:pop .2s var(--ease)}
+@keyframes pop{from{transform:scale(.2);opacity:0}to{transform:none;opacity:1}}
+.count{font-size:42px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1}
+.rows4{display:flex;flex-direction:column;gap:8px;width:100%}
+.rowcard{border-radius:15px;background:var(--sleep);border:1px solid var(--line);padding:10px 11px;display:flex;align-items:center;gap:9px;
+  transition:all var(--dur) var(--ease);min-height:58px}
+.rowcard.awake{background:var(--tap);border-color:var(--accent)}
+.rowcard.locked{background:var(--panel2);opacity:.7}
+.rowcard.asleep{opacity:.45}
+.rowcard .lab{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);width:52px;flex:0 0 auto}
+.rowcard .marks{flex:1;padding:0;gap:5px;justify-content:flex-start;min-height:14px}
+.rowcard .res{font-size:14px;color:var(--accent);font-weight:650;flex:0 0 auto;min-width:20px;text-align:right}
+.figcard{display:flex;align-items:center;gap:12px;padding:11px 13px;background:var(--panel);border:1px solid var(--accent);
+  border-radius:15px;animation:rise .4s var(--ease);margin-bottom:8px}
+@keyframes rise{from{transform:translateY(12px);opacity:0}to{transform:none;opacity:1}}
+.figcard .dots{display:flex;flex-direction:column;gap:4px;align-items:flex-start}
+.figcard .nm{font-weight:650;font-size:15px}
+.figcard .sub{font-size:11.5px;color:var(--muted)}
+.prog{font-size:12.5px;color:var(--muted);text-align:center;min-height:34px}
+.prog b{color:var(--ink)}
+
+.shieldwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:13px 9px;margin-bottom:11px}
+.shieldq{font-size:13.5px;color:var(--muted);text-align:center;margin:0 6px 11px;font-style:italic;line-height:1.4;
+  border-bottom:1px solid var(--line);padding-bottom:9px}
+.shieldq b{color:var(--accent2);font-style:normal}
+table.fig{width:100%;border-collapse:collapse;table-layout:fixed}
+table.fig td{padding:4px 3px;vertical-align:top;text-align:center}
+.blocklab{font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);text-align:center;margin:2px 0 4px}
+.cell{border-radius:13px;padding:7px 3px 6px;background:var(--panel2);border:1px solid transparent;width:100%;display:block;
+  transition:all var(--dur) var(--ease)}
+.cell:active{transform:scale(.96)}
+.cell.hot{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 13%,var(--panel2))}
+@keyframes clamp2{from{opacity:.4}to{opacity:1}}
+.cell .hn,.cell .fn{white-space:normal;overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;
+  -webkit-line-clamp:2;text-overflow:ellipsis;animation:clamp2 var(--dur)}
+.cell .hn{font-size:9px;letter-spacing:.03em;text-transform:uppercase;color:var(--muted);line-height:1.2;min-height:2.4em}
+.cell .fn{font-size:12px;font-weight:620;margin-top:1px;line-height:1.12;min-height:2.24em}
+.cell .dots{display:flex;flex-direction:column;align-items:center;gap:3px;margin:5px 0 4px}
+.cell .dots .d1,.cell .dots .d2{width:7px;height:7px}
+.cell .dots .d2{width:19px;height:7px;border-radius:4px}
+.cell .meta{font-size:9px;color:var(--muted)}
+table.ledger{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed}
+table.ledger th{text-align:left;font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600;padding:3px 5px}
+table.ledger td{padding:7px 5px;border-top:1px solid var(--line);vertical-align:top}
+table.ledger tr.court td{background:color-mix(in srgb,var(--accent) 11%,transparent)}
+table.ledger tr{transition:background var(--dur)}
+
+.panes{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;flex:1;scrollbar-width:none}
+.panes::-webkit-scrollbar{display:none}
+.pane{flex:0 0 100%;min-width:100%;scroll-snap-align:start;overflow-y:auto;padding:11px var(--step) 128px;max-height:100%}
+.dots-nav{display:flex;gap:6px;justify-content:center;padding:7px 0 3px}
+.dots-nav i{width:7px;height:7px;border-radius:50%;background:var(--line);transition:all var(--dur)}
+.dots-nav i.on{background:var(--accent);width:17px;border-radius:4px}
+.lines{margin:6px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px}
+.lines li{padding-left:13px;position:relative;font-size:14.5px}
+.lines li::before{content:"";position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--accent2)}
+.lines li em{font-style:normal;color:var(--muted)}
+.lines li b{color:var(--accent2);font-weight:600}
+.provebtn{margin-top:7px;padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--panel2);
+  font-size:11.5px;color:var(--muted);letter-spacing:.04em;display:inline-flex;gap:6px;align-items:center;transition:all var(--dur)}
+.provebtn:active{transform:scale(.94);color:var(--ink)}
+.claim{font-size:14px;margin:5px 0}
+.claimitem{border-top:1px solid var(--line);padding:9px 0 2px;margin-top:9px}
+.claimitem:first-of-type{border-top:0;padding-top:0}
+.quote{border-left:2px solid var(--accent);padding:3px 0 3px 9px;margin:6px 0;font-size:13px;font-style:italic}
+.blocked{border-left:2px solid var(--bad);padding:3px 0 3px 9px;margin:6px 0;font-size:12.5px;color:var(--muted)}
+.note{font-size:12.5px;color:var(--muted);background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:10px 11px;margin-top:9px}
+.disclaimer{font-size:12px;color:var(--muted);border-top:1px dashed var(--line);padding-top:9px;margin-top:6px;line-height:1.5}
+.tagline{display:inline-block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:999px;
+  background:var(--panel2);border:1px solid var(--line);color:var(--muted);margin-bottom:8px}
+.strength{font-size:10px;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.strength.multi{color:var(--good);border-color:color-mix(in srgb,var(--good) 45%,var(--line))}
+
+.scrim{position:absolute;inset:0;background:rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:opacity var(--dur);z-index:20}
+.scrim.open{opacity:1;pointer-events:auto}
+.sheet{position:absolute;left:0;right:0;bottom:0;max-height:88%;background:var(--panel);border-top:1px solid var(--line);
+  border-radius:22px 22px 0 0;transform:translateY(101%);transition:transform var(--dur) var(--ease);z-index:25;display:flex;flex-direction:column}
+.sheet.open{transform:none}
+.sheet .grab{width:36px;height:4px;border-radius:4px;background:var(--line);margin:9px auto 0;flex:0 0 auto}
+.sheet h2{margin:8px 17px 6px;font-size:16px}
+.sheet .body{overflow-y:auto;padding:0 17px 24px;user-select:text}
+.kv{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--line);font-size:13.5px;align-items:center}
+.kv .k{color:var(--muted);flex:0 0 auto}
+.kv .v{text-align:right;font-weight:560}
+.arith{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;background:var(--panel2);border:1px solid var(--line);
+  border-radius:10px;padding:9px;overflow-x:auto;white-space:pre;color:var(--ink);line-height:1.65}
+.toggle{width:44px;height:27px;border-radius:999px;background:var(--line);position:relative;flex:0 0 auto;transition:background var(--dur)}
+.toggle::after{content:"";position:absolute;top:3px;left:3px;width:21px;height:21px;border-radius:50%;background:var(--ink);transition:transform var(--dur) var(--ease)}
+.toggle.on{background:var(--accent)}
+.toggle.on::after{transform:translateX(17px);background:#17140f}
+select,input[type=number]{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:7px 8px;min-width:80px;text-align:right}
+.bigfig{display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px 0}
+.bigfig .dots .d1,.bigfig .dots .d2{width:14px;height:14px}
+.bigfig .dots .d2{width:40px;height:14px;border-radius:7px}
+.mini-shield{display:flex;gap:5px}
+.mini-shield span{display:flex;flex-direction:column;gap:3px;padding:5px 6px;border-radius:8px;background:var(--panel2)}
+.mini-shield i{display:block;height:5px;border-radius:3px;background:var(--mark)}
+.mini-shield i.s{width:5px}
+.mini-shield i.p{width:14px}
+</style>
+</head>
+<body>
+<div id="app">
+  <header class="top">
+    <button class="iconbtn" id="btnAbout" aria-label="About this library"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></button>
+    <div class="brand"><h1>Geomancy</h1><span class="ver" id="ver"></span></div>
+    <button class="iconbtn" id="btnOnline" aria-label="Engine status" title="Engine status"><svg viewBox="0 0 24 24"><path d="M5 13a10 10 0 0 1 14 0M8.5 16.5a5 5 0 0 1 7 0M12 20h.01"/></svg></button>
+    <button class="iconbtn" id="btnSettings" aria-label="Settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v2m0 14v2M4.2 7.5l1.7 1m12.2-1-1.7 1M4.2 16.5l1.7-1m12.2 1-1.7-1"/></svg></button>
+  </header>
+
+  <main>
+    <section class="view active" id="v-cast">
+      <div class="scroller">
+        <div class="card">
+          <h3>The question</h3>
+          <textarea class="qbox" id="q" placeholder="Who, what, or which yes or no?"></textarea>
+          <div class="chips" id="chips"></div>
+        </div>
+        <div class="seg" role="tablist" id="modes">
+          <button role="tab" aria-selected="true" data-mode="sand">Sand</button>
+          <button role="tab" data-mode="taps">Tap</button>
+          <button role="tab" data-mode="quad">4 rows</button>
+          <button role="tab" data-mode="hold">Hold</button>
+        </div>
+        <div class="card">
+          <div class="prog" id="prog"></div>
+          <div id="pips"></div>
+          <div class="stage" id="stage"></div>
+          <div class="hint" id="hint"></div>
+          <div class="row" style="margin-top:11px">
+            <button class="btn ghost" id="btnUndo" style="flex:1">Undo</button>
+            <button class="btn ghost" id="btnRandom" style="flex:1" title="Generate the remaining rows at random">Random</button>
+            <button class="btn ghost" id="btnClear" style="flex:1">Reset</button>
+          </div>
+          <div id="mothers" style="margin-top:11px"></div>
+          <button class="btn" id="btnCast" style="margin-top:11px" disabled>Cast the figures</button>
+          <button class="provebtn" id="btnArith" style="margin-top:9px">what the engine did to my marks</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" id="v-shield">
+      <div class="scroller">
+        <div class="seg" id="layouts">
+          <button data-layout="shield" aria-selected="true">Shield</button>
+          <button data-layout="square">Square</button>
+          <button data-layout="ledger">Ledger</button>
+        </div>
+        <div class="shieldwrap" id="shieldBox"></div>
+        <div class="row" style="margin-bottom:11px">
+          <button class="btn ghost" id="btnCopyAll" style="flex:1">Copy all houses</button>
+          <button class="btn ghost" id="btnShare" style="flex:1">Share as image</button>
+        </div>
+        <div class="card" id="judgeBox"></div>
+      </div>
+    </section>
+
+    <section class="view" id="v-read">
+      <div class="seg" id="panes" style="margin:11px var(--step) 0">
+        <button data-pane="0" aria-selected="true">Houses</button>
+        <button data-pane="1">Advanced</button>
+        <button data-pane="2">Interrelate</button>
+      </div>
+      <div class="dots-nav" id="paneDots"><i class="on"></i><i></i><i></i></div>
+      <div class="panes" id="panesBox">
+        <div class="pane" id="p0"></div><div class="pane" id="p1"></div><div class="pane" id="p2"></div>
+      </div>
+    </section>
+
+    <section class="view" id="v-hist">
+      <div class="scroller">
+        <div class="card">
+          <h3>Every chart is kept here</h3>
+          <div class="mini" id="histNote"></div>
+          <div class="row" style="margin-top:9px">
+            <button class="btn ghost" id="btnExport" style="flex:1">Export JSON</button>
+            <button class="btn warn" id="btnWipe" style="flex:1">Clear all</button>
+          </div>
+        </div>
+        <div id="histList"></div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="tabs" id="tabs">
+    <button data-v="v-cast" aria-selected="true"><svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18M7 7l10 10M17 7 7 17"/></svg>Cast</button>
+    <button data-v="v-shield"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>Shields</button>
+    <button data-v="v-read"><svg viewBox="0 0 24 24"><path d="M5 5h9a3 3 0 0 1 3 3v11a2 2 0 0 0-2-2H5zM19 5h-2v13"/></svg>Reading</button>
+    <button data-v="v-hist"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 8v4.5l3 1.5"/></svg>History</button>
+  </nav>
+
+  <div class="scrim" id="scrim"></div>
+  <div class="sheet" id="sheet"><div class="grab"></div><h2 id="sheetTitle"></h2><div class="body" id="sheetBody"></div></div>
+  <div class="toast" id="toast"></div>
+</div>
+
+<script>
+"use strict";
+/* The phone counts marks and paints them. Every rule - which figure a row of dots is, what the daughters are,
+   what any source said - is answered by the repo's engine over /api. Nothing here re-implements a rule that
+   could drift from it. The one exception is the pair-counting below, which is duplicated deliberately so a
+   figure can appear the instant a row closes, and which app/test_app.py holds against engine/deep_read.add
+   for every count from 1 to 400. */
+const $ = (s, r) => (r || document).querySelector(s);
+const $$ = (s, r) => [...(r || document).querySelectorAll(s)];
+const API = { cast: "/api/cast_from_rows", chart16: "/api/chart16", prove: "/api/prove", copy: "/api/copy",
+              prefs: "/api/preferences", figures: "/api/figures", health: "/api/health", topics: "/api/topics" };
+const LS = { sess: "gml.session", prefs: "gml.prefs", hist: "gml.history" };
+const ROMAN = ["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII","XIII","XIV","XV","XVI"];
+const COURT = { 13: "left witness", 14: "right witness", 15: "Judge", 16: "Sentence / Reconciler" };
+const SENT = ["Should I take this job?","Will the deal close?","Is he speaking truly?","When will this settle?",
+              "What is hidden in this matter?","Should I stay or go?","Who helps me in this?"];
+
+const store = {
+  get(k, fb) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : fb; } catch (e) { return fb; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { return false; } return true; },
+  del(k) { try { localStorage.removeItem(k); } catch (e) {} },
+};
+const PREFS = store.get(LS.prefs, {});
+const API_KEYS = ["show_quotes","preferred_works_first","min_voices_for_confidence","gap_detail","tone",
+                  "house_labels","topics_pinned","hide_unreliable_polarity","max_claims"];
+function apiPrefs() { const o = {}; API_KEYS.forEach(k => { if (PREFS[k] !== undefined) o[k] = PREFS[k]; }); return o; }
+
+const blank = () => ({ mode: "sand", slots: Array(16).fill(null), order: [], question: "",
+                       mothers: null, pos: null, tech: null, reading: null, layout: "shield" });
+let S = Object.assign(blank(), store.get(LS.sess, {}));
+if (!Array.isArray(S.slots) || S.slots.length !== 16) S.slots = Array(16).fill(null);
+function saveSess() {
+  store.set(LS.sess, { mode: S.mode, slots: S.slots, order: S.order, question: S.question,
+                       mothers: S.mothers, layout: S.layout });
+}
+const filled = () => S.slots.filter(s => s && !s.open).length;     // rows the engine may use
+const nextSlot = () => S.slots.findIndex(s => !s || s.open);       // the row still being counted, or -1
+const values = () => S.slots.map(s => s ? s.value : 0);
+
+let FIGS = {};      // pattern -> figure name, fetched once, never hard-coded here
+function figName(vals) { return FIGS[vals.join(",")] || null; }
+
+function toast(m) { const t = $("#toast"); t.textContent = m; t.classList.add("show");
+  clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove("show"), 2300); }
+function buzz(p) { if (PREFS.haptics !== false && navigator.vibrate) navigator.vibrate(p); }
+function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+async function api(path, opts) {
+  const r = await fetch(path, opts);
+  const ct = r.headers.get("content-type") || "";
+  const body = ct.includes("json") ? await r.json().catch(() => ({})) : await r.text();
+  if (!r.ok) { const e = new Error((body && body.error) || ("HTTP " + r.status)); e.detail = body; throw e; }
+  return body;
+}
+
+/* ---------- the one piece of arithmetic the phone repeats ---------- */
+function rowValue(taps) { return taps % 2 === 1 ? 1 : 2; }
+
+function show(v) {
+  $$(".view").forEach(s => s.classList.toggle("active", s.id === v));
+  $$("#tabs button").forEach(b => b.setAttribute("aria-selected", String(b.dataset.v === v)));
+  if (v === "v-shield") renderShield();
+  if (v === "v-read") renderReading();
+  if (v === "v-hist") renderHistory();
+}
+$("#tabs").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { buzz(7); show(b.dataset.v); } });
+
+/* =================== CAST =================== */
+function renderChips() {
+  const box = $("#chips"); box.innerHTML = "";
+  SENT.forEach(qs => { const b = document.createElement("button"); b.className = "pill"; b.textContent = qs;
+    b.onclick = () => { $("#q").value = qs; S.question = qs; saveSess(); }; box.appendChild(b); });
+}
+$("#q").addEventListener("input", e => { S.question = e.target.value.trim(); saveSess(); });
+
+function dots(pairs) { return pairs.map(v => v === 1 ? '<span class="d1"></span>' : '<span class="d2"></span>').join(""); }
+
+function renderPips() {
+  const box = $("#pips"); box.innerHTML = "";
+  const cur = nextSlot();
+  for (let i = 0; i < 16; i++) {
+    const p = document.createElement("i");
+    if (S.slots[i]) p.className = "done"; else if (i === cur && S.mode !== "sand") p.className = "now";
+    box.appendChild(p);
+  }
+  const left = 16 - filled();
+  const fig = Math.floor((cur < 0 ? 16 : cur) / 4) + 1;
+  $("#prog").innerHTML = left === 0
+    ? "<b>Sixteen marks counted.</b> Four mothers are fixed - press Cast."
+    : `<b>${left}</b> of 16 still to come` + (S.mode === "sand" ? "" : ` · figure ${ROMAN[fig - 1]}, row ${(cur % 4) + 1} of 4`);
+  $("#btnCast").disabled = left !== 0;
+}
+
+function stage() {
+  const st = $("#stage"), cur = nextSlot();
+  if (cur < 0) {
+    st.innerHTML = `<div class="bigfig"><div class="dots" style="display:flex;flex-direction:column;gap:5px">
+        ${[0,1,2,3].map(f => `<div style="display:flex;gap:6px;justify-content:center">${dots(S.slots.slice(f*4, f*4+4).map(s => s.value))}</div>`).join("")}
+      </div><div class="mini" style="margin-top:8px">four mothers, top to bottom</div></div>
+      <div class="hint">The engine takes each column of four rows, builds the mothers, then the daughters, nephews and court.</div>`;
+    return;
+  }
+  if (S.mode === "sand") {
+    const cells = S.slots.map((s, i) => `<button class="mound${s ? " open" : ""}" data-sand="${i}" ${s ? "disabled" : ""}
+        aria-label="hill ${i + 1}">
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M2 98 Q26 ${54 + (i % 4) * 4} 50 ${46 + (i % 3) * 5} T98 98 Z"
+          fill="var(--accent2)" opacity="${s ? .09 : .2}"/><path d="M2 98 Q34 70 62 98" stroke="var(--line)" fill="none" stroke-width="1" opacity=".5"/></svg>
+        <div class="dots">${s ? dots([s.value]) : ""}</div><span class="tag">${ROMAN[i]}</span></button>`).join("");
+    st.innerHTML = `<div class="grid16">${cells}</div>`;
+    return;
+  }
+  const s = S.slots[cur], n = s ? s.taps : 0;
+  if (S.mode === "taps") {
+    st.innerHTML = `<div class="pad awake" id="pad">
+        <div class="marks" id="marks">${"<i></i>".repeat(Math.min(n, 60))}${n > 60 ? `<span class="mini">+${n - 60}</span>` : ""}</div>
+        <div class="count num" id="cnt">${n}</div>
+        <div class="mini">figure ${ROMAN[Math.floor(cur / 4)]} · row ${(cur % 4) + 1} of 4</div>
+      </div><button class="btn" id="btnCont" ${n ? "" : "disabled"}>Continue — pair them off</button>`;
+    return;
+  }
+  if (S.mode === "quad") {
+    const base = Math.floor(cur / 4) * 4;
+    const cards = [0,1,2,3].map(r => {
+      const i = base + r, sl = S.slots[i];
+      const state = sl ? "locked" : (i === cur ? "awake" : "asleep");
+      const taps = sl ? sl.taps : (i === cur ? n : 0);
+      return `<div class="rowcard ${state}" data-row="${r}">
+        <span class="lab">row ${r + 1}${sl ? " · done" : (i === cur ? " · awake" : " · asleep")}</span>
+        <div class="marks">${"<i></i>".repeat(Math.min(taps, 26))}</div>
+        <span class="res num">${sl ? sl.value : (taps || "")}</span></div>`;
+    }).join("");
+    st.innerHTML = `<div class="rows4">${cards}</div>
+      <button class="btn" id="btnCont" ${S.slots[base + 3] ? "disabled" : (n ? "" : "disabled")}>
+        ${S.slots[cur] ? "next row" : "Done — wake the next row"}</button>`;
+    return;
+  }
+  st.innerHTML = `<div class="pad${n ? " awake" : ""}" id="pad"><div style="font-size:32px" id="hand">☝️</div>
+      <div class="marks" id="marks">${"<i></i>".repeat(Math.min(n, 40))}</div>
+      <div class="count num" id="cnt">${n}</div><div class="mini">press and hold, then let go</div></div>
+      <div class="mini">boxes in this mother: ${boxState()}</div>`;
+}
+
+function boxState() {
+  const cur = nextSlot(); const base = cur < 0 ? 0 : cur - (cur % 4);
+  return [0, 1, 2, 3].map(r => (S.slots[base + r] && !S.slots[base + r].open) ? "done"
+    : (base + r === cur ? "awake" : "asleep")).join(" · ");
+}
+function bindSand() {
+  // delegation on the container, not on each hill: bindStage() redraws the grid, and a handler bound to a
+  // node that has just been replaced is how the first pierce worked and the rest did nothing
+  $("#stage").addEventListener("click", e => {
+    const b = e.target.closest("[data-sand]");
+    if (!b || b.disabled || S.mode !== "sand") return;
+    const i = +b.dataset.sand;
+    if (S.slots[i]) return;
+    const v = Math.random() < 0.5 ? 1 : 2;         // one or two dots, at random, exactly as asked
+    setSlot(i, v, v, false);
+    b.classList.add("open"); b.disabled = true;
+    b.querySelector(".dots").innerHTML = dots([v]);
+    const ring = document.createElement("span"); ring.className = "burst"; b.appendChild(ring);
+    setTimeout(() => ring.remove(), 520);
+    buzz(9); afterSet();
+  });
+}
+function bindStage() {
+  renderPips(); stage();
+  $("#hint").textContent = { sand: "Sixteen hills. Pierce one: the finger gives up one dot or two, at random.",
+    taps: "Tap as many times as the row wants. Continue pairs them off; a leftover becomes one dot, an exact pair-set two.",
+    quad: "Four rows on the page. Only the awake row takes taps - double-tap it, or press Done, and the next wakes.",
+    hold: "Hold to let the phone tap for you; release finishes the box and wakes the next." }[S.mode];
+  const pad = $("#pad");
+  if (S.mode === "taps" && pad) {
+    pad.onpointerup = () => { const i = nextSlot(); if (i < 0) return;
+      setSlot(i, (S.slots[i] ? S.slots[i].taps : 0) + 1, rowValue((S.slots[i] ? S.slots[i].taps : 0) + 1), true);
+      const c = $("#cnt"), m = $("#marks");
+      if (c) c.textContent = S.slots[i].taps;
+      if (m && S.slots[i].taps <= 60) m.innerHTML = "<i></i>".repeat(S.slots[i].taps);
+      $("#btnCont").disabled = false;
+      buzz(4); renderPips(); };
+    const bc = $("#btnCont"); if (bc) bc.onclick = () => closeRow();
+  }
+  if (S.mode === "quad") {
+    const cur = nextSlot(), base = Math.floor(cur / 4) * 4;
+    $$("#stage [data-row]").forEach(card => {
+      const r = +card.dataset.row, i = base + r;
+      if (i !== cur) { if (S.slots[i]) card.onclick = () => toast("That row is asleep - it is already counted"); return; }
+      let last = 0;
+      card.onpointerup = () => {
+        const now = Date.now();
+        if (now - last < 340) { last = 0; closeRow(); return; }   // double-tap wakes the next row
+        last = now;
+        setSlot(i, (S.slots[i] ? S.slots[i].taps : 0) + 1, rowValue((S.slots[i] ? S.slots[i].taps : 0) + 1), true);
+        card.querySelector(".marks").innerHTML = "<i></i>".repeat(Math.min(S.slots[i].taps, 26));
+        card.querySelector(".res").textContent = S.slots[i].taps;
+        buzz(4); renderPips();
+      };
+    });
+    const bc = $("#btnCont"); if (bc) bc.onclick = () => closeRow();
+  }
+  if (S.mode === "hold" && pad) {
+    let timer = null, live = false;
+    const down = e => {
+      e.preventDefault(); const i = nextSlot(); if (i < 0) return;
+      live = true; pad.classList.add("held"); $("#hand").classList.add("hidden");
+      const step = () => {
+        const t = (S.slots[i] ? S.slots[i].taps : 0) + 1;
+        setSlot(i, t, rowValue(t), true);
+        $("#cnt").textContent = t;
+        const m = $("#marks"); if (m && t <= 40) m.innerHTML = "<i></i>".repeat(t);
+        if (t % 4 === 0) buzz(6);
+        timer = setTimeout(step, 95);
+      };
+      timer = setTimeout(step, 70);
+    };
+    const up = () => { if (!live) return; live = false; clearTimeout(timer); timer = null;
+      pad.classList.remove("held"); const h = $("#hand"); if (h) h.classList.remove("hidden");
+      const i = nextSlot(); if (i >= 0 && S.slots[Math.max(0, i - 1)] && S.slots[Math.max(0, i - 1)].taps) closeRow(); };
+    pad.onpointerdown = down; ["pointerup", "pointercancel", "pointerleave"].forEach(ev => pad.addEventListener(ev, up));
+  }
+  renderMothers();
+}
+function setSlot(i, taps, value, provisional) {
+  // provisional = still being counted; only a closed row carries a value the engine will use
+  // while a row is open its preview value moves with every tap; closing the row is what fixes it for the cast
+  S.slots[i] = { taps: taps, value: value, open: !!provisional };
+}
+function closeRow() {
+  const i = nextSlot();
+  if (i < 0) return;
+  const s = S.slots[i];
+  if (!s || !s.taps) { toast("No marks in this row yet"); return; }
+  s.value = rowValue(s.taps); s.open = false;
+  S.order.push(i);
+  buzz(16); saveSess(); bindStage();
+  if (filled() === 16) afterSet();
+}
+function afterSet() {
+  saveSess(); renderPips(); renderMothers();
+  $("#btnCast").disabled = filled() !== 16;
+  if (filled() === 16) { stage(); autoCast(); }   // only once the sixteenth closes does the stage change shape
+}
+function renderMothers() {
+  const box = $("#mothers"); const out = [];
+  for (let f = 0; f < 4; f++) {
+    const rows = S.slots.slice(f * 4, f * 4 + 4);
+    if (rows.filter(Boolean).length < 4) { break; }
+    const vals = rows.map(r => r.value);
+    const name = figName(vals) || "…";
+    const taps = rows.map(r => r.taps).join("·");
+    out.push(`<div class="figcard"><div class="dots">${vals.map(v => `<div style="display:flex;gap:6px">${dots([v])}</div>`).join("")}</div>
+      <div><div class="nm">${esc(name)}</div><div class="sub num">mother ${ROMAN[f]} · rows ${vals.join("·")} · your taps ${taps}</div></div></div>`);
+  }
+  box.innerHTML = out.join("");
+}
+$$("#modes button").forEach(b => b.onclick = () => {
+  S.mode = b.dataset.mode;
+  $$("#modes button").forEach(x => x.setAttribute("aria-selected", String(x === b)));
+  S.slots = Array(16).fill(null); S.order = []; saveSess(); bindStage();
+  toast({ sand: "Sand: sixteen hills, one or two dots at random", taps: "Tapping: one row per page, sixteen pages",
+          quad: "Four rows per page, one awake at a time", hold: "Held button: the phone taps, you release" }[S.mode]);
+});
+$("#btnUndo").onclick = () => {
+  if (S.mode === "sand") { const i = [...S.slots].map((s, k) => s ? k : -1).filter(k => k >= 0).pop();
+    if (i === undefined || i < 0) return; S.slots[i] = null; }
+  else { const i = S.order.pop(); if (i === undefined) { S.slots = Array(16).fill(null); } else S.slots[i] = null; }
+  saveSess(); bindStage(); toast("Undone");
+};
+$("#btnClear").onclick = () => { S.slots = Array(16).fill(null); S.order = []; saveSess(); bindStage(); toast("Started over"); };
+$("#btnRandom").onclick = () => {
+  for (let i = 0; i < 16; i++) if (!S.slots[i]) { const t = Math.random() < 0.5 ? 1 : 2;
+    S.slots[i] = { taps: t, value: rowValue(t), open: false }; }
+  // random generation goes through the same pair-counting as tapping, so both paths build the same kind of row
+  S.order = S.slots.map((sl, i) => (sl && !sl.open ? i : -1)).filter(i => i >= 0);
+  saveSess(); bindStage(); toast("Sixteen rows generated");
+};
+
+let CASTING = false;
+async function autoCast() {
+  if (filled() !== 16 || CASTING) return;
+  await castNow();
+  show("v-shield");
+}
+$("#btnCast").onclick = () => castNow();
+async function castNow() {
+  if (filled() !== 16) { toast("Sixteen rows first"); return false; }
+  CASTING = true;
+  const btn = $("#btnCast"), label = btn.textContent;
+  btn.disabled = true; btn.textContent = "Reading the sources…";
+  try {
+    const rows = S.slots.map(s => s.taps);
+    const j = await api(API.cast, { method: "POST", headers: { "content-type": "application/json" },
+      body: JSON.stringify({ rows: rows, topic: S.question || undefined, method: S.mode, prefs: apiPrefs() }) });
+    S.mothers = j.mothers;
+    S.reading = j.reading || null;
+    S.arith = j.mothers_arithmetic || [];
+    const ch = await api(`${API.chart16}?mothers=${encodeURIComponent(j.mothers.join(","))}&topic=${encodeURIComponent(S.question || "")}`);
+    S.pos = ch.positions; S.tech = ch.techniques;
+    setOnline(true);
+    saveHistory(j);
+    renderShield(); renderReading();
+    return true;
+  } catch (e) {
+    setOnline(false);
+    toast("The engine refused: " + e.message);
+    if (e.detail && e.detail.error) openSheet("The cast was refused", `<div class="arith">${esc(e.detail.error)}</div>
+      <div class="note">The app sends the raw counts of your marks; the library recomputes the row values from them
+      and rejects anything it cannot read as sixteen rows of one or two dots.</div>`);
+    return false;
+  } finally { CASTING = false; btn.disabled = filled() !== 16; btn.textContent = label; }
+}
+$("#btnArith").onclick = () => {
+  const A = S.arith || [];
+  if (A.length) {
+    openSheet("What the engine did to your marks", `
+      <p class="mini">Each row of marks is counted in twos. A leftover single becomes one dot; an exact pairing
+      becomes two. Nothing is rounded afterwards - these sixteen values are what built the mothers.</p>
+      ${A.map(m => `<div class="card"><h3>Mother ${esc(m.mother)} — ${esc(m.figure)}</h3>
+        <div class="arith">${m.rows.map((v, i) => `row ${i + 1}: ${String(m.taps[i]).padStart(3)} tap${m.taps[i] === 1 ? "" : "s"} = ${m.pairs[i]} pair × 2${m.remainder_odd[i] ? " + 1 over" : "        "}  ->  ${v} dot${v === 1 ? "" : "s"}`).join("\n")}
+${`sum of the figure: ${m.rows.reduce((a, b) => a + b, 0)} dots  ->  figure ${m.figure}`}</div></div>`).join("")}`);
+    return;
+  }
+  const v = values();
+  openSheet("Your sixteen rows", `<div class="arith">${v.map((x, i) =>
+    `figure ${ROMAN[Math.floor(i / 4)]} row ${(i % 4) + 1}: ${x === 1 ? "one dot" : "two dots"}`).join("\n")}</div>
+    <div class="note">Cast the figures and the engine will answer with the same arithmetic line by line,
+    computed from your counts rather than from this screen.</div>`);
+};
+
+/* =================== SHIELDS =================== */
+function setOnline(ok) { const b = $("#btnOnline"); b.style.color = ok ? "" : "var(--bad)";
+  b.title = ok ? "Engine reachable" : "Engine unreachable — only what this phone already saved can open"; }
+$$("#layouts button").forEach(b => b.onclick = () => { S.layout = b.dataset.layout; saveSess();
+  $$("#layouts button").forEach(x => x.setAttribute("aria-selected", String(x === b))); renderShield(); });
+
+function cellHTML(p) {
+
+  const arabic = (S.reading && S.reading.prefs_echo && S.reading.prefs_echo.house_labels) === "arabic";
+  const head = p.kind === "house" ? (arabic ? String(p.position) : p.label) : ROMAN[p.position - 1];
+  // one short caption per cell: the house keeps its leading word, the court keeps its role, and the full
+  // domain ("enemies, seen and unseen, fear...") belongs to the sheet a tap opens, not to a 90px tile
+  const raw = p.kind === "house" ? (p.house_name || p.latin || "")
+    : (p.label === "Sentence / Reconciler" ? "Reconciler" : p.label);
+  const sub = p.kind === "house" ? shorten(raw) : raw;      // court roles are already short and must stay exact
+  return `<button class="cell${p.hot ? " hot" : ""}" data-pos="${p.position}" title="${esc(sub)}">
+    <div class="hn">${esc(head)}${sub ? " · " + esc(sub) : ""}</div>
+    <div class="fn">${esc(p.figure)}</div>
+    <div class="dots">${p.pattern.map(v => `<span style="display:flex;gap:2px">${dots([v])}</span>`).join("")}</div>
+    <div class="meta">${p.even ? "even" : "odd"} · ${p.dots} pts${p.element ? " · " + esc(p.element[0]) : ""}</div></button>`;
+}
+function renderShield() {
+  const box = $("#shieldBox");
+  if (!S.pos) { box.innerHTML = '<div class="mini" style="padding:22px 8px;text-align:center">No cast yet. Pierce, tap, or hold - the shield is built from your marks, never from a sample.</div>';
+    $("#judgeBox").innerHTML = ""; return; }
+  const P = S.pos.map(p => Object.assign({}, p, { hot: S.reading && S.reading.quesited_house === p.position }));
+  const qs = S.question ? `<div class="shieldq"><b>Question</b> — ${esc(S.question)}</div>` : "";
+  const block = (title, idxs) => `<div class="blocklab">${title}</div><table class="fig"><tr>${
+    idxs.map(i => `<td>${cellHTML(P[i])}</td>`).join("")}</tr></table>`;
+  let inner;
+  if (S.layout === "shield") {
+    inner = block("the four mothers · yours, counted", [0, 1, 2, 3]) + block("the four daughters · the mothers' rows, read across", [4, 5, 6, 7])
+      + block("the four nephews", [8, 9, 10, 11]) + block("the court", [12, 13, 14, 15]);
+  } else if (S.layout === "square") {
+    inner = `<table class="fig">${[0, 4, 8, 12].map(r => `<tr>${[r, r + 1, r + 2, r + 3].map(i => `<td>${cellHTML(P[i])}</td>`).join("")}</tr>`).join("")}</table>`;
+  } else {
+    inner = `<table class="ledger">
+      <colgroup><col style="width:9%"><col style="width:29%"><col style="width:22%"><col style="width:12%"><col style="width:28%"></colgroup>
+      <tr><th></th><th>Place</th><th>Figure</th><th>Dots</th><th>How it was made</th></tr>
+      ${P.map(p => `<tr class="${p.kind === "court" ? "court" : ""}" data-pos="${p.position}">
+        <td class="num">${p.label}</td>
+        <td>${p.kind === "house" ? esc(p.house_name || "") + `<div class="mini" style="font-size:10px">${esc(p.latin || "")}</div>` : esc(COURT[p.position] || "")}</td>
+        <td>${esc(p.figure)}${arabicLabel(p) ? `<div class="mini" style="font-size:10.5px">${esc(arabicLabel(p))}</div>` : ""}</td>
+        <td class="num">${p.even ? "even" : "odd"} ${p.dots}<div class="mini" style="font-size:10px">${p.pattern.join("·")}</div></td>
+        <td style="font-size:11.5px;color:var(--muted);line-height:1.35">${esc(p.derived_from || "cast directly from your marks")}</td></tr>`).join("")}</table>`;
+  }
+  box.innerHTML = qs + inner;
+  $$("#shieldBox [data-pos]").forEach(el => el.onclick = () => openPos(+el.dataset.pos));
+  const J = P[14], SJ = P[15], L = P[12], R = P[13];
+  const r = S.reading || {};
+  $("#judgeBox").innerHTML = `<h3>Judge, witnesses and sentence</h3>
+    <div class="kv"><span class="k">Left witness (XIII)</span><span class="v">${esc(L.figure)}</span></div>
+    <div class="kv"><span class="k">Right witness (XIV)</span><span class="v">${esc(R.figure)}</span></div>
+    <div class="kv"><span class="k">Judge (XV)</span><span class="v">${esc(J.figure)}</span></div>
+    <div class="kv"><span class="k">Sentence / Reconciler (XVI)</span><span class="v">${esc(SJ.figure)}</span></div>
+    ${r.summary ? `<div class="mini" style="margin-top:9px">${esc(r.summary)}</div>` : ""}
+    <button class="provebtn" id="judgeProve">Prove the court</button>`;
+  $("#judgeProve").onclick = () => proveSheet({ kind: "court" });
+}
+function openPos(pos) {
+  const p = S.pos[pos - 1];
+  const claims = ((S.reading || {}).claims || []).filter(c => c.house === pos);
+  const tech = S.tech || {};
+  const punct = (tech.via_puncti || [[], [], []])[0].filter(e => e[0] === pos);
+  openSheet(`${p.label} · ${p.kind === "house" ? "House " + pos : COURT[pos]}`, `
+    <div class="bigfig"><div class="dots" style="display:flex;flex-direction:column;gap:5px">${p.pattern.map(v => `<div style="display:flex;gap:7px">${dots([v])}</div>`).join("")}</div>
+      <div style="font-size:17px;font-weight:650;margin-top:5px">${esc(p.figure)}</div>
+      ${arabicLabel(p) ? `<div class="mini">${esc(arabicLabel(p))}${p.ifa_odu ? " · Ifá " + esc(p.ifa_odu) : ""}</div>` : ""}</div>
+    <div class="kv"><span class="k">House</span><span class="v">${esc(p.house_name || COURT[pos] || "")}</span></div>
+    ${p.latin ? `<div class="kv"><span class="k">Latin</span><span class="v">${esc(p.latin)}</span></div>` : ""}
+    ${p.cal_scope ? `<div class="kv"><span class="k">Calatarama scope</span><span class="v">${esc(p.cal_scope)}</span></div>` : ""}
+    <div class="kv"><span class="k">Total dots</span><span class="v num">${p.dots} · ${p.even ? "even" : "odd"}</span></div>
+    <div class="kv"><span class="k">Element · quality</span><span class="v">${esc(p.element || "—")} · ${esc(p.quality || "—")}</span></div>
+    <div class="kv"><span class="k">Motion · planet</span><span class="v">${esc(p.motion || "—")} · ${esc(p.planet || "—")}</span></div>
+    <div class="kv"><span class="k">Gender · time</span><span class="v">${esc(p.gender || "—")} · ${esc(p.time_unit || "—")}</span></div>
+    <div class="note">${esc(p.derived_from || "one of the four mothers: cast directly from your marks, row by row, top to bottom.")}</div>
+    ${punct.length ? `<div class="note">A point of the Via Puncti falls here (${esc(punct[0][1] || "")}).</div>` : ""}
+    ${claims.length ? `<h2 style="margin:15px 0 3px;font-size:14px">What the sources put in this place</h2>
+      <ul class="lines">${claims.map((c, i) => `<li>${esc(c.text)}
+        ${c.quotes && c.quotes.length && PREFS.show_quotes !== false ? c.quotes.slice(0, 2).map(q => `<div class="quote">“${esc(q.text)}”<div class="mini">${esc(q.authority || q.work)}${q.locator ? ", " + esc(q.locator) : ""}</div></div>`).join("") : ""}
+        </li>`).join("")}</ul>`
+      : `<div class="note">No passage in the library speaks to ${p.kind === "house" ? "this house" : "this court figure"} for this question. That is a gap in what has been gathered here, not a silence in the tradition, and not a licence to invent one.</div>`}
+    <div class="row" style="margin-top:13px">
+      <button class="btn ghost" id="pCopy" style="flex:1">Copy this place</button>
+      <button class="btn" id="pProve" style="flex:1">Prove this</button></div>`);
+  $("#pCopy").onclick = async () => { await copyText([`${p.label} ${p.kind === "house" ? "house " + pos + (p.house_name ? " " + p.house_name : "") : COURT[pos]}`,
+    `figure ${p.figure}`, `dots ${p.dots} (${p.even ? "even" : "odd"})`, `rows ${p.pattern.join(",")}`,
+    `element ${p.element}, quality ${p.quality}, motion ${p.motion}, planet ${p.planet}, gender ${p.gender}`,
+    `derived: ${p.derived_from || "cast directly"}`].join("\n")); };
+  $("#pProve").onclick = () => proveSheet({ kind: "house", n: pos });
+}
+$("#btnCopyAll").onclick = async () => {
+  if (!S.mothers) { toast("Cast first"); return; }
+  try {
+    const t = await api(`${API.copy}?mothers=${encodeURIComponent(S.mothers.join(","))}&topic=${encodeURIComponent(S.question || "")}`);
+    await copyText(t); toast(`${t.length.toLocaleString()} characters copied`);
+  } catch (e) { toast(e.message); }
+};
+async function copyText(t) {
+  try { await navigator.clipboard.writeText(t); return true; }
+  catch (e) {
+    const ta = document.createElement("textarea"); ta.value = t; ta.style.cssText = "position:fixed;opacity:0";
+    document.body.appendChild(ta); ta.select(); let ok = false;
+    try { ok = document.execCommand("copy"); } catch (e2) {}
+    ta.remove(); return ok;
+  }
+}
+
+/* =================== READING =================== */
+$$("#panes button").forEach(b => b.onclick = () => goPane(+b.dataset.pane));
+function goPane(i) {
+  S.pane = i;
+  $("#panesBox").scrollTo({ left: i * $("#panesBox").clientWidth, behavior: PREFS.motion === "off" ? "auto" : "smooth" });
+  paintPaneDots();
+}
+function paintPaneDots() {
+  $$("#panes button").forEach(x => x.setAttribute("aria-selected", String(+x.dataset.pane === (S.pane || 0))));
+  $$("#paneDots i").forEach((x, k) => x.classList.toggle("on", k === (S.pane || 0)));
+}
+$("#panesBox").addEventListener("scroll", () => {
+  const i = Math.round($("#panesBox").scrollLeft / Math.max(1, $("#panesBox").clientWidth));
+  if (i !== S.pane) { S.pane = i; paintPaneDots(); }
+}, { passive: true });
+
+function claimHTML(c) {
+  const quotes = (c.quotes || []).filter(q => q.text && PREFS.show_quotes !== false).slice(0, c.strength === "thin" ? 1 : 2);
+  return `<div class="claimitem">
+    <div class="row" style="justify-content:space-between;margin-bottom:4px">
+      <span class="strength ${esc(c.strength)}">${esc(c.strength)} · ${c.n_voices} voice${c.n_voices === 1 ? "" : "s"}</span>
+      <span class="mini">${esc(c.type.replace(/_/g, " "))}</span></div>
+    <div class="claim">${esc(c.text)}</div>
+    ${quotes.map(q => `<div class="quote">“${esc(q.text)}”<div class="mini">${esc(q.authority || q.work)}${q.locator ? ", " + esc(q.locator) : ""}</div></div>`).join("")}
+    ${!quotes.length && c.n_voices ? `<div class="blocked">cites ${esc((c.works || []).join(", ") || "a source")} — wording held back: in copyright, or the library keeps a reference only</div>` : ""}
+    ${(c.works || []).length ? `<div class="mini" style="margin-top:5px">from: ${c.works.map(w => esc(w)).join(" · ")}</div>` : ""}
+    <button class="provebtn" data-claim="${c._i}">Prove this line</button></div>`;
+}
+function renderReading() {
+  const r = S.reading;
+  if (!r) { ["p0","p1","p2"].forEach(id => $("#" + id).innerHTML = '<div class="mini" style="padding:20px 4px">Cast a figure with a question and the reading arrives with it.</div>'); return; }
+  const claims = (r.claims || []).map((c, i) => Object.assign({}, c, { _i: i }));
+  // HOUSES: all sixteen places, courts included, each with what the sources put there
+  let h = `<div class="tagline">Houses · the twelve places and the court</div>`;
+  for (let n = 1; n <= 12; n++) {
+    const mine = claims.filter(c => c.house === n);
+    const p = (S.pos || [])[n - 1] || {};
+    h += `<div class="card" data-open="${n}">
+      <h3>${esc(ROMAN[n - 1])} · ${esc(shorten(p.house_name || ("house " + n)))}${r.quesited_house === n ? " · the quesited" : ""}</h3>
+      ${p.house_name && p.house_name.split(",").length > 1 ? `<div class="mini" style="margin:-3px 0 8px">${esc(p.house_name)}</div>` : ""}
+      <div class="row" style="margin-bottom:6px"><span class="pill on" style="font-size:12px">${esc(p.figure || "")}</span>
+        <span class="mini">${p.even === undefined ? "" : (p.even ? "even" : "odd")} · ${p.dots != null ? p.dots : "?"} dots · ${esc(p.element || "")} ${esc(p.quality || "")}</span></div>
+      ${mine.length ? mine.map(claimHTML).join("") :
+        '<div class="mini">nothing gathered for this place under this question — the figure and its accidents are still above</div>'}
+      ${p.cal_scope ? `<div class="mini" style="margin-top:7px">Calatarama scope: ${esc(p.cal_scope)}</div>` : ""}</div>`;
+  }
+  const courtClaims = claims.filter(c => !c.house);
+  h += `<div class="card"><h3>XIII–XVI · the court</h3>
+    ${courtClaims.length ? courtClaims.map(claimHTML).join("") : '<div class="mini">no separate ruling was gathered for the court under this question</div>'}
+    <div class="note">The witnesses, the Judge and the Reconciler are computed, not chosen: each is the sum of two figures below it, in pairs, with the odd-or-even rule deciding every dot.</div></div>`;
+  if ((r.gap_lines || []).length) {
+    h += `<div class="card"><h3>Where the library is silent</h3>
+      <ul class="lines">${r.gap_lines.map(g => `<li>${esc(g)}</li>`).join("")}</ul>
+      <div class="note">These are gaps in what has been gathered here. They are named rather than smoothed over,
+      and no reading is filled in around them.</div></div>`;
+  }
+  $("#p0").innerHTML = h;
+  // ADVANCED: the older and rarer layers, each with the figure-level proof behind it
+  const t = S.tech || {};
+  const rowsOf = a => (a || []).map(x => Array.isArray(x) ? x.join(" · ") : String(x)).join("\n");
+  let a = `<div class="tagline">Advanced · rarer forms of awareness</div>
+    <p class="mini">Swipe back for the houses. Everything here is computed from your sixteen rows by the library's
+    technique layer, and every card names what it could not establish.</p>`;
+  const card = (title, body, proveName, extra) => `<div class="card"><h3>${esc(title)}</h3>${body}
+    ${extra || ""}<button class="provebtn" data-tech="${esc(proveName)}">Prove this</button></div>`;
+  a += card("Validity of the figure", `<div class="arith">${esc(rowsOf(t.validity && t.validity.length ? t.validity.map(v => v[0] + ": " + v[1]) : []))}</div>`, "validity");
+  if (t.perfection && t.perfection.verdict) a += card("Perfection of the matter",
+    `<div class="claim">${esc(t.perfection.verdict)}</div>
+     <div class="mini">houses ${esc(JSON.stringify(t.perfection.houses))} · mode ${esc(t.perfection.mode || "—")}</div>`, "perfection");
+  if (t.humours) a += card("Complexions", `<div class="arith">${esc(JSON.stringify(t.humours[0]))}\ndominant: ${t.humours[1]}\n${t.humours[2] || ""}</div>`, "humours");
+  if (t.motus) a += card("Motus — how each figure moves", `<div class="arith">${esc(Object.entries(t.motus).map(([k, v]) => k.padEnd(17) + (typeof v === "object" ? JSON.stringify(v) : String(v))).join("\n"))}</div>`, "motus");
+  if (t.parentage) a += card("Parentage", `<div class="arith">${esc(t.parentage.map(x => `${x[0]} ← ${Array.isArray(x[2]) ? x[2].join(", ") : x[2] || ""}\n    ${x[3]}`).join("\n"))}</div>`, "parentage");
+  if (t.via_puncti) {
+    const jmps = (t.via_puncti[0] || []).map(j => "judge " + j[1] + " in " + ROMAN[j[0] - 1] + " (house " + j[0] + ")");
+    const wit = (t.via_puncti[1] || []).map(w => "witness " + w[1] + " in " + ROMAN[w[0] - 1]);
+    const end = (t.via_puncti[2] || []).map(j => j[1] + " in " + ROMAN[j[0] - 1] + " (" + j[2] + ")");
+    const vp = jmps.concat(wit).concat(end.length ? ["the way ends in: " + end.join(", ")]
+      : ["the way of the points does not arrive"]);
+    a += card("Way of the Points", `<div class="arith">${esc(vp.join("\n"))}</div>`, "via_puncti");
+  }
+  if (t.projection) { const P2 = t.projection;
+    a += card("Projection of the points", `<div class="arith">sum of all points: ${P2[0]}\nnumbered place: ${P2[1]}\nfigure there: ${P2[2]}\nits points: ${P2[3]}\n${P2[5] ? "second pass -> " + P2[4] + ": " + P2[5] : ""}</div>`, "projection"); }
+  if (t.triplicities) { const T = t.triplicities;
+    a += card("Triplicities", `<div class="arith">${esc(Object.entries(T[0] || {}).map(([k, v]) => k.padEnd(24) + v.join(", ")).join("\n"))}</div>`, "triplicities"); }
+  const cr = t.crossread || {};
+  const cro = Object.entries(cr).filter(([k, v]) => v && (v.arabic || v.ifa_odu_attested));
+  if (cro.length) a += card("Names beyond the Latin shelf",
+    `<div class="arith">${esc(cro.map(([k, v]) => `${k.padEnd(9)}${(v.figure || "").padEnd(17)}${v.arabic || ""}${v.arabic_gloss ? " (“" + v.arabic_gloss + "”)" : ""}${v.ifa_odu_attested ? "  Ifá: " + v.ifa_odu_attested : ""}`).join("\n"))}</div>
+     <div class="note">Where the Ifá column stands empty, the library found no attested pairing and will not guess one. Arabic names carry the editor and folio in the repository; an Ifá correspondence is a modern observation, not a medieval geomancy rule, and is kept apart for that reason.</div>`, "crossread");
+  a += `<div class="card"><h3>The works this reading came from</h3>`;
+  const byWork = {};
+  claims.forEach(c => (c.works || []).forEach(w => { byWork[w] = (byWork[w] || 0) + 1; }));
+  a += Object.keys(byWork).length ? Object.entries(byWork).map(([w, n]) =>
+    `<div class="kv"><span class="k">${esc(w)}</span><span class="v num">${n} line${n === 1 ? "" : "s"}</span></div>`).join("")
+    : '<div class="mini">no work reached this reading</div>';
+  const cites = r.citations || {};
+  a += `<div class="mini" style="margin-top:8px">${Object.keys(cites).length} citation record${Object.keys(cites).length === 1 ? "" : "s"} behind these lines.</div></div>`;
+  a += `<div class="card"><h3>What this is not</h3><div class="disclaimer">${esc(r.standing || "Reference, not advice.")}</div></div>`;
+  $("#p1").innerHTML = a;
+  // INTERRELATE: who, where, when, how many - each statement with its proof
+  let x = `<div class="tagline">Interrelate · why, how, where, how many</div>
+    <p class="mini">These paragraphs are the engine's own findings about how the places act on each other, not the
+    app's prose. Every card ends with a button that shows the arithmetic and the source that licenses the line.</p>`;
+  const sect = (title, items, key) => `<div class="card"><h3>${esc(title)}</h3>
+    <ul class="lines">${items.map(([k, v]) => {
+      // the engine separates what it found from what it could not find; the pane must not blend the two together
+      const parts = String(flat(v)).split(" · ");
+      const isGap = x => /^\s*_?\s*gap\b/i.test(x);
+      const gaps = parts.filter(isGap), rest = parts.filter(x => !isGap(x));
+      return `<li>${esc(nice(k))} - ${esc(rest.join(" · "))}
+        ${gaps.length ? `<div class="mini" style="margin-top:5px">named gap in the library: ${esc(gaps.map(g => g.replace(/^\s*_?\s*gap\s*:?\s*/i, "")).join(" ; "))}</div>` : ""}</li>`;
+    }).join("")}</ul>
+    <button class="provebtn" data-tech="${esc(key)}">Prove this paragraph</button></div>`;
+  if (t.who) x += sect("Who is in it", Object.entries(t.who), "who");
+  if (t.where) x += sect("Where", Object.entries(t.where), "where");
+  if (t.when) x += sect("When, and how many", Object.entries(t.when), "when");
+  if (t.perfection) x += sect("How it reaches you", [["the two houses", `houses ${JSON.stringify(t.perfection.houses)} — ${t.perfection.mode || "no relation"}`],
+    ["verdict on that", t.perfection.verdict || ""]].filter(([, v]) => v), "perfection");
+  if (!t.who && !t.where && !t.when) x += `<div class="note">Ask a question that names a person, a place or a thing and the
+    engine will have something to relate. Without a quesited house there is no "who", no "where" and no count of days,
+    and this app will not invent them.</div>`;
+  $("#p2").innerHTML = x;
+  bindProve();
+  $$("#p0 [data-open]").forEach(el => el.onclick = e => { if (e.target.closest(".provebtn") || e.target.closest(".card .btn")) return; openPos(+el.dataset.open); });
+}
+function arabicLabel(p) {                       // figures.yaml stores the Arabic name as {name, gloss}, not a string
+  const a = p && p.arabic;
+  if (!a) return "";
+  if (typeof a === "string") return a;
+  return `${a.name || ""}${a.gloss ? ` (“${a.gloss}”)` : ""}`.trim();
+}
+function shorten(t) {                       // a cell has room for one short word; the full domain is a tap away
+  t = String(t || ""); let o = t.split(",")[0].trim();
+  if (o.length > 12) o = o.split(" ")[0];
+  return o ? o.charAt(0).toUpperCase() + o.slice(1) : "";
+}
+function nice(k) { return String(k).replace(/^count_[AB]_/, "count, from ").replace(/^_+/, "").replace(/_/g, " ").trim(); }
+function flat(v) {                                  // the engine answers with shaped records; a phone shows lines
+  if (v == null) return "not established by the sources here";
+  if (typeof v !== "object") return String(v);
+  if (Array.isArray(v)) return v.length ? v.join(", ") : "none";
+  const parts = Object.entries(v).filter(([, x]) => x !== null && x !== undefined && x !== "")
+    .map(([k2, x]) => `${nice(k2)}: ${Array.isArray(x) ? x.join(", ") : (x && typeof x === "object" ? JSON.stringify(x) : x)}`);
+  return parts.length ? parts.join(" · ") : "not established by the sources here";
+}
+function bindProve() {
+  $$("[data-claim]").forEach(b => b.onclick = e => { e.stopPropagation(); proveSheet({ kind: "claim", i: +b.dataset.claim }); });
+  $$("[data-tech]").forEach(b => b.onclick = e => { e.stopPropagation(); proveSheet({ kind: "technique", name: b.dataset.tech }); });
+}
+
+/* =================== PROVE =================== */
+let PV = null, PVkey = null;
+async function proveSheet(scope) {
+  if (!S.mothers) { toast("Cast first"); return; }
+  try {
+    const key = S.mothers.join(",") + "|" + S.question;
+    if (PVkey !== key) {
+      PV = await api(`${API.prove}?mothers=${encodeURIComponent(S.mothers.join(","))}&topic=${encodeURIComponent(S.question || "")}`);
+      PVkey = key;
+    }
+  } catch (e) { toast("Proof unavailable: " + e.message); return; }
+  const P = PV, d = P.differential || {}, aud = P.audit || {};
+  const footer = `<div class="card"><h3>Why the arithmetic can be trusted</h3>
+      <div class="kv"><span class="k">casts compared</span><span class="v num">${(d.casts_tested || 0).toLocaleString()}</span></div>
+      <div class="kv"><span class="k">mismatches</span><span class="v num">${d.mismatches}</span></div>
+      <div class="kv"><span class="k">exhaustive</span><span class="v">${d.exhaustive ? "every possible shield" : "sampled"}</span></div>
+      <div class="arith">${esc(Object.entries(d.checks || {}).map(([k, v]) => `${k.padEnd(20)} ${v.toLocaleString()} casts`).join("\n"))}</div>
+      <div class="mini" style="margin-top:7px">A second, independent implementation of the rules in this repository
+      rebuilds each shield and is diffed against the first; the ${esc(String(d.checks ? Object.keys(d.checks).length : 0))} named fields above are the ones compared.</div>
+      <div class="kv" style="margin-top:8px"><span class="k">internal audit</span><span class="v">${aud.ok ? "clean" : "problems"} · ${aud.claims || 0} claims · ${aud.cited || 0} citations</span></div>
+      ${(aud.problems || []).length ? `<div class="arith">${esc(aud.problems.join("\n"))}</div>` : ""}
+      ${P.reading_gaps && Object.keys(P.reading_gaps).length ? `<div class="note">gaps named in this reading: ${esc(JSON.stringify(P.reading_gaps))}</div>` : ""}
+    </div>`;
+  let head = "";
+  if (scope.kind === "claim" || scope.kind === "house" || scope.kind === "court") {
+    let list = P.claims || [];
+    if (scope.kind === "house") list = list.filter(c => c.house === scope.n);
+    if (scope.kind === "court") list = list.filter(c => !c.house);
+    if (scope.kind === "claim") {
+      // render() sorts claims for display and prove() does not, so match on the sentence, never on an index
+      const want = (((S.reading || {}).claims || [])[scope.i] || {});
+      list = (P.claims || []).filter(c => want.text && c.text === want.text);
+      if (!list.length) list = [{ text: want.text || "", type: want.type || "claim", figure: want.figure,
+        house: want.house, n_voices: want.n_voices || 0, works: want.works || [], quotable: [], cite_only: [],
+        arithmetic: "the reading layer kept this line; the proof layer has no claim of that sentence to unfold" }];
+    }
+    head = list.length ? list.map(c => `<div class="card">
+        <h3>${esc(c.figure || "")}${c.house ? " in " + ROMAN[c.house - 1] : ""} · ${esc(String(c.type || "claim").replace(/_/g, " "))}</h3>
+        <div class="claim">${esc(c.text)}</div>
+        <div class="mini" style="margin-top:9px">how it was calculated</div>
+        <div class="arith">${esc(c.arithmetic)}</div>
+        <div class="mini" style="margin-top:9px">which sources prove it</div>
+        ${(c.quotable || []).map(v => `<div class="quote">“${esc(v.quote)}”
+            <div class="mini">${esc(v.authority || v.work)}${v.locator ? ", " + esc(v.locator) : ""}
+            ${v.through ? "<br>through " + esc(v.through) : ""} · ${esc(v.licence || "?")}${v.polarity ? " · " + esc(v.polarity) + " (" + esc(v.polarity_reliability || "?") + ")" : ""}</div></div>`).join("")}
+        ${(c.cite_only || []).map(v => `<div class="blocked">reference only, wording held back: <b>${esc(v.authority || v.work)}</b>${v.locator ? ", " + esc(v.locator) : ""}${v.through ? " — through " + esc(v.through) : ""}</div>`).join("")}
+        ${!(c.quotable || []).length && !(c.cite_only || []).length ? '<div class="mini">no voice carries this line: it follows from the figures and the rule, not from a quotation</div>' : ""}
+        <div class="kv" style="margin-top:8px"><span class="k">works</span><span class="v">${(c.works || []).map(esc).join(", ") || "—"}</span></div>
+        <div class="kv"><span class="k">voices</span><span class="v num">${c.n_voices}</span></div></div>`).join("")
+      : `<div class="note">Nothing was claimed for that line, so there is nothing to prove. The figures and their
+          derivation are still shown below.</div>`;
+  }
+  const figs = scope.kind === "technique" ? P.chart.positions.map(p =>
+    `${p.label.padEnd(5)}${(p.figure || "").padEnd(17)}rows ${p.pattern.join(",")} = ${p.dots} dots, ${p.even ? "even" : "odd"}${p.derived_from ? "\n      " + p.derived_from : ""}`).join("\n") : "";
+  const techBlock = scope.kind === "technique"
+    ? `<div class="card"><h3>${esc(scope.name)} — as the engine answered it</h3>
+       <div class="arith">${esc(((JSON.stringify((P.chart.techniques || {})[scope.name], null, 1) || "computed on the cast itself; the sixteen figures below are its inputs")).slice(0, 2400))}</div>
+       <div class="mini" style="margin-top:9px">every figure in this shield, and how each was made</div>
+       <div class="arith">${esc(figs)}</div></div>` : "";
+  const ph = scope.n ? (((S.pos || [])[scope.n - 1] || {}).house_name || "") : "";
+  openSheet(scope.kind === "house" ? `Proof · ${ROMAN[scope.n - 1]}${ph ? " " + shorten(ph) : ""}`
+    : scope.kind === "court" ? "Proof · witnesses, Judge and Reconciler"
+    : scope.kind === "technique" ? `Proof · ${scope.name.replace(/_/g, " ")}` : "Proof",
+    head + techBlock + footer);
+}
+
+/* =================== HISTORY =================== */
+function saveHistory(j) {
+  const item = { at: Date.now(), question: S.question || "", mode: S.mode, mothers: j.mothers, judge: j.judge,
+                 values: values(), taps: S.slots.map(s => s.taps), reading: S.reading,
+                 pos: (S.pos || []).map(p => ({ label: p.label, figure: p.figure, pattern: p.pattern, dots: p.dots,
+                   even: p.even, kind: p.kind, house_name: p.house_name, derived_from: p.derived_from })) };
+  const hist = store.get(LS.hist, []);
+  hist.unshift(item);
+  let keep = hist.slice(0, 60);
+  // a saved reading is big; if the phone's storage refuses it, drop the text and keep the chart, and say so
+  while (keep.length && !store.set(LS.hist, keep)) {
+    if (keep === item) { delete item.reading; keep = [item, ...hist.slice(1, 40)]; continue; }
+    keep = keep.slice(0, Math.max(1, keep.length - 5));
+  }
+  S.lastItem = item;
+  toast("Saved to History");
+}
+function renderHistory() {
+  const hist = store.get(LS.hist, []);
+  $("#histNote").textContent = hist.length
+    ? `${hist.length} chart${hist.length === 1 ? "" : "s"} on this phone. Tap to reopen; press and hold to share the shield as an image.`
+    : "Nothing yet. Every cast lands here, on this device only.";
+  const box = $("#histList"); box.innerHTML = "";
+  hist.forEach((it, i) => {
+    const el = document.createElement("div"); el.className = "card";
+    const cols = [0, 1, 2, 3].map(f => `<span>${(it.values || []).slice(f * 4, f * 4 + 4).map(v => `<i class="${v === 1 ? "s" : "p"}"></i>`).join("")}</span>`).join("");
+    el.innerHTML = `<div class="row" style="justify-content:space-between">
+        <span class="mini">${new Date(it.at).toLocaleString(undefined, { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}</span>
+        <span class="mini">${esc(it.mode)}${it.judge ? " · " + esc(it.judge) : ""}</span></div>
+      <div style="font-size:14.5px;font-weight:600;margin:4px 0 2px;line-height:1.35">${it.question ? esc(it.question) : '<span class="mini" style="font-weight:400">no question</span>'}</div>
+      <div class="mini num">${esc((it.mothers || []).join(" · "))}</div>
+      <div class="row" style="justify-content:space-between;margin-top:8px">
+        <div class="mini-shield">${cols}</div>
+        <div class="row"><button class="pill" data-act="open">Reopen</button><button class="pill" data-act="share">Image</button>
+          <button class="pill" data-act="del">Delete</button></div></div>
+      ${it.reading ? "" : '<div class="mini" style="margin-top:6px">text trimmed for storage — recast to re-read it</div>'}`;
+    box.appendChild(el);
+    el.querySelector('[data-act=open]').onclick = () => reopen(it);
+    el.querySelector('[data-act=share]').onclick = () => shareImage(it);
+    el.querySelector('[data-act=del]').onclick = () => { const k = store.get(LS.hist, []); k.splice(i, 1); store.set(LS.hist, k); renderHistory(); };
+    let hold = null;
+    el.addEventListener("pointerdown", () => { hold = setTimeout(() => { buzz(22); shareImage(it); }, 600); });
+    ["pointerup", "pointercancel", "pointerleave"].forEach(ev => el.addEventListener(ev, () => clearTimeout(hold)));
+  });
+}
+function reopen(it) {
+  S.slots = (it.values || []).map((v, i) => ({ taps: (it.taps || [])[i] || v, value: v, open: false }));
+  while (S.slots.length < 16) S.slots.push(null);
+  S.order = S.slots.map((s, i) => i);
+  S.question = it.question || ""; S.mode = it.mode || S.mode;
+  S.mothers = it.mothers; S.reading = it.reading || null; S.arith = null;
+  S.pos = (it.pos || []).map((p, i) => Object.assign({}, p, { position: i + 1 }));
+  $("#q").value = S.question;
+  saveSess(); bindStage();
+  if (S.pos && S.pos.length === 16) { show("v-shield"); if (S.reading) renderReading(); }
+  else { show("v-cast"); toast("Saved marks restored — press Cast to read them again"); }
+}
+$("#btnExport").onclick = async () => { const ok = await copyText(JSON.stringify(store.get(LS.hist, []))); toast(ok ? "History copied as JSON" : "Copying was blocked"); };
+$("#btnWipe").onclick = () => {
+  openSheet("Clear the saved charts?", `<p class="mini">This deletes ${store.get(LS.hist, []).length} chart(s) held on this phone.
+    Nothing is removed from the library or the repository: history never leaves the device in the first place.</p>
+    <button class="btn warn" id="doWipe">Delete them all</button>`);
+  $("#doWipe").onclick = () => { store.del(LS.hist); closeSheet(); renderHistory(); toast("History cleared"); };
+};
+
+/* =================== SHARE AS IMAGE =================== */
+async function shareImage(it) {
+  it = it || S.lastItem;
+  if (!it || !it.values) { toast("Cast something first"); return; }
+  const c = await paint(it);
+  const blob = await new Promise(res => c.toBlob(res, "image/png"));
+  if (!blob) { toast("The phone would not draw it"); return; }
+  const name = `geomancy-${new Date(it.at || Date.now()).toISOString().slice(0, 10)}.png`;
+  const file = new File([blob], name, { type: "image/png" });
+  if (navigator.canShare && navigator.canShare({ files: [file] })) {
+    try { await navigator.share({ files: [file], title: "Geomantic shield", text: it.question || "" }); return; }
+    catch (e) { if (e && e.name === "AbortError") return; }
+  }
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name; a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+  toast("Saved as an image");
+}
+$("#btnShare").onclick = () => shareImage(S.lastItem || { at: Date.now(), question: S.question, mode: S.mode,
+  values: values(), mothers: S.mothers, pos: S.pos || [] });
+async function paint(it) {
+  const W = 1080, H = 1350, c = document.createElement("canvas");
+  c.width = W; c.height = H;
+  const g = c.getContext("2d");
+  const ink = document.documentElement.dataset.theme === "parchment";
+  const INK = ink ? "#221e1a" : "#f0e9dd", MUT = ink ? "#6d6151" : "#a99c90",
+        ACC = ink ? "#5d4a86" : "#b795e6", GOLD = ink ? "#8a6b23" : "#e6c07a", PANEL = ink ? "#f8f3e7" : "#1e1a18";
+  g.fillStyle = ink ? "#efe7d7" : "#141110"; g.fillRect(0, 0, W, H);
+  g.fillStyle = PANEL; round(g, 56, 56, W - 112, H - 112, 40); g.fill();
+  g.strokeStyle = ink ? "#cdbd9f" : "#3a322e"; g.lineWidth = 2; round(g, 56, 56, W - 112, H - 112, 40); g.stroke();
+  g.textAlign = "center";
+  g.fillStyle = GOLD; g.font = "600 27px system-ui,sans-serif";
+  g.fillText("G E O M A N C Y   ·   " + new Date(it.at || Date.now()).toDateString().toUpperCase(), W / 2, 132);
+  // the question is drawn above the shield, because a chart without its question is only dots
+  g.fillStyle = INK; g.font = "italic 37px Georgia,serif";
+  const lines = wrapText(g, it.question ? `“${it.question}”` : "no question asked", W - 240);
+  lines.slice(0, 3).forEach((ln, i) => g.fillText(ln, W / 2, 200 + i * 48));
+  const pos = it.pos || [];
+  const cols = [0, 1, 2, 3];
+  g.font = "600 30px system-ui,sans-serif";
+  cols.forEach(f => {
+    const cx = 210 + f * 222;
+    const p = pos[f * 4] || {};
+    g.fillStyle = ACC; g.font = "500 22px system-ui,sans-serif";
+    g.fillText(String((p.figure || "")), cx, 396);
+    for (let r = 0; r < 4; r++) {
+      const v = (it.values || [])[f * 4 + r];
+      const y = 452 + r * 62;
+      g.fillStyle = INK;
+      if (v === 1) { g.beginPath(); g.arc(cx, y, 13, 0, 6.284); g.fill(); }
+      else if (v === 2) { g.beginPath(); g.arc(cx - 26, y, 13, 0, 6.284); g.arc(cx + 26, y, 13, 0, 6.284); g.fill(); }
+    }
+    g.fillStyle = MUT; g.font = "500 19px system-ui,sans-serif";
+    g.fillText(ROMAN[f], cx, 424);
+  });
+  g.strokeStyle = ink ? "#cdbd9f" : "#3a322e"; g.lineWidth = 1;
+  g.beginPath(); g.moveTo(150, 740); g.lineTo(W - 150, 740); g.stroke();
+  g.fillStyle = MUT; g.font = "500 20px system-ui,sans-serif";
+  g.fillText("the four mothers, as counted", W / 2, 776);
+  const daughters = pos.slice(4, 8), court = pos.slice(12, 16);
+  g.fillStyle = INK; g.font = "600 26px system-ui,sans-serif";
+  g.fillText(daughters.map(d => d.figure || "?").join("   ·   "), W / 2, 836);
+  g.fillStyle = MUT; g.font = "500 19px system-ui,sans-serif";
+  g.fillText("daughters", W / 2, 866);
+  g.fillStyle = ACC; g.font = "600 34px system-ui,sans-serif";
+  const judge = (court[2] || {}).figure || it.judge || "";
+  g.fillText("JUDGE  " + judge, W / 2, 946);
+  g.fillStyle = INK; g.font = "500 24px system-ui,sans-serif";
+  g.fillText(`witnesses ${(court[0] || {}).figure || "?"} · ${(court[1] || {}).figure || "?"}   ·   reconciler ${(court[3] || {}).figure || "?"}`, W / 2, 992);
+  g.fillStyle = MUT; g.font = "400 20px system-ui,sans-serif";
+  g.fillText("a reading of what named authorities wrote — reference, not advice", W / 2, 1236);
+  return c;
+}
+function round(g, x, y, w, h, r) { g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r);
+  g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); }
+function wrapText(g, text, max) {
+  const words = String(text).split(/\s+/); const out = []; let line = "";
+  words.forEach(w => { if (g.measureText(line + " " + w).width > max && line) { out.push(line); line = w; } else line = line ? line + " " + w : w; });
+  if (line) out.push(line); return out;
+}
+
+/* =================== SHEETS =================== */
+function openSheet(title, html) {
+  $("#sheetTitle").textContent = title; $("#sheetBody").innerHTML = html;
+  $("#sheet").classList.add("open"); $("#scrim").classList.add("open"); bindProve();
+  $("#sheetBody").scrollTop = 0;
+}
+function closeSheet() { $("#sheet").classList.remove("open"); $("#scrim").classList.remove("open"); }
+$("#scrim").onclick = closeSheet;
+let sy0 = null;
+$("#sheet").addEventListener("touchstart", e => { sy0 = e.touches[0].clientY; }, { passive: true });
+$("#sheet").addEventListener("touchmove", e => { if (sy0 !== null && e.touches[0].clientY - sy0 > 70) { closeSheet(); sy0 = null; } }, { passive: true });
+
+/* =================== SETTINGS =================== */
+function setPref(k, v) { if (v === undefined || v === "" || v === null) delete PREFS[k]; else PREFS[k] = v;
+  if (!store.set(LS.prefs, PREFS)) toast("Storage refused the setting"); }
+$("#btnSettings").onclick = async () => {
+  let filePrefs = {};
+  try { filePrefs = await api(API.prefs); } catch (e) {}
+  const p = Object.assign({}, filePrefs, PREFS);
+  openSheet("Settings", `
+    <p class="mini">Held on this phone. What the engine will accept is a short allow-list of presentation keys -
+    order, labels, how much to show - and it answers with the keys it ignored. Nothing here reaches the content
+    layer: no setting can change what a source said, or make the app invent a line to fill a gap.</p>
+    <div class="kv"><span class="k">Theme</span><span class="v"><select id="sTheme">
+      <option value="ink">Night ink</option><option value="parchment">Parchment</option></select></span></div>
+    <div class="kv"><span class="k">Animations</span><span class="v"><button class="toggle" id="sMotion"></button></span></div>
+    <div class="kv"><span class="k">Haptics</span><span class="v"><button class="toggle" id="sHapt"></button></span></div>
+    <div class="kv"><span class="k">Place labels</span><span class="v"><select id="sLabels">
+      <option value="roman">Roman I–XVI</option><option value="arabic">Arabic 1–12</option></select></span></div>
+    <div class="kv"><span class="k">Source quotations</span><span class="v"><button class="toggle" id="sQuotes"></button></span></div>
+    <div class="kv"><span class="k">Gaps in the library</span><span class="v"><select id="sGap">
+      <option value="brief">name the house</option><option value="full">whole sentence</option><option value="silent">hide</option></select></span></div>
+    <div class="kv"><span class="k">Tone</span><span class="v"><select id="sTone">
+      <option value="plain">plain (one-line count)</option><option value="scholarly">scholarly (no summary)</option></select></span></div>
+    <div class="kv"><span class="k">Voices for confidence</span><span class="v"><input type="number" id="sMinV" min="1" max="4"></span></div>
+    <div class="kv"><span class="k">Lines per cast</span><span class="v"><input type="number" id="sMax" min="10" max="200" step="10"></span></div>
+    <div class="kv"><span class="k">Hide weak polarity</span><span class="v"><button class="toggle" id="sPol"></button></span></div>
+    <div class="card" style="margin:12px 0 0"><h3>Which works speak first</h3><div id="sWorks"></div>
+      <div class="note">Reordering changes the order lines are shown in. It cannot add a work the library does not
+      hold, and a line whose only source is lower down still cites that source.</div></div>
+    <div class="row" style="margin-top:11px">
+      <button class="btn ghost" id="sDefault" style="flex:1">Library defaults</button>
+      <button class="btn" id="sAgain" style="flex:1">Re-read this cast</button></div>
+    <div class="mini" id="sEcho" style="margin-top:9px"></div>`);
+  const on = (id, v) => { const e = $(id); if (e) e.checked = !!v; if (e) e.classList.toggle("on", !!v); };
+  $("#sTheme").value = document.documentElement.dataset.theme;
+  $("#sLabels").value = PREFS.house_labels || filePrefs.house_labels || "roman";
+  $("#sGap").value = PREFS.gap_detail || filePrefs.gap_detail || "brief";
+  $("#sTone").value = PREFS.tone || filePrefs.tone || "plain";
+  $("#sMinV").value = PREFS.min_voices_for_confidence || filePrefs.min_voices_for_confidence || 2;
+  $("#sMax").value = PREFS.max_claims || filePrefs.max_claims || 60;
+  on("#sMotion", PREFS.motion !== "off"); on("#sHapt", PREFS.haptics !== false);
+  on("#sQuotes", (PREFS.show_quotes !== undefined ? PREFS.show_quotes : filePrefs.show_quotes) !== false);
+  on("#sPol", (PREFS.hide_unreliable_polarity !== undefined ? PREFS.hide_unreliable_polarity : filePrefs.hide_unreliable_polarity) !== false);
+  $("#sTheme").onchange = e => { document.documentElement.dataset.theme = e.target.value; };
+  const tg = (id, key, whenOn, whenOff) => { $(id).onclick = () => { const now = !$(id).classList.contains("on");
+    $(id).classList.toggle("on", now); setPref(key, now ? whenOn : whenOff);
+    if (key === "motion") document.documentElement.dataset.motion = now ? "on" : "off"; }; };
+  tg("#sMotion", "motion", undefined, "off"); tg("#sHapt", "haptics", undefined, false);
+  tg("#sQuotes", "show_quotes", true, false); tg("#sPol", "hide_unreliable_polarity", true, false);
+  $("#sLabels").onchange = e => { setPref("house_labels", e.target.value); renderShield(); };
+  $("#sGap").onchange = e => setPref("gap_detail", e.target.value);
+  $("#sTone").onchange = e => setPref("tone", e.target.value);
+  $("#sMinV").onchange = e => setPref("min_voices_for_confidence", +e.target.value);
+  $("#sMax").onchange = e => setPref("max_claims", +e.target.value);
+  const order = PREFS.preferred_works_first || filePrefs.preferred_works_first || [];
+  const seen = [];
+  ((S.reading || {}).claims || []).forEach(c => (c.works || []).forEach(w => { if (!seen.includes(w)) seen.push(w); }));
+  Object.keys((S.reading || {}).citations || {}).forEach(k => { const w = k.split(":").pop(); if (!seen.includes(w)) seen.push(w); });
+  const list = order.concat(seen.filter(s => !order.includes(s)));
+  function paintWorks() {
+  $("#sWorks").innerHTML = list.length ? list.map((w, i) =>
+    `<div class="kv"><span class="k num">${ROMAN[i] || i + 1}. ${esc(w)}</span>
+      <span class="v"><button class="pill" data-up="${i}" ${i ? "" : "disabled"}>↑</button>
+      <button class="pill" data-dn="${i}" ${i === list.length - 1 ? "disabled" : ""}>↓</button></span></div>`).join("")
+    : '<div class="mini">Cast a reading first: the works listed here are the ones that actually spoke in it.</div>';
+    $$("#sWorks [data-up],#sWorks [data-dn]").forEach(b => b.onclick = () => {
+      const up = b.hasAttribute("data-up"); const i = +(up ? b.dataset.up : b.dataset.dn);
+      const j = up ? i - 1 : i + 1;
+      if (j < 0 || j >= list.length) return;
+      const x = list[i]; list[i] = list[j]; list[j] = x;
+      setPref("preferred_works_first", list.slice());
+      toast(list[j] + " moved to " + (i + 1) + " of " + list.length); paintWorks();
+    });
+  }
+  paintWorks();
+  $("#sDefault").onclick = () => { API_KEYS.concat(["theme","motion","haptics"]).forEach(k => delete PREFS[k]);
+    store.set(LS.prefs, PREFS); document.documentElement.dataset.motion = "on"; closeSheet(); toast("Library defaults restored"); };
+  $("#sAgain").onclick = async () => { closeSheet(); if (filled() === 16) { const ok = await castNow(); if (ok) { show("v-read"); goPane(S.pane || 0); } } else toast("Nothing to re-read"); };
+  const ign = ((S.reading || {}).prefs_echo || {}).ignored_client_keys;
+  $("#sEcho").textContent = ign && ign.length ? `the engine ignored: ${ign.join(", ")}` : "every setting this app sent was accepted";
+};
+
+/* =================== ABOUT =================== */
+$("#btnAbout").onclick = async () => {
+  openSheet("About", `<p style="font-size:15px">You cast the figures by hand, by pierced sand, by four rows, or by a held
+    button. The library computes the mothers, the daughters, the nephews, the witnesses, the Judge and the Reconciler,
+    then places in each question only what its named sources actually wrote - with the silence named where they wrote nothing.</p>
+    <div class="kv"><span class="k">Casting</span><span class="v">four modes, one engine</span></div>
+    <div class="kv"><span class="k">Shield</span><span class="v">16 places: 12 houses and the court</span></div>
+    <div class="kv"><span class="k">Engine</span><span class="v" id="abVer">offline</span></div>
+    <div class="kv"><span class="k">Dataset</span><span class="v" id="abDs">—</span></div>
+    <div class="kv"><span class="k">Passages</span><span class="v" id="abPass">—</span></div>
+    <div class="kv"><span class="k">Coverage</span><span class="v" id="abCov">—</span></div>
+    <div class="kv"><span class="k">Cross-check</span><span class="v" id="abDiff">—</span></div>
+    <div class="note">Charts are saved in this phone's own storage and never sent anywhere: the engine sees the counts
+    of your marks and the question you typed, nothing else. Ask for a proof on any line and the app shows the
+    arithmetic and the named source - never a paragraph with a citation melted into it.</div>
+    <div class="disclaimer">Reference, not advice. These are recorded claims by historical authors, gathered because they
+    agree across independent witnesses, not because anything here is predictive. Not medical, legal, financial or
+    psychological advice, in any direction.</div>
+    <div class="row" style="margin-top:12px">
+      <button class="btn ghost" id="abInstall" style="flex:1">Install</button>
+      <button class="btn ghost" id="abLic" style="flex:1">Licence</button></div>`);
+  try {
+    const h = await api(API.health);
+    $("#abVer").textContent = "v" + (h.version || "?") + " · reachable";
+    $("#abDs").textContent = h.dataset || "—";
+    $("#abPass").textContent = h.passages != null ? h.passages.toLocaleString() + " · " + h.voices.toLocaleString() + " voices" : "—";
+    $("#abCov").textContent = h.coverage_score != null ? h.coverage_score + " / 100" : "—";
+    $("#ver").textContent = "v" + (h.version || "");
+    let d = "—";
+    try { const pv = await api(`${API.prove}?mothers=Via,Via,Via,Via&topic=`);
+      d = `${(pv.differential.casts_tested || 0).toLocaleString()} casts, ${pv.differential.mismatches} mismatches`; } catch (e) {}
+    $("#abDiff").textContent = d;
+  } catch (e) { $("#abVer").textContent = "not reachable from here"; }
+  $("#abInstall").onclick = async () => {
+    if (!window.__bip) { toast("In Chrome: menu → Add to Home screen"); return; }
+    window.__bip.prompt(); window.__bip = null;
+  };
+  $("#abLic").onclick = () => openSheet("Licence", `<div class="note">Code is MIT. <code>core_facts.json</code> - figure
+    patterns, dot counts, elemental and planetary correspondences, house meanings - is CC0 and free to reuse. The curated
+    passages, the claim keys and the reading engine are a licensed editorial layer: share non-commercially with
+    attribution, or ask for a commercial licence. This app reproduces no in-copyright wording at all: where a passage
+    cannot be quoted, it shows the work and the folio instead.</div>`);
+};
+let deferred = null;
+window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); deferred = e; window.__bip = e; });
+$("#btnOnline").onclick = async () => {
+  try { await api(API.health); setOnline(true); toast("Engine reachable"); }
+  catch (e) { setOnline(false); toast("Engine unreachable — saved charts still open"); }
+};
+
+/* =================== BOOT =================== */
+async function boot() {
+  try {
+    const f = await api(API.figures);
+    Object.entries(f).forEach(([name, v]) => { if (v && v.pattern) FIGS[v.pattern.join(",")] = name; });
+    setOnline(true);
+  } catch (e) {
+    setOnline(false);
+    const b = document.createElement("div");
+    b.className = "card offline";
+    b.innerHTML = "The engine is not answering, so a new cast cannot be read. Saved charts and their text still open.";
+    $("#v-cast .scroller").prepend(b);
+  }
+  document.documentElement.dataset.theme = PREFS.theme === "parchment" ? "parchment" : "ink";
+  document.documentElement.dataset.motion = PREFS.motion === "off" ? "off" : "on";
+  // the manifest declares a share_target, so text shared into the app becomes the question
+  const shared = new URLSearchParams(location.search).get("text");
+  if (shared && !S.question) { S.question = shared.trim(); }
+  $("#q").value = S.question || "";
+  $$("#modes button").forEach(x => x.setAttribute("aria-selected", String(x.dataset.mode === S.mode)));
+  $$("#layouts button").forEach(x => x.setAttribute("aria-selected", String(x.dataset.layout === S.layout)));
+  renderChips(); bindSand(); bindStage();
+  if ("serviceWorker" in navigator) { try { await navigator.serviceWorker.register("sw.js"); } catch (e) {} }
+  document.addEventListener("keydown", e => {
+    if (["TEXTAREA", "INPUT", "SELECT"].includes(e.target.tagName)) return;
+    const k = e.key.toLowerCase();
+    if (e.code === "Space") { e.preventDefault(); const i = nextSlot(); if (i >= 0 && S.mode !== "sand") {
+      setSlot(i, (S.slots[i] ? S.slots[i].taps : 0) + 1, rowValue((S.slots[i] ? S.slots[i].taps : 0) + 1), true); bindStage(); } }
+    if (k === "enter" || k === "c") closeRow();
+    if (k === "z") $("#btnUndo").click();
+    if (k === "n") goPane(((S.pane || 0) + 1) % 3);
+    if (k === "escape") closeSheet();
+  });
+}
+boot();
+</script>
+</body>
+</html>

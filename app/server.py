@@ -36,6 +36,8 @@ DS = ROOT / "library" / "dataset"
 KB = ROOT / "kb"
 PREFS = APP / "preferences.json"
 
+ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"]
+
 _cache: dict = {}
 
 
@@ -63,6 +65,28 @@ def coverage() -> dict:
         f = KB / "coverage.json"
         _cache["coverage"] = json.loads(f.read_text()) if f.exists() else {}
     return _cache["coverage"]
+
+
+PRESENTATION_KEYS = ("show_quotes", "preferred_works_first", "min_voices_for_confidence", "gap_detail",
+                    "tone", "house_labels", "topics_pinned", "hide_unreliable_polarity", "max_claims")
+
+
+def merge_prefs(client: dict | None) -> dict:
+    """File preferences, with a client's overrides applied - presentation keys only.
+
+    A phone cannot write app/preferences.json, so the mobile app sends its settings with each request. What
+    it may not do, in either direction, is reach the content layer: keys outside the whitelist are dropped and
+    reported, because the moment a client can pick which ruling to display the library stops being a source.
+    """
+    base = preferences()
+    if not client:
+        return base
+    kept = {k: v for k, v in client.items() if k in PRESENTATION_KEYS}
+    ignored = sorted(set(client) - set(kept))
+    out = {**base, **kept}
+    if ignored:
+        out["ignored_client_keys"] = ignored
+    return out
 
 
 def preferences() -> dict:
@@ -249,6 +273,170 @@ def chart(mothers: list[str]) -> dict:
             "daughters": shield[4:8], "nieces": shield[8:12]}
 
 
+STATIC = {"/m": ("mobile.html", "text/html; charset=utf-8"),
+          "/mobile.html": ("mobile.html", "text/html; charset=utf-8"),
+          "/manifest.webmanifest": ("manifest.webmanifest", "application/manifest+json"),
+          "/sw.js": ("sw.js", "application/javascript; charset=utf-8"),
+          "/icon-192.png": ("icon-192.png", "image/png"),
+          "/icon-512.png": ("icon-512.png", "image/png")}
+
+
+# ---------------------------------------------------------------- counting rule, in one place
+def rows_to_values(rows: list[int]) -> list[int]:
+    """Taps become dots the way the tradition counts them: make the marks, count them off in pairs, and what
+    is left over decides the row - one dot if the remainder is odd, two if the pair closes even.
+
+    This is deliberately the same arithmetic as `engine.deep_read.add()`, which turns two rows into one:
+    `(x + y) % 2` picks 1 else 2. If the app ever invents its own counting rule, the first figure and the
+    last agree with nothing, so the tests compare this function against the engine rather than trusting the
+    comment.
+    """
+    out = []
+    for r in rows:
+        n = int(r)
+        if n < 1:
+            raise ValueError("a row needs at least one tap; an empty row is not a figure")
+        out.append(1 if n % 2 else 2)
+    return out
+
+
+def mothers_from_values(values: list[int]) -> list[str]:
+    """Sixteen row-values, taken in blocks of four top-to-bottom, are the four mothers."""
+    from engine import deep_read as D
+    if len(values) != 16:
+        raise ValueError(f"16 rows are needed to cast, got {len(values)}")
+    return [D.fig(list(values[4 * i:4 * i + 4])) for i in range(4)]
+
+
+def parents_label(c, i: int) -> str:
+    """How position i+1 was produced, in the words a person can check with their own eyes."""
+    from engine import deep_read as D
+    tr = c.get("transposed") or {}
+    if i < 4:
+        return "cast directly: four rows of taps, counted in pairs"
+    if i in tr:
+        return f"row {tr[i] + 1} of the four mothers, read across as a figure"
+    par = (c.get("parents") or {}).get(i)
+    if not par:
+        return ""
+    a, b = par
+    pa, pb = list(c["houses"][a]), list(c["houses"][b])
+    lab = lambda k: ROMAN[k] if k < 12 else ["left witness", "right witness", "Judge", "Sentence"][k - 12]
+    merged = ", ".join(f"{x}+{y}->{'odd so 1' if (x + y) % 2 else 'even so 2'}" for x, y in zip(pa, pb))
+    return f"{lab(a)} + {lab(b)}: {merged}"
+
+
+def chart16(mothers: list[str], topic: str | None = None) -> dict:
+    import yaml
+    from engine import deep_read as D
+    c = D.build(mothers)
+    figs = yaml.safe_load((KB / "figures.yaml").read_text())["figures"]
+    hm_raw = yaml.safe_load((KB / "houses.yaml").read_text())["houses"]
+    court = ["left witness", "right witness", "Judge", "Sentence / Reconciler"]
+    positions = []
+    for i in range(16):
+        pat = [int(x) for x in c["houses"][i]]
+        name = D.fig(pat)
+        meta = figs.get(name) or {}
+        hm = (hm_raw.get(str(i + 1)) or hm_raw.get(i + 1) or {}) if i < 12 else {}
+        positions.append({
+            "position": i + 1, "label": ROMAN[i] if i < 12 else court[i - 12],
+            "kind": "house" if i < 12 else "court",
+            "house_name": hm.get("english"), "latin": hm.get("latin"), "cal_scope": (hm.get("cal") or {}).get("aspect"),
+            "figure": name, "arabic": meta.get("arabic"), "pattern": pat,
+            "rows": [{"row": r + 1, "dots": pat[r], "single": pat[r] == 1} for r in range(4)],
+            "dots": sum(pat), "even": sum(pat) % 2 == 0,
+            "element": meta.get("element"), "quality": meta.get("quality"), "motion": meta.get("motion"),
+            "planet": meta.get("planet"), "gender": meta.get("gender"), "time_unit": meta.get("time_unit"),
+            "ifa_odu": meta.get("ifa_odu"), "derived_from": parents_label(c, i)})
+    tech = {}
+    for fn, needs_topic in (("validity", False), ("motus", False), ("parentage", False), ("via_puncti", False),
+                            ("projection", False), ("humours", True), ("perfection", True), ("triplicities", True),
+                            ("who", True), ("where", True), ("when", True), ("crossread", False)):
+        try:
+            f = getattr(D, fn)
+            tech[fn] = f(c, topic) if needs_topic and topic else (f(c, topic) if needs_topic else f(c))
+        except Exception as e:                                  # noqa: BLE001
+            tech[fn] = {"error": f"{type(e).__name__}: {e}"}
+    return {"mothers": mothers, "positions": positions, "techniques": tech,
+            "topic": topic, "validity_note": "the shield is 16 figures: 12 houses then the court"}
+
+
+def prove(mothers: list[str], topic: str | None) -> dict:
+    """What the 'prove it' button opens: the arithmetic, the independent check, and the sources - kept out of
+    the prose so a sentence is never its own footnote."""
+    from engine import ground as G
+    ch = chart16(mothers, topic)
+    c = chart(mothers)
+    rd = G.assemble({"houses": {int(k): v for k, v in c["houses"].items()}, **c["court"]}, topic, G.VoiceBook())
+    vb = G.VoiceBook()
+    pos_by_fig: dict = {}
+    for row in ch["positions"]:
+        pos_by_fig.setdefault(row["figure"], []).append(row)
+    claims = []
+    for k, cl in enumerate(rd["claims"]):
+        ids = (cl.get("cites") or {}).get("voice_ids") or []
+        voices = []
+        for vid in ids:
+            v = vb.lookup(vid) or {}
+            voices.append({"id": vid, "quote": v.get("quote"), "gloss": v.get("gloss"),
+                           "authority": v.get("authority"), "through": v.get("through"),
+                           "locator": v.get("locator"), "work": v.get("work"),
+                           "licence": v.get("licence"), "cite_only": v.get("cite_only"),
+                           "polarity": v.get("polarity"), "polarity_reliability": v.get("polarity_reliability")})
+        fig, house = cl.get("figure"), cl.get("house")
+        rows = pos_by_fig.get(fig) or []
+        which = next((r for r in rows if r["position"] == house), rows[0] if rows else None)
+        arithmetic = (f"{which['label']}: rows {which['pattern']} = {which['dots']} dots, "
+                      f"{'even' if which['even'] else 'odd'} - {which['derived_from'] or 'cast directly'}"
+                      if which else "court figure: derived from the witnesses above")
+        claims.append({"i": k, "type": cl["type"], "text": cl["text"], "figure": fig, "house": house,
+                       "role": cl.get("role"), "mode": cl.get("mode"), "arithmetic": arithmetic,
+                       "works": sorted({v["work"] for v in voices if v.get("work")}),
+                       "quotable": [v for v in voices if v.get("quote")],
+                       "cite_only": [v for v in voices if not v.get("quote")],
+                       "n_voices": len(ids)})
+    diff = {}
+    ev = DS / "evaluation.json"
+    if ev.exists():
+        e = json.loads(ev.read_text())
+        diff = {"casts_tested": e.get("casts_tested"), "mismatches": e.get("mismatches"),
+                "checks": {k: v for k, v in (e.get("agreement") or {}).items()},
+                "exhaustive": e.get("exhaustive")}
+    return {"topic": topic, "chart": ch, "claims": claims, "differential": diff,
+            "reading_gaps": rd.get("gaps"), "audit": G.validate(rd, vb)}
+
+
+def copy_text(mothers: list[str], topic: str | None) -> str:
+    """The plain-text block a user pastes into a chat or a notebook: one line per position, figures, dots,
+    correspondences and the derived chain, then the reading, then the silence."""
+    ch = chart16(mothers, topic)
+    L = [f"geomancy chart - {' '.join(mothers)}" + (f" - question: {topic}" if topic else ""), ""]
+    r16 = ROMAN + ["XIII", "XIV", "XV", "XVI"]
+    for r in ch["positions"]:
+        # the four court figures are the thirteenth to sixteenth places of the same shield, so the copied block
+        # numbers them too: a notebook pasted with this should still show where each figure sits
+        num = r16[r["position"] - 1]
+        tag = num if r["kind"] == "house" else f"{num} {r['label']}"
+        head = f"{tag:>23}" + (f" {r['house_name']}" if r.get("house_name") else "")
+        bits = [f"{r['figure']}", f"{r['dots']} dots ({'even' if r['even'] else 'odd'})"]
+        for key, lab in (("element", "element"), ("quality", "quality"), ("motion", "motion"),
+                         ("planet", "ruler"), ("time_unit", "time")):
+            if r.get(key):
+                bits.append(f"{lab} {r[key]}")
+        L.append(f"{head}: " + ", ".join(bits))
+        if r.get("derived_from"):
+            L.append(f"      from {r['derived_from']}")
+    vp = (ch["techniques"].get("via_puncti") or {})
+    if vp:
+        L += ["", f"way of the points: {json.dumps(vp, ensure_ascii=False, default=str)[:400]}"]
+    pf = (ch["techniques"].get("perfection") or {}) if topic else {}
+    if pf:
+        L += [f"perfection: {json.dumps(pf, ensure_ascii=False, default=str)[:400]}"]
+    L += ["", "not advice, and not a prediction: these are documented claims by named authorities."]
+    return "\n".join(L)
+
+
 class H(BaseHTTPRequestHandler):
     protocol_version = "HTTP/1.1"
 
@@ -259,13 +447,59 @@ class H(BaseHTTPRequestHandler):
         self.send_response(code)
         self.send_header("Content-Type", ctype)
         self.send_header("Content-Length", str(len(body)))
-        self.send_header("Cache-Control", "no-store")
+        self.send_header("Cache-Control", getattr(self, "_cache_ctl", "no-store"))
         self.end_headers()
         self.wfile.write(body)
 
     def json_out(self, obj, code: int = 200) -> None:
         self._send(code, json.dumps(obj, indent=1, ensure_ascii=False, default=str).encode(),
                    "application/json; charset=utf-8")
+
+    def do_POST(self) -> None:             # noqa: N802
+        u = urlparse(self.path)
+        n = int(self.headers.get("Content-Length") or 0)
+        try:
+            body = json.loads(self.rfile.read(n) or b"{}")
+        except Exception as e:                                  # noqa: BLE001
+            return self.json_out({"error": f"body must be JSON: {e}"}, 400)
+        try:
+            if u.path == "/api/cast_from_rows":
+                if "rows" in body:
+                    values = rows_to_values(body["rows"])
+                elif "values" in body:
+                    values = [int(v) for v in body["values"]]
+                    if any(v not in (1, 2) for v in values):
+                        return self.json_out({"error": "values must be 1 or 2 dots"}, 400)
+                    if len(values) != 16:
+                        return self.json_out({"error": f"16 rows are needed, got {len(values)}"}, 400)
+                else:
+                    return self.json_out({"error": "send rows (tap counts) or values (1/2 per row)"}, 400)
+                moms = mothers_from_values(values)
+                c = chart(moms)
+                c["method"] = body.get("method") or "unknown"
+                c["row_values"] = values
+                c["rows_in"] = [int(x) for x in (body.get("rows") or [0] * 16)]
+                c["mothers_arithmetic"] = [
+                    {"mother": ROMAN[i], "rows": values[4 * i:4 * i + 4],
+                     "taps": [int(x) for x in (body.get("rows") or [0] * 16)][4 * i:4 * i + 4],
+                     "figure": moms[i], "dots": sum(values[4 * i:4 * i + 4]),
+                     "pairs": [int(x) // 2 for x in (body.get("rows") or [0] * 16)][4 * i:4 * i + 4],
+                     "remainder_odd": [bool(int(x) % 2) for x in (body.get("rows") or [0] * 16)][4 * i:4 * i + 4]}
+                    for i in range(4)]
+                topic = (body.get("topic") or "").strip()
+                if topic:
+                    from engine import ground as G
+                    rd = G.assemble({"houses": {int(k): v for k, v in c["houses"].items()}, **c["court"]},
+                                    topic, G.VoiceBook())
+                    rd["audit"] = G.validate(rd, G.VoiceBook())
+                    c["reading"] = render(rd, merge_prefs(body.get("prefs")))
+                return self.json_out(c)
+            self.json_out({"error": f"no POST route {u.path}"}, 404)
+        except ValueError as e:
+            self.json_out({"error": str(e)}, 400)
+        except Exception as e:                                  # noqa: BLE001
+            sys.stderr.write(f"  error on {u.path}: {e!r}\n")
+            self.json_out({"error": f"{type(e).__name__}: {e}", "route": u.path}, 500)
 
     def do_GET(self) -> None:              # noqa: N802
         u = urlparse(self.path)
@@ -274,6 +508,33 @@ class H(BaseHTTPRequestHandler):
             if u.path in ("/", "/index.html"):
                 page = (APP / "index.html").read_text()
                 return self._send(200, page.encode(), "text/html; charset=utf-8")
+            if u.path in STATIC:
+                name, ctype = STATIC[u.path]
+                f = APP / name
+                if not f.exists():
+                    return self.json_out({"error": f"{name} is missing from app/"}, 500)
+                body = f.read_bytes()
+                # a service worker the browser caches once never sees a fix afterwards, and that is how a
+                # phone stays on a three-week-old app forever - so the worker is always served fresh
+                cache = "no-store" if u.path.endswith("sw.js") else "no-cache"
+                self._cache_ctl = cache
+                return self._send(200, body, ctype)
+            if u.path == "/api/chart16" or u.path == "/api/positions":
+                moms = [m.strip() for m in (q.get("mothers") or "").split(",") if m.strip()]
+                if len(moms) != 4:
+                    return self.json_out({"error": "give four mothers"}, 400)
+                return self.json_out(chart16(moms, (q.get("topic") or "").strip() or None))
+            if u.path == "/api/prove":
+                moms = [m.strip() for m in (q.get("mothers") or "").split(",") if m.strip()]
+                if len(moms) != 4:
+                    return self.json_out({"error": "give four mothers"}, 400)
+                return self.json_out(prove(moms, (q.get("topic") or "").strip() or None))
+            if u.path == "/api/copy":
+                moms = [m.strip() for m in (q.get("mothers") or "").split(",") if m.strip()]
+                if len(moms) != 4:
+                    return self.json_out({"error": "give four mothers"}, 400)
+                return self._send(200, copy_text(moms, (q.get("topic") or "").strip() or None).encode(),
+                                  "text/plain; charset=utf-8")
             if u.path == "/api/health":
                 man = manifest()
                 return self.json_out({"ok": True, "dataset": man.get("dataset"), "version": repo_version(),
@@ -310,7 +571,7 @@ class H(BaseHTTPRequestHandler):
                 rd = G.assemble({"houses": {int(k): v for k, v in c["houses"].items()}, **c["court"]},
                                 (q.get("topic") or "").strip() or None, G.VoiceBook())
                 rd["audit"] = G.validate(rd, G.VoiceBook())
-                view = render(rd, preferences())
+                view = render(rd, merge_prefs(json.loads(q["prefs"]) if q.get("prefs") else None))
                 view["chart"] = c
                 view["shield"] = [rd["chart"].get(str(i)) for i in range(1, 13)]
                 return self.json_out(view)

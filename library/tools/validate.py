@@ -136,6 +136,16 @@ if ap.exists():
         tail += "  ||  " + " | ".join((r.stderr.strip().splitlines() or [""])[-1:])[:150]
     chk("reader app: routes answer, citations survive, page stays self-contained", r.returncode == 0, tail)
 
+rr = ROOT / "app" / "check_render.py"
+if rr.exists():
+    # headless Chromium at a phone's size. It self-skips when playwright is not installed, because the library
+    # must stay buildable on a machine that will not download a browser - the skip is printed, never silent.
+    r = subprocess.run([sys.executable, str(rr)], capture_output=True, text=True)
+    tail = (r.stdout.strip().splitlines() or ["(no output)"])[-1][:170]
+    if r.returncode != 0:
+        tail += "  ||  " + " | ".join((r.stderr.strip().splitlines() or [""])[-1:])[:150]
+    chk("phone app renders at 412x915 without clipping, cutting off, or inventing", r.returncode == 0, tail)
+
 mcp = ROOT / "server" / "mcp_geomancy.py"
 if mcp.exists():
     for mode, what in (("--self-test", "protocol surface (17 checks)"),

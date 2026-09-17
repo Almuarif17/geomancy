@@ -1,5 +1,38 @@
 # Changelog
 
+## 0.2.6 - 2026-09-17
+
+### Added
+- **The phone app.** `app/mobile.html`, a manifest, a service worker and two generated icons, served by the same
+  `app/server.py` at `/m`. Four casting modes - sixteen pierced hills of sand (one dot or two at random each),
+  one row per page across sixteen pages, four rows to a page with the untouched rows asleep until a double-tap
+  wakes the next, and press-and-hold while the phone taps and buzzes - all of them feeding the engine the raw
+  counts rather than the app's own conclusions. Three shield renderings (classical, 4x4, ledger) covering all
+  sixteen places including the witnesses, Judge and Reconciler; copy-all-houses as text; share the shield as a
+  PNG with the question drawn above it; auto-saved history on the device; three swiped reading panes (houses,
+  advanced techniques and citations, interrelating who/where/when) where every paragraph ends in a **Prove**
+  button opening the arithmetic and the named sources instead of a footnote merged into the prose.
+- `POST /api/cast_from_rows` (sixteen tap counts or sixteen row values in, chart plus `mothers_arithmetic` out),
+  `GET /api/chart16` (all sixteen positions with their derivation chain plus the technique layer),
+  `GET /api/prove` (per-claim arithmetic, quotable and cite-only voices, the 65,536-cast differential, the audit)
+  and `GET /api/copy` (the plain-text block). `GET /api/reading` now accepts `?prefs=` like the POST path does.
+- `merge_prefs()` with a nine-key presentation whitelist: a phone may reorder, relabel and shorten, and the
+  server answers with the keys it ignored, which the settings screen then prints.
+- `app/make_icons.py` draws the app icons from the first four mothers, deterministically, and
+  `--check` fails if the committed PNGs are stale - a binary a person made once in a graphics program is not an
+  artefact this repo can reproduce.
+- **`app/check_render.py`: 50 render checks in headless Chromium at 412x915**, driving all four cast modes, the
+  proof sheet, the clipboard, history, theming and an offline engine, and failing on a clipped figure name, a
+  `[object Object]`, a console error, or app arithmetic that has drifted from `deep_read.add`. It self-skips
+  where Playwright is absent; CI installs the browser and runs it.
+
+### Changed
+- `app/test_app.py` grew from 26 to 55 checks, adding the tap-counting differential against the engine, the
+  install files, the whitelist, the row arithmetic, and the copy block's sixteen numbered places.
+- `copy_text()` now numbers the four court figures XIII-XVI as well as the twelve houses, so a pasted block still
+  shows where every figure sits.
+- `library/tools/validate.py --build` gates on the render check, so a release cannot ship an app that paints badly.
+
 ## 0.2.5 - 2026-09-18
 
 ### Added

@@ -69,9 +69,20 @@ python3 app/server.py            # then open the printed URL
 A cast, a question, the sources that answer it, and what they do not answer - the whole pipeline in a page you
 can hold in your hands before you write a line of integration code. It reads `app/preferences.json` on every
 request, so a preference (which works you trust first, whether verbatim quotations are shown, how loudly the
-gaps are named) is one edit and a reload. `python3 app/test_app.py` proves its 26 contract checks; `how it
+gaps are named) is one edit and a reload. `python3 app/test_app.py` proves its 55 contract checks; `how it
 works` in the header prints the eight build stages with live counts, generated from the shipped files, so the
 explanation cannot drift from the thing it explains.
+
+### On a phone
+
+The same server answers `/m` with an installable app: cast by piercing sixteen hills of sand, by tapping rows, by
+four rows to a page with the others asleep, or by holding a button while the phone taps for you; read all sixteen
+places in three layouts; copy all the houses as text; hold a saved chart to share its shield as an image; open a
+proof on any paragraph and get the arithmetic plus the work and folio behind it, never a citation melted into the
+sentence. Nothing is re-implemented on the device and nothing is sent anywhere: charts live in the phone's own
+storage. `python3 app/check_render.py` drives it in headless Chromium at 412x915 and fails on a clipped name.
+Install it with Chrome's *Add to home screen* - see [notes/APP.md](notes/APP.md) for running the engine on the
+phone itself, and for why there is no APK and no static host.
 
 ## The same library as an agent tool (MCP, no dependencies)
 
