@@ -77,7 +77,7 @@ def main() -> int:
     n_claims = 0
     for f in fixtures:
         c = D.build(f["mothers"])
-        chart = {"houses": {i + 1: D.fig(p) for i, p in enumerate(c["houses"])},
+        chart = {"houses": {i + 1: D.fig(p) for i, p in enumerate(c["houses"][:12])},
                  "judge": D.fig(c["judge"]), "sentence": D.fig(c["sentence"])}
         reading = ground.assemble(chart, f["topic"], vb)
         aud = ground.validate(reading, vb)

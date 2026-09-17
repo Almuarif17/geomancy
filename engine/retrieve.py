@@ -145,7 +145,9 @@ def build():
         })
     _write_jsonl(IDX / "by_figure.jsonl", list(by_figure.values()))
     _write_jsonl(IDX / "by_house.jsonl", list(by_house.values()))
-    _write_jsonl(IDX / "by_outcome.jsonl", by_outcome)
+    # by_outcome is written after the voice layer is attached (see below): the outcome row is the first
+    # thing an app loads, and shipping it without the citation counts forced every consumer to also pull
+    # 1,408 voice rows to answer "what do the sources actually say about this question"
     # one row per claim-key: which voices speak to it, from which works, in what licence bucket, and
     # whether they can be shown to disagree. This is what an app pulls to render "what the sources say".
     vb_rows: dict = {}
@@ -180,6 +182,32 @@ def build():
         _write_jsonl(IDX / "by_voice.jsonl", sorted(vb_rows.values(), key=lambda x: (x["family"], x["key"])))
         print(f"  voices: {sum(len(e['voices']) for e in vb_rows.values())} rows over {len(vb_rows)} keys, "
               f"{sum(1 for e in vb_rows.values() if e['disagreement'])} with measurable cross-source disagreement")
+    for row in by_outcome:
+        want = {str(row["quesited_house"])} | {str(x) for x in row.get("extra_houses") or []}
+        fams = ("figure_in_house", "look_rule", "question_rule", "attribution_conflict",
+                "motion_between_houses")
+        rel = [e for e in vb_rows.values()
+               if e["family"] in fams and (str(e.get("house")) in want or e.get("topic") == row["outcome"])]
+        row["n_voice_keys"] = len(rel)
+        row["n_voices"] = sum(e["n_voices"] for e in rel)
+        row["works"] = sorted({w for e in rel for w in e["works"]})
+        row["n_works"] = len(row["works"])
+        row["disagreeing_keys"] = sorted(e["key"] for e in rel if e["disagreement"])[:12]
+        row["n_disagreements"] = len([e for e in rel if e["disagreement"]])
+        row["voice_keys"] = sorted(e["key"] for e in rel)[:40]
+        row["voices"] = sorted({v for e in rel for v in e["voices"]})[:40]
+        row["quote_available"] = sum(e["quote_available"] for e in rel)
+        # silence is a finding, not an empty array: say so in the row the app renders from
+        row["coverage_note"] = ("no shipped source speaks to this house" if not rel else
+                                f"{row['n_voices']} attributed voice rows from {row['n_works']} work(s), "
+                                f"{row['n_disagreements']} key(s) where they measurably disagree")
+    _write_jsonl(IDX / "by_outcome.jsonl", by_outcome)
+    # The app-facing contract is derived from the rows themselves, so it cannot drift from the data it
+    # describes: a hand-written row schema is a second place to remember, and the second place is where
+    # documentation goes stale. types/geomancy.d.ts and openapi.yaml then pick this up via `make types`.
+    _emit_row_schema(by_outcome, "outcome_row", "one row of index/by_outcome.jsonl: everything an app needs "
+                     "to answer one question type - the quesited house, its rulers, the source's own ruling "
+                     "table, the passages, and how many attributed voices stand behind each of it")
     _write_jsonl(IDX / "by_work.jsonl", [
         {"work": w, "passages": [r["id"] for r in passages if r.get("work") == w],
          "kinds": sorted({r.get("kind") for r in passages if r.get("work") == w if r.get("kind")})}
@@ -189,6 +217,51 @@ def build():
     print(f"indexes: {len(by_figure)} figures, {len(by_house)} houses, {len(by_outcome)} outcomes, "
           f"{len(_jsonl(IDX / 'by_work.jsonl'))} works")
     return 0
+
+
+_ROW_DESC = {"outcome": "question-type key the app asked for", "label": "human label from the house register", "quesited_house": "house number the question falls in (1-12)", "quesited_roman": "same house, roman", "latin": "the house's Latin name in the source register", "extra_houses": "houses that must be read alongside this one", "triplicities": "triplicity groups the source assigns to this house", "cal_scope": "the scope statement of the source's own table for this house", "priors_key": "key into tables/perfection_priors.json", "base_rates": "observed answer rates for this house over all 65,536 casts", "ruling_table": "figure -> ruling, exactly as the source tabulates it", "passages": "passage ids in the shards that speak to this house", "n_passages_for_house": "total passages for this house (passages is capped at 30)", "significator_rules": "the ordering of rules an app should apply to this outcome", "always_read": "techniques that must be evaluated for any reading, not only on request", "n_voice_keys": "claim keys in the voice index that speak to this outcome", "n_voices": "attributed voice rows behind those keys", "works": "which works those voices come from", "n_works": "how many distinct works (1 means single-source, and should be shown as such)", "disagreeing_keys": "keys where two works measurably lean differently", "n_disagreements": "count of those keys", "voice_keys": "the claim keys themselves, capped at 40", "voices": "voice ids to pass to engine/ground.py, capped at 40", "quote_available": "how many of those voices may be quoted verbatim under licence", "coverage_note": "plain statement of what is covered, including when nothing is"}
+
+
+def _jtype(v):
+    if isinstance(v, bool):
+        return "boolean"
+    if isinstance(v, int):
+        return "integer"
+    if isinstance(v, float):
+        return "number"
+    if isinstance(v, str):
+        return "string"
+    if isinstance(v, list):
+        return "array"
+    if isinstance(v, dict):
+        return "object"
+    return "null"
+
+
+def _emit_row_schema(rows: list, name: str, desc: str) -> None:
+    props: dict = {}
+    for r in rows:
+        for k, v in r.items():
+            t = _jtype(v)
+            cur = props.setdefault(k, {"types": [], "sample": v})
+            if t not in cur["types"]:
+                cur["types"].append(t)
+    out = {"$schema": "https://json-schema.org/draft/2020-12/schema", "$id": f"{name}.json",
+           "title": name.replace("_", " ").title(), "description": desc,
+           "type": "object", "properties": {}, "required": [], "additionalProperties": False}
+    for k in sorted(props):
+        types = sorted(props[k]["types"])
+        node: dict = {"description": _ROW_DESC.get(k, ""), "type": types[0] if len(types) == 1 else types}
+        if node["type"] == "array":
+            node["items"] = True
+        if node["type"] == "object":
+            node["additionalProperties"] = True
+        out["properties"][k] = node
+        if all(rows and k in r for r in [rows[0]]):
+            out["required"].append(k)
+    out["required"] = sorted(out["required"])
+    (ROOT / "library" / "schema" / f"{name}.json").write_text(json.dumps(out, indent=1) + chr(10))
+    print(f"  schema/{name}.json: {len(out['properties'])} properties, generated from {len(rows)} rows")
 
 
 def bundles() -> None:

@@ -1,0 +1,131 @@
+{
+  "components": {
+    "cross_work_keys": {
+      "achieved": 0.0433,
+      "count": 13,
+      "next_command": "python3 scripts/build_voices.py",
+      "ratio": 0.0433,
+      "remedy": "Adopt one shared claim key across works so Agrippa, Cattan and Hartmann land on the same figure-in-house keys; disagreement stops being anecdotal around 300 shared keys.",
+      "target": 300,
+      "weight": 0.18
+    },
+    "figures_with_attributes": {
+      "achieved": 0.5625,
+      "count": 9,
+      "next_command": "python3 library/tools/check_docs_consistency.py --report",
+      "ratio": 0.5625,
+      "remedy": "Seven figures have no `meaning` line in the Calatarama block (14 of 16 have cal_details at all); the 2 naming conflicts need a documented decision, not a merge.",
+      "target": 16,
+      "weight": 0.08
+    },
+    "grid_cells": {
+      "achieved": 0.9583,
+      "count": 184,
+      "next_command": "python3 library/tools/check_calatarama_grid.py",
+      "ratio": 0.9583,
+      "remedy": "8 Calatarama cells are unread; Barcelona MS 84.7.4 f.50 is the fallback witness for Acquisitio in VIII.",
+      "target": 192,
+      "weight": 0.1
+    },
+    "lataille_cells": {
+      "achieved": 0.1667,
+      "count": 8,
+      "next_command": "python3 library/tools/sync_corpus.py --only lataille_geomancie",
+      "ratio": 0.1667,
+      "remedy": "8 of 48 readable cells transcribed; the ceiling is the witness, not the effort - this abridged octavo lost most section headings to long-s OCR, so a fuller edition is needed.",
+      "target": 48,
+      "weight": 0.05
+    },
+    "outcomes": {
+      "achieved": 0.3667,
+      "count": 22,
+      "next_command": "python3 scripts/build_question_inventory.py",
+      "ratio": 0.3667,
+      "remedy": "Grow the question inventory from 22 to 60 routings using the Catalan and Castilian lists already in kb/.",
+      "target": 60,
+      "weight": 0.14
+    },
+    "quotable_rows": {
+      "achieved": 0.8707,
+      "count": 1219,
+      "next_command": "python3 library/tools/sync_corpus.py --check && python3 scripts/build_voices.py",
+      "ratio": 0.8707,
+      "remedy": "The cite_only rows are licence-gated, not lost: fetch the witness, then quote from the local copy once its bucket allows text.",
+      "target": 1400,
+      "weight": 0.08
+    },
+    "rule_cases_proof": {
+      "achieved": 0.6897,
+      "count": 20,
+      "next_command": "python3 library/tools/run_rule_tests.py --probe",
+      "ratio": 0.6897,
+      "remedy": "Convert the 9 pin cases to proof by adding a second independent witness per rule.",
+      "target": 29,
+      "weight": 0.1
+    },
+    "techniques_implemented": {
+      "achieved": 0.913,
+      "count": 21,
+      "next_command": "python3 library/tools/run_rule_tests.py --list",
+      "ratio": 0.913,
+      "remedy": "Two techniques are NAMED_ONLY: write the test, then pin it against the oracle.",
+      "target": 23,
+      "weight": 0.09
+    },
+    "works_contributing": {
+      "achieved": 0.4375,
+      "contributing_works": [
+        "agrippa_ii_1655",
+        "calatarama_thesis",
+        "cattan_1591",
+        "cattan_1608",
+        "fasciculus_1704",
+        "hartmann_1889",
+        "lataille_geomancie"
+      ],
+      "count": 7,
+      "missing_works": [
+        "amazulu_1870",
+        "binsbergen_1996",
+        "heydon_theomagia_1663",
+        "lal_kitab_1939",
+        "nuskhah_raml_mcgill",
+        "opus_geomantiae_1638",
+        "risala_ramlia",
+        "shatpanchashika",
+        "surkhab_raml_leiden"
+      ],
+      "next_command": "python3 library/tools/sync_corpus.py --only <work-id> && python3 scripts/build_voices.py",
+      "note": "count = registered works disposited full/summarize that have at least one row in kb/voices.jsonl after joining the extractors' short labels to registry ids",
+      "ratio": 0.4375,
+      "remedy": "Fetch and extract the 9 registered work(s) disposited full/summarize that still contribute no voice row: amazulu_1870, binsbergen_1996, heydon_theomagia_1663, lal_kitab_1939, nuskhah_raml_mcgill, opus_geomantiae_1638, risala_ramlia, shatpanchashika, surkhab_raml_leiden.",
+      "target": 16,
+      "weight": 0.18
+    }
+  },
+  "ranked_moves": [
+    "cross_work_keys",
+    "lataille_cells",
+    "outcomes",
+    "works_contributing",
+    "figures_with_attributes",
+    "rule_cases_proof",
+    "quotable_rows",
+    "techniques_implemented",
+    "grid_cells"
+  ],
+  "reading_guide": "ratio = current/target, uncapped, so a component over target is visible; score = sum(weight * min(1, ratio)) * 100. The score is completeness against our own targets, not accuracy or trustworthiness. Disagreement counts are reported, never scored: a library can only score well by suppressing them, which is the failure mode this file exists to prevent.",
+  "reported_only": {
+    "claim_keys": 1379,
+    "figures": 16,
+    "measurable_cross_source_disagreements": 4,
+    "rule_cases_total": 29,
+    "techniques_named": 23,
+    "voices_rows": 1408,
+    "works_fetchable_by_bucket": 16,
+    "works_registered": 23
+  },
+  "schema": "geomancy-coverage/1",
+  "score_of_100": 50.8,
+  "weights_sum": 1.0
+}

@@ -123,6 +123,30 @@ if dc.exists():
         tail += "  ||  " + " | ".join((r.stderr.strip().splitlines() or [""])[-1:])[:150]
     chk("prose counts match the build", r.returncode == 0, tail)
 
+mcp = ROOT / "server" / "mcp_geomancy.py"
+if mcp.exists():
+    for mode, what in (("--self-test", "protocol surface (17 checks)"),
+                       ("--transport-test", "real stdio pipes, framing and garbage tolerance")):
+        r = subprocess.run([sys.executable, str(mcp), mode], capture_output=True, text=True)
+        tail = (r.stdout.strip().splitlines() or ["(no output)"])[-1][:150]
+        if r.returncode != 0:
+            tail += "  ||  " + " | ".join((r.stderr.strip().splitlines() or [""])[-1:])[:120]
+        chk(f"MCP server: {what}", r.returncode == 0, tail)
+
+sc = LIB / "tools/score_coverage.py"
+if sc.exists():
+    r = subprocess.run([sys.executable, str(sc), "--check"], capture_output=True, text=True)
+    tail = (r.stdout.strip().splitlines() or ["(no output)"])[0][:120]
+    chk("coverage scoreboard is fresh against the shipped files", r.returncode == 0, tail)
+
+ls = LIB / "tools/check_licence_scope.py"
+if ls.exists():
+    r = subprocess.run([sys.executable, str(ls)], capture_output=True, text=True)
+    tail = " | ".join((r.stdout.strip().splitlines() or ["(no output)"])[-2:])[:200]
+    if r.returncode != 0:
+        tail += "  ||  " + " | ".join((r.stderr.strip().splitlines() or [""])[-1:])[:150]
+    chk("licence scope: every tracked path is declared by exactly one layer", r.returncode == 0, tail)
+
 gr = LIB / "tools/check_grounding.py"
 if gr.exists():
     r = subprocess.run([sys.executable, str(gr)], capture_output=True, text=True)

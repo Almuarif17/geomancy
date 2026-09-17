@@ -1,6 +1,6 @@
 PY ?= python3
 
-.PHONY: help build check test read ocr clean
+.PHONY: help build check test read ocr clean core-facts
 
 help:
 	@echo "make build   regenerate library/dataset (jsonl + manifest) from kb/ + extracts"
@@ -10,7 +10,10 @@ help:
 	@echo "make json    print the app-facing JSON reading for the demo cast"
 	@echo "make ocr     example: OCR one page of a scan (set PDF= and PAGE=)"
 
-build:
+core-facts:
+	$(PY) library/tools/build_core_facts.py
+
+build: core-facts
 	$(PY) library/tools/build_dataset.py
 
 check: build

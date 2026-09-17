@@ -68,6 +68,9 @@ class VoiceBook:
 def _chart_from(chart: dict) -> tuple[dict, dict]:
     """Accept {houses:{1:'Via',...}} or {'1':...} or a 12-length list; ignore whatever else is present."""
     raw = chart.get("houses") or chart
+    court_in = {k: v for k, v in chart.items()
+                if k in ("judge", "reconciler", "witness_left", "witness_right", "left_witness",
+                         "right_witness", "sentence") and isinstance(v, str)}
     out: dict[int, str] = {}
     if isinstance(raw, list):
         out = {i + 1: v for i, v in enumerate(raw[:12])}
@@ -80,10 +83,25 @@ def _chart_from(chart: dict) -> tuple[dict, dict]:
             else:
                 inv = {v_: k_ for k_, v_ in ROMAN.items()}
                 num = inv.get(s.upper())
-            if num and isinstance(v, str):
-                out[num] = v.strip()
-    court = {k: v for k, v in chart.items() if k in ("judge", "reconciler", "witness_left", "witness_right",
-                                                     "left_witness", "right_witness", "sentence")}
+            if not num or not isinstance(v, str):
+                continue
+            v = v.strip()
+            # No source table in this library has a house XIII: the shield's 13th-to-16th figures are the two
+            # witnesses, the Judge and the Sentence. A caller that hands us all sixteen numbered as houses
+            # would otherwise get readings citing "Amissio in house XV", a claim no follocan supports. So the
+            # court figures are routed to the court here, once, instead of being left to every caller to
+            # remember - ground.py's own CLI had this bug until the MCP transport test caught it.
+            if 1 <= num <= 12:
+                out[num] = v
+            else:
+                alias = {13: "witness_left", 14: "witness_right", 15: "judge", 16: "reconciler"}.get(num)
+                if alias:
+                    court_in.setdefault(alias, v)
+    court = court_in
+    if "sentence" not in court and "reconciler" in court:
+        court["sentence"] = court["reconciler"]
+    if "reconciler" not in court and "sentence" in court:
+        court["reconciler"] = court["sentence"]
     return out, court
 
 
@@ -124,6 +142,7 @@ def assemble(chart: dict, topic: str | None = None, vb: VoiceBook | None = None,
             gaps.append({"house": hn, "figure": fig, "reason": "no tabulated ruling in any shipped source"})
             claims.append({"type": "no_source_ruling", "figure": fig, "house": hn,
                            "text": f"No source we ship speaks to {fig} in house {ROMAN.get(hn, hn)}.",
+                           "mode": "gloss",
                            "cites": {"voice_ids": [], "n_voices": 0, "works": []}})
             continue
         leans = {r.get("polarity") for r in vb.key(f"figure_in_house:{fig}:{hn}") if r.get("polarity")}
@@ -138,7 +157,7 @@ def assemble(chart: dict, topic: str | None = None, vb: VoiceBook | None = None,
     for hn, fig in sorted(houses.items()):
         rows = [r for r in vb.key(f"figure_attribute:{fig}:quality", reliable_only=False)]
         if rows:
-            claims.append({"type": "figure_quality", "figure": fig, "house": hn,
+            claims.append({"type": "figure_quality", "figure": fig, "house": hn, "mode": "gloss",
                            "text": f"{fig} is {rows[0].get('value')} by nature", "cites": cite(rows)})
 
     # 3. judge / sentence / reconciler, and the universal answer table behind them
@@ -154,16 +173,28 @@ def assemble(chart: dict, topic: str | None = None, vb: VoiceBook | None = None,
                         continue
                 rows.append(r)
         if rows:
-            claims.append({"type": "sourced_ruling", "role": role, "figure": fig,
-                           "text": " / ".join((r.get("quote") or "") for r in rows)[:400],
-                           "n_candidate_answers": len(rows), "cites": cite(rows)})
+            # Hartmann's appendix answers the same judge/cofigure pair differently per question type, so a
+            # row set here is N witnesses and not one ruling. Joining them into a single `sourced_ruling`
+            # put eleven contradictory verdicts in our own voice and no mode, which is exactly the shape the
+            # auditor exists to refuse. Divergent answers are therefore reported as disagreement, with the
+            # spread kept visible rather than averaged away.
+            texts = [(r.get("quote") or r.get("gloss") or "").strip() for r in rows]
+            texts = [t for t in texts if t]
+            leans = sorted({str(r.get("polarity")) for r in rows if r.get("polarity")})
+            diverge = len(set(texts)) > 1
+            claims.append({"type": "sources_disagree" if diverge else "sourced_ruling",
+                           "role": role, "figure": fig,
+                           "text": (" / ".join(texts))[:400],
+                           "mode": "quote", "leans": leans,
+                           "n_candidate_answers": len(rows),
+                           "candidate_answers": texts[:12], "cites": cite(rows)})
 
     # 4. correspondences for the quesited house's figure: colour, place, bodies, numbers, "looks like"
     if quesited and houses.get(quesited):
         fig = houses[quesited]
         for r in vb.rows:
             if r["family"] == "correspondence" and r["figure"] == fig:
-                claims.append({"type": "correspondence", "figure": fig, "house": quesited,
+                claims.append({"type": "correspondence", "figure": fig, "house": quesited, "mode": "quote",
                                "attribute": r["attribute"], "text": str(r.get("value")), "cites": cite([r])})
 
     # 5. method: the rules that were applied, each with its own citation, not posed as a claim
@@ -294,7 +325,7 @@ def main() -> int:
         from engine import deep_read as D
         moms = [m.strip() for m in a.mothers.split(",")]
         c = D.build(moms)
-        chart = {"houses": {i + 1: D.fig(pat) for i, pat in enumerate(c["houses"])},
+        chart = {"houses": {i + 1: D.fig(pat) for i, pat in enumerate(c["houses"][:12])},
                  "judge": D.fig(c["judge"]), "sentence": D.fig(c["sentence"]),
                  "witness_left": D.fig(c["witnesses"][0]), "witness_right": D.fig(c["witnesses"][1])}
     if not chart:

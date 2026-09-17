@@ -47,6 +47,18 @@ Update protocol for a client: fetch `manifest.json`, diff the per-file hashes, d
 shards, rebuild a local SQLite index. Offline-capable after first fetch. `make db` regenerates the
 SQLite file locally (it is not committed, because it is derived and CI rebuilds it).
 
+## The same library as an agent tool (MCP, no dependencies)
+
+```bash
+python3 server/mcp_geomancy.py --self-test && python3 server/mcp_geomancy.py --transport-test
+```
+
+Six tools — `cast_from_mothers`, `grounded_reading`, `voices_for`, `score_answer`, `grounding_pack`,
+`coverage` — over JSON-RPC on stdio, so Claude Desktop, Cursor or any MCP client gets a geomancy server whose
+every sentence is cited and whose every gap is named. `score_answer` runs the library's auditor over *your*
+model's prose and returns which sentences have no source under them. <!--num:mcp_tools-->6 of them, in
+`server/README.md`.
+
 ## Layout
 
 | path | what it is |
@@ -76,6 +88,15 @@ reproducible with `scripts/` from public identifiers — that is what makes the 
    passage loses its locator, or if any engine rule stops reproducing the fixtures. A corpus that grows by
    hundreds of works without a gate becomes a rumour machine; with one, it compounds.
 
+## How much of the corpus is here
+
+`kb/coverage.json` is generated from the shipped files and published for exactly this question, with
+denominators instead of adjectives: **<!--num:coverage_score-->50/100** against our own targets today
+(`<!--num:voices-->1,408 attributed voices`, <!--num:outcomes-->22 outcome routings,
+<!--num:grid_cells-->184 of <!--num:grid_possible-->192 Calatarama cells, <!--num:rule_cases-->29 rule cases
+of which 20 are proved twice). The file also lists the next moves, computed worst-component-first, so the
+roadmap is a build output and not a mood. `python3 library/tools/score_coverage.py` prints it.
+
 ## Sources
 
 Public-domain prints and open deposits: Cattan (1591, 1608), Heydon's *Theomagia* (1663), the
@@ -91,8 +112,19 @@ Latin/Castilian routing tables. Full list with licences: `library/dataset/manife
 
 ## Licence and citation
 
-Code: MIT. Dataset and notes: CC BY 4.0. Living-tradition material (Ifá verses, taboos, prescriptions) is
-deliberately **not** included — see `LICENSE_POLICY.md` and `PRIVACY.md`.
+Three layers, enforced by a gate rather than by trust — see `LICENSING.md` and `LICENSE_DATA.md`:
+
+| layer | licence | what |
+|---|---|---|
+| code, schemas, generated types | **MIT** | run it, sell software built on it |
+| `library/dataset/core_facts.json` | **CC0** | figure bits, house numbering, and what the arithmetic over all 65,536 casts implies |
+| everything curated: `kb/`, dataset indexes/shards/tables, notes, findings | **CC BY-NC 4.0 + commercial licence** | translations, voices, glosses, adjudication |
+
+A revenue-bearing product needs the L3 licence (open an Issue titled "commercial licence"); a free or
+research tool needs only honest attribution. <!--num:licence_layers-->3 layers, and
+`library/tools/check_licence_scope.py` fails the build if a tracked path is claimed by none of them or by two. Living-tradition material (Ifá verses, taboos, prescriptions)
+is deliberately **not** included — see `LICENSE_POLICY.md` and `PRIVACY.md`. `check_licence_scope.py` fails
+the build if a tracked path has undeclared or double-declared licensing.
 
 ```
 Usman, A. (2026). geomancy-library: a source-cited dataset and rules engine for traditional

@@ -6,7 +6,8 @@ future HTTP host cannot drift from the Python engine. Run after any schema chang
 """
 from __future__ import annotations
 
-import json, pathlib, sys
+import json
+import re, pathlib, sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 SCHEMA = ROOT / "library" / "schema"
@@ -56,22 +57,31 @@ def json_safe(k):
     return k if k.isidentifier() else json.dumps(k)
 
 
-def camel(s):
-    return "".join(w.capitalize() for w in s.split("_") if w)
+def camel(s: str) -> str:
+    # Identifiers, not prose. This used to prefer each schema's `title` as the interface name, and titles are
+    # sentences - the shipped types/geomancy.d.ts carried `export interface A passage in the library: text is
+    # never allowed without provenance`, which no TypeScript compiler can read. Names now come from the file
+    # stem, sanitised, and titles become doc comments.
+    words = [w for w in re.split(r"[^A-Za-z0-9]+", s or "") if w]
+    return "".join(w.capitalize() for w in words) or "Generated"
 
 
 def main() -> int:
     ctx, blocks = {}, []
     for f in sorted(SCHEMA.glob("*.json")):
         sch = json.loads(f.read_text())
-        name = sch.get("title") or camel(f.stem)
+        name = camel(f.stem)
+        title = " ".join(str(sch.get("title") or "").split())
         if sch.get("type") == "array":
             inner = ts_type(sch.get("items"), ctx, name + "Item")
             blocks.append(f"export type {name}Item = {inner};")
             blocks.append(f"export type {name} = {name}Item[];")
             continue
         root = ts_type(sch, ctx, name)
-        blocks.append(f"/** generated from library/schema/{f.name} - do not edit */")
+        blocks.append(f"/** generated from library/schema/{f.name} - do not edit */"
+                      + (f"\n *\n * {title}" if title else "") + "\n */" if False else
+                      f"/** generated from library/schema/{f.name} - do not edit.\n"
+                      + (f" * {title}\n" if title else "") + " */")
         for k, body in ctx.items():
             if body and k not in [b.split(" ")[2] for b in blocks if b.startswith("export interface")]:
                 blocks.append(f"export interface {k} {{\n{body}\n}}")

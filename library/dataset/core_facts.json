@@ -1,0 +1,367 @@
+{
+ "cast_space": {
+  "attainable_figures_per_house": {
+   "I": 16,
+   "II": 16,
+   "III": 16,
+   "IV": 16,
+   "IX": 16,
+   "V": 16,
+   "VI": 16,
+   "VII": 16,
+   "VIII": 16,
+   "X": 16,
+   "XI": 16,
+   "XII": 16,
+   "XIII": 16,
+   "XIV": 16,
+   "XV": 8,
+   "XVI": 16
+  },
+  "attainable_judges": [
+   "Acquisitio",
+   "Amissio",
+   "Carcer",
+   "Conjunctio",
+   "Fortuna Major",
+   "Fortuna Minor",
+   "Populus",
+   "Via"
+  ],
+  "attainable_judges_note": "derived: adding two mothers/nieces pairs mod parity yields only even-pointed figures in the Judge seat, verified over every cast",
+  "bits_per_cast": 16,
+  "figures": 16,
+  "judge_population": {
+   "Acquisitio": {
+    "n": 8192,
+    "pct": 12.5
+   },
+   "Amissio": {
+    "n": 8192,
+    "pct": 12.5
+   },
+   "Carcer": {
+    "n": 8192,
+    "pct": 12.5
+   },
+   "Conjunctio": {
+    "n": 8192,
+    "pct": 12.5
+   },
+   "Fortuna Major": {
+    "n": 8192,
+    "pct": 12.5
+   },
+   "Fortuna Minor": {
+    "n": 8192,
+    "pct": 12.5
+   },
+   "Populus": {
+    "n": 8192,
+    "pct": 12.5
+   },
+   "Via": {
+    "n": 8192,
+    "pct": 12.5
+   }
+  },
+  "mothers": 4,
+  "parity_law": "the Judge is always even-pointed; the eight odd-pointed figures can never be a Judge",
+  "surprisal_bits_by_house": {
+   "I": 4.0,
+   "II": 4.0,
+   "III": 4.0,
+   "IV": 4.0,
+   "IX": 4.0,
+   "V": 4.0,
+   "VI": 4.0,
+   "VII": 4.0,
+   "VIII": 4.0,
+   "X": 4.0,
+   "XI": 4.0,
+   "XII": 4.0,
+   "XIII": 4.0,
+   "XIV": 4.0,
+   "XV": 3.0,
+   "XVI": 4.0
+  },
+  "total_casts": 65536
+ },
+ "figures": {
+  "Acquisitio": {
+   "element": "Air",
+   "motion": "incoming",
+   "pattern": [
+    2,
+    1,
+    2,
+    1
+   ],
+   "points": 6,
+   "quality": "good"
+  },
+  "Albus": {
+   "element": "Water",
+   "motion": "incoming",
+   "pattern": [
+    2,
+    2,
+    1,
+    2
+   ],
+   "points": 7,
+   "quality": "good"
+  },
+  "Amissio": {
+   "element": "Fire",
+   "motion": "outgoing",
+   "pattern": [
+    1,
+    2,
+    1,
+    2
+   ],
+   "points": 6,
+   "quality": "bad"
+  },
+  "Caput Draconis": {
+   "element": "Earth",
+   "motion": "incoming",
+   "pattern": [
+    2,
+    1,
+    1,
+    1
+   ],
+   "points": 5,
+   "quality": "good"
+  },
+  "Carcer": {
+   "element": "Earth",
+   "motion": "incoming",
+   "pattern": [
+    1,
+    2,
+    2,
+    1
+   ],
+   "points": 6,
+   "quality": "bad"
+  },
+  "Cauda Draconis": {
+   "element": "Fire",
+   "motion": "outgoing",
+   "pattern": [
+    1,
+    1,
+    1,
+    2
+   ],
+   "points": 5,
+   "quality": "bad"
+  },
+  "Conjunctio": {
+   "element": "Air",
+   "motion": "incoming",
+   "pattern": [
+    2,
+    1,
+    1,
+    2
+   ],
+   "points": 6,
+   "quality": "communal"
+  },
+  "Fortuna Major": {
+   "element": "Fire",
+   "motion": "incoming",
+   "pattern": [
+    2,
+    2,
+    1,
+    1
+   ],
+   "points": 6,
+   "quality": "good"
+  },
+  "Fortuna Minor": {
+   "element": "Fire",
+   "motion": "outgoing",
+   "pattern": [
+    1,
+    1,
+    2,
+    2
+   ],
+   "points": 6,
+   "quality": "communal"
+  },
+  "Laetitia": {
+   "element": "Fire",
+   "motion": "outgoing",
+   "pattern": [
+    1,
+    2,
+    2,
+    2
+   ],
+   "points": 7,
+   "quality": "good"
+  },
+  "Populus": {
+   "element": "Water",
+   "motion": "incoming",
+   "pattern": [
+    2,
+    2,
+    2,
+    2
+   ],
+   "points": 8,
+   "quality": "communal"
+  },
+  "Puella": {
+   "element": "Water",
+   "motion": "incoming",
+   "pattern": [
+    1,
+    1,
+    2,
+    1
+   ],
+   "points": 5,
+   "quality": "bad"
+  },
+  "Puer": {
+   "element": "Fire",
+   "motion": "outgoing",
+   "pattern": [
+    1,
+    2,
+    1,
+    1
+   ],
+   "points": 5,
+   "quality": "good"
+  },
+  "Rubeus": {
+   "element": "Air",
+   "motion": "outgoing",
+   "pattern": [
+    2,
+    1,
+    2,
+    2
+   ],
+   "points": 7,
+   "quality": "bad"
+  },
+  "Tristitia": {
+   "element": "Earth",
+   "motion": "incoming",
+   "pattern": [
+    2,
+    2,
+    2,
+    1
+   ],
+   "points": 7,
+   "quality": "bad"
+  },
+  "Via": {
+   "element": "Water",
+   "motion": "outgoing",
+   "pattern": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "points": 4,
+   "quality": "communal"
+  }
+ },
+ "generated_by": "library/tools/build_core_facts.py",
+ "houses": {
+  "1": {
+   "name": null,
+   "significator": null
+  },
+  "10": {
+   "name": null,
+   "significator": null
+  },
+  "11": {
+   "name": null,
+   "significator": null
+  },
+  "12": {
+   "name": null,
+   "significator": null
+  },
+  "2": {
+   "name": null,
+   "significator": null
+  },
+  "3": {
+   "name": null,
+   "significator": null
+  },
+  "4": {
+   "name": null,
+   "significator": null
+  },
+  "5": {
+   "name": null,
+   "significator": null
+  },
+  "6": {
+   "name": null,
+   "significator": null
+  },
+  "7": {
+   "name": null,
+   "significator": null
+  },
+  "8": {
+   "name": null,
+   "significator": null
+  },
+  "9": {
+   "name": null,
+   "significator": null
+  }
+ },
+ "licence": "CC0-1.0",
+ "licence_note": "To the extent possible under law, the maintainers of geomancy-library waive all copyright and related rights to this file. It contains only definitions and arithmetic derived from them. Attribution is requested, not required.",
+ "provenance_of_numbers": {
+  "figures.pattern": "definition of the sixteen figures as four rows of one or two dots",
+  "statistics": "kb/priors.json and kb/calibration.json, produced by engine/build_priors.py",
+  "verification": "library/dataset/evaluation.json (65,536/65,536 against an independent oracle)"
+ },
+ "question_to_house": {
+  "animals": 6,
+  "career_rank": 10,
+  "children": 5,
+  "death": 8,
+  "enemies_obstruction": 12,
+  "friends": 11,
+  "health": 1,
+  "illness": 6,
+  "imprisonment_absent": 6,
+  "inheritance": 4,
+  "job_livelihood": 10,
+  "lawsuit": 7,
+  "lost_things": 7,
+  "love_partner": 7,
+  "marriage": 7,
+  "news_message": 3,
+  "pregnancy": 5,
+  "property_land": 4,
+  "servants_workers": 6,
+  "studies": 9,
+  "travel_journey": 9,
+  "wealth_money": 2
+ },
+ "schema": "geomancy.core_facts/1.0"
+}

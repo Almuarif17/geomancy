@@ -10,8 +10,8 @@
    "resolved": [
     {
      "path": "library/dataset/index/by_outcome.jsonl",
-     "bytes": 52086,
-     "sha256": "7479507dd9222d6f"
+     "bytes": 109622,
+     "sha256": "2f98bbfff68980bb"
     },
     {
      "path": "library/dataset/index/by_figure.jsonl",
@@ -19,7 +19,7 @@
      "sha256": "a612a3d2cf8add2f"
     }
    ],
-   "bytes": 78545
+   "bytes": 136081
   },
   "reading": {
    "files": [
@@ -33,8 +33,8 @@
    "resolved": [
     {
      "path": "library/dataset/index/by_outcome.jsonl",
-     "bytes": 52086,
-     "sha256": "7479507dd9222d6f"
+     "bytes": 109622,
+     "sha256": "2f98bbfff68980bb"
     },
     {
      "path": "library/dataset/index/by_figure.jsonl",
@@ -62,7 +62,7 @@
      "sha256": "4e98c31d5cb446c2"
     }
    ],
-   "bytes": 164816
+   "bytes": 222352
   },
   "verdict": {
    "files": [
@@ -90,11 +90,11 @@
    "resolved": [
     {
      "path": "library/dataset/index/by_outcome.jsonl",
-     "bytes": 52086,
-     "sha256": "7479507dd9222d6f"
+     "bytes": 109622,
+     "sha256": "2f98bbfff68980bb"
     }
    ],
-   "bytes": 52086
+   "bytes": 109622
   },
   "search": {
    "files": [
@@ -135,11 +135,11 @@
     },
     {
      "path": "library/dataset/manifest.json",
-     "bytes": 2775,
-     "sha256": "068ce25589191b2a"
+     "bytes": 2855,
+     "sha256": "bef0ad688bae1fc7"
     }
    ],
-   "bytes": 358329
+   "bytes": 358409
   }
  }
 }

@@ -12,7 +12,12 @@ cited, and the licence terms on the parts people actually want. Here is the shap
 | L2 core facts | figure bit patterns, house names, the derived statistics of all 65,536 casts, the registry of works | **CC0** | zero-carrying-cost, and it is the layer that gets cited; you cannot sell what anyone can regenerate, so give it away and own the standard |
 | L3 the curated layer | `kb/voices.jsonl`, the grounded readings, plain-language glosses, the adjudication notes, outcome bundles | **CC BY-NC 4.0, with a separate commercial licence on request** | this is the paid thing: NC means a company shipping it in a revenue app must talk to you; attribution means every copy still advertises you |
 
-Today the whole repo is MIT (`LICENSE`), which puts L3 in the public domain for commercial use. Changing
+Until 0.2.5 the whole repo was MIT (`LICENSE`), which put L3 in the public domain for commercial use; the
+README said "Dataset and notes: CC BY 4.0", which said the same thing in a friendlier font. It is now split:
+`LICENSING.md` carries the layer map, `LICENSE_DATA.md` the precise terms, and
+`library/tools/check_licence_scope.py` fails the build when a tracked path is claimed by no layer or by two,
+so the split is a property of the repo, not a paragraph someone has to remember. `LICENSE` itself now opens
+with the scope notice that it covers L1 only. Changing
 that is your call, not mine to make silently: it needs `LICENSE_DATA.md`, a `LICENSING.md` with the two
 tiers, and a line in the README. If you say go, I will write the files and the migration note.
 

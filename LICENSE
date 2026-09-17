@@ -1,3 +1,10 @@
+Licence scope, read first: this MIT licence covers the CODE layer (L1) of this repository - the engine, the
+tools, the schemas, the generated types, the fixtures and the examples. It does not cover the curated dataset
+layer (translations, the voice index, glosses, adjudication notes, outcome bundles), which is CC BY-NC 4.0
+with a separate commercial licence, and it does not cover library/dataset/core_facts.json, which is CC0.
+The layer map and the gate that enforces it are in LICENSING.md, LICENSE_DATA.md and
+library/tools/check_licence_scope.py. The text below applies to L1 only.
+
 MIT License
 
 Copyright (c) 2026 the geomancy-library authors

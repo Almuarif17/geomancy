@@ -35,6 +35,17 @@ jobs:
       run: python engine/evaluate.py --json library/dataset/evaluation.json
     - name: Run validation gate
       run: python library/tools/validate.py --build library/dataset
+    - name: Coverage scoreboard (kb/coverage.json must be fresh)
+      run: python3 library/tools/score_coverage.py --check
+
+    - name: MCP server (protocol surface + real stdio session)
+      run: |
+        python3 server/mcp_geomancy.py --self-test
+        python3 server/mcp_geomancy.py --transport-test
+
+    - name: Licence scope (three layers, no orphaned or double-claimed path)
+      run: python3 library/tools/check_licence_scope.py
+
     - name: Grounding (citations, licence of quotes, auditor attacks)
       run: python library/tools/check_grounding.py
     - name: Extraction integrity (calatarama grid)

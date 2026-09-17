@@ -1,14 +1,17 @@
-Creative Commons Attribution 4.0 International (CC BY 4.0)
+Data licence - moved, this file is a pointer only.
 
-Applies to: library/dataset/ (the JSONL shards and manifest), kb/, docs/FINDINGS.md, data/fixtures/.
-Code in this repository is MIT-licensed; see LICENSE.
+This file used to say "Creative Commons Attribution 4.0 (CC BY 4.0)" over library/dataset/, kb/ and
+docs/FINDINGS.md. That was wrong in the direction that mattered: CC BY permits commercial reuse, so the
+curated layer - our translations, our voice index, our adjudication and gap notes - was licensed to the
+world for resale on the day the repo went public, while README.md described the same material as the thing
+we intend to sell.
 
-You are free to copy and redistribute the material in any medium or format and to remix, transform, and
-build upon the material for any purpose, even commercially, provided that you give appropriate credit,
-link to the licence, and indicate if changes were made.
+Read the outbound terms in:
 
-Two obligations this dataset imposes on you, in addition to the licence terms:
-1. Preserve the per-passage provenance (work + locator). A ruling without a citation cannot be checked,
-   and an uncited chain of quotations is how a documented tradition turns into folklore.
-2. Do not add Ifá verses, taboos or prescriptions, or any other living-tradition material, without the
-   consent and attribution of the lineage or practitioner who holds it (see NOTICE).
+    LICENSING.md        the three layers, and the machine-readable scope block the build enforces
+    LICENSE_DATA.md     the precise terms for the curated layer (CC BY-NC 4.0 + commercial licence)
+    LICENSE_POLICY.md   what may enter the dataset at all (bucket A/B/C) - stricter, and unchanged
+
+The two obligations the old file imposed are still imposed, now in LICENSE_DATA.md: preserve per-passage
+provenance (work + locator) in anything you redistribute, and do not add living-tradition material without
+the consent of the lineage that holds it.

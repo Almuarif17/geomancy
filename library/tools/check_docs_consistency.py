@@ -39,7 +39,12 @@ def truth() -> dict:
             "figures": figures, "houses": houses, "grid_cells": sum(len(v["entries"]) for v in grid["grid"].values()),
             "grid_possible": len(grid["grid"]) * figures, "outcomes": outcomes,
             "works_registered": len(reg), "works_shipped": man["counts"]["works"], "rule_cases": cases,
-            "voices": len([l for l in (ROOT / "kb" / "voices.jsonl").read_text().splitlines() if l.strip()]) if (ROOT / "kb" / "voices.jsonl").exists() else 0}
+            "voices": len([l for l in (ROOT / "kb" / "voices.jsonl").read_text().splitlines() if l.strip()]) if (ROOT / "kb" / "voices.jsonl").exists() else 0,
+            # the scoreboard, the MCP surface and the licence layer map are claims in prose too, so they are
+            # read from the files that define them rather than typed into the docs a second time
+            "coverage_score": int(json.loads((KB / "coverage.json").read_text())["score_of_100"]) if (KB / "coverage.json").exists() else 0,
+            "licence_layers": len(re.findall(r"^L\d-", (ROOT / "LICENSING.md").read_text(), re.M)) if (ROOT / "LICENSING.md").exists() else 0,
+            "mcp_tools": len(re.findall(r'^    "([a-z_]+)": \{', (ROOT / "server" / "mcp_geomancy.py").read_text(), re.M)) if (ROOT / "server" / "mcp_geomancy.py").exists() else 0}
 
 
 def yaml_load(p: pathlib.Path):

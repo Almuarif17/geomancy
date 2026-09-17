@@ -1,0 +1,148 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "outcome_row.json",
+ "title": "Outcome Row",
+ "description": "one row of index/by_outcome.jsonl: everything an app needs to answer one question type - the quesited house, its rulers, the source's own ruling table, the passages, and how many attributed voices stand behind each of it",
+ "type": "object",
+ "properties": {
+  "always_read": {
+   "description": "techniques that must be evaluated for any reading, not only on request",
+   "type": "array",
+   "items": true
+  },
+  "base_rates": {
+   "description": "observed answer rates for this house over all 65,536 casts",
+   "type": "object",
+   "additionalProperties": true
+  },
+  "cal_scope": {
+   "description": "the scope statement of the source's own table for this house",
+   "type": "string"
+  },
+  "coverage_note": {
+   "description": "plain statement of what is covered, including when nothing is",
+   "type": "string"
+  },
+  "disagreeing_keys": {
+   "description": "keys where two works measurably lean differently",
+   "type": "array",
+   "items": true
+  },
+  "extra_houses": {
+   "description": "houses that must be read alongside this one",
+   "type": "array",
+   "items": true
+  },
+  "label": {
+   "description": "human label from the house register",
+   "type": "string"
+  },
+  "latin": {
+   "description": "the house's Latin name in the source register",
+   "type": "string"
+  },
+  "n_disagreements": {
+   "description": "count of those keys",
+   "type": "integer"
+  },
+  "n_passages_for_house": {
+   "description": "total passages for this house (passages is capped at 30)",
+   "type": "integer"
+  },
+  "n_voice_keys": {
+   "description": "claim keys in the voice index that speak to this outcome",
+   "type": "integer"
+  },
+  "n_voices": {
+   "description": "attributed voice rows behind those keys",
+   "type": "integer"
+  },
+  "n_works": {
+   "description": "how many distinct works (1 means single-source, and should be shown as such)",
+   "type": "integer"
+  },
+  "outcome": {
+   "description": "question-type key the app asked for",
+   "type": "string"
+  },
+  "passages": {
+   "description": "passage ids in the shards that speak to this house",
+   "type": "array",
+   "items": true
+  },
+  "priors_key": {
+   "description": "key into tables/perfection_priors.json",
+   "type": "string"
+  },
+  "quesited_house": {
+   "description": "house number the question falls in (1-12)",
+   "type": "integer"
+  },
+  "quesited_roman": {
+   "description": "same house, roman",
+   "type": "string"
+  },
+  "quote_available": {
+   "description": "how many of those voices may be quoted verbatim under licence",
+   "type": "integer"
+  },
+  "ruling_table": {
+   "description": "figure -> ruling, exactly as the source tabulates it",
+   "type": "object",
+   "additionalProperties": true
+  },
+  "significator_rules": {
+   "description": "the ordering of rules an app should apply to this outcome",
+   "type": "array",
+   "items": true
+  },
+  "triplicities": {
+   "description": "triplicity groups the source assigns to this house",
+   "type": "array",
+   "items": true
+  },
+  "voice_keys": {
+   "description": "the claim keys themselves, capped at 40",
+   "type": "array",
+   "items": true
+  },
+  "voices": {
+   "description": "voice ids to pass to engine/ground.py, capped at 40",
+   "type": "array",
+   "items": true
+  },
+  "works": {
+   "description": "which works those voices come from",
+   "type": "array",
+   "items": true
+  }
+ },
+ "required": [
+  "always_read",
+  "base_rates",
+  "cal_scope",
+  "coverage_note",
+  "disagreeing_keys",
+  "extra_houses",
+  "label",
+  "latin",
+  "n_disagreements",
+  "n_passages_for_house",
+  "n_voice_keys",
+  "n_voices",
+  "n_works",
+  "outcome",
+  "passages",
+  "priors_key",
+  "quesited_house",
+  "quesited_roman",
+  "quote_available",
+  "ruling_table",
+  "significator_rules",
+  "triplicities",
+  "voice_keys",
+  "voices",
+  "works"
+ ],
+ "additionalProperties": false
+}

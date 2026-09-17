@@ -1,5 +1,8 @@
 # LICENCE POLICY — the rule that lets a free library be shipped in a paid app
 
+*This file governs what may enter the dataset at all (buckets A/B/C, source rights). It is stricter than,
+and does not replace, the outbound licence: see `LICENSING.md` and `LICENSE_DATA.md`.*
+
 Three buckets. Every row in the dataset carries one of them, and `tools/validate.py` enforces the split.
 
 ## Bucket A — **full text may be bundled**
