@@ -38,10 +38,10 @@ jobs:
           bash android/build.sh
           export PATH="$ANDROID_HOME/build-tools/33.0.2:$PATH"
           echo '### What came out' >> "$GITHUB_STEP_SUMMARY"
-          aapt dump badging android/dist/D-Gem.apk | grep -E '^(package|application-label|sdkVersion|targetSdkVersion|launchable-activity)' >> "$GITHUB_STEP_SUMMARY" || true
+          aapt dump badging android/dist/tellus-loquens.apk | grep -E '^(package|application-label|sdkVersion|targetSdkVersion|launchable-activity)' >> "$GITHUB_STEP_SUMMARY" || true
           python3 - <<'PY' >> "$GITHUB_STEP_SUMMARY"
           import os, zipfile
-          ap = "android/dist/D-Gem.apk"
+          ap = "android/dist/tellus-loquens.apk"
           z = zipfile.ZipFile(ap)
           inner = z.read("assets/www/mobile.html")
           disk = open("app/mobile.html", "rb").read()
@@ -52,24 +52,24 @@ jobs:
 
       - name: A clean rebuild produces the identical bytes
         run: |
-          cp android/dist/D-Gem.apk /tmp/first.apk
+          cp android/dist/tellus-loquens.apk /tmp/first.apk
           bash android/build.sh
-          cmp /tmp/first.apk android/dist/D-Gem.apk
-          echo "- rebuild produced the same bytes, sha256 \`$(sha256sum android/dist/D-Gem.apk | cut -d' ' -f1)\`" \
+          cmp /tmp/first.apk android/dist/tellus-loquens.apk
+          echo "- rebuild produced the same bytes, sha256 \`$(sha256sum android/dist/tellus-loquens.apk | cut -d' ' -f1)\`" \
             >> "$GITHUB_STEP_SUMMARY"
 
       - name: The page inside is the page the render gate drives
         run: |
           export PATH="$ANDROID_HOME/build-tools/33.0.2:/usr/lib/jvm/default/bin:$PATH"
-          unzip -p android/dist/D-Gem.apk assets/www/mobile.html > /tmp/in-apk.html
+          unzip -p android/dist/tellus-loquens.apk assets/www/mobile.html > /tmp/in-apk.html
           cmp /tmp/in-apk.html app/mobile.html
-          apksigner verify --verbose android/dist/D-Gem.apk | head -5
+          apksigner verify --verbose android/dist/tellus-loquens.apk | head -5
 
       - uses: actions/upload-artifact@v4
         with:
-          name: D-Gem-apk
+          name: tellus-loquens-apk
           path: |
-            android/dist/D-Gem.apk
-            android/dist/D-Gem.apk.sha256
+            android/dist/tellus-loquens.apk
+            android/dist/tellus-loquens.apk.sha256
           if-no-files-found: error
           retention-days: 90

@@ -35,7 +35,13 @@ def asset_names(v: str) -> dict:
              # conversation, which is the point of having a CC0 layer at all
              "geomancy-core_facts-%s.json" % v: "cp library/dataset/core_facts.json $OUT",
              # and the coverage scoreboard, so "comprehensive" arrives as a checkable file, not an adjective
-             "geomancy-coverage-%s.json" % v: "cp kb/coverage.json $OUT"}
+             "geomancy-coverage-%s.json" % v: "cp kb/coverage.json $OUT",
+             # The Android shell, built from the tag by the same script anyone else could run. Debug-signed, so it
+             # sideloads and is not a Play build; $DEBUG_KEYSTORE, if set while this runs, is the key it signs with,
+             # which is what lets the next release replace an installed copy instead of being refused for a
+             # different signature. Neither the key nor the APK is ever committed to the tree.
+             "tellus-loquens-%s.apk" % v: "bash android/build.sh && cp android/dist/tellus-loquens.apk $OUT",
+             "tellus-loquens-%s.apk.sha256" % v: "cp android/dist/tellus-loquens.apk.sha256 $OUT"}
 
 def redact(text: str) -> str:
     """Strip credentials from anything this script may print or raise with.

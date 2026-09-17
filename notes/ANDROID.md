@@ -90,6 +90,18 @@ reaching the engine through `Android.request` rather than being computed locally
 view, the shield arriving as a PNG rather than a download, no service-worker attempt, and the offline banner naming
 the address it tried.
 
+One failure mode could not be reasoned away, only designed around. A first install on a TECNO K17 showed the
+page's markup as text instead of the app. The likely mechanism was in the headers this shell builds -
+`WebResourceResponse` appends its own `charset=` to the type it is given, so a type that already names a charset
+arrives with two, and `X-Content-Type-Options: nosniff` on a document whose type is not readable is exactly what
+makes Chromium show the file rather than render it. Fixed: types are handed over bare, the charset is split out and
+set once, and nosniff now rides only on the engine's answers. Because that diagnosis cannot be confirmed from a
+sandbox with no handset in it, the shell no longer relies on being right: after a reload it falls back to loading
+the same file out of the package (the API calls are unaffected, since they go over the bridge and not through the
+origin), and only then puts four lines on the screen - what it served, as which type, to which engine, in which
+mode - so a phone that still misbehaves reports itself. `android/build.sh --check` holds both halves of the header
+fix in place, and each was mutated to confirm the check bites.
+
 Not proved here: that Android's WebView paints it on a handset. There is no emulator in this environment and none
 was installed, so the last step is a person with a phone. That gap is stated rather than glossed, and the checklist
 below is what to look at when someone is.

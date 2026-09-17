@@ -82,10 +82,10 @@ proof on any paragraph and get the arithmetic plus the work and folio behind it,
 sentence. Nothing is re-implemented on the device, and nothing leaves it except to the engine you pointed it at: charts
 live in the phone's own storage, in `localStorage`, on this handset. `python3 app/check_render.py` drives it in headless Chromium at 412x915 and fails on a clipped name.
 Three ways to get it onto a phone, and one refusal - [notes/APP.md](notes/APP.md) has the reasoning, and
-[notes/ANDROID.md](notes/ANDROID.md) the shell. Termux on the device is the recommended one, because then
+[notes/ANDROID.md](notes/ANDROID.md) why the shell is shaped the way it is. Termux on the device is the recommended one, because then
 `http://localhost:8044/m` is a secure context and Chrome will install it. If you would rather have a real
-package, `python3 android/build.sh` produces `android/dist/D-Gem.apk` (debug-signed, sideloaded, no Gradle and
-nothing to buy). What is not offered is a static host: no Pages deployment, because the reading is computed and
+package, `python3 android/build.sh` builds an installable Android shell around the same page - no Gradle and nothing to
+buy. What is not offered is a static host: no Pages deployment, because the reading is computed and
 this repository will not keep a second copy of the rules to make a serverless build work.
 
 ## The same library as an agent tool (MCP, no dependencies)

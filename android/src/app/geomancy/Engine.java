@@ -208,26 +208,64 @@ final class Engine {
         return "text/plain; charset=utf-8";
     }
 
+    /**
+     * The media type for a file inside the package, with NO charset parameter on it.
+     *
+     * This matters more than it looks. WebResourceResponse takes a type and an encoding and joins them with its
+     * own "charset=", so a type that already carries one is sent as "text/html; charset=utf-8; charset=UTF-8",
+     * Chromium finds no parseable document type, and - with X-Content-Type-Options: nosniff in the way - it
+     * refuses to render and shows the page's source as text. That is precisely what a first install on a TECNO
+     * displayed: sixteen hills of sand, as HTML.
+     */
     static String assetType(String path) {
         if (path.endsWith(".html")) {
-            return "text/html; charset=utf-8";
+            return "text/html";
         }
         if (path.endsWith(".js")) {
-            return "application/javascript; charset=utf-8";
+            return "application/javascript";
         }
         if (path.endsWith(".css")) {
-            return "text/css; charset=utf-8";
+            return "text/css";
         }
         if (path.endsWith(".png")) {
             return "image/png";
         }
         if (path.endsWith(".json") || path.endsWith(".webmanifest")) {
-            return "application/json; charset=utf-8";
+            return "application/json";
         }
         if (path.endsWith(".svg")) {
             return "image/svg+xml";
         }
         return "application/octet-stream";
+    }
+
+    /** The type alone: "text/html; charset=utf-8" and "text/html" must not reach the WebView as two headers. */
+    static String bareType(String mime) {
+        if (mime == null) {
+            return "application/octet-stream";
+        }
+        int i = mime.indexOf(';');
+        String t = (i < 0 ? mime : mime.substring(0, i)).trim();
+        return t.isEmpty() ? "application/octet-stream" : t;
+    }
+
+    /** The charset the other half of that header was carrying, or null for a type that has no business having one. */
+    static String charsetOf(String mime) {
+        if (mime == null) {
+            return null;
+        }
+        int i = mime.indexOf("charset=");
+        if (i < 0) {
+            return bareType(mime).startsWith("text/") || bareType(mime).contains("json")
+                    || bareType(mime).endsWith("javascript") || bareType(mime).contains("svg") ? "utf-8" : null;
+        }
+        String cs = mime.substring(i + "charset=".length()).trim();
+        int j = cs.indexOf(';');
+        if (j > 0) {
+            cs = cs.substring(0, j);
+        }
+        cs = cs.replace("\"", "").replace("'", "").trim();
+        return cs.isEmpty() ? null : cs.toLowerCase();
     }
 
     private static byte[] read(InputStream in) throws IOException {

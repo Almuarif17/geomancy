@@ -20,7 +20,7 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 A="$ROOT/android"; B="$A/build"; D="$A/dist"
-NAME="D-Gem"                       # the file you send someone; the launcher label stays "Geomancy"
+NAME="tellus-loquens"              # the file you send someone; the launcher label is in res/values/strings.xml
 MIN_SDK=26 TARGET_SDK=33
 BT_VER=33.0.2
 BT_ZIP=build-tools_r33.0.2-linux.zip
@@ -111,6 +111,25 @@ try:
           f"the rules stay in the engine")
 except FileNotFoundError:
     print("  (library/dataset/core_facts.json not built, so the no-rules check had nothing to compare against)")
+
+# The header bug that put source code on a phone instead of a chart: a media type that already carries a charset,
+# joined to the one WebResourceResponse appends, arrives as "text/html; charset=utf-8; charset=UTF-8", which is
+# not a parseable document type - and with nosniff in the way the WebView shows the file as text rather than
+# guessing. Both halves are asserted against the source, because nothing short of a handset shows the symptom.
+eng = (a / "src/app/geomancy/Engine.java").read_text()
+body = eng.split("static String assetType", 1)[1].split("\n    }", 1)[0]
+if "charset" in body:
+    sys.exit("FAIL: Engine.assetType is naming a charset again - the WebView appends its own and the page renders "
+             "as source text")
+for must, why in [
+    ("new WebResourceResponse(type,", "the type handed to the WebView has to be the stripped one, not the raw header"),
+    ('"X-Content-Type-Options", "nosniff"', "the hardening has to be there for engine answers at all"),
+    ("if (api) {", "and only for them: nosniff on the app's own document is what turns a slightly-off type into "
+                   "a screen of markup"),
+]:
+    if must not in java:
+        sys.exit(f"FAIL: {must} is gone from MainActivity - {why}")
+print("android/build.sh --check: PASS - manifest and resources parse, and the shell's own rules are in place")
 PYCHK
   if ! have_tools; then
     echo "  (no Android toolchain here, so this stopped at the sources; install build-tools/$BT_VER and"

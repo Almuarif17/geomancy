@@ -4,15 +4,25 @@ One page, two ways to run it. The browser is served `app/mobile.html` by `app/se
 same bytes into an installable package, and adds the four things a web page cannot do on a phone by itself.
 
 ```bash
-python3 android/build.sh            # -> android/dist/D-Gem.apk  (fetches the toolchain if it is not in $ANDROID_HOME)
+python3 android/build.sh            # -> android/dist/tellus-loquens.apk  (fetches the toolchain if it is not in $ANDROID_HOME)
 python3 android/build.sh --check    # gate the sources; needs no Android toolchain at all, so CI can always run it
 python3 android/build.sh --clean    # remove build/ and dist/
-adb install -r android/dist/D-Gem.apk
+adb install -r android/dist/tellus-loquens.apk
 ```
 
 Nothing here is committed except source: `build/`, `dist/`, the debug keystore and the SDK are all gitignored. The
 APK is a release asset (like `library/dataset/geomancy.sqlite`): reproducible from a clean tree, so the tree is the
 thing under version control.
+
+## The name
+
+*Tellus Loquens* - "the speaking earth". The launcher carries those two words and nothing else, because a tile label
+longer than that is truncated on the phone and unreadable on a small screen; the full name the manifest and the
+About sheet carry spells out what the app actually is: *ʿilm al-raml · ars geomantica — the deep root of the earth, which listens and answers*. Both names are the traditions the corpus is built
+from - the Arabic ʿilm al-raml, "the science of the sand", and the Latin *ars geomantica* - and the phrase
+"listens and answers" is the whole method: a question is put, sixteen marks are counted, and the judgment is read
+back out of what was asked. The package id stays `app.geomancy`, because a package name is not a brand: changing
+it means every installed copy has to be uninstalled.
 
 ## What the shell is
 
@@ -88,6 +98,7 @@ AAB. Nobody has chosen that yet, and nothing here pretends the debug key is a su
 | Symptom | What it actually means |
 | --- | --- |
 | "Nothing is answering at …" in the Cast screen | The dialog's address is wrong or the server is not running. Start `python3 app/server.py --host 0.0.0.0 --port 8044`, and use the laptop's LAN address — not `localhost`, which is the phone itself. |
+| The screen shows the page's own markup instead of the app | The shell already tried twice: a reload, then loading `mobile.html` straight out of the package with the API still going over the bridge. If it is still text, it shows a dialog naming the URL, the content type it served, the engine address and the mode - those four lines are the bug report, and the render gate cannot catch this class of defect because it lives in Chromium's header handling, not in the page. |
 | Page opens but no reading appears, and no dialog | The engine answered with something that is not JSON. Check `curl http://<host>:8044/api/health` from another machine on that network. |
 | Install blocked by the phone | "Install unknown apps" must be allowed for the app that opens the file (Files, or your messenger). Expected for a sideloaded debug build. |
 | Casting stops when the screen sleeps | The lock is held only while the Cast view is open, on purpose; if the phone's own battery settings kill background apps, exempt this one. |

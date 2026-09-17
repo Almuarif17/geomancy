@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <!-- The launcher label. The page says "Geomancy" in its own header; this is what sits under the icon. -->
-  <string name="app_name">Geomancy</string>
+  <!-- The launcher label has to be readable under an icon on a 1080p tile, so it is the two-word Latin alone;
+       the whole name, with both traditions it draws on, is the description the system can show elsewhere. -->
+  <string name="app_name">Tellus Loquens</string>
+  <string name="app_tagline">ʿilm al-raml · ars geomantica — the deep root of the earth, which listens and answers</string>
 </resources>

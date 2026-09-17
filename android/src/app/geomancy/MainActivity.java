@@ -51,9 +51,13 @@ public class MainActivity extends Activity {
     private static final String HOST = "geomancy.local";
     private static final String START = "https://" + HOST + "/mobile.html";
     private static final String ASSET_ROOT = "www/";
+    private static final String ASSET_FILE = "file:///android_asset/www/mobile.html";
 
     private WebView web;
     private SharedPreferences prefs;
+    private volatile String documentMime = "(no document served yet)";
+    private int bootTries = 0;
+    private volatile boolean fileMode = false;
     private String sharedText = null;
     private volatile boolean dialogShowing = false;
 
@@ -133,18 +137,75 @@ public class MainActivity extends Activity {
                 // only GETs can be answered here: the WebView gives a client no access to a request body,
                 // so POSTs go over the bridge and this path exists for a page loaded outside it
                 Engine.Reply r = Engine.call(engineBase(), pathAndQuery(u), request.getMethod(), null);
-                return reply(r.status, r.mime, r.body);
+                return reply(r.status, r.mime, r.body, true);
             }
             return asset(path);
         }
 
         @Override
         public void onPageFinished(WebView view, String url) {
+            checkBooted(view);
             if (sharedText != null) {
                 String t = sharedText.replace("\\", "\\\\").replace("'", "\\'").replace("\n", " ");
                 view.evaluateJavascript("window.__sharedText='" + t + "';", null);
                 sharedText = null;
             }
+        }
+
+        /**
+         * Did the page actually run? A WebView handed its own document as text, or an asset list with a file
+         * missing, produces a screen of markup and no error anywhere - the hardest kind of bug to report, because
+         * the app looks broken and the log says nothing. So the shell asks the document whether its own app is in
+         * it, and takes three steps: reload, then load the same file out of the package directly, then say on the
+         * screen what it served and how.
+         *
+         * The middle step matters more than a retry. Everything about the first two steps is ours - the made-up
+         * origin and the interceptor in front of it - and if one of them is the problem on somebody's build of
+         * Chromium, the page still has to work. It does, from file://, because the API calls do not go through the
+         * origin at all: they go through the bridge, which does not care where the page was loaded from. What that
+         * costs is file access on this one window, which is why it is a fallback and not the normal path.
+         */
+        private void checkBooted(final WebView view) {
+            final int attempt = bootTries++;
+            view.evaluateJavascript("(function(){var t=document.getElementById('tabs');"
+                    + "return (t && t.querySelectorAll('button').length >= 3 && typeof API === 'object')"
+                    + " ? 'booted' : (document.body && document.body.childElementCount <= 1"
+                    + " ? 'source-as-text' : 'not-booted');})()", value -> {
+                if (value != null && value.contains("booted") && !value.contains("source-as-text")) {
+                    bootTries = 0;
+                    return;
+                }
+                if (attempt == 0) {
+                    view.postDelayed(() -> view.reload(), 250);
+                    return;
+                }
+                if (attempt == 1 && !fileMode) {
+                    fileMode = true;
+                    run(() -> {
+                        Toast.makeText(MainActivity.this, "Rendering through the app's own origin failed, so this"
+                                        + " window is reading the package's files instead. Nothing else changed.",
+                                Toast.LENGTH_LONG).show();
+                        view.getSettings().setAllowFileAccess(true);
+                        view.loadUrl(ASSET_FILE);
+                    });
+                    return;
+                }
+                run(() -> new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("The page did not start")
+                        .setMessage("served  " + START + "\n  as      " + documentMime
+                                + "\n  engine  " + engineBase() + "\n  mode     "
+                                + (fileMode ? "package files" : "virtual origin")
+                                + "\n\nThe file arrived and did not run, so this is not the engine being"
+                                + " unreachable. Those four lines are the bug report; reinstall from a build of the"
+                                + " same version first.")
+                        .setPositiveButton("Change engine address", (d2, w2) -> showConnectionDialog(engineBase()))
+                        .setNeutralButton("Reload", (d2, w2) -> {
+                            bootTries = 0;
+                            view.loadUrl(fileMode ? ASSET_FILE : START);
+                        })
+                        .setNegativeButton("Close", null)
+                        .show());
+            });
         }
 
         @Override
@@ -185,7 +246,10 @@ public class MainActivity extends Activity {
         }
         try (InputStream in = getAssets().open(ASSET_ROOT + rel)) {
             byte[] body = read(in);
-            return reply(200, Engine.assetType(rel), body);
+            if (rel.endsWith(".html")) {
+                documentMime = Engine.assetType(rel);      // what the next diagnostic line will quote back
+            }
+            return reply(200, Engine.assetType(rel), body, false);
         } catch (Exception e) {
             return reply(404, "text/html; charset=utf-8",
                     ("<html><body style=\"font:16px sans-serif;background:#141110;color:#f0e9dd;padding:2em\">"
@@ -194,18 +258,31 @@ public class MainActivity extends Activity {
         }
     }
 
-    private static WebResourceResponse reply(int status, String mime, byte[] body) {
-        WebResourceResponse r = new WebResourceResponse(mime, "UTF-8", new ByteArrayInputStream(body));
+    /**
+     * Build the response from a type and a charset that are kept apart until the last moment.
+     *
+     * WebResourceResponse appends its own "charset=" to whatever type it is given, so the type handed here is
+     * always stripped first - see Engine.assetType for what happens otherwise. `api` marks the answers that came
+     * from the engine: those get nosniff, because a JSON reply that a browser is willing to read as HTML is a
+     * real hazard on a shared network. The files inside the package do not, and must not: nosniff on a document
+     * whose type is even slightly off is what renders the app as a page of source code.
+     */
+    private static WebResourceResponse reply(int status, String mime, byte[] body, boolean api) {
+        String type = Engine.bareType(mime);
+        String charset = Engine.charsetOf(mime);
+        WebResourceResponse r = new WebResourceResponse(type, charset, new ByteArrayInputStream(body));
         r.setStatusCodeAndReasonPhrase(status, status == 200 ? "OK" : (status == 503 ? "Service Unavailable" : "Error"));
-        r.setResponseHeaders(headers());
+        java.util.Map<String, String> h = new java.util.HashMap<>();
+        h.put("Cache-Control", "no-cache");
+        if (api) {
+            h.put("X-Content-Type-Options", "nosniff");
+        }
+        r.setResponseHeaders(h);
         return r;
     }
 
-    private static java.util.Map<String, String> headers() {
-        java.util.Map<String, String> h = new java.util.HashMap<>();
-        h.put("Cache-Control", "no-cache");
-        h.put("X-Content-Type-Options", "nosniff");
-        return h;
+    private static WebResourceResponse reply(int status, String mime, byte[] body) {
+        return reply(status, mime, body, false);
     }
 
     // ---------------------------------------------------------------- the bridge

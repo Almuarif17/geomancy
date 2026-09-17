@@ -41,7 +41,7 @@ class Handler(SimpleHTTPRequestHandler):
                       ".html": "text/html; charset=utf-8",
                       ".svg": "image/svg+xml"}
 
-    apk: pathlib.Path = HERE / "dist" / "D-Gem.apk"      # set by main(); a class attr so the handler can find it
+    apk: pathlib.Path = HERE / "dist" / "tellus-loquens.apk"      # set by main(); a class attr so the handler can find it
 
     def end_headers(self) -> None:
         if self.path.lstrip("/").startswith(self.apk.name) and self.apk.exists():
@@ -77,10 +77,10 @@ code,pre{{background:#1e1a18;padding:2px 6px;border-radius:6px;font-size:13px}}o
 li{{margin:7px 0}}.card{{border:1px solid #2c2622;border-radius:14px;padding:16px 18px;margin:18px 0}}
 img{{display:block;max-width:210px;margin:0 auto}}small{{color:#a99c90}}
 </style></head><body><div class="wrap">
-<h1>Geomancy <span class="mut">- D-Gem.apk</span></h1>
+<h1>Geomancy <span class="mut">- tellus-loquens.apk</span></h1>
 <p class="mut">The phone app with an Android shell around it. {size:,} bytes, signed with a local debug key,
 built from the same tree the tests run against.</p>
-<a class="btn" href="/{apk.name}">Download D-Gem.apk</a>
+<a class="btn" href="/{apk.name}">Download tellus-loquens.apk</a>
 <div class="card" style="text-align:center">
   <img src="qr.svg" alt="QR code for this page">
   <small>scan with the phone's camera</small>
@@ -106,7 +106,7 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--port", type=int, default=int(os.environ.get("PORT", "8099")))
     ap.add_argument("--url", default="", help="public URL to encode in the QR code (default: the LAN address)")
-    ap.add_argument("--apk", default=str(HERE / "dist" / "D-Gem.apk"))
+    ap.add_argument("--apk", default=str(HERE / "dist" / "tellus-loquens.apk"))
     a = ap.parse_args()
     apk = pathlib.Path(a.apk).resolve()
     if not apk.exists():

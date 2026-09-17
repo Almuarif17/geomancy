@@ -309,7 +309,7 @@ def main() -> int:
        rc == 0 and "application/vnd.android.package-archive" in run(sys.executable, "-c",
        "import pathlib,sys; sys.path.insert(0,'android'); import serve_apk as s;"
        "print(s.Handler.extensions_map['.apk'])")[1], out.splitlines()[0][:60])
-    rc, out = run(sys.executable, "android/serve_apk.py", "--apk", "/nonexistent/D-Gem.apk")
+    rc, out = run(sys.executable, "android/serve_apk.py", "--apk", "/nonexistent/tellus-loquens.apk")
     ck("it refuses to serve an APK that was never built, instead of an empty page",
        rc != 0 and "android/build.sh" in out, out.strip()[-90:])
     rc, tracked = run("git", "ls-files", "android")

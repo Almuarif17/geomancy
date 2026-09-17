@@ -86,7 +86,7 @@ Three ways to reach the engine, and one that is deliberately not offered:
    plain `http://192.168.x.x` address is neither, so the service worker and the install prompt stay switched off.
    That is the whole argument for path 1 over path 2: same code, same engine, and the phone lets it be installed.
 3. **The APK, over the local network or through Termux.** `python3 android/build.sh` (or `android/build.sh` on a
-   machine with the toolchain already in `$ANDROID_HOME`) produces `android/dist/D-Gem.apk`; install it with
+   machine with the toolchain already in `$ANDROID_HOME`) produces `android/dist/tellus-loquens.apk`; install it with
    `adb install -r` or by opening it from Files. It loads its own copy of the page from `assets/www/` and reaches
    the engine at an address you type once into a dialog, so it works on `http://192.168.x.x:8044` where the
    browser will not install, and with Termux on the device where no browser is open. It is a window and a proxy,
