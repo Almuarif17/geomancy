@@ -119,7 +119,12 @@ gg = LIB / "tools/check_calatarama_grid.py"
 if gg.exists():
     r = subprocess.run([sys.executable, str(gg)], capture_output=True, text=True)
     last = (r.stdout.strip().splitlines() or [""])[-1]
-    chk("calatarama grid integrity (no figure dropped from every house)", r.returncode == 0, last[:120])
+    if r.returncode != 0:
+        # CI once failed this gate with no explanation because only stdout was read; a tool that
+        # cannot report why it failed is a worse gate than no gate.
+        err = " | ".join((r.stderr.strip().splitlines() or ["(no output)"])[-2:])[:220]
+        last = (last + "  ||  " + err).strip(" |")
+    chk("calatarama grid integrity (no figure dropped from every house)", r.returncode == 0, last[:230])
 
 techf = ROOT / "kb" / "techniques.yaml"
 if techf.exists():

@@ -10,16 +10,16 @@
    "resolved": [
     {
      "path": "library/dataset/index/by_outcome.jsonl",
-     "bytes": 51471,
-     "sha256": "31e52e362d912478"
+     "bytes": 52086,
+     "sha256": "7479507dd9222d6f"
     },
     {
      "path": "library/dataset/index/by_figure.jsonl",
-     "bytes": 26207,
-     "sha256": "07dee3566149a0e2"
+     "bytes": 26459,
+     "sha256": "a612a3d2cf8add2f"
     }
    ],
-   "bytes": 77678
+   "bytes": 78545
   },
   "reading": {
    "files": [
@@ -33,18 +33,18 @@
    "resolved": [
     {
      "path": "library/dataset/index/by_outcome.jsonl",
-     "bytes": 51471,
-     "sha256": "31e52e362d912478"
+     "bytes": 52086,
+     "sha256": "7479507dd9222d6f"
     },
     {
      "path": "library/dataset/index/by_figure.jsonl",
-     "bytes": 26207,
-     "sha256": "07dee3566149a0e2"
+     "bytes": 26459,
+     "sha256": "a612a3d2cf8add2f"
     },
     {
      "path": "library/dataset/index/by_house.jsonl",
-     "bytes": 37758,
-     "sha256": "c898c6fc6f4982f6"
+     "bytes": 38136,
+     "sha256": "1eff8ccedb4b9191"
     },
     {
      "path": "library/dataset/shards/rules.jsonl",
@@ -62,7 +62,7 @@
      "sha256": "4e98c31d5cb446c2"
     }
    ],
-   "bytes": 163571
+   "bytes": 164816
   },
   "verdict": {
    "files": [
@@ -72,16 +72,16 @@
    "resolved": [
     {
      "path": "library/dataset/index/by_house.jsonl",
-     "bytes": 37758,
-     "sha256": "c898c6fc6f4982f6"
+     "bytes": 38136,
+     "sha256": "1eff8ccedb4b9191"
     },
     {
      "path": "library/dataset/shards/passages.jsonl",
-     "bytes": 325115,
-     "sha256": "b492d6e459ce7325"
+     "bytes": 332788,
+     "sha256": "63ab1a2d2ffd99ee"
     }
    ],
-   "bytes": 362873
+   "bytes": 370924
   },
   "topics": {
    "files": [
@@ -90,11 +90,11 @@
    "resolved": [
     {
      "path": "library/dataset/index/by_outcome.jsonl",
-     "bytes": 51471,
-     "sha256": "31e52e362d912478"
+     "bytes": 52086,
+     "sha256": "7479507dd9222d6f"
     }
    ],
-   "bytes": 51471
+   "bytes": 52086
   },
   "search": {
    "files": [
@@ -104,17 +104,17 @@
    "resolved": [
     {
      "path": "library/dataset/geomancy.sqlite",
-     "bytes": 520192,
+     "bytes": 528384,
      "sha256": null,
      "note": "regenerate with `make build`; not byte-stable, not hashed"
     },
     {
      "path": "library/dataset/shards/passages.jsonl",
-     "bytes": 325115,
-     "sha256": "b492d6e459ce7325"
+     "bytes": 332788,
+     "sha256": "63ab1a2d2ffd99ee"
     }
    ],
-   "bytes": 845307
+   "bytes": 861172
   },
   "offline_full": {
    "files": [
@@ -125,8 +125,8 @@
    "resolved": [
     {
      "path": "library/dataset/shards/passages.jsonl",
-     "bytes": 325115,
-     "sha256": "b492d6e459ce7325"
+     "bytes": 332788,
+     "sha256": "63ab1a2d2ffd99ee"
     },
     {
      "path": "library/dataset/shards/rules.jsonl",
@@ -136,10 +136,10 @@
     {
      "path": "library/dataset/manifest.json",
      "bytes": 2646,
-     "sha256": "dfad1fd8d08a1ce5"
+     "sha256": "26e0dd1468d20d0b"
     }
    ],
-   "bytes": 350527
+   "bytes": 358200
   }
  }
 }

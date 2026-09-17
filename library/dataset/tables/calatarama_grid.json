@@ -112,6 +112,13 @@
     "status": "corrected",
     "evidence": "v0.2.0 carried the house X row here; per-table offsets now place 'Science and fear of God' in IX and 'Achievement of rural office' in X",
     "ruling": "re-parsed with per-table bounds"
+   },
+   {
+    "house": "I",
+    "figure": "Carcer, Fortuna Major, Fortuna Minor, Puer, Tristitia, Via",
+    "status": "no_universal_table",
+    "evidence": "the appendix holds universal tables for houses II-XII only (Finan, fn. 552); the first house is handled by the example casting and its demonstration table (thesis Table 8, f.24v-25), from which the ten present rows are taken",
+    "ruling": "an app asking 'what does Carcer in the first house mean in this source' must get no-ruling, not a row borrowed from another house"
    }
   ]
  },

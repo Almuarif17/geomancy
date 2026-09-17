@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.2.3 - 2026-09-17
+
+### Fixed
+- `library/tools/check_calatarama_grid.py` used an f-string with nested identical quotes
+  (`f"...{doc["houses"]}..."`), which is PEP 701 syntax: accepted by Python 3.12+, a **SyntaxError** on the
+  3.11 interpreter CI pins. The gate therefore died before printing anything, and `validate.py` reported a
+  failure with no detail because it only read the child's stdout. Rewritten portably.
+- `library/tools/validate.py` now appends the child's stderr tail whenever a subprocess gate fails. A gate
+  that cannot say why it failed is worse than no gate; that is why this took a CI run to diagnose.
+- The shipped derived files were not what a fresh clone produces: `library/dataset/index/*`,
+  `bundles.json` and `tables/calatarama_grid.json` were built from an older passage set, so CI's
+  "Generated artefacts must be committed" guard had been failing since 0.2.1. Rebuilt in CI's exact order
+  (`build_dataset` -> `retrieve --build` -> `gen_types`) and committed; a clean clone is now reproducible.
+
+### Notes
+- Contents: 1,140 passages / 23 rules, 184/192 Calatarama cells, 12 houses, 22 outcomes. Bundles grew as
+  the recovered rulings propagated: `verdict` 362K, `search` 840K, `offline_full` 349K.
+
 ## Unreleased
 
 ### Added

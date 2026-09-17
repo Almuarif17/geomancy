@@ -91,3 +91,9 @@ against 321 here. Decision: keep this tree as source of truth, adopt its two goo
   from every house, because that is what a broken extractor looks like - which is how 42 real rulings were
   lost in 0.2.0 while the findings text explained them away.
 
+
+### Gate portability
+
+CI pins Python 3.11; the sandbox that develops this repo runs 3.13, and PEP 701 nested quotes inside f-strings
+slipped through every local check while failing to parse in CI (v0.2.2). Every tracked `.py` is now verified to
+parse, and `validate.py` surfaces a failing gate's stderr so a crash cannot masquerade as a verdict.

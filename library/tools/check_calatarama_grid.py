@@ -70,8 +70,11 @@ def main() -> int:
         print("\nCALATARAMA GRID GATE: FAIL")
         print("  - short houses not explained in _meta.editorial_notes:", sorted(documented - set(notes)))
         return 1
-    print(f"\nCALATARAMA GRID GATE: PASS ({cells} cells, {doc["houses"]} houses, "
-          f"{len(documented)} absences all explained in editorial_notes)")
+    n_houses = doc["houses"]
+    n_doc = len(documented)
+    msg = ("CALATARAMA GRID GATE: PASS (" + str(cells) + " cells, " + str(n_houses)
+           + " houses, " + str(n_doc) + " absences all explained in editorial_notes)")
+    print("\n" + msg)
     return 0
 
 
