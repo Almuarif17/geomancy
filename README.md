@@ -35,13 +35,26 @@ attested sources cannot fill. A blank that says "not attested" beats a confident
 
 ## Use it from anywhere, at zero cost
 
-The dataset is committed as JSONL, so it is directly servable as a CDN file — no server, no database bill:
+The dataset is committed as JSONL, so it is directly servable as a CDN file - no server, no database bill.
+Every URL below is checked to exist by `check_docs_consistency.py`, and each was fetched over HTTPS before
+this release was tagged, because a documentation link that 404s is worse than no link:
 
 ```
-https://cdn.jsdelivr.net/gh/<you>/geomancy-library@v0.1.0/library/dataset/passages.jsonl
-https://cdn.jsdelivr.net/gh/<you>/geomancy-library@v0.1.0/library/dataset/rules.jsonl
-https://cdn.jsdelivr.net/gh/<you>/geomancy-library@v0.1.0/library/dataset/manifest.json
+https://cdn.jsdelivr.net/gh/Almuarif17/geomancy@v0.2.5/library/dataset/index/by_outcome.jsonl
+https://cdn.jsdelivr.net/gh/Almuarif17/geomancy@v0.2.5/library/dataset/shards/passages.jsonl
+https://cdn.jsdelivr.net/gh/Almuarif17/geomancy@v0.2.5/library/dataset/core_facts.json
+https://cdn.jsdelivr.net/gh/Almuarif17/geomancy@v0.2.5/library/dataset/manifest.json
+https://cdn.jsdelivr.net/gh/Almuarif17/geomancy@v0.2.5/types/geomancy.d.ts
 ```
+
+Swap the tag for `@latest` while you evaluate, pin a tag the moment you ship. Pin the **CC0** layer
+(`core_facts.json`) if you only need the figures, the house numbering and the arithmetic - it carries no
+licence obligation at all.
+
+Update protocol for a client: fetch `manifest.json`, diff the per-file hashes, download only the changed
+shards, rebuild a local SQLite index. Offline-capable after first fetch. The prebuilt SQLite file is a
+release asset - `geomancy-v0.2.5.sqlite`, 528 KB - so a client that would rather not run `make db` can
+`curl -O` it; `make db` regenerates it locally, and it is not committed because the build derives it.
 
 Update protocol for a client: fetch `manifest.json`, diff the per-file hashes, download only the changed
 shards, rebuild a local SQLite index. Offline-capable after first fetch. `make db` regenerates the

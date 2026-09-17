@@ -53,7 +53,7 @@ A clone gets a **snapshot**. These are not snapshots:
   travel with them and it is trivial to demonstrate provenance.
 - **Keep distinctive editorial notes in your own voice** (already true: `editorial_notes`, the gap
   explanations, the "we refuse to guess" rulings). Generic data is untraceable; an argument is a signature.
-- **Version everything, name versions.** `v0.2.3` beats "some CSV on someone's blog" because a consumer can
+- **Version everything, name versions.** `v0.2.5` beats "some CSV on someone's blog" because a consumer can
   pin it, cite it and diff it.
 - **A visible corrections path** (Issues + Discussions + a `docs/RESEARCH_LEDGER.md` entry per fix). A
   dataset that admits and fixes errors is worth paying for; one that never has them is assumed to hide them.

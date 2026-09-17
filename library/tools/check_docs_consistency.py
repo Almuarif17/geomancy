@@ -61,6 +61,32 @@ def targets():
         yield p
 
 
+def _advertised_paths(sources):
+    """Every CDN or raw-github URL in a tracked .md must point at a file that exists in this tree.
+
+    The host patterns are matched by substring rather than inside a regexp character class, because this
+    function's first draft spent more time fighting quote escaping than it did finding stale links - which is
+    itself the lesson the gate exists to teach: prefer the boring readable form.
+    """
+    hostmarks = ("cdn.jsdelivr.net/gh/", "raw.githubusercontent.com/")
+    pat = re.compile(r"https?://\S+")
+    out = []
+    for md in sorted(sources.rglob("*.md")):
+        rel = md.relative_to(sources)
+        if rel.parts and rel.parts[0] in {".git", "corpus", "node_modules"}:
+            continue
+        for url in pat.findall(md.read_text()):
+            url = url.rstrip("\"\'`)")
+            if not any(h in url for h in hostmarks):
+                continue
+            m = re.search(r"(?:geomancy|geomancy-library)(?:@v[\d.]+|/v[\d.]+)/(.+)$", url)
+            if not m:
+                continue                       # release assets are built by the publisher, not tracked files
+            if not (sources / m.group(1)).exists():
+                out.append(f"{rel} advertises {m.group(1)}, which is not in the tree")
+    return out
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--fix", action="store_true", help="rewrite every marked number to the build's value")
@@ -110,6 +136,10 @@ def main() -> int:
                 for m in loose.finditer(line):
                     if int(m.group(1)) != t["passages"]:
                         print(f"  note  {p.relative_to(ROOT)}:{ln} states {m.group(1)} passages unmarked")
+    url_bad = _advertised_paths(sources=ROOT)
+    for u in url_bad:
+        bad.append(u)
+
     print(f"docs consistency: {len(t)} units tracked, {checked} marked numbers, {changed} rewritten"
           + (" (--fix)" if a.fix else ""))
     if bad:
