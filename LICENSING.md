@@ -7,7 +7,7 @@ So the repo is now layered, **by file, not by intention** — a layer is enforce
 by two layers.
 
 ```scope
-L1-code=engine/,library/tools/,scripts/,server/,tools/,data/,examples/,library/schema/,types/,library/dataset/openapi.yaml,registry/,corpus/,.github/,Makefile,SETUP.md
+L1-code=engine/,library/tools/,scripts/,server/,app/,tools/,data/,examples/,library/schema/,types/,library/dataset/openapi.yaml,registry/,corpus/,.github/,Makefile,SETUP.md
 L2-cc0=library/dataset/core_facts.json
 L3-curated=kb/,library/dataset/index/,library/dataset/shards/,library/dataset/tables/,library/dataset/bundles.json,library/dataset/manifest.json,library/dataset/evaluation.json,library/README.md,notes/,docs/,README.md,FINDINGS.md,CHANGELOG.md,PLAN.md,LICENSE-DATA
 ```

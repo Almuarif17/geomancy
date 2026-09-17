@@ -128,6 +128,14 @@ if dc.exists():
         tail += "  ||  " + " | ".join((r.stderr.strip().splitlines() or [""])[-1:])[:150]
     chk("prose counts match the build", r.returncode == 0, tail)
 
+ap = ROOT / "app" / "test_app.py"
+if ap.exists():
+    r = subprocess.run([sys.executable, str(ap)], capture_output=True, text=True)
+    tail = (r.stdout.strip().splitlines() or ["(no output)"])[-1][:170]
+    if r.returncode != 0:
+        tail += "  ||  " + " | ".join((r.stderr.strip().splitlines() or [""])[-1:])[:150]
+    chk("reader app: routes answer, citations survive, page stays self-contained", r.returncode == 0, tail)
+
 mcp = ROOT / "server" / "mcp_geomancy.py"
 if mcp.exists():
     for mode, what in (("--self-test", "protocol surface (17 checks)"),

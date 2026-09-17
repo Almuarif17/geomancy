@@ -44,6 +44,11 @@ def sh(*cmd: str, check: bool = True) -> str:
     return (r.stdout or "") + (r.stderr or "")
 
 
+def _has(ref: str) -> bool:
+    import subprocess
+    return subprocess.run(["git", "rev-parse", "--verify", "-q", ref], capture_output=True).returncode == 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("tag")
@@ -56,6 +61,7 @@ def main() -> int:
                  + "\n  (or add --dry-run to check the gates, the asset list and the order without one)")
     H = {"Authorization": "token " + (tok or ""), "Accept": "application/vnd.github+json",
          "User-Agent": "geomancy-publish"}
+    gitid: list[str] = []
 
     def api(url, data=None, method=None, ctype=None, host=API):
         h = dict(H)
@@ -96,9 +102,40 @@ def main() -> int:
               + str(len(asset_names(a.tag.lstrip("v")))) + " assets, upload, verify"); return 0
 
     print("[2/6] tag + push")
-    sh("git", "tag", "-a", a.tag, "-m", f"geomancy-library {a.tag}", "--force")
-    print("   ", sh("git", "push", "-f", "origin", "main").strip() or "main pushed")
-    print("   ", sh("git", "push", "-f", "-q", "origin", f"refs/tags/{a.tag}").strip() or f"{a.tag} pushed")
+    clean_url = f"https://github.com/{a.repo}.git"
+    # Auth is driven from the token in the environment, for the length of the push, and never written to
+    # .git/config or to disk: a remote that depends on a stored credential is a release you cannot make from
+    # a fresh machine, and this workspace proved it - .git/config is not snapshotted, so a configured remote
+    # simply vanishes and "git push" asks a non-interactive process for a password.
+    auth_url = f"https://x-access-token:{tok}@github.com/{a.repo}.git" if tok else clean_url
+    sh("git", "remote", "set-url", "origin", auth_url)
+    try:
+        st, body = api(f"/repos/{a.repo}/git/refs/tags/{a.tag}")
+        if st == 200:
+            remote_sha = json.loads(body).get("object", {}).get("sha", "")[:10]
+            local_sha = sh("git", "rev-parse", f"{a.tag}^{{}}").strip()[:10] if _has(a.tag) else ""
+            if local_sha and remote_sha and local_sha != remote_sha:
+                sys.exit(f"{a.tag} already exists upstream at {remote_sha} but points at {local_sha} here. "
+                         "Refusing to move a published tag: bump the version, or delete the release by hand.")
+        else:
+            # the tag object records who released it; if the machine has no git identity, ask the token whose
+            # permissions are already in use rather than inventing one or hardcoding a person into the script
+            if sh("git", "config", "user.email").strip() == "":
+                u = json.loads(api("/user")[1] or b"{}")
+                login, nm = u.get("login") or "unknown", u.get("name") or u.get("login") or "unknown"
+                mail = u.get("email") or f"{u.get('id')}-{login}@users.noreply.github.com"
+                gitid = ["-c", f"user.name={nm}", "-c", f"user.email={mail}"]
+                print("    git identity unset: tagging as", nm)
+        sh("git", *gitid, "tag", "-a", a.tag, "-m", f"geomancy-library {a.tag}", "--force")
+        # main goes up with --force-with-lease, not -f: history is rewritten only if nobody else moved the
+        # branch between our fetch and our push, which is the one case a library release must never overwrite
+        print("   ", (sh("git", "push", "--force-with-lease", "origin", "main:refs/heads/main",
+                         "--porcelain").strip().splitlines() or ["main pushed"])[-1] or "main pushed")
+        print("   ", (sh("git", "push", "-f", "origin", f"refs/tags/{a.tag}", "--porcelain").strip().splitlines()
+                       or [f"{a.tag} pushed"])[-1] or f"{a.tag} pushed")
+    finally:
+        sh("git", "remote", "set-url", "origin", clean_url)
+        print("    origin restored to the credential-free URL")
 
     print("[3/6] build assets")
     A = ROOT.parent / "release-assets"; A.mkdir(exist_ok=True)

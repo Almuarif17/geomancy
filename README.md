@@ -47,6 +47,19 @@ Update protocol for a client: fetch `manifest.json`, diff the per-file hashes, d
 shards, rebuild a local SQLite index. Offline-capable after first fetch. `make db` regenerates the
 SQLite file locally (it is not committed, because it is derived and CI rebuilds it).
 
+## Run the reader (nothing to install, nothing to send anywhere)
+
+```bash
+python3 app/server.py            # then open the printed URL
+```
+
+A cast, a question, the sources that answer it, and what they do not answer - the whole pipeline in a page you
+can hold in your hands before you write a line of integration code. It reads `app/preferences.json` on every
+request, so a preference (which works you trust first, whether verbatim quotations are shown, how loudly the
+gaps are named) is one edit and a reload. `python3 app/test_app.py` proves its 26 contract checks; `how it
+works` in the header prints the eight build stages with live counts, generated from the shipped files, so the
+explanation cannot drift from the thing it explains.
+
 ## The same library as an agent tool (MCP, no dependencies)
 
 ```bash

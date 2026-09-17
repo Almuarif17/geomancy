@@ -1,0 +1,27 @@
+{
+  "_how_to_use": [
+    "This file is yours. Edit it, save, reload the reader - nothing else has to change.",
+    "It controls what you SEE and in what ORDER. It cannot change what a source said: engine/ground.py decides",
+    "content, this file decides presentation. That split is deliberate, and it is what keeps a preference from",
+    "quietly becoming a fabrication.",
+    "Every key is optional; unknown keys are ignored, missing keys take the defaults shown here."
+  ],
+  "show_quotes": true,
+  "_show_quotes": "false hides the verbatim source sentences and keeps our own attributed summary - useful when you are testing whether the structure reads well before you argue about the wording.",
+  "preferred_works_first": ["calatarama", "cattan1608", "hartmann"],
+  "_preferred_works_first": "works listed here are quoted ahead of the others inside each claim. Put the authors you trust most, or the ones whose English you read most easily, at the front. Options are the 'work' values in kb/voices.jsonl: calatarama, lataille, cattan1591, cattan1608, fasciculus, hartmann, agrippa.",
+  "min_voices_for_confidence": 2,
+  "_min_voices_for_confidence": "a claim resting on fewer voices than this is stamped 'thin' in the app. 1 means single-source; raise it to 3 to see how much of the library currently rests on one author.",
+  "gap_detail": "brief",
+  "_gap_detail": "'silent' hides where the sources say nothing, 'brief' names the house, 'full' gives the whole sentence. Leaving this on 'silent' is how a library starts looking complete when it is not.",
+  "tone": "plain",
+  "_tone": "'plain' adds a one-line count summary above the reading; 'scholarly' leaves the claims to speak for themselves. Wording of claims is never rewritten either way.",
+  "house_labels": "roman",
+  "_house_labels": "'roman' shows I-XII as the sources do; 'arabic' shows 1-12, which an app's data layer will prefer.",
+  "topics_pinned": ["marriage", "lawsuit", "voyage"],
+  "_topics_pinned": "these come first in the topic list - put the questions you actually get asked.",
+  "hide_unreliable_polarity": true,
+  "_hide_unreliable_polarity": "true keeps polarity ('this answer is favourable') off a claim when we only inferred it from one language's vocabulary instead of the source stating it. Set false to see everything we can weakly say, and you will see why it defaults to true.",
+  "max_claims": 60,
+  "_max_claims": "hard cap on claims per reading, so a Judge with eleven candidate answers does not bury the page."
+}

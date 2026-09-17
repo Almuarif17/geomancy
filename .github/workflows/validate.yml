@@ -41,6 +41,9 @@ jobs:
     - name: Coverage scoreboard (kb/coverage.json must be fresh)
       run: python3 library/tools/score_coverage.py --check
 
+    - name: Reader app (routes, citations, preferences, self-containment)
+      run: python3 app/test_app.py
+
     - name: MCP server (protocol surface + real stdio session)
       run: |
         python3 server/mcp_geomancy.py --self-test

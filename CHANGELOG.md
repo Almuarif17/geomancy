@@ -9,6 +9,9 @@
   and what the arithmetic over all 65,536 casts implies - free forever, including commercially), L3 the
   curated layer **CC BY-NC 4.0 plus a commercial licence on request**. The README had been saying "Dataset and
   notes: CC BY 4.0", which licensed the paid thing away; that is what this closes.
+- `app/test_app.py`: 26 checks over a real socket - routes answer, every claim keeps its locator, an unknown
+  route is JSON 404 rather than a stack trace, no `fetch()` to an absolute origin (the page must survive a
+  sandboxed preview and an offline copy), and the server logs no traceback while all of it runs.
 - `library/tools/check_licence_scope.py` - fails the build when a tracked path is claimed by no layer (it
   would silently inherit MIT) or by two, and pins the CC0 layer to exactly one file of definitions and
   arithmetic. 232 tracked files, 3 layers.
@@ -36,6 +39,17 @@
   output "CC BY 4.0", `UPSTREAM.md`'s archive.org guidance and `docs/IP_STRATEGY.md`'s "if you say go"
   paragraph were all corrected to match what shipped; three stale licence sentences in three files is exactly
   how a split like this becomes folklore again.
+
+- `app/server.py` + `app/index.html`: the reader. One command, standard library only, no third-party asset.
+  Cast four mothers, pick a question, see the shield as dot patterns, then what the sources say, who said it,
+  where in the folio, how many voices stand behind each claim, and what the corpus cannot answer. It is also
+  the answer to "how do I understand this library": `how it works` in the header renders the eight stages from
+  the live build, with the counts and the gate protecting each stage, so the explanation is generated and
+  cannot disagree with the data.
+- `app/preferences.json` is the owner's control surface, read on every request: which works are quoted first,
+  whether verbatim quotations show, how loudly silences are named, which topics you actually get asked,
+  the claim count a single reading may reach. It governs presentation only - `engine/ground.py` keeps sole
+  authority over content - which is the line that has to stay where it is.
 
 ### Fixed
 - **A chart bug in our own reader.** `engine/ground.py`'s CLI and `library/tools/check_grounding.py` passed all

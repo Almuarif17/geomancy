@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>geomancy reader</title>
+<style>
+  :root{
+    --ink:#181410; --ink2:#4a423a; --paper:#f6f1e6; --card:#fffdf8; --line:#d9cfbb;
+    --good:#2f6b3a; --warn:#95610e; --bad:#8f2d20; --chip:#ece4d3; --accent:#5d4a86;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font:15px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  h1,h2,h3,.serif{font-family:ui-serif,Georgia,"Times New Roman",serif}
+  h1{font-size:19px;margin:0;letter-spacing:.2px}
+  header{display:flex;align-items:center;gap:14px;padding:12px 18px;border-bottom:1px solid var(--line);
+    background:var(--card);position:sticky;top:0;z-index:5;flex-wrap:wrap}
+  .chip{background:var(--chip);border:1px solid var(--line);border-radius:999px;padding:2px 10px;
+    font-size:12px;color:var(--ink2);white-space:nowrap}
+  button,select{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);
+    border-radius:7px;padding:6px 10px;cursor:pointer}
+  button:hover{border-color:var(--ink2)}
+  button.primary{background:var(--ink);color:#fdfaf3;border-color:var(--ink)}
+  main{display:grid;grid-template-columns:340px 1fr 320px;gap:16px;padding:16px;align-items:start;max-width:1500px;margin:0 auto}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px}
+  .card+ .card{margin-top:14px}
+  .card h2{font-size:13px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink2);margin:0 0 10px}
+  .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  select.full{width:100%}
+  .shield{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .cell{border:1px solid var(--line);border-radius:8px;padding:7px 6px 6px;background:#fffefb;text-align:center;position:relative}
+  .cell.quesited{outline:2px solid var(--accent);outline-offset:-2px}
+  .cell .hn{font-size:10px;color:var(--ink2);letter-spacing:.06em}
+  .cell .fn{font-size:12px;font-weight:600;margin-top:3px;line-height:1.25}
+  .dots{display:grid;gap:3px;justify-content:center;margin:5px 0 2px}
+  .dots .l{display:flex;gap:5px;justify-content:center}
+  .dots i{width:7px;height:7px;border-radius:50%;background:var(--ink);display:block}
+  .dots i.off{background:transparent;border:1px solid var(--line)}
+  .court{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}
+  .court .cell{background:#f4efe3}
+  .claim{border-left:3px solid var(--line);padding:8px 0 8px 11px;margin:0 0 10px}
+  .claim.sources_disagree{border-left-color:var(--warn)}
+  .claim.no_source_ruling{border-left-color:var(--ink2);opacity:.85;font-style:italic}
+  .claim.figure_quality,.claim.correspondence{border-left-color:#b9c9a8}
+  .ct{font-size:12px;color:var(--ink2);display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:4px}
+  .t{font-size:14.5px}
+  .quote{margin:7px 0 0;padding:8px 10px;background:#faf6ec;border:1px solid var(--line);border-radius:7px;
+    font-family:ui-serif,Georgia,serif;font-size:13.5px}
+  .quote .src{display:block;margin-top:5px;font-family:ui-sans-serif,system-ui,sans-serif;font-size:11.5px;color:var(--ink2)}
+  .thin{color:var(--bad)} .single{color:var(--warn)} .multi{color:var(--good)}
+  .panel{display:none}.panel.on{display:block}
+  .stage{border-top:1px solid var(--line);padding:10px 0}
+  .stage:first-child{border-top:0}
+  .stage b{font-size:13px}
+  .stage .files{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11.5px;color:var(--ink2)}
+  .kvs{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:12px;color:var(--ink2);margin-top:4px}
+  .gate{font-size:12px;color:var(--good);margin-top:3px}
+  .bar{height:6px;background:var(--chip);border-radius:4px;overflow:hidden}
+  .bar>div{height:100%;background:var(--good)}
+  small{color:var(--ink2)}
+  .audit{font-size:12.5px;padding:7px 10px;border-radius:7px;border:1px solid var(--line)}
+  .audit.ok{background:#eef6ea;border-color:#cfe3c4;color:var(--good)}
+  .audit.bad{background:#fdeeea;border-color:#ecc9c1;color:var(--bad)}
+  .link{color:var(--accent);text-decoration:underline;cursor:pointer;font-size:12.5px}
+  pre{white-space:pre-wrap;font-size:12px;background:#faf6ec;border:1px solid var(--line);padding:8px;border-radius:7px}
+  @media(max-width:1180px){main{grid-template-columns:1fr;}.shield{max-width:420px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>geomancy reader</h1>
+  <span class="chip" id="h-version">loading…</span>
+  <span class="chip" id="h-voices"></span>
+  <span class="chip" id="h-cov"></span>
+  <span class="link" id="t-how">how it works</span>
+  <span class="link" id="t-prefs">my preferences</span>
+  <span class="link" id="t-src">browse sources</span>
+  <span class="link" id="btn-share">copy link to this cast</span>
+  <span style="flex:1"></span>
+  <small>documents what named authorities wrote · not a prediction · not advice</small>
+</header>
+
+<main>
+  <!-- left: cast + topic -->
+  <div>
+    <div class="card">
+      <h2>The four mothers</h2>
+      <div id="moms" class="row" style="flex-direction:column;align-items:stretch;gap:6px"></div>
+      <div class="row" style="margin-top:10px">
+        <button class="primary" id="cast">Cast &amp; read</button>
+        <button id="rand">Random</button>
+        <small id="castnote"></small>
+      </div>
+    </div>
+    <div class="card">
+      <h2>The question</h2>
+      <select id="topic" class="full"></select>
+      <small id="topicnote" style="display:block;margin-top:6px"></small>
+    </div>
+    <div class="card panel" id="p-prefs">
+      <h2>My preferences</h2>
+      <small>these are applied by <code>app/server.py</code> from <code>app/preferences.json</code>. Edit the file,
+      save, reload. They change what you see and in what order — never what a source said.</small>
+      <pre id="prefs"></pre>
+    </div>
+  </div>
+
+  <!-- middle: shield + reading -->
+  <div>
+    <div class="card">
+      <h2>The chart</h2>
+      <div class="shield" id="shield"></div>
+      <div class="court" id="court"></div>
+      <small id="shieldnote" style="display:block;margin-top:8px"></small>
+    </div>
+    <div class="card" id="reading-card">
+      <h2>What the sources say</h2>
+      <div id="audit" class="audit">cast to read.</div>
+      <div id="summary" class="serif" style="margin:10px 0 4px;font-size:16px"></div>
+      <div id="claims"></div>
+    </div>
+    <div class="card panel" id="p-how">
+      <h2>How everything works, in eight stages</h2>
+      <small id="hownote"></small>
+      <div id="stages" style="margin-top:8px"></div>
+    </div>
+  </div>
+
+  <!-- right: gaps, coverage, sources -->
+  <div>
+    <div class="card">
+      <h2>Where the sources are silent</h2>
+      <div id="gaps" style="font-size:13px">—</div>
+    </div>
+    <div class="card">
+      <h2>Corpus coverage</h2>
+      <div id="covscore" class="serif" style="font-size:22px"></div>
+      <div class="bar" style="margin:6px 0 10px"><div id="covbar" style="width:0"></div></div>
+      <div id="cov"></div>
+      <h2 style="margin-top:14px">Next move, by the scoreboard</h2>
+      <div id="covmove" style="font-size:13px"></div>
+    </div>
+    <div class="card panel" id="p-src">
+      <h2>Browse voices by figure and house</h2>
+      <div class="row"><select id="sf"></select><select id="sh"></select><button id="sfb">find</button></div>
+      <div id="sres" style="margin-top:10px;font-size:13px"></div>
+    </div>
+  </div>
+</main>
+
+<script>
+const $ = s => document.querySelector(s);
+const FIGS = {}, STATE = {mothers: [], topic: "", chart: null};
+const ROMAN = ["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"];
+
+function el(tag, cls, txt){ const e = document.createElement(tag); if(cls) e.className = cls;
+  if(txt !== undefined) e.textContent = txt; return e; }
+async function j(url){ const r = await fetch(url); if(!r.ok) throw new Error(url + " -> " + r.status); return r.json(); }
+
+async function boot(){
+  try{
+    const [health, figs, topics] = await Promise.all([j("/api/health"), j("/api/figures"), j("/api/topics")]);
+    $("#h-version").textContent = "v" + (health.version || "?") + " · " + health.passages + " passages";
+    $("#h-voices").textContent = health.voices + " attributed voices";
+    $("#h-cov").textContent = "coverage " + health.coverage_score + "/100";
+    const names = Object.keys(figs);
+    names.forEach(n => FIGS[n] = figs[n]);
+    const mk = (sel, cur) => { sel.innerHTML = "";
+      names.forEach(n => { const o = el("option"); o.value = n; o.textContent = n + "  (" + figs[n].points + " pts)";
+        if(n === cur) o.selected = true; sel.appendChild(o); }); };
+    for(let i = 0; i < 4; i++){
+      const row = el("label", "row"); row.appendChild(el("small", null, "house " + ROMAN[i]));
+      const s = el("select", "full"); row.appendChild(s); $("#moms").appendChild(row);
+      s.onchange = () => { STATE.mothers[i] = s.value; };
+      mk(s, STATE.mothers[i]);
+      STATE.mothers[i] = STATE.mothers[i] || names[i]; s.value = STATE.mothers[i];
+    }
+    const tp = $("#topic");
+    topics.forEach(t => { const o = el("option"); o.value = t.outcome;
+      o.textContent = (t.pinned ? "★ " : "") + t.outcome + "  ·  house " + t.house + "  ·  " + t.n_voices + " voices";
+      tp.appendChild(o); });
+    tp.onchange = () => read();
+    $("#sfb").onclick = browse;
+    $("#sf").innerHTML = '<option value="">any figure</option>' + names.map(n=>`<option>${n}</option>`).join("");
+    $("#sh").innerHTML = '<option value="">any house</option>' + ROMAN.map((r,i)=>`<option value="${i+1}">${r}</option>`).join("");
+    await coverage(); await how();
+    const prefs = await j("/api/preferences"); $("#prefs").textContent = JSON.stringify(prefs, null, 1);
+    const q = new URLSearchParams(location.search);
+    if(q.get("mothers")){ STATE.mothers = q.get("mothers").split(",");
+      [...$("#moms").querySelectorAll("select")].forEach((s,i)=> s.value = STATE.mothers[i]); }
+    if(q.get("topic")){ tp.value = q.get("topic"); }
+    cast();
+  }catch(e){ $("#audit").className = "audit bad"; $("#audit").textContent = "could not load: " + e.message +
+    "  (is the server running?  python3 app/server.py)"; }
+}
+
+function dots(pat){ const box = el("div","dots");
+  (pat||[]).forEach(v => { const l = el("div","l"); [1,0].forEach(k => l.appendChild(el("i", v ? "on" : "off")));
+    box.appendChild(l); }); return box; }
+
+async function cast(){
+  const note = $("#castnote"); note.textContent = "";
+  let c;
+  try{ c = await j("/api/cast?mothers=" + STATE.mothers.map(encodeURIComponent).join(",")); }
+  catch(e){ note.textContent = "cast failed: " + e.message; return; }
+  STATE.chart = c;
+  const sh = $("#shield"); sh.innerHTML = "";
+  for(let i = 0; i < 12; i++){
+    const cell = el("div","cell"); cell.dataset.h = i+1;
+    cell.appendChild(el("div","hn", ROMAN[i]));
+    cell.appendChild(dots(c.patterns[String(i+1)]));
+    cell.appendChild(el("div","fn", c.houses[String(i+1)]));
+    sh.appendChild(cell);
+  }
+  const ct = $("#court"); ct.innerHTML = "";
+  [["witness_left","left witness"],["witness_right","right witness"],["judge","Judge"],["sentence","Sentence / Reconciler"]]
+    .forEach(([k,lab]) => { const cell = el("div","cell");
+      cell.appendChild(el("div","hn", lab)); cell.appendChild(dots(c.patterns[[13,14,15,16][["witness_left","witness_right","judge","sentence"].indexOf(k)]]));
+      cell.appendChild(el("div","fn", c.court[k])); ct.appendChild(cell); });
+  $("#shieldnote").textContent = "Judge = " + c.judge + " · Sentence/Reconciler = " + c.reconciler +
+    " — computed from the four mothers, then matched against the sources below.";
+  read();
+}
+
+async function read(){
+  STATE.topic = $("#topic").value;
+  const tp = (await j("/api/topics")).find(t => t.outcome === STATE.topic);
+  $("#topicnote").textContent = tp ? ("house " + tp.house + " · " + tp.note) : "";
+  const url = "/api/reading?mothers=" + STATE.mothers.map(encodeURIComponent).join(",") + "&topic=" + encodeURIComponent(STATE.topic);
+  let v; try{ v = await j(url); }catch(e){ $("#audit").className="audit bad"; $("#audit").textContent = e.message; return; }
+  [...$("#shield").children].forEach(c => c.classList.toggle("quesited", +c.dataset.h === v.quesited_house));
+  const a = v.audit || {}, box = $("#audit");
+  box.className = "audit " + (a.ok ? "ok" : "bad");
+  box.textContent = a.ok ? ("audited clean — " + a.claims + " claims, " + a.cited + " distinct voices cited")
+                         : ("AUDIT PROBLEMS: " + (a.problems||[]).join(" | "));
+  $("#summary").textContent = v.summary || "";
+  const cl = $("#claims"); cl.innerHTML = "";
+  (v.claims||[]).forEach(c => {
+    const d = el("div","claim " + c.type);
+    const t = el("div","ct");
+    t.appendChild(el("span",null, c.type.replace(/_/g," ")));
+    if(c.figure) t.appendChild(el("span","chip", c.figure + (c.house ? " in " + ROMAN[c.house-1] : "") + (c.role ? " ("+c.role+")" : "")));
+    const st = el("span","chip " + (c.strength==="thin"?"thin":c.strength==="single-source"?"single":"multi"));
+    st.textContent = c.n_voices + " voice" + (c.n_voices===1?"":"s") + " · " + c.strength;
+    t.appendChild(st);
+    if((c.works||[]).length) t.appendChild(el("span","chip", c.works.join(", ")));
+    if(c.mode === "quote") t.appendChild(el("span","chip","verbatim"));
+    d.appendChild(t);
+    d.appendChild(el("div","t", c.text));
+    (c.quotes||[]).forEach(q => { if(!q.text) return;
+      const b = el("div","quote"); b.appendChild(el("span",null,"“" + q.text + "”"));
+      b.appendChild(el("span","src", (q.authority||q.work) + (q.locator ? " — " + q.locator : "") + " · " + q.id));
+      d.appendChild(b); });
+    if(c.polarity_note) d.appendChild(el("small",null,c.polarity_note));
+    cl.appendChild(d);
+  });
+  const g = $("#gaps"); g.innerHTML = "";
+  const gp = v.gaps||{};
+  g.appendChild(el("div",null, "silences named: " + (gp.no_source_ruling||0) + " · contested positions: " + (gp.contested||0)));
+  (v.gap_lines||[]).forEach(x => g.appendChild(el("div","serif", "· " + x)));
+  if(!(v.gap_lines||[]).length) g.appendChild(el("small",null,"(gap_detail in preferences.json controls this)"));
+  history.replaceState(null,"","?mothers=" + STATE.mothers.map(encodeURIComponent).join(",") + "&topic=" + encodeURIComponent(STATE.topic));
+}
+
+async function coverage(){
+  const c = await j("/api/coverage"); if(!c.components) return;
+  $("#covscore").textContent = c.score_of_100 + " / 100";
+  $("#covbar").style.width = Math.max(0, Math.min(100, c.score_of_100)) + "%";
+  const box = $("#cov"); box.innerHTML = "";
+  Object.entries(c.components).sort((a,b)=>a[1].ratio-b[1].ratio).forEach(([k,v])=>{
+    const r = el("div","row"); r.style.cssText="justify-content:space-between;font-size:12.5px;margin:2px 0";
+    r.appendChild(el("span",null,k.replace(/_/g," ")));
+    r.appendChild(el("small",null, v.count + "/" + v.target + "  " + Math.round(v.ratio*100) + "%"));
+    box.appendChild(r);
+    const b = el("div","bar"); const f = el("div"); f.style.width = Math.min(100, v.ratio*100) + "%";
+    f.style.background = v.ratio < .4 ? "var(--bad)" : v.ratio < .75 ? "var(--warn)" : "var(--good)";
+    b.appendChild(f); box.appendChild(b);
+  });
+  const mv = (c.ranked_moves||[])[0], m = mv && c.components[mv];
+  $("#covmove").textContent = m ? (mv + " (" + m.count + "/" + m.target + "): " + m.remedy) : "—";
+}
+
+async function how(){
+  const h = await j("/api/how");
+  $("#hownote").textContent = h.note + "  ·  coverage " + h.score + "/100";
+  const box = $("#stages"); box.innerHTML = "";
+  h.stages.forEach(s => {
+    const d = el("div","stage");
+    d.appendChild(el("b",null, s.n + ". " + s.name));
+    d.appendChild(el("div",null, s.what));
+    d.appendChild(el("div","files", s.files));
+    const k = el("div","kvs");
+    Object.entries(s.numbers||{}).forEach(([kk,vv]) =>
+      k.appendChild(el("span","chip", kk + ": " + (typeof vv === "object" ? Object.entries(vv).map(a=>a[0]+" "+a[1]).join(", ") : vv))));
+    d.appendChild(k);
+    d.appendChild(el("div","gate", "gate: " + s.gate));
+    box.appendChild(d);
+  });
+}
+
+async function browse(){
+  const p = new URLSearchParams(); const f = $("#sf").value, h = $("#sh").value;
+  if(f) p.figure = f; if(h) p.house = h; p.limit = 20;
+  const r = await j("/api/voices?" + p.toString());
+  const box = $("#sres"); box.innerHTML = "";
+  box.appendChild(el("div","small", r.matched + " matching row(s)"));
+  (r.returned||[]).forEach(v => {
+    const d = el("div","claim"); d.appendChild(el("div","ct", v.family + " · " + v.key + " · " + v.work));
+    d.appendChild(el("div","t", v.quote || v.gloss || v.value || "(text withheld: " + (v.licence||"") + ")"));
+    d.appendChild(el("small",null, (v.authority||"") + (v.locator ? " — " + v.locator : "")));
+    box.appendChild(d);
+  });
+}
+
+$("#cast").onclick = cast;
+$("#rand").onclick = () => { const n = Object.keys(FIGS);
+  STATE.mothers = [0,0,0,0].map(() => n[Math.floor(Math.random()*n.length)]);
+  [...$("#moms").querySelectorAll("select")].forEach((s,i)=> s.value = STATE.mothers[i]); cast(); };
+$("#btn-share").onclick = async () => { const url = location.href;
+  try{ await navigator.clipboard.writeText(url); $("#btn-share").textContent = "copied"; }
+  catch(e){ prompt("copy this link", url); } };
+const toggle = (link, panel) => $(link).onclick = () => { $(panel).classList.toggle("on"); };
+toggle("#t-how", "#p-how"); toggle("#t-prefs", "#p-prefs"); toggle("#t-src", "#p-src");
+boot();
+</script>
+</body>
+</html>
