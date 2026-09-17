@@ -2,6 +2,15 @@
 
 ## 0.2.6 - 2026-09-17
 
+- **Android shell.** `android/build.sh` wraps the phone app in a WebView and produces a debug-signed, sideloadable
+  `android/dist/D-Gem.apk` with Gradle, Android Studio and the Play Console all absent: two free zips from Google
+  and a JDK are the entire toolchain, and `android/prepare.py` assembles the APK's assets from `app/` at build
+  time, so there is no second copy of the app to drift. The page is loaded from a made-up https origin and its
+  `/api/` calls are proxied to whatever engine address the user names, which is what lets an http server on the
+  LAN be installed at all - and the shell keeps no rule: no figure, no house, no quotation lives in the Java.
+  `python3 android/build.sh --check` gates the sources without a toolchain; a GitHub Action builds the APK on a
+  tag and uploads it next to the SQLite file.
+
 ### Added
 - **The phone app.** `app/mobile.html`, a manifest, a service worker and two generated icons, served by the same
   `app/server.py` at `/m`. Four casting modes - sixteen pierced hills of sand (one dot or two at random each),

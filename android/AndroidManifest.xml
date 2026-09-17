@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The Android shell for the geomancy reader.
+
+  What this APK is: a WebView over the same files the browser serves, plus one job no browser gives you - reach
+  a Python engine over plain http on a LAN address, or on localhost under Termux, without the page ever
+  hard-coding an origin. Everything else the app does, it already did in the browser; the page inside is copied
+  from app/ at build time (see android/prepare_www.py), never copied in here to rot.
+
+  What this APK is not: an implementation of any geomancy rule. It holds no figures, no houses, no quotations.
+  If the engine cannot be reached, the shell returns a 503 with a readable message and the page shows its own
+  honest offline state, because a chart that renders from a stale cache is worse than no chart.
+-->
+<!-- No version lives in this file. android/build.sh takes it from the top CHANGELOG heading, which is the one
+     line the tagger, /api/health and the openapi manifest already agree on: an APK stamped with a version of its
+     own is an APK that quietly stops matching the engine it talks to. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="app.geomancy">
+
+    <uses-sdk android:minSdkVersion="26" android:targetSdkVersion="33" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application
+        android:label="Geomancy"
+        android:icon="@mipmap/ic_launcher"
+        android:allowBackup="false"
+        android:fullBackupContent="false"
+        android:usesCleartextTraffic="true"
+        android:networkSecurityConfig="@xml/network"
+        android:hardwareAccelerated="true"
+        android:supportsRtl="true"
+        android:theme="@android:style/Theme.DeviceDefault.NoActionBar">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:configChanges="orientation|screenSize|keyboardHidden|screenLayout|uiMode|density|fontScale"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <!-- text shared INTO the app becomes the question, the same contract the web manifest declares -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

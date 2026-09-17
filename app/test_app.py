@@ -277,6 +277,37 @@ def main() -> int:
     code, err = get(port, "/api/nope")
     ck("unknown route is JSON 404, not an HTML traceback", code == 404, str(err)[:80])
 
+    # ---- the Android shell: it must be buildable from this tree, and carry nothing of its own ----
+    # android/ is a WebView around the file the browser is served. Two ways that rots: the shell keeps a second
+    # copy of the app (then every test here proves nothing about what ships), or a rule quietly leaves the Java
+    # (then it installs, opens, and never shows a reading). Both are checked at the source, not by building.
+    def run(*cmd: str) -> tuple[int, str]:
+        r = subprocess.run(list(cmd), cwd=ROOT, capture_output=True, text=True, timeout=180)
+        return r.returncode, (r.stdout + r.stderr).strip()
+
+    rc, out = run(sys.executable, "android/prepare.py", "--check")
+    ck("the shell's assets come from app/, and it keeps no copy of its own", rc == 0 and "PASS" in out, out[-220:])
+    rc, out = run("bash", "android/build.sh", "--check")
+    ck("the shell's own rules are still in its source", rc == 0 and "PASS" in out, out[-220:])
+
+    mob = (APP / "mobile.html").read_text()
+    sys.path.insert(0, str(APP.parent / "android"))
+    import prepare as shellprep                                       # noqa: E402
+
+    carried = set(shellprep.WWW)
+    named = {m.strip("./") for m in re.findall(r"""["'`]([A-Za-z0-9._-]+\.(?:png|js|css|webmanifest|json))["'`]""", mob)}
+    ck("every file the page asks for by name is one the APK carries", named <= carried,
+       f"page names {sorted(named - carried)}; the build carries {sorted(carried)}")
+    sh = (APP.parent / "android" / "build.sh").read_text()
+    man = (APP.parent / "android" / "AndroidManifest.xml").read_text()
+    top = next((l[3:].split(" -")[0].strip() for l in (ROOT / "CHANGELOG.md").read_text().splitlines()
+                if l.startswith("## ")), "")
+    ck("the APK's version is derived from the repo, so it cannot drift from the engine",
+       "CHANGELOG.md" in sh and "android:versionName" not in man and "--version-name" in sh, top)
+    rc, tracked = run("git", "ls-files", "android")
+    junk = [l for l in tracked.splitlines() if l.endswith((".apk", ".keystore", ".jks", ".jar", ".zip"))]
+    ck("no build output, keystore or SDK jar is tracked in git", rc == 0 and not junk, str(junk[:3]))
+
     proc.terminate()
     try:
         proc.wait(timeout=8)

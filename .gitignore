@@ -52,3 +52,10 @@ Thumbs.db
 library/dataset/geomancy.sqlite
 __pycache__/
 *.pyc
+
+# --- the Android shell: generated, fetched, or a local signing key (see android/README.md) ---
+android/build/
+android/dist/
+.android-sdk/
+*.keystore
+*.jks

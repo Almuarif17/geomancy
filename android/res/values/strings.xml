@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <!-- The launcher label. The page says "Geomancy" in its own header; this is what sits under the icon. -->
+  <string name="app_name">Geomancy</string>
+</resources>

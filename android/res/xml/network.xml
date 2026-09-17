@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Cleartext is permitted, and the reason is worth stating because "cleartext on" usually means "this app will
+  talk to whoever asks it to". Here it does not. Nothing in the page can reach the network: every request the
+  WebView makes goes to the fake origin geomancy.local, and only Engine.java talks to a real address - the one
+  the user typed into the connection dialog, stored on the device, and checked before use. The payload in both
+  directions is a list of dot counts and a question, with no account, no cookie and no identifier, so the
+  failure mode of cleartext on your own Wi-Fi is somebody on that network reading your cast, while the
+  alternative - refusing cleartext - would mean this APK cannot reach the engine at all.
+
+  Android cannot express "private ranges only" in this file: <domain> matches hostnames, not CIDRs, and the
+  point of the app is that the user's engine host is whatever they typed.
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>

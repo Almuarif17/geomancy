@@ -1,0 +1,65 @@
+name: Build the Android shell
+
+# The APK is a release asset, not a tracked file: it is rebuilt from this tree on a tag and uploaded beside the
+# SQLite export. Nothing here needs an account - the toolchain is two free zips from Google and the key is
+# generated on the runner, so what you get out of this workflow is a package you can sideload, not a store build.
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      ANDROID_HOME: ${{ github.workspace }}/.android-sdk
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Build the APK (fetches build-tools and the platform jar, then compiles and signs)
+        run: |
+          mkdir -p "$ANDROID_HOME"
+          bash android/build.sh
+          export PATH="$ANDROID_HOME/build-tools/33.0.2:$PATH"
+          echo '### What came out' >> "$GITHUB_STEP_SUMMARY"
+          aapt dump badging android/dist/D-Gem.apk | grep -E '^(package|application-label|sdkVersion|targetSdkVersion|launchable-activity)' >> "$GITHUB_STEP_SUMMARY" || true
+          python3 - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import os, zipfile
+          ap = "android/dist/D-Gem.apk"
+          z = zipfile.ZipFile(ap)
+          inner = z.read("assets/www/mobile.html")
+          disk = open("app/mobile.html", "rb").read()
+          print(f"- `{ap}`: {os.path.getsize(ap):,} bytes, {len(z.namelist())} entries")
+          print(f"- `assets/www/mobile.html` {'matches' if inner == disk else 'DOES NOT MATCH'} `app/mobile.html` "
+                f"({len(disk):,} bytes)")
+          PY
+
+      - name: The page inside is the page the render gate drives
+        run: |
+          export PATH="$ANDROID_HOME/build-tools/33.0.2:/usr/lib/jvm/default/bin:$PATH"
+          unzip -p android/dist/D-Gem.apk assets/www/mobile.html > /tmp/in-apk.html
+          cmp /tmp/in-apk.html app/mobile.html
+          apksigner verify --verbose android/dist/D-Gem.apk | head -5
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: D-Gem-apk
+          path: android/dist/D-Gem.apk
+          if-no-files-found: error
+          retention-days: 90

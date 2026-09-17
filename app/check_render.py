@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import argparse
 import pathlib
+import re
 import shutil
 import socket
 import subprocess
@@ -35,6 +36,163 @@ def free_port() -> int:
         s.bind(("127.0.0.1", 0))
         return s.getsockname()[1]
 
+
+SHELL_JS = """
+window.__shell = { buzz: [], keep: [], share: [], calls: [], asked: 0,
+                   base: localStorage.getItem('gml.testbase') || '__BASE__' };
+window.Android = {
+  request: function (m, p, b) {
+    var x = new XMLHttpRequest();
+    // like the Java proxy, the fake forwards to the configured engine address rather than to the page origin,
+    // which is the only reason "point me at another box" is testable from a browser at all
+    x.open(String(m).toUpperCase(), window.__shell.base + p, false);
+    if (String(m).toUpperCase() === 'POST') x.setRequestHeader('Content-Type', 'application/json');
+    try { x.send(b || null); } catch (e) {
+      return JSON.stringify({ status: 503, type: 'application/json',
+        body: JSON.stringify({ error: 'no engine at ' + window.__shell.base + ' (Connection refused)',
+                               offline: true }) });
+    }
+    window.__shell.calls.push(String(m).toUpperCase() + ' ' + p.split('?')[0]);
+    return JSON.stringify({ status: x.status, type: x.getResponseHeader('content-type') || '',
+                            body: x.responseText });
+  },
+  engine: function () { return window.__shell.base; },
+  isShell: function () { return true; },
+  setEngine: function (u) { window.__shell.base = u; },
+  buzz: function (ms) { window.__shell.buzz.push(ms); },
+  keepScreen: function (on) { window.__shell.keep.push(!!on); },
+  sharePng: function (b64, name) { window.__shell.share.push([b64.length, name]); },
+  askEngine: function () { window.__shell.asked += 1; }
+};
+// count the attempt, not the network: Chromium reuses an origin's existing registration without fetching it
+if (navigator.serviceWorker) {
+  navigator.serviceWorker.register = function () {
+    window.__shell.sw = (window.__shell.sw || 0) + 1;
+    return Promise.reject(new Error('blocked by the render gate'));
+  };
+}
+"""
+
+
+def shell_checks(ctx, base: str, shots, console, ck) -> None:
+    """Drive the whole app through the Android bridge, and fail on what only a handset would show.
+
+    android/ wraps exactly this file in a WebView and hands the page one object, `Android`, for the four things a
+    browser page cannot do on a phone: buzz with a real motor, hold the screen awake while the hands are busy, put
+    a PNG into the share sheet, and be told where its engine lives. Every call then returns one synchronous JSON
+    string - {status, type, body} - which is easy to get subtly wrong in a way the browser never shows: a POST the
+    shell cannot see at all, a multibyte character escaped one byte at a time, an address the user is never told.
+    So the bridge is reproduced here in JavaScript, over synchronous XHR to the same server exactly as the Java
+    proxy forwards it, and the app is driven through it end to end.
+    """
+
+    def last(xs, default=None):
+        # an empty list here means the hook was never called, which has to read as a failing check with the empty
+        # list in its detail rather than as an IndexError that swallows the report
+        try:
+            return xs[-1]
+        except Exception:                                           # noqa: BLE001
+            return default
+
+    page = ctx.new_page()
+    page.on("pageerror", lambda e: console.append(f"pageerror(shell): {e}"))
+    page.on("console", lambda m: console.append(f"{m.type}(shell): {m.text}")
+            if m.type in ("error", "warning") else None)
+    page.add_init_script(SHELL_JS.replace("__BASE__", base))
+    page.goto(f"{base}/m", wait_until="load")
+    page.wait_for_timeout(900)
+
+    # a registration is per-origin, so this page would inherit the one the first page made: what has to be true is
+    # that the shell page never tries, because inside the APK a cache would only shadow the installed assets
+    ck("the shell page never tries to install an offline cache",
+       page.evaluate("!!window.Android") and page.evaluate("window.__shell.sw || 0") == 0,
+       f"registrations attempted: {page.evaluate('window.__shell.sw || 0')}")
+
+    # the same endpoint twice: once the way a browser asks it, once the way the APK does
+    twin = page.evaluate("""async () => {
+      const path = '/api/chart16?mothers=Via,Populus,Acquisitio,Amissio&topic=';
+      const rep = JSON.parse(Android.request('GET', path, ''));
+      const viaBridge = JSON.parse(rep.body);
+      const viaFetch = await (await fetch(path)).json();
+      const nonAscii = t => (t.match(/[^\\u0000-\\u007f]/g) || []).length;
+      return { same: JSON.stringify(viaBridge) === JSON.stringify(viaFetch), status: rep.status,
+               naBridge: nonAscii(rep.body), naFetch: nonAscii(JSON.stringify(viaFetch)),
+               keys: Object.keys(viaBridge).length };
+    }""")
+    ck("the bridge hands back exactly what fetch hands back, same status and same bytes",
+       twin["same"] and twin["status"] == 200, str(twin)[:200])
+    # the corpus is transliterated, so an ellipsis in a clipped quotation is the only multibyte character an engine
+    # answer carries; three characters per one of those is exactly what a byte-wise Java escape produces
+    ck("the non-ASCII characters an engine answer holds arrive whole, not one per UTF-8 byte",
+       twin["naBridge"] > 0 and twin["naBridge"] == twin["naFetch"],
+       f"bridge={twin['naBridge']} fetch={twin['naFetch']}")
+
+    # cast it the way a thumb does. This page shares storage with the first, so it opens on the marks that run left
+    # behind: take the sand tray back and start over rather than assume a first-run state
+    page.locator('#modes button[data-mode="sand"]').click()
+    page.wait_for_timeout(350)
+    page.locator("#btnClear").click()
+    page.wait_for_timeout(450)
+    ck("the shell page shows the sand tray", page.locator(".mound").count() == 16,
+       f"{page.locator('.mound').count()} mounds")
+    page.fill("#q", "will the deal close")
+    for i in range(16):
+        page.locator(".mound").nth(i).click()
+        page.wait_for_timeout(35)
+    page.wait_for_function("document.querySelectorAll('#shieldBox .cell').length === 16 || "
+                           "!document.querySelector('#v-cast').classList.contains('active')", timeout=25000)
+    page.wait_for_timeout(1400)
+    calls = page.evaluate("window.__shell.calls")
+    ck("the shell casts by posting to the engine, not by computing anything itself",
+       "POST /api/cast_from_rows" in calls and "GET /api/chart16" in calls, str(calls[:6]))
+    ck("taps reach the phone motor", page.evaluate("window.__shell.buzz.length") > 0,
+       str(page.evaluate("window.__shell.buzz"))[:60])
+    page.locator('#tabs button', has_text="Reading").click()
+    page.wait_for_timeout(900)
+    ck("a cast driven inside the shell reaches a full reading",
+       page.evaluate("document.querySelectorAll('#shieldBox .cell').length") == 16
+       and len(page.inner_text("#v-read").strip()) > 200,
+       str(page.evaluate("[document.querySelectorAll('#shieldBox .cell').length,"
+                         " document.querySelector('#v-read').textContent.trim().length]")))
+    # a screen that sleeps between the eighth row and the ninth is the reason this hook exists at all
+    page.locator('#tabs button', has_text="Cast").click()
+    page.wait_for_timeout(300)
+    ck("the cast view asks the shell to hold the screen awake",
+       last(page.evaluate("window.__shell.keep")) is True, str(page.evaluate("window.__shell.keep"))[:90])
+    page.locator('#tabs button', has_text="Shields").click()
+    page.wait_for_timeout(300)
+    ck("and releases it the moment the hands leave the tray",
+       last(page.evaluate("window.__shell.keep")) is False, str(page.evaluate("window.__shell.keep"))[:90])
+
+    page.evaluate("shareImage(S.lastItem || {at: Date.now(), values: values(), question: S.question})")
+    page.wait_for_timeout(1800)
+    share = page.evaluate("window.__shell.share")
+    ck("the shield goes to the share sheet as a PNG and never to a downloads folder",
+       len(share) == 1 and last(share, [0, ""])[0] > 60000
+       and re.match(r"^geomancy-\d{4}-\d{2}-\d{2}\.png$", str(share[0][1])), str(share)[:120])
+
+    page.locator("#btnAbout").click()
+    page.wait_for_timeout(1400)
+    ck("About names the engine the shell is talking to",
+       base.split("://")[1] in page.inner_text("#abVer"), page.inner_text("#abVer"))
+    page.locator("#abInstall").click()
+    page.wait_for_timeout(300)
+    ck("an installed app does not tell you to install it",
+       "you installed this one" in page.inner_text("#toast").lower(), page.inner_text("#toast"))
+
+    page.evaluate("localStorage.setItem('gml.testbase', 'http://127.0.0.1:9')")   # nothing listens on port 9
+    page.goto(f"{base}/m", wait_until="load")
+    page.wait_for_timeout(1800)
+    banner = page.inner_text("#v-cast .card.offline").lower()
+    ck("an engine that is not there is named by address, not by stack trace",
+       "127.0.0.1:9" in banner and "nothing is answering" in banner, banner[:160])
+    page.locator("#v-cast .card.offline button").click()
+    page.wait_for_timeout(200)
+    ck("the banner hands the fix to the shell instead of failing quietly",
+       page.evaluate("window.__shell.asked") == 1, str(page.evaluate("window.__shell.asked")))
+    page.evaluate("localStorage.removeItem('gml.testbase')")
+    page.screenshot(path=str(shots / "12-shell.png"))
+    page.close()
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
@@ -391,6 +549,13 @@ def main() -> int:
            "unreachable" in page.inner_text("#toast").lower(), page.inner_text("#toast"))
         ctx.set_offline(False)
         page.wait_for_timeout(400)
+
+        # the Android shell, driven through its bridge: see shell_checks
+        try:
+            shell_checks(ctx, base, shots, console, ck)
+        except Exception as e:                                      # noqa: BLE001
+            ck("the shell checks ran to the end", False, f"{type(e).__name__}: {e}")
+            page.wait_for_timeout(200)
 
         # the offline probe above raises network errors by design, so compare against what was logged before it
         # the offline probe answers /api with a deliberate 503, so resource-load noise after it is expected

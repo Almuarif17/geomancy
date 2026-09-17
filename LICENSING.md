@@ -7,14 +7,14 @@ So the repo is now layered, **by file, not by intention** — a layer is enforce
 by two layers.
 
 ```scope
-L1-code=engine/,library/tools/,scripts/,server/,app/,tools/,data/,examples/,library/schema/,types/,library/dataset/openapi.yaml,registry/,corpus/,.github/,Makefile,SETUP.md
+L1-code=engine/,library/tools/,scripts/,server/,app/,android/,tools/,data/,examples/,library/schema/,types/,library/dataset/openapi.yaml,registry/,corpus/,.github/,Makefile,SETUP.md
 L2-cc0=library/dataset/core_facts.json
 L3-curated=kb/,library/dataset/index/,library/dataset/shards/,library/dataset/tables/,library/dataset/bundles.json,library/dataset/manifest.json,library/dataset/evaluation.json,library/README.md,notes/,docs/,README.md,FINDINGS.md,CHANGELOG.md,PLAN.md,LICENSE-DATA
 ```
 
 | layer | licence | what it is | what you may do |
 |---|---|---|---|
-| **L1 code** | MIT | the engine, extractors, gates, schemas, generated types, the OpenAPI contract, fixtures, examples | use, copy, modify, sell software built on it |
+| **L1 code** | MIT | the engine, extractors, gates, schemas, generated types, the OpenAPI contract, fixtures, examples, the phone app and its Android shell (`app/`, `android/`) | use, copy, modify, sell software built on it |
 | **L2 core facts** | CC0 | `library/dataset/core_facts.json`: the figure bit patterns, the house numbering, our routing table, and the consequences of the arithmetic over all 65,536 casts (attainable Judges, parity law, priors, surprisal) | anything, including commercial, no permission, attribution requested not required |
 | **L3 curated layer** | CC BY-NC 4.0, **plus a separate commercial licence on request** | every translated ruling, every voice row, every gloss, the adjudication and gap notes, the outcome bundles, the findings | read, study, cite, share with attribution, non-commercial use; a paid or revenue-bearing product needs a licence |
 

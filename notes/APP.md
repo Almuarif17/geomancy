@@ -60,12 +60,20 @@ daughters, the nephews, the witnesses, the Judge and the Reconciler are the engi
 
 ## Installing it on a phone
 
-**No APK is built in this repository, and none can be: there is no Android SDK here, and anything that costs money
-is out of scope.** The install path is the one Android already has: Chrome → *Add to home screen*. The manifest
-makes it standalone, portrait, icon'd, with a service worker so the interface opens in a plane. `app/check_render.py`
-and the CI render gate test the installed surface at 412x915 (a TECNO K17's CSS viewport).
+**No APK is committed.** One is *built*: `android/build.sh` wraps the same `app/mobile.html` in a WebView with
+`aapt2`, `javac`, `d8`, `zipalign` and `apksigner`, and the only things it needs are a JDK and two free zips from
+Google (`build-tools_r33.0.2-linux.zip`, `platform-33_r02.zip`) with no account and no licence - the rule
+"**anything that costs money is out of scope**" is what kept Gradle, Play Console and an emulator out of it, not
+any shortage of free tooling. The output is debug-signed into `android/dist/`, which is gitignored: an APK is a
+release asset like `geomancy.sqlite`, reproducible from the tree, not a blob to review.
 
-Two ways to reach the engine, and one that is deliberately not offered:
+The browser install path is still the one Android already gives any web app: Chrome → *Add to home screen*. The
+manifest makes it standalone, portrait, icon'd, with a service worker so the interface opens in a plane.
+`app/check_render.py` and the CI render gate test the installed surface at 412x915 (a TECNO K17's CSS viewport),
+and drive the bridge too - 14 of its 64 checks run the whole app through the shell contract rather than through
+`fetch`.
+
+Three ways to reach the engine, and one that is deliberately not offered:
 
 1. **On the phone itself - recommended.** Termux (free, F-Droid or Play), then
    `pkg install python git && pip install pyyaml`, `git clone` the repo, `python3 app/server.py --port 8044`,
@@ -77,7 +85,14 @@ Two ways to reach the engine, and one that is deliberately not offered:
    install will not**, because Android only treats `https://` and `http://localhost` as secure contexts, and a
    plain `http://192.168.x.x` address is neither, so the service worker and the install prompt stay switched off.
    That is the whole argument for path 1 over path 2: same code, same engine, and the phone lets it be installed.
-3. **Not offered: GitHub Pages, and any other static host.** Pages serves files, not Python, and the interesting
+3. **The APK, over the local network or through Termux.** `python3 android/build.sh` (or `android/build.sh` on a
+   machine with the toolchain already in `$ANDROID_HOME`) produces `android/dist/D-Gem.apk`; install it with
+   `adb install -r` or by opening it from Files. It loads its own copy of the page from `assets/www/` and reaches
+   the engine at an address you type once into a dialog, so it works on `http://192.168.x.x:8044` where the
+   browser will not install, and with Termux on the device where no browser is open. It is a window and a proxy,
+   not a second app: it holds no rule, no figure and no quotation, and if the engine is unreachable it says so and
+   still opens the saved charts. See [ANDROID.md](ANDROID.md) for the origin trick it depends on.
+4. **Not offered: GitHub Pages, and any other static host.** Pages serves files, not Python, and the interesting
    half of this library is computed - the cast and the audit. A static page would have to re-implement the engine,
    which is exactly the thing the rule above exists to prevent. If the app is ever to work with no server at all,
    it will be because the engine was *ported and proved*, not because a second copy was written:
@@ -86,7 +101,8 @@ Two ways to reach the engine, and one that is deliberately not offered:
    claims-by-(figure,house) table, then extend the differential harness to run *node* over all 65,536 shields and
    require zero mismatches against Python before the artefact may be committed. That keeps one source of truth
    with a proof between the two copies, and it makes the PWA work with the radio off. It is a real build, not a
-   flag.
+   flag. The same port also turns the APK into a *serverless* app, since the shell's only network path is the
+   engine: with the rules inside the package, there would be nothing to point the dialog at.
 
 ## What the app will not do
 

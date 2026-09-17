@@ -146,6 +146,14 @@ if rr.exists():
         tail += "  ||  " + " | ".join((r.stderr.strip().splitlines() or [""])[-1:])[:150]
     chk("phone app renders at 412x915 without clipping, cutting off, or inventing", r.returncode == 0, tail)
 
+sh = ROOT / "android" / "build.sh"
+if sh.exists():
+    # the APK is not committed, so the thing that has to be true is that it can still be built from this tree and
+    # still holds no rules of its own. --check does exactly that and needs no Android toolchain to do it.
+    r = subprocess.run(["bash", str(sh), "--check"], capture_output=True, text=True)
+    tail = " | ".join([l for l in (r.stdout + r.stderr).strip().splitlines() if "PASS" in l or "FAIL" in l])[-170:]
+    chk("android shell builds from these files and carries no rules of its own", r.returncode == 0, tail)
+
 mcp = ROOT / "server" / "mcp_geomancy.py"
 if mcp.exists():
     for mode, what in (("--self-test", "protocol surface (17 checks)"),

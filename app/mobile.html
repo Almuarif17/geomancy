@@ -343,9 +343,34 @@ function figName(vals) { return FIGS[vals.join(",")] || null; }
 
 function toast(m) { const t = $("#toast"); t.textContent = m; t.classList.add("show");
   clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove("show"), 2300); }
-function buzz(p) { if (PREFS.haptics !== false && navigator.vibrate) navigator.vibrate(p); }
+/* ---------- the Android shell (optional; the page never needs it) ----------
+   The APK (android/) wraps these same bytes in a WebView and offers four things a web page on a plain http
+   address cannot have: a real vibration motor, a screen that stays awake while you tap, a share sheet for the
+   drawn shield, and a way to be told where the engine lives. Everything here degrades to the browser path when
+   window.Android is absent, which is the normal case, and the page still decides nothing about the reading. */
+const SHELL = (window.Android && window.Android.request) ? window.Android : null;
+function buzz(p) { if (PREFS.haptics === false) return; if (SHELL && SHELL.buzz) { SHELL.buzz(p); return; }
+  if (navigator.vibrate) navigator.vibrate(p); }
 function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
 async function api(path, opts) {
+  if (SHELL) {
+    /* A WebView client is never handed the *body* of a request it intercepts, so a page inside one cannot POST
+       to its own origin; the bridge is the way round it, and it also means the page is never actually talking to
+       a plain-http host from an https origin. Same paths, same bodies, same errors as the fetch below. */
+    const method = ((opts && opts.method) || "GET").toUpperCase();
+    const body = opts && opts.body != null ? String(opts.body) : "";
+    let rep;
+    try { rep = JSON.parse(SHELL.request(method, path, body)); }
+    catch (e) { const er = new Error("no engine at " + (SHELL.engine() || "the address you set")); er.offline = true; throw er; }
+    const ct = rep.type || "";
+    let parsed = rep.body || "";
+    if (ct.includes("json")) { try { parsed = JSON.parse(parsed || "{}"); } catch (e) { parsed = {}; } }
+    if (rep.status < 200 || rep.status >= 300) {
+      const e = new Error((parsed && parsed.error) || ("HTTP " + rep.status));
+      e.detail = parsed; e.offline = rep.status === 503; throw e;
+    }
+    return parsed;
+  }
   const r = await fetch(path, opts);
   const ct = r.headers.get("content-type") || "";
   const body = ct.includes("json") ? await r.json().catch(() => ({})) : await r.text();
@@ -359,6 +384,7 @@ function rowValue(taps) { return taps % 2 === 1 ? 1 : 2; }
 function show(v) {
   $$(".view").forEach(s => s.classList.toggle("active", s.id === v));
   $$("#tabs button").forEach(b => b.setAttribute("aria-selected", String(b.dataset.v === v)));
+  if (SHELL && SHELL.keepScreen) SHELL.keepScreen(v === "v-cast");   // a locked screen mid-tap loses the row
   if (v === "v-shield") renderShield();
   if (v === "v-read") renderReading();
   if (v === "v-hist") renderHistory();
@@ -1023,6 +1049,10 @@ async function shareImage(it) {
   const blob = await new Promise(res => c.toBlob(res, "image/png"));
   if (!blob) { toast("The phone would not draw it"); return; }
   const name = `geomancy-${new Date(it.at || Date.now()).toISOString().slice(0, 10)}.png`;
+  if (SHELL && SHELL.sharePng) {
+    try { SHELL.sharePng(c.toDataURL("image/png").split(",")[1], name); return; }
+    catch (e) { /* no share activity on this device; fall through to saving it */ }
+  }
   const file = new File([blob], name, { type: "image/png" });
   if (navigator.canShare && navigator.canShare({ files: [file] })) {
     try { await navigator.share({ files: [file], title: "Geomantic shield", text: it.question || "" }); return; }
@@ -1216,12 +1246,14 @@ $("#btnAbout").onclick = async () => {
     $("#abPass").textContent = h.passages != null ? h.passages.toLocaleString() + " · " + h.voices.toLocaleString() + " voices" : "—";
     $("#abCov").textContent = h.coverage_score != null ? h.coverage_score + " / 100" : "—";
     $("#ver").textContent = "v" + (h.version || "");
+    if (SHELL) { $("#abVer").textContent = "v" + (h.version || "") + " at " + (SHELL.engine() || ""); }
     let d = "—";
     try { const pv = await api(`${API.prove}?mothers=Via,Via,Via,Via&topic=`);
       d = `${(pv.differential.casts_tested || 0).toLocaleString()} casts, ${pv.differential.mismatches} mismatches`; } catch (e) {}
     $("#abDiff").textContent = d;
   } catch (e) { $("#abVer").textContent = "not reachable from here"; }
   $("#abInstall").onclick = async () => {
+    if (SHELL) { toast("You installed this one — it is the app"); return; }
     if (!window.__bip) { toast("In Chrome: menu → Add to Home screen"); return; }
     window.__bip.prompt(); window.__bip = null;
   };
@@ -1248,19 +1280,27 @@ async function boot() {
     setOnline(false);
     const b = document.createElement("div");
     b.className = "card offline";
-    b.innerHTML = "The engine is not answering, so a new cast cannot be read. Saved charts and their text still open.";
+    b.innerHTML = SHELL
+      ? `Nothing is answering at <code>${esc(SHELL.engine() || "")}</code>. Start the engine there, or set another
+         address. Saved charts and their text still open.`
+      : "The engine is not answering, so a new cast cannot be read. Saved charts and their text still open.";
     $("#v-cast .scroller").prepend(b);
+    if (SHELL) { const btn = document.createElement("button"); btn.className = "btn sm ghost";
+      btn.textContent = "Engine address"; btn.onclick = () => SHELL.askEngine(); b.appendChild(btn); }
   }
   document.documentElement.dataset.theme = PREFS.theme === "parchment" ? "parchment" : "ink";
   document.documentElement.dataset.motion = PREFS.motion === "off" ? "off" : "on";
   // the manifest declares a share_target, so text shared into the app becomes the question
-  const shared = new URLSearchParams(location.search).get("text");
-  if (shared && !S.question) { S.question = shared.trim(); }
+  // the manifest declares a share_target for the browser; the APK gets the same text through an ACTION_SEND intent
+  const shared = new URLSearchParams(location.search).get("text") || window.__sharedText || "";
+  if (window.__sharedText) { try { window.__sharedText = ""; } catch (e) {} }
+  if (shared && !S.question) { S.question = String(shared).trim(); }
   $("#q").value = S.question || "";
   $$("#modes button").forEach(x => x.setAttribute("aria-selected", String(x.dataset.mode === S.mode)));
   $$("#layouts button").forEach(x => x.setAttribute("aria-selected", String(x.dataset.layout === S.layout)));
   renderChips(); bindSand(); bindStage();
-  if ("serviceWorker" in navigator) { try { await navigator.serviceWorker.register("sw.js"); } catch (e) {} }
+  // a WebView has no install path to cache for, and a service worker there would only shadow the APK's own assets
+  if (!SHELL && "serviceWorker" in navigator) { try { await navigator.serviceWorker.register("sw.js"); } catch (e) {} }
   document.addEventListener("keydown", e => {
     if (["TEXTAREA", "INPUT", "SELECT"].includes(e.target.tagName)) return;
     const k = e.key.toLowerCase();

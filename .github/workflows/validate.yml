@@ -56,6 +56,9 @@ jobs:
         python -m playwright install --with-deps chromium
         python3 app/check_render.py
 
+    - name: Android shell sources (no toolchain needed to prove the inputs)
+      run: bash android/build.sh --check
+
     - name: MCP server (protocol surface + real stdio session)
       run: |
         python3 server/mcp_geomancy.py --self-test
