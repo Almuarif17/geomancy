@@ -304,6 +304,14 @@ def main() -> int:
                 if l.startswith("## ")), "")
     ck("the APK's version is derived from the repo, so it cannot drift from the engine",
        "CHANGELOG.md" in sh and "android:versionName" not in man and "--version-name" in sh, top)
+    rc, out = run(sys.executable, "android/serve_apk.py", "--help")
+    ck("the Wi-Fi handover exists, and knows what an APK's content type is",
+       rc == 0 and "application/vnd.android.package-archive" in run(sys.executable, "-c",
+       "import pathlib,sys; sys.path.insert(0,'android'); import serve_apk as s;"
+       "print(s.Handler.extensions_map['.apk'])")[1], out.splitlines()[0][:60])
+    rc, out = run(sys.executable, "android/serve_apk.py", "--apk", "/nonexistent/D-Gem.apk")
+    ck("it refuses to serve an APK that was never built, instead of an empty page",
+       rc != 0 and "android/build.sh" in out, out.strip()[-90:])
     rc, tracked = run("git", "ls-files", "android")
     junk = [l for l in tracked.splitlines() if l.endswith((".apk", ".keystore", ".jks", ".jar", ".zip"))]
     ck("no build output, keystore or SDK jar is tracked in git", rc == 0 and not junk, str(junk[:3]))

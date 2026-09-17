@@ -50,6 +50,14 @@ jobs:
                 f"({len(disk):,} bytes)")
           PY
 
+      - name: A clean rebuild produces the identical bytes
+        run: |
+          cp android/dist/D-Gem.apk /tmp/first.apk
+          bash android/build.sh
+          cmp /tmp/first.apk android/dist/D-Gem.apk
+          echo "- rebuild produced the same bytes, sha256 \`$(sha256sum android/dist/D-Gem.apk | cut -d' ' -f1)\`" \
+            >> "$GITHUB_STEP_SUMMARY"
+
       - name: The page inside is the page the render gate drives
         run: |
           export PATH="$ANDROID_HOME/build-tools/33.0.2:/usr/lib/jvm/default/bin:$PATH"
@@ -60,6 +68,8 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: D-Gem-apk
-          path: android/dist/D-Gem.apk
+          path: |
+            android/dist/D-Gem.apk
+            android/dist/D-Gem.apk.sha256
           if-no-files-found: error
           retention-days: 90

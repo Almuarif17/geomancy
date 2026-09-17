@@ -9,7 +9,11 @@
   `/api/` calls are proxied to whatever engine address the user names, which is what lets an http server on the
   LAN be installed at all - and the shell keeps no rule: no figure, no house, no quotation lives in the Java.
   `python3 android/build.sh --check` gates the sources without a toolchain; a GitHub Action builds the APK on a
-  tag and uploads it next to the SQLite file.
+  tag and uploads it next to the SQLite file. Two builds of the same tree produce identical bytes (the one entry
+  `aapt2` does not normalise gets a fixed mtime), so `D-Gem.apk.sha256` beside it is a check a download can be
+  held to, and `DEBUG_KEYSTORE` pins the signing identity so a newer build installs *over* an older one instead of
+  being refused. `python3 android/serve_apk.py` hands the file to a phone over the Wi-Fi with that hash on the
+  page, for when there is no cable and no `adb`.
 
 ### Added
 - **The phone app.** `app/mobile.html`, a manifest, a service worker and two generated icons, served by the same

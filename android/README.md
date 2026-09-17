@@ -53,6 +53,16 @@ Both are free, need no account, and land in `$ANDROID_HOME` (default: `<repo>/.a
 stubs jar the first lambda in the source fails to compile), `d8`, `zip` the dex in, `zipalign`, `apksigner sign`
 with a keystore generated on the spot.
 
+### Handing it to a phone without a cable
+
+```bash
+python3 android/serve_apk.py            # prints a LAN URL, writes qr.svg + index.html beside the APK
+```
+
+The page it serves states the file's sha256 and sends `X-APK-SHA256`, so the phone can be told what it should have
+received - the reason this exists instead of "just message the file to yourself", since a chat app renames,
+recompresses or quarantines an `.apk` with no apology and no note.
+
 Gradle and Android Studio are not required and were deliberately not used: they add a wrapper that downloads a
 distribution, a daemon, and a licence prompt, in exchange for nothing this build needs — four files, one activity,
 no dependencies.
@@ -60,7 +70,12 @@ no dependencies.
 ## Signing, and what it is for
 
 `debug.keystore` is created in `build/` on a clean tree (alias `geomancy`, both passwords `android`, 10 000 days)
-and never committed. That is enough to sideload: Android requires a signature to install, not a trusted one, and
+and never committed. Point `DEBUG_KEYSTORE` at a file you keep somewhere - it is the only thing standing between
+"install the new version" and "uninstall the old one and lose the charts stored inside it":
+
+```bash
+DEBUG_KEYSTORE=~/keys/geomancy-debug.keystore python3 android/build.sh
+``` That is enough to sideload: Android requires a signature to install, not a trusted one, and
 the APK is signed with the v2/v3 schemes so modern Android accepts it.
 
 It is **not** enough for the Play Store, which needs an upload key whose loss is unrecoverable, an AAB, and a

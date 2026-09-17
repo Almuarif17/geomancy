@@ -85,6 +85,11 @@ for src, must, why in [
     (java, "UTF-8", "the body comes back as text, so the encoding has to be stated, not guessed"),
     (sh, "CHANGELOG.md", "the APK version is derived from the repo's own version line, never typed in here"),
     (sh, "core-lambda-stubs.jar", "android.jar alone cannot compile the lambdas this source uses"),
+    # the two needles are split across concatenation on purpose: written as one literal, each would appear in
+    # this check's own source, and the check would pass by matching itself whatever the build did
+    (sh, 'touch -d "@${SOURCE' '_DATE_EPOCH', "every entry needs a fixed mtime, or a published sha256 of the APK "
+                                            "is worth nothing and nobody can verify a download"),
+    (sh, 'zip -q -X -D' ' -j', "the dex is added without directory entries or extra fields, for the same reason"),
 ]:
     if must.lower() not in src.lower():
         sys.exit("FAIL: {} is gone - {}".format(must, why))
@@ -158,12 +163,21 @@ d8 --lib "$JAR" --release --min-api "$MIN_SDK" --output "$B/dex" \
   $(find "$B/classes" -name '*.class')
 
 echo "package"
-cd "$B/dex" && zip -q -j "$B/shell.apk" classes.dex && cd "$B"
+# Fixed mtime on the one entry the Android tools do not normalise (aapt2 writes 1980-01-01 for everything it
+# touches; d8's output keeps the wall clock). Without this, the same tree hashes differently on every build, and
+# then a published sha256 - the thing you would check a downloaded APK against - is worth nothing.
+find "$B/dex" -exec touch -d "@${SOURCE_DATE_EPOCH:-315532800}" {} +
+cd "$B/dex" && zip -q -X -D -j "$B/shell.apk" classes.dex && cd "$B"
 zipalign -f 4 "$B/shell.apk" "$B/aligned.apk"
 
-KS="$B/debug.keystore"
+# The signing identity, not a secret. Any self-signed key installs fine; what matters is that the *same* one is
+# used next time, because Android refuses to upgrade a package signed by a different key and the user then has to
+# uninstall, losing the charts in the app's storage. So the key lives wherever you point $DEBUG_KEYSTORE, and a
+# clean tree without one generates a fresh key rather than shipping a committed one.
+KS="${DEBUG_KEYSTORE:-$B/debug.keystore}"
 if [ ! -f "$KS" ]; then
   need keytool || die "keytool not found - it ships with the JDK, so put \$JAVA_HOME/bin on PATH"
+  mkdir -p "$(dirname "$KS")"
   keytool -genkeypair -v -keystore "$KS" -storepass android -keypass android \
     -alias geomancy -keyalg RSA -keysize 2048 -validity 10000 \
     -dname "CN=Geomancy debug, OU=none, O=none, L=none, S=none, C=US" >/dev/null 2>&1
@@ -171,6 +185,11 @@ fi
 apksigner sign --ks "$KS" --ks-pass pass:android --key-pass pass:android \
   --out "$D/$NAME.apk" "$B/aligned.apk"
 apksigner verify --print-certs "$D/$NAME.apk" | sed 's/^/  /'
+
+sha256sum "$D/$NAME.apk" | awk '{print $1}' > "$D/$NAME.apk.sha256"
+echo "  sha256 $(cat "$D/$NAME.apk.sha256")"
+echo "  publish this line with the file: it is what a downloaded APK gets checked against, and it is only"
+echo "  worth publishing because the build above is byte-reproducible"
 
 echo
 aapt dump badging "$D/$NAME.apk" 2>/dev/null | grep -E '^(package|application-label|sdkVersion|targetSdkVersion|launchable-activity|uses-permission|application-icon-480)' | sed 's/^/  /'
