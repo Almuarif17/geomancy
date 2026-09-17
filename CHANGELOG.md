@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+### Added
+- `.github/workflows/validate.yml` and `library/tools/validate.py` now run
+  `library/tools/check_calatarama_grid.py`, so the class of defect that cost 42 Calatarama rulings in
+  0.2.0-0.2.2 (a figure vanishing from every house, a cell swallowing the next appendix, a short house
+  with no explanatory note) fails CI instead of landing in a release. No data change: the 0.2.2 assets
+  remain byte-valid.
+
 ## 0.2.2 - 2026-09-17
 
 **Fourty-two cells that were never missing from the manuscript.** The Calatarama grid goes from

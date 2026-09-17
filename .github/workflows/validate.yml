@@ -31,6 +31,8 @@ jobs:
 
     - name: Run validation gate
       run: python library/tools/validate.py --build library/dataset
+    - name: Extraction integrity (calatarama grid)
+      run: python library/tools/check_calatarama_grid.py
 
     - name: Scan for identity / credential leakage
       run: python library/tools/check_public_leaks.py

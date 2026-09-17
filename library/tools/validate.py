@@ -115,6 +115,12 @@ if rt.exists():
 else:
     chk("kb/rule_tests.yaml exists", False, "no rule is demonstrated, only described")
 
+gg = LIB / "tools/check_calatarama_grid.py"
+if gg.exists():
+    r = subprocess.run([sys.executable, str(gg)], capture_output=True, text=True)
+    last = (r.stdout.strip().splitlines() or [""])[-1]
+    chk("calatarama grid integrity (no figure dropped from every house)", r.returncode == 0, last[:120])
+
 techf = ROOT / "kb" / "techniques.yaml"
 if techf.exists():
     try:
