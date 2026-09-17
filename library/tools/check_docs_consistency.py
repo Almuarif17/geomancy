@@ -38,7 +38,8 @@ def truth() -> dict:
     return {"passages": man["counts"]["passages"], "rules": man["counts"]["rules"],
             "figures": figures, "houses": houses, "grid_cells": sum(len(v["entries"]) for v in grid["grid"].values()),
             "grid_possible": len(grid["grid"]) * figures, "outcomes": outcomes,
-            "works_registered": len(reg), "works_shipped": man["counts"]["works"], "rule_cases": cases}
+            "works_registered": len(reg), "works_shipped": man["counts"]["works"], "rule_cases": cases,
+            "voices": len([l for l in (ROOT / "kb" / "voices.jsonl").read_text().splitlines() if l.strip()]) if (ROOT / "kb" / "voices.jsonl").exists() else 0}
 
 
 def yaml_load(p: pathlib.Path):

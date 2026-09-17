@@ -18,6 +18,50 @@
 - Contents: 1,140 passages / 23 rules, 184/192 Calatarama cells, 12 houses, 22 outcomes. Bundles grew as
   the recovered rulings propagated: `verdict` 362K, `search` 840K, `offline_full` 349K.
 
+## 0.2.4 - 2026-09-17
+
+### Added
+- **Voices.** `kb/voices.jsonl`: 1,408 attributed statements across 9 families (figure-in-house 215,
+  judge+cofigure answers 859, figure attributes 131, correspondences 87, quaestiones 42, look-rules 23,
+  motion-between-houses 24, and the 27 rows that record documented conflicts rather than resolving them).
+  Each row carries who wrote it, whose edition or translation reached us, a folio/leaf locator, the licence
+  bucket, the quote where we may ship it, and `cite_only` where we may not. Built by
+  `scripts/build_voices.py`; served as `index/by_voice.jsonl` (1,379 claim-keys).
+- **Grounded reading.** `engine/ground.py` assembles a reading for a cast and a topic where every claim
+  names its voices; `validate()` rejects uncited claims, citations that resolve to no voice, figures not in
+  the cast, and asserted certainty; `score()` runs the same audit over someone else's text, so an app can
+  publish a grounding rate instead of a vibe; `--prompt-pack` emits the instructions any language model is
+  held to. Contract: `library/schema/grounded_reading.json`.
+- Quote vs assertion is a first-class distinction: certainty language inside a cited quotation is the
+  author's voice and allowed; the same words in our own gloss are a validation error.
+- Polarity leans carry `polarity_reliability`. Early French/Latin OCR is `low`, and a `low` lean is treated
+  as *unmeasured*, not neutral - otherwise two sources look like they agree because one of them was not
+  scored. That rule alone changed "13 contested keys" into 4 genuine, measurable cross-source
+  disagreements, which is the honest number.
+- `library/tools/check_grounding.py`, wired into `validate.py` and CI: enforces that no quote text ships for
+  a non-`full` work, that every voice is locatable and uniquely identified, and - the part that makes the
+  auditor mean something - that it **fails** on four deliberately bad readings.
+- `docs/COST.md` (what this costs: nothing, with the exact triggers that would change that) and
+  `docs/IP_STRATEGY.md` (how a public repo stays uncopiable: three licence layers, and selling the machine,
+  the freshness, the audit and the access instead of the data).
+- `docs/VISION.md`: capability audit, market read with dated prices, six claims a buyer can verify with one
+  command, three build tiers, the research agenda with expected yield, and the anti-goals.
+
+### Fixed
+- `FINDINGS.md` carried the superseded grid section (142 of 192, with the claim that absences were
+  "scattered across figures ... not a systematic exclusion of one figure") as an orphan next to the corrected
+  one, and two sections were numbered 13. Removed and renumbered 1-22.
+- `library/dataset/evaluation.json` reported 1,098 passages against a manifest of 1,140 - only a Makefile
+  target wrote it, so CI's freshness guard never saw it. CI now regenerates it and the guard covers
+  `manifest.json` and `evaluation.json`.
+- `library/README.md` advertised 1,098 passages to app builders; README, SOURCES, EVALUATION and
+  `retrieve.py` prose likewise. Numbers that describe the build are now generated:
+  `library/tools/check_docs_consistency.py` verifies marked numbers (`<!--num:passages-->1,140`) against the
+  build and `--fix` rewrites them; it also asserts every shipped passage carries a locator, since that is
+  the citation guarantee rather than a slogan.
+- `scripts/publish_release.py` no longer embeds a personal identity in a tracked file - the leak gate flagged
+  it, and it was right to.
+
 ## Unreleased
 
 ### Added

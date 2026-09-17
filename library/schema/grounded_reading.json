@@ -1,0 +1,202 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://github.com/Almuarif17/geomancy/blob/main/library/schema/reading.json",
+ "title": "Grounded geomancy reading",
+ "description": "A reading where every statement about the cast names the voice that said it. Produced by engine/ground.py and audited by its validate(); an output with an uncited claim is not a valid reading, it is a guess.",
+ "type": "object",
+ "required": [
+  "schema",
+  "claims",
+  "citations",
+  "standing"
+ ],
+ "properties": {
+  "schema": {
+   "const": "geomancy.grounded_reading/1.0"
+  },
+  "topic": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "quesited_house": {
+   "type": [
+    "integer",
+    "null"
+   ],
+   "minimum": 1,
+   "maximum": 12
+  },
+  "chart": {
+   "type": "object",
+   "additionalProperties": {
+    "type": "string"
+   }
+  },
+  "court": {
+   "type": "object"
+  },
+  "claims": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "type",
+     "text",
+     "cites"
+    ],
+    "properties": {
+     "type": {
+      "enum": [
+       "sourced_ruling",
+       "sources_disagree",
+       "figure_quality",
+       "correspondence",
+       "look_rule",
+       "no_source_ruling",
+       "method_note"
+      ]
+     },
+     "mode": {
+      "enum": [
+       "quote",
+       "gloss"
+      ]
+     },
+     "figure": {
+      "type": [
+       "string",
+       "null"
+      ]
+     },
+     "house": {
+      "type": [
+       "integer",
+       "null"
+      ]
+     },
+     "text": {
+      "type": "string",
+      "minLength": 1
+     },
+     "leans": {
+      "type": "array",
+      "items": {
+       "type": "string"
+      }
+     },
+     "cites": {
+      "type": "object",
+      "required": [
+       "voice_ids"
+      ],
+      "properties": {
+       "voice_ids": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       },
+       "n_voices": {
+        "type": "integer"
+       },
+       "works": {
+        "type": "array",
+        "items": {
+         "type": "string"
+        }
+       }
+      }
+     },
+     "validate_rule": {
+      "description": "a non-silent claim must carry >=1 voice_id; a no_source_ruling claim must carry 0 and say why",
+      "type": "string"
+     }
+    },
+    "allOf": [
+     {
+      "if": {
+       "properties": {
+        "type": {
+         "const": "sourced_ruling"
+        }
+       }
+      },
+      "then": {
+       "properties": {
+        "cites": {
+         "properties": {
+          "voice_ids": {
+           "minItems": 1
+          }
+         }
+        }
+       }
+      }
+     }
+    ]
+   }
+  },
+  "method": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "required": [
+     "technique",
+     "cite"
+    ]
+   }
+  },
+  "citations": {
+   "type": "object",
+   "additionalProperties": {
+    "type": "object",
+    "required": [
+     "authority",
+     "locator"
+    ],
+    "properties": {
+     "authority": {
+      "type": "string"
+     },
+     "through": {
+      "type": "string"
+     },
+     "year": {
+      "type": [
+       "integer",
+       "null"
+      ]
+     },
+     "locator": {
+      "type": [
+       "string",
+       "null"
+      ]
+     },
+     "licence": {
+      "type": [
+       "string",
+       "null"
+      ]
+     },
+     "cite_only": {
+      "type": "boolean"
+     }
+    }
+   }
+  },
+  "gaps": {
+   "type": "object"
+  },
+  "audit": {
+   "type": "object"
+  },
+  "standing": {
+   "type": "string",
+   "minLength": 40
+  }
+ },
+ "additionalProperties": true
+}

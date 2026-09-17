@@ -35,6 +35,8 @@ jobs:
       run: python engine/evaluate.py --json library/dataset/evaluation.json
     - name: Run validation gate
       run: python library/tools/validate.py --build library/dataset
+    - name: Grounding (citations, licence of quotes, auditor attacks)
+      run: python library/tools/check_grounding.py
     - name: Extraction integrity (calatarama grid)
       run: python library/tools/check_calatarama_grid.py
 

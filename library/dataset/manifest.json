@@ -52,15 +52,17 @@
   "priors.json": "b888cccff891667f",
   "question_inventory.json": "435526dc064a512f",
   "rule_tests.yaml": "15d45f7ee9c89644",
-  "techniques.yaml": "31fff25326068e97"
+  "techniques.yaml": "31fff25326068e97",
+  "voices.jsonl": "dd08a2c3ed997e9a"
  },
  "files": {
   "evaluation.json": "7a290a5f5ef6467b",
   "index/by_figure.jsonl": "a612a3d2cf8add2f",
   "index/by_house.jsonl": "1eff8ccedb4b9191",
   "index/by_outcome.jsonl": "7479507dd9222d6f",
+  "index/by_voice.jsonl": "233dc898e30b238e",
   "index/by_work.jsonl": "71ac06a678b25501",
-  "openapi.yaml": "e3c48130040e80a1",
+  "openapi.yaml": "52cbf4d63cc7481d",
   "shards/passages.jsonl": "63ab1a2d2ffd99ee",
   "shards/rules.jsonl": "7f07209de5a546b0",
   "tables/alfagini_quaestiones.json": "861c01e4c14f9fea",
@@ -75,7 +77,8 @@
   "tables/perfection_priors.json": "4e98c31d5cb446c2",
   "tables/priors.json": "b888cccff891667f",
   "tables/question_inventory.json": "435526dc064a512f",
-  "tables/techniques.yaml": "31fff25326068e97"
+  "tables/techniques.yaml": "31fff25326068e97",
+  "tables/voices.jsonl": "dd08a2c3ed997e9a"
  },
  "next_ids": {
   "passage_table": "passages",

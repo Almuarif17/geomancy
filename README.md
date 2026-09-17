@@ -82,6 +82,10 @@ Public-domain prints and open deposits: Cattan (1591, 1608), Heydon's *Theomagia
 *Opus/Fasciculus geomanticum* compendia (1638, 1704 — including the *Quaestiones* of al-Fakini), Jean de
 la Taille's French treatise, Hartmann (1889) with his 2,048-cell answer table, the *Libro de los
 juysios de calatarama* via an open university deposit, Agrippa's second and "fourth" books, plus the
+Voices (<!--num:voices-->1,408 attributed statements, each traceable to an author, an edition and
+a folio) live in `kb/voices.jsonl`; `engine/ground.py` assembles them into a reading where an uncited
+sentence is a validation error, not a style choice.
+
 Latin/Castilian routing tables. Full list with licences: `library/dataset/manifest.json` and
 `NOTICE`. Modern scholarship (Skinner, Greer, Regardie, Charmasson) is **cited, not quoted**.
 

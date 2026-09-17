@@ -123,6 +123,14 @@ if dc.exists():
         tail += "  ||  " + " | ".join((r.stderr.strip().splitlines() or [""])[-1:])[:150]
     chk("prose counts match the build", r.returncode == 0, tail)
 
+gr = LIB / "tools/check_grounding.py"
+if gr.exists():
+    r = subprocess.run([sys.executable, str(gr)], capture_output=True, text=True)
+    tail = " | ".join((r.stdout.strip().splitlines() or ["(no output)"])[-2:])[:200]
+    if r.returncode != 0:
+        tail += "  ||  " + " | ".join((r.stderr.strip().splitlines() or [""])[-1:])[:150]
+    chk("grounding: every claim citable, licence-safe, and the auditor bites", r.returncode == 0, tail)
+
 gg = LIB / "tools/check_calatarama_grid.py"
 if gg.exists():
     r = subprocess.run([sys.executable, str(gg)], capture_output=True, text=True)

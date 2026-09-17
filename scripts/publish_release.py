@@ -57,8 +57,9 @@ def main() -> int:
     if dirty and not a.dry_run:
         print("   committing regenerated artefacts")
         sh("git", "add", "-A")
-        sh("git", "-c", "user.name=Ahmad", "-c", "user.email=ahmad.muarif17@gmail.com",
-           "commit", "-q", "-m", f"release {a.tag}: regenerated dataset artefacts")
+        # commit under whoever's git identity is configured here. An identity hard-coded into a script
+        # that lives in a public repo is exactly what library/tools/check_public_leaks.py exists to stop.
+        sh("git", "commit", "-q", "-m", f"release {a.tag}: regenerated dataset artefacts")
     if a.dry_run:
         print("[dry-run] would tag " + a.tag + ", push main+tag, build 6 assets, upload, verify"); return 0
 

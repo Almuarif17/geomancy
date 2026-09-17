@@ -39,7 +39,7 @@ def _write_jsonl(p: pathlib.Path, rows):
 
 
 # ---------------------------------------------------------------- build
-TABLES = ["figures.yaml", "houses.yaml", "techniques.yaml", "calatarama_grid.json", "priors.json",
+TABLES = ["figures.yaml", "houses.yaml", "techniques.yaml", "calatarama_grid.json", "voices.jsonl", "priors.json",
           "perfection_priors.json", "calibration.json", "alfagini_quaestiones.json",
           "hartmann_casebook.json", "lataille_grid.json", "cattan_motus_bank.json",
           "cattan1591_dangers.json", "question_inventory.json"]
@@ -146,6 +146,40 @@ def build():
     _write_jsonl(IDX / "by_figure.jsonl", list(by_figure.values()))
     _write_jsonl(IDX / "by_house.jsonl", list(by_house.values()))
     _write_jsonl(IDX / "by_outcome.jsonl", by_outcome)
+    # one row per claim-key: which voices speak to it, from which works, in what licence bucket, and
+    # whether they can be shown to disagree. This is what an app pulls to render "what the sources say".
+    vb_rows: dict = {}
+    vf = KB / "voices.jsonl"
+    if vf.exists():
+        for line in vf.read_text().splitlines():
+            if not line.strip():
+                continue
+            v = json.loads(line)
+            e = vb_rows.setdefault(v["key"], {"key": v["key"], "family": v["family"], "figure": v.get("figure"),
+                                             "house": v.get("house"), "topic": v.get("topic"), "voices": [],
+                                             "works": [], "cite_only_works": [], "quote_available": 0,
+                                             "leans": [], "reliable_leans": []})
+            e["voices"].append(v["id"])
+            e["works"].append(v["work"])
+            if v.get("cite_only"):
+                e["cite_only_works"].append(v["work"])
+            else:
+                e["quote_available"] += 1
+            if v.get("polarity"):
+                e["leans"].append(v["polarity"])
+                if v.get("polarity_reliability") != "low":
+                    e["reliable_leans"].append(v["polarity"])
+        for e in vb_rows.values():
+            e["works"] = sorted(set(e["works"]))
+            e["n_voices"] = len(e["voices"])
+            # disagreement is only a claim when both sides were actually measurable (see engine/ground.py)
+            e["disagreement"] = len(set(e["reliable_leans"])) > 1
+            e["silent_polarity_works"] = sorted({w for w, l in zip(e["works"], [None] * len(e["works"]))}
+                                                ) if False else None
+            del e["reliable_leans"], e["leans"], e["silent_polarity_works"]
+        _write_jsonl(IDX / "by_voice.jsonl", sorted(vb_rows.values(), key=lambda x: (x["family"], x["key"])))
+        print(f"  voices: {sum(len(e['voices']) for e in vb_rows.values())} rows over {len(vb_rows)} keys, "
+              f"{sum(1 for e in vb_rows.values() if e['disagreement'])} with measurable cross-source disagreement")
     _write_jsonl(IDX / "by_work.jsonl", [
         {"work": w, "passages": [r["id"] for r in passages if r.get("work") == w],
          "kinds": sorted({r.get("kind") for r in passages if r.get("work") == w if r.get("kind")})}
