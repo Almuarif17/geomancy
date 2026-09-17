@@ -3,7 +3,7 @@
 Each item: the rule, where it comes from, and what it buys you. Folio/page references are from the
 files in `corpus/raw/`, so you can check every one.
 
-## 1. A cast can be *illegal*, and the test is arithmetic before it is mystical
+## 1.
 
 The *Libro de los juysios de calatarama* devotes a whole chapter (ch.2, ff. 4v-5v) to checking your
 own work **after** the cast:
@@ -22,7 +22,7 @@ wrong lord.
 
 **Buy:** a hard rule for "should I answer this cast at all", and a defensible reason to re-cast.
 
-## 2. The stopping figures (and one specific remedy)
+## 2.
 
 From Cattan (1591 and 1608 independently — I recovered the same ruling from both, which is why I
 trust it despite the blackletter OCR):
@@ -35,7 +35,7 @@ the matter; **Populus** as Judge → too much is moving, no verdict to extract.
 
 **Buy:** three concrete "do not proceed" conditions, one with a prescription (wait an hour).
 
-## 3. The 16th figure: three sources, one answer — and one popular formula that is provably dead
+## 3.
 
 - *Calatarama*/Arabic (van Binsbergen's translation of al-Zanātī): they formed a new configuration
   called **'sand ruler'** … *"It is the fifteenth house. Then they have formed **from the first and the
@@ -57,7 +57,7 @@ space (65,536 witness pairs, 0 exceptions) and over every cast (0 exceptions). S
 computed that way contains no information at all. `I + XV` is the only version that can say something
 new.
 
-## 4. Parentage: read every derived figure through its two parents
+## 4.
 
 > if the bad figures engender other bad ones they demonstrate evil from two parts, and if the good
 > engender good it demonstrates good from two parts (f. 22v)
@@ -69,7 +69,7 @@ Populus + Conjunctio "demonstrates the perfection of the union" in a marriage qu
 **Buy:** the same figure in the same house means different things depending on which two figures made
 it. This is a layer almost no modern book mentions, and it is free — the parents are already in the cast.
 
-## 5. Motus — and the detail that changes the verdict
+## 5.
 
 Figures repeat; a repeating figure "passes". The rule most books skip is in ch.5:
 
@@ -80,7 +80,7 @@ i.e. when a figure appears in two houses, you judge it by its **second** coming.
 entry/exit axis (mobile = outgoing/exiting, stable = incoming/entering), this is the "movement"
 calculator: *where the matter is going, and whether it stays.*
 
-## 6. The trace, and what "no trace" means
+## 6.
 
 **Via Puncti** (head-line only): from the Judge's top row upward, following whichever parent shares
 that row. Where it lands is the root of the question. Two refinements the French sources add:
@@ -94,7 +94,7 @@ branching. A Judge with a double head either branches or dies.
 hidden factor sits. **Part of Fortune** (count *all* points, mod 12) = where the gain stands;
 remainder 0 counts as the 12th.
 
-## 7. Timing: two methods and an explicit unit table
+## 7.
 
 Unit, from the figure in the house of the question (ch.6, f.12):
 - **years**: Caput Draconis, Fortuna Major, Tristitia, Carcer, Albus, Laetitia
@@ -111,7 +111,7 @@ Count, two ways:
 Pace, by planet: Saturn/Jupiter prolong; Venus middling; Mercury short (Conjunctio shorter than
 Populus); Moon shortest (Via shorter than Albus).
 
-## 8. House routing, from the manual's own table (Table 7)
+## 8.
 
 For each question house, which triplicity and which **extra houses** to read. This is the answer to
 "how do I check for the best alternative": the manual does not let you read one house, it hands you
@@ -120,7 +120,7 @@ the set. Examples: house I → 1-2-9, 5-6-9, 7-8-12; house II (money) → 1-2-9,
 9, 13; house XII → 1, 12, 6, 8, 7, 14. Note 13/14/15 (witnesses and Judge) are folded into the
 routing — a medieval antecedent of what modern practitioners call the court.
 
-## 9. The 10-step procedure (the manual as a workflow, not a vibe)
+## 9.
 
 Find the house of the question → find the **other** houses that bear on it → read the figures in the
 houses **neighbouring** the question house → identify the figures that rule the topic anywhere in the
@@ -129,7 +129,7 @@ poverty", "Amissio: loss of money, thieves and highwaymen") → see where the qu
 (good houses = accomplished with little effort; bad = effort and delay) → and so on to the witnesses,
 Judge, and the "figure of the day" legality check.
 
-## 10. The statistics nobody publishes
+## 10.
 
 From `kb/priors.json`, `perfection_priors.json`, `calibration.json` (all exact, all enumerable):
 
@@ -146,7 +146,7 @@ From `kb/priors.json`, `perfection_priors.json`, `calibration.json` (all exact, 
   "figure X in house Y" is *not* intrinsically rare; rarity lives in the **combinations**.
 - The 16 figures can never all be distinct in one cast; at least one repeats, always (0 counterexamples).
 
-## 11. Two conflicts in the sources, recorded rather than smoothed
+## 11.
 
 1. **Puer vs Puella pattern.** Britannica's plate and the Golden Dawn table: Puer = 1-2-1-1,
    Puella = 1-1-2-1. Digital Ambler/Skinner line: the reverse. Everything else about the 16 agrees.
@@ -159,7 +159,7 @@ From `kb/priors.json`, `perfection_priors.json`, `calibration.json` (all exact, 
    the pace rule. The engine uses the Calatarama table for the gate (because it is that text's own
    table) and says so.
 
-## 12. The "beware of the knife" register — it exists, and here is a worked proof
+## 12.
 
 Cattan's book III gives, per figure and per house, not a mood but an event. Two examples, from the
 1591 scan I OCR'd myself (raw OCR string first, my reading of it second — **verify on the page image**):
@@ -183,7 +183,7 @@ lookup table: at ~65% OCR recall on blackletter, a machine-extracted table would
 The clean path to a usable register is HTR (Transkribus/Kraken trained on 16th-c. secretary type) or
 the 1578/1608 editions collated line by line — that is roadmap item 1.
 
-## 13. What I tried and could not source (kept as `NAMED_ONLY`)
+## 13.
 
 - The **"hidden figure"** of a house (used in Islamicate practice to get at "the secret and hidden root"
   by combining the house's figure with it) — the technique is *used* in the literature I can read,
@@ -200,7 +200,7 @@ the 1578/1608 editions collated line by line — that is roadmap item 1.
 
 # Second dig: the casebook stratum (added in this pass)
 
-## 13. The *Quaestiones* mechanism — a second engine on top of the shield
+## 14.
 
 Found in **Fasciculus geomanticus (1704)**, which prints *Alfagini Quaestiones Geomantici* — a
 per-question rulebook. 42 rules OCR'd by me from the scan (`corpus/raw/ia/fasciculus_ocr/`,
@@ -231,7 +231,7 @@ per-question rulebook. 42 rules OCR'd by me from the scan (`corpus/raw/ia/fascic
 - **Servants, gifts, prison**: I & XI for fidelity (531); I & II/V/XI for a gift (531); and for
   imprisonment, whether the figure of I and XIII sits *in* XII or conjoined with it, i.e. in X or XI (532).
 
-## 14. Hartmann's 2,048 answers — and a warning inside them
+## 15.
 
 Hartmann, *The Principles of Astrological Geomancy* (1889), has an appendix of **2,048 answers to 16
 questions** — a lookup grid, 8 attainable Judges x 16 figures x 16 questions. 859 cells recovered into
@@ -246,7 +246,7 @@ by 12, and the remainder *is* the Judge's house ('there have been 152 points... 
 case the Judge'). So it is a different art wearing the same names — read his appendix as a
 question-oracle keyed to figures, and never as a judgment of a shield chart.
 
-## 15. The question taxonomy, borrowed deliberately
+## 16.
 
 The Indian horary literature (Prasna Marga; the *Shatpanchashika* = 'sixty verses' on questions) is the
 most systematic **sub-question inventory** in print: theft ('nature of the article; the thief — his age,
@@ -257,7 +257,7 @@ as `prasna_question_taxonomy`, and the slot table says which geomantic attribute
 The content is **not** borrowed: those answers come from lunar mansions and planetary combinations.
 Pasting a horary 'combination' onto a figure is how syncretic nonsense gets written.
 
-## 16. Where the 'only a genius knows' detail actually comes from
+## 17.
 
 The **Amazulu bones divination** corpus (Colenso & Bryant, 1870, 195k words, in `corpus/raw/ia2/`) shows
 the mechanism plainly: each thrown lot has a *name that is itself a statement* — an informant, a lurking
@@ -267,7 +267,7 @@ adjectives. That, plus the figura extracta, plus the Calatarama's who/where tabl
 (taboo) and *ebo* (prescription) registers do the same job with a different cosmology — and access to
 that register runs through a teacher, not a download. See docs/RESEARCH_LEDGER.md §3.
 
-## 17. Two traps I hit so you don't
+## 18.
 
 - Most items titled *Ramal*/*Raml* in South Asia are **not** figure geomancy: the Hindi
   'Ramal Prashnottari'/'Ramal Sara' books are the Napoleon-**Book-of-Fate** lookup genre (Voltaire's
@@ -278,7 +278,7 @@ that register runs through a teacher, not a download. See docs/RESEARCH_LEDGER.m
   you know it exists; do not build a corpus on it.
 
 
-## 18. A 16th-century French treatise, and the tie-break it hands us
+## 19.
 
 From IA I pulled **Jean de la Taille, *La Geomancie*** (`corpus/raw/ia3/lataille_la_geomancie.txt`;
 8 house-IV rulings extracted into `kb/lataille_grid.json` — the abridged print loses most section
@@ -300,7 +300,7 @@ And a fourth, uncomfortable but important: his attribution table disagrees with 
 `figure_attribution_variants`, with the instruction: **re-run** any element/planet rule under the
 alternative table before stating it as a finding. Averaging the tables is how a synthesis becomes fiction.
 
-## 19. The Internet Archive dig, in numbers
+## 20.
 
 - 38 paginated queries → **1,604 unique items** → **259 relevant** on a title/collection test
   (`corpus/ia/IA_CATALOG.md` is the full table).
@@ -320,7 +320,7 @@ alternative table before stating it as a finding. Averaging the tables is how a 
   *jogo de búzios* — the one external literature I have found that directly addresses your
   "geomancy ↔ Ifá" question with a documented argument rather than a correspondence table.
 
-## 20. Hartmann's appendix corroborates the parity theorem - and corrects our model of his grid
+## 21.
 
 Hartmann's `2,048 Answers` table is addressed **8 attainable Judges x 16 cofigures x 16 questions**,
 not 16 x 16 x 8 (verified against the extracted rows on 2026-09-17: `q` runs 1..16, and only
@@ -336,9 +336,9 @@ even-pointed figures ever appear as judge). Two consequences:
   The blocker is identified, not vague: IA's text layer for `b24884145` ends before the appendix
   (173 KB, 2 mentions of Carcer), so only page-level OCR of the scans can finish it.
 
-## 21. What the Calatarama grid does *not* contain (measured, not assumed)
+## 22.
 
-`kb/calatarama_grid.json` carries **184 of a possible 192** figure×house cells across **all twelve
+`kb/calatarama_grid.json` carries <!--num:grid_cells-->**184 of a possible <!--num:grid_possible-->**192<!--/num--> figure×house cells across **all twelve
 houses**. It used to carry 142 over ten, and the difference was not the manuscript: it was three
 defects in `scripts/extract_calatarama_grid.py`, each one of which made a tooling failure look like a
 historical silence.
@@ -380,15 +380,3 @@ claimed), and `engine/retrieve.py --build` writes `missing_figure_rulings` into 
 this" instead of showing a silently shorter list. Coverage is asserted against the data by
 `library/tools/check_calatarama_grid.py`, which fails when a figure is missing from *every* house —
 the signature of a parser bug rather than a source gap.
-
-
-`kb/calatarama_grid.json` carries **142 of a possible 192** figure×house cells (10 of 12 houses).
-`_meta.coverage` now states it per house: **VIII and X have no table at all** in our extraction, house I
-is thin (10/16), and the remaining houses miss one or two figures each. The absences are scattered
-across figures rather than concentrated on one - so this is not a doctrine that excludes a figure, it
-is an extraction boundary, and the honest move is to say so in the data: `engine/retrieve.py --build`
-writes `missing_figure_rulings` into every house row and `missing_house_rulings` into every figure
-row, so an app renders "the 13th-c. table does not speak to this" instead of a shorter list. Filling
-VIII and X is a bounded job: re-read those two Appendix-1 tables in Finan (2023), and if the folios
-truly skip them, record the lacuna in the same field so the claim survives the silence.
-

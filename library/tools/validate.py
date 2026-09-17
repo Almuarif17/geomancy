@@ -115,6 +115,14 @@ if rt.exists():
 else:
     chk("kb/rule_tests.yaml exists", False, "no rule is demonstrated, only described")
 
+dc = LIB / "tools/check_docs_consistency.py"
+if dc.exists():
+    r = subprocess.run([sys.executable, str(dc)], capture_output=True, text=True)
+    tail = " | ".join((r.stdout.strip().splitlines() or ["(no output)"])[-2:])[:200]
+    if r.returncode != 0:
+        tail += "  ||  " + " | ".join((r.stderr.strip().splitlines() or [""])[-1:])[:150]
+    chk("prose counts match the build", r.returncode == 0, tail)
+
 gg = LIB / "tools/check_calatarama_grid.py"
 if gg.exists():
     r = subprocess.run([sys.executable, str(gg)], capture_output=True, text=True)

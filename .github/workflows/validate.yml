@@ -31,6 +31,8 @@ jobs:
     - name: Generate app contract artefacts
       run: python library/tools/gen_types.py
 
+    - name: Regenerate the evaluation report (so prose cannot outlive the build)
+      run: python engine/evaluate.py --json library/dataset/evaluation.json
     - name: Run validation gate
       run: python library/tools/validate.py --build library/dataset
     - name: Extraction integrity (calatarama grid)
@@ -50,5 +52,6 @@ jobs:
 
     - name: Generated artefacts must be committed
       run: |
-        git diff --exit-code library/dataset/index library/dataset/bundles.json types/geomancy.d.ts \
+        git diff --exit-code library/dataset/index library/dataset/bundles.json \
+          library/dataset/manifest.json library/dataset/evaluation.json types/geomancy.d.ts \
           || { echo "generated files are stale - run: make build && make index && make types"; exit 1; }

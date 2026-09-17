@@ -39,7 +39,7 @@ the corpus.
 
 | Disposition | Meaning | What lands in the repo | Current count |
 |---|---|---|---|
-| `full` | public-domain with a text layer | extracted passages in `library/dataset/shards/passages.jsonl`, each with `work` + `locator`; the text itself stays out of git (66 MB of bulk) and is re-fetchable via `make sync` | 9 works → 1,098 passages |
+| `full` | public-domain with a text layer | extracted passages in `library/dataset/shards/passages.jsonl`, each with `work` + `locator`; the text itself stays out of git (66 MB of bulk) and is re-fetchable via `make sync` | 9 works → {{num:passages}}1,140 passages |
 | `summarize` | readable but not redistributable, or needs OCR first | notes and rules in `kb/` (`techniques.yaml`, `calatarama_grid.json`), never prose | 8 works (Persian/Arabic mss pending OCR: `nuskhah_raml_mcgill`, `surkhab_raml_leiden`, `risala_ramlia`) |
 | `cite` | modern scholarship, the digging map | a `source:` string on a rule; zero quotes | 7 (`skinner`, `greer`, `regardie`, `charmasson`, `tannery`, `encislam_raml`, `binsbergen_1996`) |
 | `drop` | in-copyright upload of a whole book | a line in `_REMOVED_because_in_copyright.txt` | 4 deleted, 3 registered as `drop` so nobody re-adds them |

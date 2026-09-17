@@ -20,7 +20,7 @@ differential sweep over 65,536 casts  (exhaustive)
 
 4.6 s on a laptop, in `make eval`, results pinned to `library/dataset/evaluation.json`.
 
-## 2. Executable rule cases — 29 across 22 rules
+## 2. Executable rule cases — {{num:rule_cases}}29 across {{num:rules}}23 rules
 
 `kb/rule_tests.yaml`, run by `make rules`. Each case declares its `strength`:
 

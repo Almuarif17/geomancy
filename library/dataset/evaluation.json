@@ -11,8 +11,8 @@
   "judge_parity": 65536
  },
  "mismatches": 0,
- "passages": 1098,
- "passages_with_locator": 1098,
+ "passages": 1140,
+ "passages_with_locator": 1140,
  "rules": 23,
  "high_techniques": 19,
  "high_with_test_case": 19,

@@ -8,7 +8,7 @@ library/dataset/
 ├── manifest.json          counts, licence summary, sha256 of every file
 ├── bundles.json           screen -> files + bytes + content hash (CDN cache key)
 ├── openapi.yaml           the same contract in OpenAPI 3.1, if you do host it
-├── shards/passages.jsonl  1,098 sourced passages {work, kind, figure, house, locator, text, confidence}
+├── shards/passages.jsonl  1,140 sourced passages {work, kind, figure, house, locator, text, confidence}
 ├── shards/rules.jsonl     23 computable techniques
 ├── index/by_outcome.jsonl ONE ROW PER ANSWERABLE OUTCOME (22)
 ├── index/by_figure.jsonl  per figure: attributes, judge attainability, 12 house rulings, passage ids

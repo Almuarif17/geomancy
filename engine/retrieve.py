@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """The app's only entry point: ask for an outcome, get exactly the pieces that answer it.
 
-A casting screen does not need 1,098 passages. It needs the figures, the routing, the rulings and
+A casting screen does not need <!--num:passages-->1,140 passages. It needs the figures, the routing, the rulings and
 the priors for *one* outcome - so the dataset ships pre-sliced indexes and this module reads them
 without touching the network or the corpus.
 

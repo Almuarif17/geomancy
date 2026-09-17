@@ -56,7 +56,7 @@ let a model fill it.
 | big blobs (scans, page images) | **archive.org upload** of your own derived bundle, or leave them where they are and store the identifier | free | you never ship 400 MB in an app; you ship `ia_identifier + page` and link out |
 | citable snapshots | **Zenodo** via the GitHub integration | free | every release gets a DOI — this is what makes your corpus citable and defensible |
 | search + records, if you outgrow JSONL | **Supabase** or **Neon** or **Turso** free tier (Postgres/SQLite) | free to ~500 MB | only needed once you have user accounts; start without it |
-| full-text search over the corpus | **SQLite FTS5 inside the app** (already built) | free | 1,098 passages ship in ~900 KB and search offline; no server round-trip |
+| full-text search over the corpus | **SQLite FTS5 inside the app** (already built) | free | <!--num:passages-->1,140 passages ship in ~900 KB and search offline; no server round-trip |
 | CI that enforces the licence gate | **GitHub Actions** (`.github/workflows/validate.yml`) | free for public/2,000 min private | the build fails if copyrighted text sneaks in |
 | notes, backlog, "who found what" | repo **Issues** + `docs/FINDINGS.md` | free | your harvest scripts become issue templates; contributors can add works safely |
 

@@ -1,7 +1,7 @@
 # geomancy-library
 
 A **source-cited dataset and rules engine for traditional geomancy** (the European *geomantia* and
-Arabic *ʿilm al-raml* line): 1,098 extracted rulings and 23 computable interpretation rules, each
+Arabic *ʿilm al-raml* line): <!--num:passages-->1,140 extracted rulings and 23 computable interpretation rules, each
 carrying the work and folio/leaf it came from, plus the exact statistics of the whole finite cast space
 (65,536 charts). Built to be the knowledge layer under a casting app.
 
