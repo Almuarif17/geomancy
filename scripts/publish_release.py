@@ -11,7 +11,7 @@ mistakes that made v0.2.2's assets stale. Prefer a fine-grained PAT limited to t
 Contents+Administration write; do not paste it into a chat, export it in the shell.
 """
 from __future__ import annotations
-import argparse, json, os, pathlib, subprocess, sys, urllib.request, urllib.error
+import argparse, json, os, pathlib, re, subprocess, sys, urllib.request, urllib.error
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 API, UP = "https://api.github.com", "https://uploads.github.com"
@@ -37,11 +37,26 @@ def asset_names(v: str) -> dict:
              # and the coverage scoreboard, so "comprehensive" arrives as a checkable file, not an adjective
              "geomancy-coverage-%s.json" % v: "cp kb/coverage.json $OUT"}
 
+def redact(text: str) -> str:
+    """Strip credentials from anything this script may print or raise with.
+
+    The push runs with the token inside the remote URL, because that is how git authenticates over https - and
+    `git push` echoes that URL back in its own output ("To https://user:token@host/..."). A release script that
+    pastes the maintainer's credential into terminal scrollback, a CI log, or its own failure message turns a
+    working release into a leaked token, so redaction happens here, once, at the only exit a command has.
+    """
+    t = text or ""
+    t = re.sub(r"gh[pousr]_[A-Za-z0-9_]{6,}", "ghp_***", t)
+    t = re.sub(r"(?P<scheme>[a-z]+)://(?P<user>[^/@\s]+):(?P<pw>[^/@\s]+)@",
+               lambda m: f"{m['scheme']}://{m['user']}:***@", t)
+    return re.sub(r"(Authorization:\s*token\s+)\S+", r"\1***", t)
+
+
 def sh(*cmd: str, check: bool = True) -> str:
     r = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
     if check and r.returncode:
-        sys.exit(f"FAILED: {' '.join(cmd)}\n{r.stdout[-2000:]}\n{r.stderr[-2000:]}")
-    return (r.stdout or "") + (r.stderr or "")
+        sys.exit(redact(f"FAILED: {' '.join(cmd)}\n{r.stdout[-2000:]}\n{r.stderr[-2000:]}"))
+    return redact((r.stdout or "") + (r.stderr or ""))
 
 
 def _has(ref: str) -> bool:
@@ -86,7 +101,7 @@ def main() -> int:
     moved = sh("git", "status", "--porcelain").strip().splitlines()
     if moved:
         sys.exit("refusing to publish: the rebuild changed the working tree (" + str(len(moved))
-                 + " file(s), e.g. " + ", ".join(l[3:].strip() for l in moved[:3])
+                 + " file(s), e.g. " + ", ".join(l.split(None, 1)[-1].strip() for l in moved[:3])
                  + "). Commit the regenerated files and run again.")
     print("    tree matches its own build ->", "clean")
     print("   validate:", sh("python3", "library/tools/validate.py").strip().splitlines()[-1])
