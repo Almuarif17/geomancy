@@ -1,5 +1,18 @@
 # Changelog
 
+## Unreleased — JS runtime (no Python on the phone)
+
+- **Architecture.** `docs/APP_ARCHITECTURE.md` records the decision: Python stays the research/oracle
+  engine; the phone runs `web/engine.js`; knowledge is fetched from GitHub via jsDelivr and cached;
+  no Termux, no engine-address dialog once the port is proved, no paid host, no LLM as the judge.
+- **`web/engine.js`.** Mothers → Daughters → Nieces → Witnesses → Judge → Reconciler, Via Puncti,
+  projection, Part of Fortune, motus. `node web/engine.test.js` walks all 65,536 casts: 0 odd Judges,
+  eight even Judges at 8,192 each. This is the offline-engine backlog in `notes/APP.md`, started.
+- **`web/cdn.js`.** Pin-tag fetch of `library/dataset/` through jsDelivr with a local cache.
+- Not yet: Node↔Python differential in CI, outcome-shard retrieval in the UI, prototype v2 screens
+  wired to this engine, APK without a Python server.
+
+
 ## 0.2.6 - 2026-09-17
 
 - **Android shell.** `android/build.sh` wraps the phone app in a WebView and produces a debug-signed, sideloadable
