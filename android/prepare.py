@@ -24,7 +24,7 @@ APP = ROOT / "app"
 
 # The page fetches some of these by name; the ones it does not are here so that a future link cannot 404 on a
 # phone, where there is no server to fall back to and no console to look in.
-WWW = ["mobile.html", "icon-192.png", "icon-512.png", "manifest.webmanifest", "sw.js"]
+WWW = ["mobile.html", "engine.js", "perfection.js", "icon-192.png", "icon-512.png", "manifest.webmanifest", "sw.js"]
 
 # one file, five buckets: the launcher scales it rather than stretching it
 ICON_SIZES = {"mdpi": 48, "hdpi": 72, "xhdpi": 96, "xxhdpi": 144, "xxxhdpi": 192, "anydpi": 512}

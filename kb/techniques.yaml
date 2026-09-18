@@ -284,3 +284,44 @@ techniques:
       re-run any element or planetary rule (pace, day/hour gate, humours) under the alternative before
       stating it as a finding. deep_read uses the GD table for humours and the Calatarama for the gate;
       the conflict is written into kb/figures.yaml rather than averaged away.
+
+  house_aspects:
+    answers: "when the chart does not perfect, do the significators still see each other"
+    conf: HIGH
+    source: "Cattan 1591/1608; Pietro d'Abano's house-chart grammar as restated in the public geomancy literature"
+    procedure: |
+      Number the houses 1..12. Distance d = min( |a-b|, 12-|a-b| ) in steps of houses apart
+      (not counting the starting house).
+        d=2 sextile (favourable lean, no completion)
+        d=3 square (friction)
+        d=4 trine (favourable lean, no completion)
+        d=6 opposition (they face and refuse)
+        d=1 is geomantic conjunction if a figure has passed next door (already a mode of perfection)
+      Print the aspect only when perfection.mode is no_relation. Cattan: angular houses
+      (1,4,7,10) weigh more than succedent (2,5,8,11); cadent (3,6,9,12) almost none.
+    output: aspect name + house pair + whether either house is angular
+    see_also: kb/astrology.yaml translation_and_astrology
+
+  company_kinds:
+    answers: "what kind of company the neighbour is — including the planetary (astrological) kind"
+    conf: MED
+    source: "Greer; Powers. House pairs themselves are HIGH (company_of_houses). The four kinds are teaching-book until a folio is attached."
+    procedure: |
+      For each pair (1,2)(3,4)(5,6)(7,8)(9,10)(11,12):
+        simple       — same figure
+        demi_simple  — different figures, same planet (uses the chosen planet table)
+        compound     — row-wise complements (1 where the other has 2)
+        capitular    — same head / Fire line
+      Demi-simple is how astrology helps when translation (same figure on both sides) is absent.
+    status: teaching_book
+    see_also: kb/astrology.yaml company_kinds
+
+  agrippa_house_chart:
+    answers: "Agrippa's solar-order house chart, which is NOT the Shield"
+    conf: HIGH
+    status: NAMED_NOT_DEFAULT
+    source: "Agrippa, Of Geomancy (Turner 1655); Digital Ambler 2020-05-04"
+    procedure: |
+      Mothers -> I, X, VII, IV. Daughters -> II, XI, VIII, V. Cadents rebuilt by triplicity
+      addition, discarding the Nieces. The engine does not use this for the reading.
+      Offer as a labelled comparison only.

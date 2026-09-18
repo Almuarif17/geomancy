@@ -1,5 +1,23 @@
 # Changelog
 
+## Unreleased — grounded UI, astrology of translation, JS chart on the phone
+
+- **v1 kept, v2 settings pulled in.** `app/mobile.html` is still the phone app. Settings now
+  also hold tick sound, show-the-sums, keep-history, and plain vs traditional names (the
+  extras prototype v2 had). Buttons and cards are **solid and curved** (22px, a real
+  shadow-step) instead of a silk wash.
+- **Offline chart math.** `engine.js` + `perfection.js` ship in the page and in the APK.
+  If Python is not answering, a cast still builds the shield, court, translation/occupation
+  modes and house aspects on the device. Source *passages* remain a named gap until the
+  dataset is fetched.
+- **Astrology and translation.** The library already knew translation as a third figure.
+  It did not know how signs and planets colour that third party. `kb/astrology.yaml` and
+  `notes/ASTROLOGY_AND_TRANSLATION.md` add Agrippa 1655 signs (public domain), Cattan
+  house aspects, company kinds (demi-simple = same planet), Agrippa's house chart as
+  NAMED_NOT_DEFAULT, and Gerard of Cremona as NAMED_ONLY. Disagreements are not averaged.
+  FINDINGS §23.
+
+
 ## Unreleased — JS runtime (no Python on the phone)
 
 - **Architecture.** `docs/APP_ARCHITECTURE.md` records the decision: Python stays the research/oracle

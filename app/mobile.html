@@ -12,7 +12,7 @@
 <style>
 /* Two themes off one variable set: a theme change must re-paint, never re-layout. The arrangement of a shield
    is part of the reading, so it cannot be allowed to move under the reader. */
-:root{--step:16px;--r:18px;--dur:.28s;--ease:cubic-bezier(.2,.8,.2,1);
+:root{--step:16px;--r:22px;--dur:.22s;--ease:cubic-bezier(.2,.7,.2,1);
   --bg:#141110;--panel:#1e1a18;--panel2:#262120;--line:#3a322e;--ink:#f0e9dd;--muted:#a99c90;
   --accent:#b795e6;--accent2:#e6c07a;--good:#7fc98a;--bad:#e08a7a;--mark:#f4efe6;--tap:#2a2422;--sleep:#191615}
 html[data-theme=parchment]{--bg:#efe7d7;--panel:#f8f3e7;--panel2:#eae0cc;--line:#cdbd9f;--ink:#221e1a;--muted:#6d6151;
@@ -32,8 +32,8 @@ header.top{display:flex;align-items:center;gap:8px;padding:10px 10px 8px;border-
 header.top .brand{display:flex;align-items:baseline;gap:8px;min-width:0;flex:1}
 header.top h1{font-size:17px;margin:0;letter-spacing:.02em}
 header.top .ver{font-size:11px;color:var(--muted)}
-.iconbtn{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:var(--panel);
-  border:1px solid var(--line);transition:transform var(--dur) var(--ease)}
+.iconbtn{width:40px;height:40px;border-radius:16px;display:grid;place-items:center;background:var(--panel2);
+  border:2px solid var(--line);box-shadow:0 3px 0 var(--line);transition:transform var(--dur) var(--ease)}
 .iconbtn:active{transform:scale(.9)}
 .iconbtn svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.7}
 main{flex:1;position:relative;overflow:hidden}
@@ -49,19 +49,20 @@ nav.tabs svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1
 nav.tabs button[aria-selected=true]{color:var(--ink)}
 nav.tabs button[aria-selected=true]::after{content:"";position:absolute;top:1px;width:22px;height:2px;border-radius:2px;background:var(--accent)}
 
-.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:13px;margin-bottom:11px}
+.card{background:var(--panel);border:2px solid var(--line);border-radius:var(--r);padding:14px;margin-bottom:12px;box-shadow:0 5px 0 var(--line)}
 .card h3{margin:0 0 8px;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:600}
 .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.pill{padding:8px 13px;border-radius:999px;background:var(--panel);border:1px solid var(--line);font-size:13.5px;
+.pill{padding:8px 14px;border-radius:999px;background:var(--panel2);border:2px solid var(--line);font-size:13.5px;
   transition:transform var(--dur) var(--ease),background var(--dur)}
 .pill:active{transform:scale(.94)}
 .pill.on{background:var(--accent);border-color:transparent;color:#17140f;font-weight:600}
-.btn{padding:13px 15px;border-radius:14px;background:var(--accent);color:#17140f;font-weight:650;width:100%;text-align:center;
+.btn{padding:14px 16px;border-radius:22px;background:var(--accent);color:#17140f;font-weight:800;width:100%;text-align:center;
+  box-shadow:0 4px 0 #5a3d12;border:0;
   transition:transform var(--dur) var(--ease),opacity var(--dur)}
-.btn:disabled{opacity:.32}
-.btn:active{transform:scale(.98)}
-.btn.ghost{background:var(--panel);border:1px solid var(--line);color:var(--ink);font-weight:500;
-  white-space:nowrap;font-size:14px;padding:13px 8px}
+.btn:disabled{opacity:.32;box-shadow:none}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #5a3d12}
+.btn.ghost{background:var(--panel2);border:2px solid var(--line);color:var(--ink);font-weight:800;
+  white-space:nowrap;font-size:14px;padding:13px 8px;box-shadow:0 3px 0 var(--line)}
 .btn.warn{background:var(--bad);color:#210f0b}
 .mini{font-size:12.5px;color:var(--muted)}
 .num{font-variant-numeric:tabular-nums}
@@ -299,6 +300,8 @@ select,input[type=number]{background:var(--panel2);border:1px solid var(--line);
   <div class="toast" id="toast"></div>
 </div>
 
+<script src="engine.js"></script>
+<script src="perfection.js"></script>
 <script>
 "use strict";
 /* The phone counts marks and paints them. Every rule - which figure a row of dots is, what the daughters are,
@@ -371,11 +374,52 @@ async function api(path, opts) {
     }
     return parsed;
   }
-  const r = await fetch(path, opts);
-  const ct = r.headers.get("content-type") || "";
-  const body = ct.includes("json") ? await r.json().catch(() => ({})) : await r.text();
-  if (!r.ok) { const e = new Error((body && body.error) || ("HTTP " + r.status)); e.detail = body; throw e; }
-  return body;
+  try {
+    const r = await fetch(path, opts);
+    const ct = r.headers.get("content-type") || "";
+    const body = ct.includes("json") ? await r.json().catch(() => ({})) : await r.text();
+    if (!r.ok) { const e = new Error((body && body.error) || ("HTTP " + r.status)); e.detail = body; throw e; }
+    return body;
+  } catch (err) {
+    if (typeof GeomancyEngine !== "undefined" && localEngine(path, opts)) return localEngine(path, opts);
+    throw err;
+  }
+}
+function localEngine(path, opts) {
+  if (!path) return null;
+  if (path.indexOf("/api/health") >= 0) return { ok: true, engine: "web/engine.js", python: false };
+  if (path.indexOf("/api/figures") >= 0) {
+    const o = {};
+    Object.keys(GeomancyEngine.FIG).forEach(n => { o[n] = GeomancyEngine.FIG[n]; });
+    return o;
+  }
+  if (path.indexOf("/api/cast_from_rows") >= 0) {
+    let body = {};
+    try { body = JSON.parse((opts && opts.body) || "{}"); } catch (e) { body = {}; }
+    const values = (body.values && body.values.length === 16)
+      ? body.values.map(Number)
+      : (body.rows || []).map(t => GeomancyEngine.rowValue(t));
+    if (values.length !== 16) return null;
+    const M = [0,1,2,3].map(i => values.slice(i*4, i*4+4));
+    const ch = GeomancyEngine.cast(M);
+    const qh = Number(body.house || 7) || 7;
+    const pf = (typeof GeomancyPerfection !== "undefined")
+      ? GeomancyPerfection.perfection(ch.houses, qh, null) : null;
+    return {
+      mothers: ch.names.slice(0,4),
+      houses: Object.fromEntries(ch.names.slice(0,12).map((n,i) => [String(i+1), n])),
+      patterns: Object.fromEntries(ch.houses.map((p,i) => [String(i+1), p])),
+      court: { witness_right: ch.names[12], witness_left: ch.names[13], judge: ch.judge, sentence: ch.reconciler },
+      judge: ch.judge, reconciler: ch.reconciler,
+      daughters: ch.names.slice(4,8), nieces: ch.names.slice(8,12),
+      method: body.method || "local",
+      row_values: values,
+      local_engine: true,
+      perfection: pf,
+      gaps: [{ slot: "passages", note: "Python library not on this phone. Chart math is local and proved. Source lines need the dataset or a later fetch." }]
+    };
+  }
+  return null;
 }
 
 /* ---------- the one piece of arithmetic the phone repeats ---------- */
@@ -1152,6 +1196,11 @@ $("#btnSettings").onclick = async () => {
       <option value="ink">Night ink</option><option value="parchment">Parchment</option></select></span></div>
     <div class="kv"><span class="k">Animations</span><span class="v"><button class="toggle" id="sMotion"></button></span></div>
     <div class="kv"><span class="k">Haptics</span><span class="v"><button class="toggle" id="sHapt"></button></span></div>
+    <div class="kv"><span class="k">Tick sound</span><span class="v"><button class="toggle" id="sSound"></button></span></div>
+    <div class="kv"><span class="k">Show the sums</span><span class="v"><button class="toggle" id="sCalc"></button></span></div>
+    <div class="kv"><span class="k">Keep history</span><span class="v"><button class="toggle" id="sHist"></button></span></div>
+    <div class="kv"><span class="k">Figure names</span><span class="v"><select id="sTerms">
+      <option value="plain">plain (Via, Judge)</option><option value="trad">traditional (Via Puncti, Witnesses)</option></select></span></div>
     <div class="kv"><span class="k">Place labels</span><span class="v"><select id="sLabels">
       <option value="roman">Roman I–XVI</option><option value="arabic">Arabic 1–12</option></select></span></div>
     <div class="kv"><span class="k">Source quotations</span><span class="v"><button class="toggle" id="sQuotes"></button></span></div>
@@ -1177,6 +1226,8 @@ $("#btnSettings").onclick = async () => {
   $("#sMinV").value = PREFS.min_voices_for_confidence || filePrefs.min_voices_for_confidence || 2;
   $("#sMax").value = PREFS.max_claims || filePrefs.max_claims || 60;
   on("#sMotion", PREFS.motion !== "off"); on("#sHapt", PREFS.haptics !== false);
+  on("#sSound", PREFS.sound === true); on("#sCalc", PREFS.show_calc !== false); on("#sHist", PREFS.hist !== false);
+  if ($("#sTerms")) $("#sTerms").value = PREFS.terms || "plain";
   on("#sQuotes", (PREFS.show_quotes !== undefined ? PREFS.show_quotes : filePrefs.show_quotes) !== false);
   on("#sPol", (PREFS.hide_unreliable_polarity !== undefined ? PREFS.hide_unreliable_polarity : filePrefs.hide_unreliable_polarity) !== false);
   $("#sTheme").onchange = e => { document.documentElement.dataset.theme = e.target.value; };
@@ -1184,7 +1235,9 @@ $("#btnSettings").onclick = async () => {
     $(id).classList.toggle("on", now); setPref(key, now ? whenOn : whenOff);
     if (key === "motion") document.documentElement.dataset.motion = now ? "on" : "off"; }; };
   tg("#sMotion", "motion", undefined, "off"); tg("#sHapt", "haptics", undefined, false);
+  tg("#sSound", "sound", true, false); tg("#sCalc", "show_calc", true, false); tg("#sHist", "hist", true, false);
   tg("#sQuotes", "show_quotes", true, false); tg("#sPol", "hide_unreliable_polarity", true, false);
+  if ($("#sTerms")) $("#sTerms").onchange = e => setPref("terms", e.target.value);
   $("#sLabels").onchange = e => { setPref("house_labels", e.target.value); renderShield(); };
   $("#sGap").onchange = e => setPref("gap_detail", e.target.value);
   $("#sTone").onchange = e => setPref("tone", e.target.value);

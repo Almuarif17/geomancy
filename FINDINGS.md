@@ -380,3 +380,27 @@ claimed), and `engine/retrieve.py --build` writes `missing_figure_rulings` into 
 this" instead of showing a silently shorter list. Coverage is asserted against the data by
 `library/tools/check_calatarama_grid.py`, which fails when a figure is missing from *every* house —
 the signature of a parser bug rather than a source gap.
+
+## 23. Astrology, signs, and translation
+
+The library already computed *translation* as a mode of perfection (a third figure
+beside both significators). It did not yet say how **zodiac signs** and **planets**
+colour that third party. That gap is closed in `kb/astrology.yaml`, without inventing
+a rule.
+
+- **Translation is geomantic, not horary.** The test is identity of figures in
+  neighbouring houses. It is named after astrology's translation of light because
+  the *job* is a go-between, not because applying aspects of planets are counted.
+- **What astrology then adds:** the translator's planet (who the helper is), the
+  translator's sign (Agrippa 1655 table vs Calatarama planets — they disagree, both
+  ship), house aspect when perfection is denied (Cattan; d'Abano), and company
+  demi-simple (same planet, different figure — teaching-book, MED).
+- **Agrippa's house chart** (Mothers on the angles in solar order, cadents rebuilt)
+  is recorded as `NAMED_NOT_DEFAULT`. The Shield allotment remains the engine.
+- **Gerard of Cremona / astronomical geomancy** stays `NAMED_ONLY` (FINDINGS s.11);
+  still no generative rule in hand.
+- Dexter vs sinister aspect direction is named in modern manuals and **not**
+  computed until a folio states the counting.
+
+See `notes/ASTROLOGY_AND_TRANSLATION.md`.
+

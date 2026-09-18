@@ -1,0 +1,205 @@
+# Astrology that geomancy actually uses — signs, planets, aspects, company.
+# Nothing here invents a rule. Where tables disagree, both ship.
+# Licence: same layer as kb/ (curated notes). Chart arithmetic stays in core_facts.json (CC0).
+#
+# Why this file exists:
+#   Perfection.translation is already in techniques.yaml: a THIRD figure sits next to both
+#   significators. That is geomancy, not "zodiac translation".
+#   Astrology is how you *colour* that third figure: its planet, its sign, its aspects,
+#   and whether it stands in company with either significator.
+#   Without this file the engine can say "yes, through a third party" and cannot say
+#   *what kind of party* the sources would have named.
+
+schema: geomancy.astrology/1.0
+generated_by: notes/ASTROLOGY_AND_TRANSLATION.md
+
+# ---- 1. How signs help translation (the question we were asked) -------------------------
+translation_and_astrology:
+  conf: HIGH
+  source: >
+    Pietro d'Abano (modes of perfection, as summarised in the public geomancy
+    article that restates his house-chart grammar);
+    Christopher Cattan, Geomancie (English 1591/1608) on house strength and aspects;
+    John Michael Greer, Art and Practice of Geomancy (secondary, MED for company kinds);
+    Agrippa, Of Geomancy (Turner 1655, public domain) on signs of the figures.
+  what_translation_is:
+    geomantic: >
+      A figure that is NOT the querent's significator and NOT the quesited's
+      significator appears in the house immediately beside EACH of them.
+      That figure is the translator. The matter completes through a third party.
+    not: >
+      It is not the astrological "translation of light" (a planet separating from
+      one significator and applying to the other). Geomancers borrowed the *name*
+      because the job is the same — a go-between — but the test is identity of
+      figures in neighbouring houses, not applying aspects of planets.
+  how_astrology_then_helps:
+    - id: planet_of_translator
+      conf: HIGH
+      procedure: >
+        Read the translator's planet (kb/figures.yaml, and the conflict table
+        planet_attribution_conflict). The planet names the kind of helper:
+        Mercury a scribe/message, Venus a woman or pleasure, Mars a fighter or
+        surgeon, Jupiter a judge or patron, Saturn an old man or delay, Sun a
+        prince, Moon the public. If the two tables disagree, print both.
+    - id: sign_of_translator
+      conf: MED
+      procedure: >
+        Give the translator the zodiac sign of its figure (tables below). The
+        sign colours the helper's temperament (Aries hot, Cancer wet, etc.) and
+        is the link to body-parts and directions already in Calatarama Table 4.
+        Do not pretend the sign *causes* the translation. It describes the
+        third party once translation is already found.
+    - id: dignity_by_sign
+      conf: MED
+      source: "Cattan on angular / succedent / cadent strength; Agrippa on signs of figures"
+      procedure: >
+        A translator whose sign matches the triplicity or house type it sits in
+        is a willing helper. A translator in a cadent house (3, 6, 9, 12) is a
+        weak or passing helper — Cattan: cadent figures have little lasting effect.
+    - id: aspects_when_translation_fails
+      conf: HIGH
+      source: "Cattan; public restatement of d'Abano: if the chart denies perfection, observe aspects"
+      procedure: >
+        Count houses between significators (inclusive of neither):
+          2 = sextile, 3 = square, 4 = trine, 5 = quincunx (not used in the early books),
+          6 = opposition, 0 = conjunction of houses (already a geomantic conjunction
+          if they are next door).
+        Trine and sextile are favourable leanings without perfection.
+        Square and opposition are friction: the parties see each other and cannot agree.
+        Dexter (earlier house looking to a later one, counting against the house order)
+        vs sinister is named in the modern teaching books; the early Latin corpus does
+        not spell the dexter/sinister test clearly enough here -> do not compute it
+        until a folio is extracted. Flag: NAMED in Greer, procedure not in our kb.
+    - id: company_demi_simple
+      conf: MED
+      source: "Greer / Powers (secondary). Primary folio for 'same planet = company' not yet extracted."
+      procedure: >
+        If the house next to a significator holds a *different* figure of the
+        *same planet*, that is company demi-simple. It is the astrological
+        version of a helper who is not a translator (not the same figure on
+        both sides) but is of the same court. Print it as company, not as
+        translation.
+
+# ---- 2. Zodiac signs of the sixteen figures --------------------------------------------
+# Two tables. Do not average them.
+zodiac_of_figures:
+  agrippa_1655:
+    conf: HIGH
+    source: >
+      Henry Cornelius Agrippa, Of Geomancy, English of Robert Turner, 1655,
+      public domain (e.g. princeton.edu/~ezb/geomancy/agrippa.html).
+      "the greater and lesser Fortunes have the signes of Leo, which is the House
+      of the Sun: Via and Populus have the signe of Cancer, which is the House of
+      the Moone: Acquisitio hath for his signe Pisces; and Laetitia Sagitary...
+      Puella hath the signe of Taurus, and Amissio of Libra... Conjunctio hath
+      for its signe Virgo, and Albus" [Gemini in the received table — the scan
+      cuts the sentence; the pairing with Mercury's houses is the rest of the
+      paragraph's pattern].
+    note: >
+      Agrippa assigns each figure the zodiacal house of its planet. Nodes and
+      the remaining Mercury/Mars/Saturn pairs follow that same pattern in the
+      received table used by later printers. Where the 1655 sentence is cut on
+      the scan, the pair is marked scan_gap.
+    figures:
+      Fortuna Major: {sign: Leo, planet: Sun}
+      Fortuna Minor: {sign: Leo, planet: Sun}
+      Via: {sign: Cancer, planet: Moon}
+      Populus: {sign: Cancer, planet: Moon}
+      Acquisitio: {sign: Pisces, planet: Jupiter}
+      Laetitia: {sign: Sagittarius, planet: Jupiter}
+      Puella: {sign: Taurus, planet: Venus}
+      Amissio: {sign: Libra, planet: Venus}
+      Conjunctio: {sign: Virgo, planet: Mercury}
+      Albus: {sign: Gemini, planet: Mercury, scan_gap: true}
+      Puer: {sign: Aries, planet: Mars, scan_gap: true}
+      Rubeus: {sign: Scorpio, planet: Mars, scan_gap: true}
+      Carcer: {sign: Capricorn, planet: Saturn, scan_gap: true}
+      Tristitia: {sign: Aquarius, planet: Saturn, scan_gap: true}
+      Caput Draconis: {sign: Virgo, planet: North Node, note: "later printers; Agrippa's nodes are not in the quoted sentence"}
+      Cauda Draconis: {sign: Sagittarius, planet: South Node, note: "later printers; not in the quoted sentence"}
+  golden_dawn:
+    conf: MED
+    source: "Israel Regardie / GD teaching tables as reprinted in 20th-c. geomancy manuals. Secondary."
+    note: >
+      Same planets as Agrippa for the twelve ordinary figures; elemental signs
+      sometimes swapped (Amissio as Fire vs Earth). Do not silently replace Agrippa.
+    same_as_agrippa_except:
+      Amissio: {element_conflict: "Jean de la Taille: Fire in Scorpio; GD often Earth"}
+  calatarama:
+    conf: HIGH
+    source: "kb/figures.yaml planet_attribution_conflict.calatarama_f5"
+    note: >
+      The Calatarama does not print a zodiac sign per figure in the extracted
+      tables. It prints a planet per figure, and that planet disagrees with
+      Agrippa/GD on Puer/Puella/Rubeus/Albus/Populus/Caput/Cauda.
+      Sign, if wanted, must be derived from THAT planet's houses, and labelled
+      as derived, not as a folio reading.
+
+# ---- 3. Company, four kinds (modern teaching; pairs of houses are HIGH) ----------------
+company_kinds:
+  pairs_of_houses:
+    conf: HIGH
+    source: "techniques.yaml company_of_houses; Calatarama universal chapter"
+    pairs: [[1,2],[3,4],[5,6],[7,8],[9,10],[11,12]]
+  kinds:
+    simple:
+      conf: MED
+      source: "Greer; Powers. Primary folio not yet extracted."
+      test: both houses of a pair hold the SAME figure
+    demi_simple:
+      conf: MED
+      source: "Greer; Powers. This is the planetary one."
+      test: different figures, SAME planet (using the chosen attribution table)
+      astrology: true
+    compound:
+      conf: MED
+      source: "Greer; Powers. Complements: each row 1↔2 (Via↔Populus, Puer↔Albus in GD dots, etc.)"
+      test: the two figures are row-wise complements (1 where the other has 2)
+    capitular:
+      conf: MED
+      source: "Greer; Powers. Same head (Fire) line."
+      test: both figures have the same first row (both 1 or both 2)
+  engine_rule: >
+    Compute all four kinds. Label MED kinds as teaching-book until a folio is
+    attached. Never upgrade MED to HIGH without a locator.
+
+# ---- 4. House chart allotment (Agrippa variant) ----------------------------------------
+house_chart_allotment:
+  traditional:
+    conf: HIGH
+    source: "Nearly every pre-modern text; Digital Ambler 2020-05-04 survey; Malagasy sikidy; Arabic/Persian as reported by Melvin-Koushki."
+    map:
+      Mothers: [1, 2, 3, 4]
+      Daughters: [5, 6, 7, 8]
+      Nieces: [9, 10, 11, 12]
+    note: "This is the only allotment the engine uses."
+  agrippa_astrological:
+    conf: HIGH
+    status: NAMED_NOT_DEFAULT
+    source: "Agrippa, Of Geomancy (Turner 1655). Digital Ambler 2020-05-04 walks the construction and warns it breaks identity with the Shield."
+    procedure: >
+      Mothers to the angles in solar order: I, X, VII, IV.
+      Daughters to succedents: II, XI, VIII, V.
+      Cadents rebuilt by triplicity addition, NOT taken from the Nieces.
+      The House Chart then is not the first twelve of the Shield.
+    engine_rule: >
+      Do not compute this as the reading. Offer it as a labelled variant
+      ('Agrippa's astrological house chart') so a user can compare. The
+      Shield and the traditional House Chart remain the authority.
+
+# ---- 5. Gerard of Cremona / 'astronomical geomancy' ------------------------------------
+astronomical_geomancy:
+  conf: LOW
+  status: NAMED_ONLY
+  source: "Pseudo-Gerard of Cremona, Si quis per artem; Estimaverunt Indi (Tannery). FINDINGS.md s.11 — generative rule not recovered."
+  note: >
+    A Latin tradition that mixes geomantic figures with natal/horary houses more
+    tightly than Cattan. Named so we do not pretend we have the procedure.
+    Next extraction target alongside suffrages_and_lots.
+
+# ---- 6. What we will not add ------------------------------------------------------------
+anti_goals:
+  - Do not treat Golden Dawn as older than Cattan.
+  - Do not invent dexter/sinister until a folio states the counting direction.
+  - Do not collapse Calatarama planets into Agrippa signs.
+  - Do not call planetary company 'translation'.
