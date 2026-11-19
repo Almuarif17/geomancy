@@ -69,9 +69,25 @@ python3 app/server.py            # then open the printed URL
 A cast, a question, the sources that answer it, and what they do not answer - the whole pipeline in a page you
 can hold in your hands before you write a line of integration code. It reads `app/preferences.json` on every
 request, so a preference (which works you trust first, whether verbatim quotations are shown, how loudly the
-gaps are named) is one edit and a reload. `python3 app/test_app.py` proves its 55 contract checks; `how it
+gaps are named) is one edit and a reload. `python3 app/test_app.py` exercises the HTTP contract; `how it
 works` in the header prints the eight build stages with live counts, generated from the shipped files, so the
 explanation cannot drift from the thing it explains.
+
+The web reader and phone app (`/m`, also packaged by the Android shell) include a **Research desk**: search
+Internet Archive's public text catalogue and GitHub's public repository catalogue, preview repository READMEs,
+and save candidate records to a device-local shelf. These are discovery leads only. Before adding material to
+the corpus, verify the exact edition, relevance, provenance, access terms and licence; use the existing
+`registry/works.jsonl` → triage → extract → validate workflow rather than treating search results as vetted
+knowledge. The mobile version can copy its shelf as JSON for transfer or triage.
+
+An **optional AI study note** can turn the current chart and grounded claims into a more connective, expressive
+commentary. The audited reading is not rewritten, and the model is instructed to cite evidence labels and mark
+interpretive links as tentative. For a free local setup, run Ollama with `qwen2.5:3b`, then start the reader
+with `GEOMANCY_AI_BASE_URL=http://127.0.0.1:11434/v1 GEOMANCY_AI_MODEL=qwen2.5:3b python3 app/server.py`.
+The model endpoint must be reachable from the Python server; nothing is sent unless you click the AI button.
+A compatible hosted endpoint can be configured with `GEOMANCY_AI_BASE_URL` and (if needed)
+`GEOMANCY_AI_API_KEY`. Hosted providers may charge and receive the supplied chart/evidence. Without that
+configuration, all geomancy computation and source-grounded reading continue to work normally.
 
 ### On a phone
 

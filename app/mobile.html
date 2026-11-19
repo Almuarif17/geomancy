@@ -203,6 +203,11 @@ select,input[type=number]{background:var(--panel2);border:1px solid var(--line);
 .mini-shield i{display:block;height:5px;border-radius:3px;background:var(--mark)}
 .mini-shield i.s{width:5px}
 .mini-shield i.p{width:14px}
+.research-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+.research-item{padding:11px 0;border-top:1px solid var(--line);line-height:1.4}
+.research-item:first-child{border-top:0}
+.research-note{white-space:pre-wrap;user-select:text;overflow-wrap:anywhere}
+.research-readme{max-height:340px;overflow:auto;white-space:pre-wrap;user-select:text;font:12px/1.45 ui-monospace,monospace}
 </style>
 </head>
 <body>
@@ -286,6 +291,41 @@ select,input[type=number]{background:var(--panel2);border:1px solid var(--line);
         <div id="histList"></div>
       </div>
     </section>
+
+    <section class="view" id="v-research">
+      <div class="scroller">
+        <div class="card">
+          <h3>Research beyond this cast</h3>
+          <p class="mini">Search public Internet Archive and GitHub catalogues, preview a project's README, and keep leads on this device. A catalogue hit is not a verified edition or a rights clearance. Search phrases are sent to the selected catalogue through your geomancy server.</p>
+          <label class="mini" for="researchQ">Search phrase</label>
+          <input class="qbox" id="researchQ" value="advanced geomancy" maxlength="120" style="min-height:0">
+          <div class="row" style="margin-top:8px">
+            <button class="btn ghost" id="researchIA" style="flex:1">Internet Archive</button>
+            <button class="btn ghost" id="researchGH" style="flex:1">GitHub</button>
+          </div>
+          <div class="mini" id="researchStatus" style="margin-top:8px"></div>
+        </div>
+        <div id="researchResults"></div>
+        <div class="card" id="researchReadme" hidden></div>
+        <div class="card">
+          <h3>Saved research leads <span class="pill" id="researchCount">0</span></h3>
+          <div class="mini" id="researchShelf"></div>
+          <div class="row" style="margin-top:8px">
+            <button class="btn ghost" id="researchExport" style="flex:1">Copy shelf JSON</button>
+            <button class="btn ghost" id="researchClear" style="flex:1">Clear shelf</button>
+          </div>
+        </div>
+        <div class="card">
+          <h3>AI study note · optional</h3>
+          <p class="mini">With a model configured on the engine host, ask for a more connective note based on this cast's chart relationships and cited claims. It remains commentary; the audited reading above is unchanged. Nothing is sent until you tap Draft.</p>
+          <div class="row"><button class="btn" id="aiDraft" style="flex:1">Draft from this cast</button></div>
+          <div class="mini" id="aiStatus" style="margin-top:8px">Checking optional model…</div>
+          <div class="research-note" id="aiNote" hidden></div>
+          <details id="aiEvidence" hidden><summary>Evidence label key</summary><div id="aiEvidenceList"></div></details>
+        </div>
+        <div class="note">A free local setup can use Ollama on the machine running the geomancy server. Hosted model endpoints may charge and receive the chart and claims. See the setup notes before enabling one.</div>
+      </div>
+    </section>
   </main>
 
   <nav class="tabs" id="tabs">
@@ -293,6 +333,7 @@ select,input[type=number]{background:var(--panel2);border:1px solid var(--line);
     <button data-v="v-shield"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>Shields</button>
     <button data-v="v-read"><svg viewBox="0 0 24 24"><path d="M5 5h9a3 3 0 0 1 3 3v11a2 2 0 0 0-2-2H5zM19 5h-2v13"/></svg>Reading</button>
     <button data-v="v-hist"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 8v4.5l3 1.5"/></svg>History</button>
+    <button data-v="v-research"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5M8 10.5h5M10.5 8v5"/></svg>Research</button>
   </nav>
 
   <div class="scrim" id="scrim"></div>
@@ -312,8 +353,9 @@ select,input[type=number]{background:var(--panel2);border:1px solid var(--line);
 const $ = (s, r) => (r || document).querySelector(s);
 const $$ = (s, r) => [...(r || document).querySelectorAll(s)];
 const API = { cast: "/api/cast_from_rows", chart16: "/api/chart16", prove: "/api/prove", copy: "/api/copy",
-              prefs: "/api/preferences", figures: "/api/figures", health: "/api/health", topics: "/api/topics" };
-const LS = { sess: "gml.session", prefs: "gml.prefs", hist: "gml.history" };
+              prefs: "/api/preferences", figures: "/api/figures", health: "/api/health", topics: "/api/topics",
+              research: "/api/research/search", readme: "/api/research/github-readme", aiStatus: "/api/ai/status", assist: "/api/assist" };
+const LS = { sess: "gml.session", prefs: "gml.prefs", hist: "gml.history", research: "gml.research" };
 const ROMAN = ["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII","XIII","XIV","XV","XVI"];
 const COURT = { 13: "left witness", 14: "right witness", 15: "Judge", 16: "Sentence / Reconciler" };
 const SENT = ["Should I take this job?","Will the deal close?","Is he speaking truly?","When will this settle?",
@@ -432,6 +474,7 @@ function show(v) {
   if (v === "v-shield") renderShield();
   if (v === "v-read") renderReading();
   if (v === "v-hist") renderHistory();
+  if (v === "v-research") { renderResearchShelf(); refreshAIStatus(); }
 }
 $("#tabs").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { buzz(7); show(b.dataset.v); } });
 
@@ -929,6 +972,133 @@ function renderReading() {
   bindProve();
   $$("#p0 [data-open]").forEach(el => el.onclick = e => { if (e.target.closest(".provebtn") || e.target.closest(".card .btn")) return; openPos(+el.dataset.open); });
 }
+/* =================== RESEARCH + OPTIONAL AI =================== */
+function researchLeads() {
+  const rows = store.get(LS.research, []);
+  return Array.isArray(rows) ? rows.slice(0, 100) : [];
+}
+function renderResearchShelf() {
+  const box = $("#researchShelf");
+  if (!box) return;
+  const rows = researchLeads();
+  $("#researchCount").textContent = String(rows.length);
+  box.innerHTML = "";
+  if (!rows.length) { box.textContent = "Saved leads stay on this device until you clear or export them."; return; }
+  rows.forEach((item, i) => {
+    const d = document.createElement("div"); d.className = "research-item";
+    const title = document.createElement("b"); title.textContent = item.title || item.id || "Research lead";
+    const meta = document.createElement("div"); meta.className = "mini";
+    meta.textContent = [item.catalog, item.creator, item.date, item.language,
+      item.stars != null ? item.stars + " stars" : ""].filter(Boolean).join(" · ");
+    const actions = document.createElement("div"); actions.className = "research-actions";
+    const copy = document.createElement("button"); copy.className = "btn ghost"; copy.textContent = "Copy source link";
+    copy.onclick = async () => { if (await copyText(item.url || "")) toast("Source link copied"); else toast(item.url || "No source link"); };
+    const remove = document.createElement("button"); remove.className = "btn ghost"; remove.textContent = "Remove";
+    remove.onclick = () => { const next = researchLeads(); next.splice(i, 1); store.set(LS.research, next); renderResearchShelf(); };
+    actions.append(copy, remove); d.append(title, meta, actions); box.appendChild(d);
+  });
+}
+function saveResearchLead(item) {
+  const rows = researchLeads(), key = String(item.catalog) + ":" + String(item.id);
+  if (!rows.some(x => String(x.catalog) + ":" + String(x.id) === key)) {
+    rows.unshift(item); store.set(LS.research, rows.slice(0, 100)); renderResearchShelf(); toast("Saved to this device");
+  } else toast("Already on your research shelf");
+}
+async function searchResearch(catalog) {
+  const q = $("#researchQ").value.trim();
+  const status = $("#researchStatus"), box = $("#researchResults");
+  if (!q) { status.textContent = "Enter a search phrase."; return; }
+  status.textContent = "Searching " + (catalog === "archive" ? "Internet Archive" : "GitHub") + "…";
+  box.innerHTML = ""; $("#researchReadme").hidden = true;
+  try {
+    const params = new URLSearchParams({ catalog: catalog, q: q });
+    const data = await api(`${API.research}?${params.toString()}`);
+    status.textContent = `${data.results.length} lead${data.results.length === 1 ? "" : "s"}. ${data.note || "Check each record before relying on it."}`;
+    data.results.forEach(item => {
+      const card = document.createElement("div"); card.className = "card research-item";
+      const title = document.createElement("h3"); title.textContent = item.title || item.id;
+      const meta = document.createElement("div"); meta.className = "mini";
+      meta.textContent = [item.catalog, item.creator, item.date, item.language,
+        item.stars != null ? item.stars + " stars" : ""].filter(Boolean).join(" · ");
+      const desc = document.createElement("p"); desc.className = "mini"; desc.textContent = item.description || "No catalogue summary.";
+      const actions = document.createElement("div"); actions.className = "research-actions";
+      const save = document.createElement("button"); save.className = "btn ghost"; save.textContent = "Save lead";
+      save.onclick = () => saveResearchLead(item);
+      const copy = document.createElement("button"); copy.className = "btn ghost"; copy.textContent = "Copy source link";
+      copy.onclick = async () => { if (await copyText(item.url || "")) toast("Source link copied"); else toast(item.url || "No source link"); };
+      actions.append(save, copy);
+      if (item.catalog === "GitHub") {
+        const readme = document.createElement("button"); readme.className = "btn ghost"; readme.textContent = "Preview README";
+        readme.onclick = () => previewResearchReadme(item.id);
+        actions.appendChild(readme);
+      }
+      card.append(title, meta, desc, actions); box.appendChild(card);
+    });
+  } catch (e) {
+    status.textContent = e.message + " · Ensure the geomancy server is online; catalogue search needs internet on that server.";
+  }
+}
+async function previewResearchReadme(repo) {
+  const card = $("#researchReadme"); card.hidden = false; card.innerHTML = "";
+  card.appendChild(document.createTextNode("Loading README…"));
+  try {
+    const data = await api(`${API.readme}?repo=${encodeURIComponent(repo)}`);
+    card.innerHTML = "";
+    const heading = document.createElement("h3"); heading.textContent = data.repo + " · " + data.name;
+    const text = document.createElement("pre"); text.className = "research-readme"; text.textContent = data.text;
+    const actions = document.createElement("div"); actions.className = "research-actions";
+    const copy = document.createElement("button"); copy.className = "btn ghost"; copy.textContent = "Copy repository link";
+    copy.onclick = async () => { if (await copyText(data.url)) toast("Repository link copied"); };
+    actions.appendChild(copy); card.append(heading, text, actions);
+    const warn = document.createElement("div"); warn.className = "mini";
+    warn.textContent = "Unvetted repository text. Inspect linked sources, licence and maintenance before using it.";
+    card.appendChild(warn);
+  } catch (e) { card.textContent = e.message; }
+}
+async function refreshAIStatus() {
+  const status = $("#aiStatus");
+  try {
+    const s = await api(API.aiStatus);
+    status.textContent = s.available ? "Configured · " + s.model : "Not configured · free local Ollama is an option";
+  } catch (e) { status.textContent = "Optional AI status unavailable · " + e.message; }
+}
+async function draftStudyNote() {
+  const status = $("#aiStatus"), note = $("#aiNote"), evidence = $("#aiEvidence"), button = $("#aiDraft");
+  if (!S.mothers || !S.reading || !S.pos) { status.textContent = "Cast and read a chart first."; return; }
+  button.disabled = true; status.textContent = "Drafting from chart relationships and cited claims…";
+  note.hidden = true; evidence.hidden = true;
+  try {
+    const chart = { mothers: S.mothers, positions: S.pos, techniques: S.tech || {}, topic: S.question || "" };
+    const result = await api(API.assist, { method: "POST", headers: { "content-type": "application/json" },
+      body: JSON.stringify({ topic: S.question || "", chart: chart, claims: S.reading.claims || [] }) });
+    note.textContent = result.text || "No note returned."; note.hidden = false;
+    const list = $("#aiEvidenceList"); list.innerHTML = "";
+    (result.evidence || []).forEach(item => {
+      const line = document.createElement("div"); line.className = "research-item";
+      line.textContent = `[E${item.id}] ${item.text}${(item.works || []).length ? " — " + item.works.join(", ") : ""}`;
+      (item.references || []).forEach(ref => {
+        const cite = document.createElement("div"); cite.className = "mini";
+        cite.textContent = [ref.authority, ref.work, ref.locator, ref.id].filter(Boolean).join(" · ");
+        line.appendChild(cite);
+      });
+      list.appendChild(line);
+    });
+    evidence.hidden = false;
+    status.textContent = result.notice + " · " + result.model + " · verify every [E] reference.";
+  } catch (e) { status.textContent = e.message; }
+  finally { button.disabled = false; }
+}
+$("#researchIA").onclick = () => searchResearch("archive");
+$("#researchGH").onclick = () => searchResearch("github");
+$("#researchQ").addEventListener("keydown", e => { if (e.key === "Enter") searchResearch("archive"); });
+$("#researchExport").onclick = async () => {
+  const payload = JSON.stringify({ created: new Date().toISOString(), leads: researchLeads() }, null, 2);
+  if (await copyText(payload)) toast("Research shelf JSON copied"); else openSheet("Research shelf JSON", `<pre class="arith">${esc(payload)}</pre>`);
+};
+$("#researchClear").onclick = () => { store.del(LS.research); renderResearchShelf(); toast("Research shelf cleared"); };
+$("#aiDraft").onclick = draftStudyNote;
+renderResearchShelf();
+
 function arabicLabel(p) {                       // figures.yaml stores the Arabic name as {name, gloss}, not a string
   const a = p && p.arabic;
   if (!a) return "";

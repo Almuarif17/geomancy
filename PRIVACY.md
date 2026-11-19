@@ -10,6 +10,15 @@ what is analytically necessary:
 - `docs/USAGE.md` and `docs/FINDINGS.md` describe the questions only in generic terms
   ("a relocation question"), because a reading plus a question is identifying in a small community.
 
+The optional reader integrations have separate data flows:
+
+- The Research desk sends the search phrase to Internet Archive or GitHub when you press a search button.
+  Saved leads stay in that browser/app's `localStorage` unless you explicitly copy/export the shelf.
+- The AI study note is opt-in per click. It sends the current chart and the displayed sourced claims to the
+  endpoint configured by the server operator. A local Ollama endpoint keeps that request on your machine;
+  a hosted endpoint receives it under that provider's terms. No AI request is made while casting or reading.
+- The chart arithmetic and source-grounded reading continue to work without either integration.
+
 If you are extending this repository: keep it that way. Store real client work outside the repo. If you
 want example castings for docs or tests, generate them or abstract them to patterns, and never paste a
 person's question next to the answer.

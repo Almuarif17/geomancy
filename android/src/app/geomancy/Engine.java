@@ -64,7 +64,8 @@ final class Engine {
             }
             conn = (HttpURLConnection) url.openConnection();
             conn.setConnectTimeout(4000);
-            conn.setReadTimeout(30000);
+            // Local AI models can take longer than a normal chart endpoint, especially on first load.
+            conn.setReadTimeout(pathAndQuery != null && pathAndQuery.startsWith("/api/assist") ? 120000 : 30000);
             conn.setInstanceFollowRedirects(false);       // a redirect would move the request to a host nobody approved
             conn.setRequestMethod("POST".equals(method) ? "POST" : "GET");
             conn.setRequestProperty("Accept", "application/json, text/plain, */*");

@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased — grounded UI, astrology of translation, JS chart on the phone
+## 0.3.1 — research desk and AI study notes on mobile
 
 - **v1 kept, v2 settings pulled in.** `app/mobile.html` is still the phone app. Settings now
   also hold tick sound, show-the-sums, keep-history, and plain vs traditional names (the
@@ -10,6 +10,10 @@
   If Python is not answering, a cast still builds the shield, court, translation/occupation
   modes and house aspects on the device. Source *passages* remain a named gap until the
   dataset is fetched.
+- **Research desk + optional AI on mobile.** `/m` now has the same Internet Archive and GitHub lead search,
+  README preview, local research shelf and on-demand, citation-keyed AI study note as the web reader. AI stays
+  opt-in and server-configured; it does not alter the audited source reading. The Android bridge gives only the
+  AI request its longer response timeout.
 - **Astrology and translation.** The library already knew translation as a third figure.
   It did not know how signs and planets colour that third party. `kb/astrology.yaml` and
   `notes/ASTROLOGY_AND_TRANSLATION.md` add Agrippa 1655 signs (public domain), Cattan
