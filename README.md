@@ -74,11 +74,15 @@ works` in the header prints the eight build stages with live counts, generated f
 explanation cannot drift from the thing it explains.
 
 The web reader and phone app (`/m`, also packaged by the Android shell) include a **Research desk**: search
-Internet Archive's public text catalogue and GitHub's public repository catalogue, preview repository READMEs,
-and save candidate records to a device-local shelf. These are discovery leads only. Before adding material to
+Internet Archive's public catalogue metadata and GitHub's public repository catalogue, preview repository READMEs,
+and save candidate records to a device-local shelf. Archive search does not fetch book pages or OCR text; even when
+an item has a text layer, the current Research desk does not read it. These are discovery leads only. Before adding material to
 the corpus, verify the exact edition, relevance, provenance, access terms and licence; use the existing
 `registry/works.jsonl` → triage → extract → validate workflow rather than treating search results as vetted
-knowledge. The mobile version can copy its shelf as JSON for transfer or triage.
+knowledge. The Archive route currently searches catalogue metadata only: it does **not** fetch or read book text,
+run OCR, or verify an edition. The mobile version can copy its shelf as JSON for transfer or triage. The product
+plan in [docs/APP_UPGRADE_ROADMAP.md](docs/APP_UPGRADE_ROADMAP.md) explains the Archive/OCR distinction and the
+proposed reading experience in detail.
 
 An **optional AI study note** can turn the current chart and grounded claims into a more connective, expressive
 commentary. The audited reading is not rewritten, and the model is instructed to cite evidence labels and mark

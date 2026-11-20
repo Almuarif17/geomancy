@@ -2,6 +2,9 @@
 
 ## 0.3.1 — research desk and AI study notes on mobile
 
+- **Chart-weave exploration.** The shield view now draws the actual arithmetic parentage from Mothers through the
+  court; nodes open the matching figure detail. The diagram is explicitly framed as construction, not an invented
+  spiritual interpretation. The full app plan, including an Archive/OCR explanation, lives in `docs/APP_UPGRADE_ROADMAP.md`.
 - **v1 kept, v2 settings pulled in.** `app/mobile.html` is still the phone app. Settings now
   also hold tick sound, show-the-sums, keep-history, and plain vs traditional names (the
   extras prototype v2 had). Buttons and cards are **solid and curved** (22px, a real

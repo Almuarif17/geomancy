@@ -206,6 +206,16 @@ def main() -> int:
                               "id=\"aiDraft\"", "id=\"aiNote\"", "API.assist")))
     ck("the Android bridge allows enough time for a local AI response", "120000" in
        (ROOT / "android/src/app/geomancy/Engine.java").read_text())
+    weave_needles = ("function derivationWeaveHTML(P)", "data-weave-pos", "role=\"button\"",
+                     "aria-label=\"Scrollable diagram", "do not claim a separate mystical force")
+    ck("the shield offers an accessible, tappable derivation weave with explicit arithmetic-only framing",
+       all(x in mob for x in weave_needles), f"missing {[x for x in weave_needles if x not in mob]}")
+    ck("the weave describes the actual parent relations through the Reconciler",
+       all(x in mob for x in ("[1,9],[2,9],[3,10],[4,10]", "[13,15],[14,15],[15,16],[1,16]")))
+    ck("the Research desk explicitly says Archive search is metadata-only, not OCR or book contents",
+       "catalogue metadata only—not book pages or OCR text" in mob
+       and "catalogue metadata only—not book pages or OCR text" in (APP / "index.html").read_text()
+       and "Catalog metadata is a discovery lead" in (ROOT / "app/server.py").read_text())
     script = re.search(r"<script>(.*?)</script>", mob, re.S)
     ck("its script is one parseable block", bool(script), "")
     js = script.group(1) if script else ""

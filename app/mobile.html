@@ -126,6 +126,22 @@ nav.tabs button[aria-selected=true]::after{content:"";position:absolute;top:1px;
 .prog b{color:var(--ink)}
 
 .shieldwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:13px 9px;margin-bottom:11px}
+.weave{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:12px 10px;margin:12px 0;overflow:hidden}
+.weave h3{margin:0 0 5px;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.weave .weave-scroll{overflow-x:auto;scrollbar-width:thin;padding:5px 0 8px}
+.weave svg{display:block;width:900px;max-width:none;height:auto}
+.weave .thread{stroke:var(--accent);stroke-width:1.5;opacity:.25;stroke-dasharray:5 5;animation:thread-in 1.3s ease-out both}
+.weave .thread.court-thread{stroke:var(--accent2);opacity:.58}
+@keyframes thread-in{from{stroke-dashoffset:60;opacity:0}to{stroke-dashoffset:0}}
+.weave-node{cursor:pointer;outline:none;animation:rise .38s var(--ease) both}
+.weave-node rect{fill:var(--panel2);stroke:var(--line);stroke-width:1.5;transition:fill var(--dur),stroke var(--dur),transform var(--dur)}
+.weave-node:hover rect,.weave-node:focus rect{fill:color-mix(in srgb,var(--accent) 20%,var(--panel2));stroke:var(--accent);stroke-width:2.5}
+.weave-node text{fill:var(--ink);pointer-events:none}
+.weave-node .weave-place{fill:var(--muted);font-size:9px;letter-spacing:.04em}
+.weave-node .weave-name{font-size:10px;font-weight:650}
+.weave .weave-legend{display:flex;gap:7px;flex-wrap:wrap;margin:5px 0 0}
+.weave .weave-legend span{font-size:10px;color:var(--muted);padding:3px 7px;border:1px solid var(--line);border-radius:999px}
+@media(prefers-reduced-motion:reduce){.weave .thread{animation:none;stroke-dasharray:none}.weave-node{animation:none}}
 .shieldq{font-size:13.5px;color:var(--muted);text-align:center;margin:0 6px 11px;font-style:italic;line-height:1.4;
   border-bottom:1px solid var(--line);padding-bottom:9px}
 .shieldq b{color:var(--accent2);font-style:normal}
@@ -296,7 +312,7 @@ select,input[type=number]{background:var(--panel2);border:1px solid var(--line);
       <div class="scroller">
         <div class="card">
           <h3>Research beyond this cast</h3>
-          <p class="mini">Search public Internet Archive and GitHub catalogues, preview a project's README, and keep leads on this device. A catalogue hit is not a verified edition or a rights clearance. Search phrases are sent to the selected catalogue through your geomancy server.</p>
+          <p class="mini"><b>Important: Internet Archive search here returns catalogue metadata only—not book pages or OCR text.</b> Some items have a text layer; others require OCR of scanned pages. This app does not fetch either yet. Search public Archive and GitHub catalogues, preview a project's README, and keep candidate leads on this device. A catalogue hit is not a verified edition or rights clearance. Search phrases are sent to the selected catalogue through your geomancy server.</p>
           <label class="mini" for="researchQ">Search phrase</label>
           <input class="qbox" id="researchQ" value="advanced geomancy" maxlength="120" style="min-height:0">
           <div class="row" style="margin-top:8px">
@@ -760,6 +776,35 @@ function cellHTML(p) {
     <div class="dots">${p.pattern.map(v => `<span style="display:flex;gap:2px">${dots([v])}</span>`).join("")}</div>
     <div class="meta">${p.even ? "even" : "odd"} · ${p.dots} pts${p.element ? " · " + esc(p.element[0]) : ""}</div></button>`;
 }
+function derivationWeaveHTML(P) {
+  // Edges encode the arithmetic inputs, not a historical allegory: each visible line has a real parent-child derivation.
+  const box = { 1:[18,22],2:[18,85],3:[18,148],4:[18,211],5:[166,22],6:[166,85],7:[166,148],8:[166,211],
+    9:[314,22],10:[314,85],11:[314,148],12:[314,211],13:[462,66],14:[462,169],15:[610,117],16:[758,117] };
+  const links = [];
+  for (let d = 5; d <= 8; d++) for (let m = 1; m <= 4; m++) links.push([m, d, false]);
+  [[1,9],[2,9],[3,10],[4,10],[5,11],[6,11],[7,12],[8,12],[9,13],[10,13],[11,14],[12,14],[13,15],[14,15],[15,16],[1,16]]
+    .forEach(([a,b]) => links.push([a,b,b >= 13]));
+  const lines = links.map(([a,b,court], i) => {
+    const [x1,y1] = box[a], [x2,y2] = box[b];
+    return `<path class="thread${court ? " court-thread" : ""}" style="animation-delay:${Math.min(i * 13, 260)}ms" d="M${x1+108} ${y1+21} C${x1+132} ${y1+21},${x2-24} ${y2+21},${x2} ${y2+21}"/>`;
+  }).join("");
+  const nodes = P.map(p => {
+    const [x,y] = box[p.position];
+    const name = esc(p.figure || "unknown figure");
+    const place = esc(p.label || ROMAN[p.position-1]);
+    return `<g class="weave-node" data-weave-pos="${p.position}" tabindex="0" role="button" aria-label="Open ${place}, ${name}">
+      <title>${place}: ${name}. Tap to inspect its pattern, derivation and evidence.</title>
+      <rect x="${x}" y="${y}" width="108" height="42" rx="12"/>
+      <text class="weave-place" x="${x+54}" y="${y+15}" text-anchor="middle">${place.toUpperCase()}</text>
+      <text class="weave-name" x="${x+54}" y="${y+32}" text-anchor="middle">${name}</text></g>`;
+  }).join("");
+  return `<section class="weave" aria-labelledby="weaveTitle">
+    <h3 id="weaveTitle">The chart's making · follow the threads</h3>
+    <div class="mini">Tap any figure to inspect it. Lines show which figures enter each calculation; they do not claim a separate mystical force or historical interpretation.</div>
+    <div class="weave-scroll" role="region" aria-label="Scrollable diagram of figure derivations"><svg viewBox="0 0 886 275" role="img" aria-label="Four Mothers lead through Daughters and Nieces to Witnesses, Judge and Reconciler">${lines}${nodes}</svg></div>
+    <div class="weave-legend"><span>Four Mothers</span><span>Daughters · rows read across</span><span>Nieces · pair sums</span><span>Witnesses → Judge → Reconciler</span></div>
+  </section>`;
+}
 function renderShield() {
   const box = $("#shieldBox");
   if (!S.pos) { box.innerHTML = '<div class="mini" style="padding:22px 8px;text-align:center">No cast yet. Pierce, tap, or hold - the shield is built from your marks, never from a sample.</div>';
@@ -785,8 +830,14 @@ function renderShield() {
         <td class="num">${p.even ? "even" : "odd"} ${p.dots}<div class="mini" style="font-size:10px">${p.pattern.join("·")}</div></td>
         <td style="font-size:11.5px;color:var(--muted);line-height:1.35">${esc(p.derived_from || "cast directly from your marks")}</td></tr>`).join("")}</table>`;
   }
+  if (S.layout === "shield") inner += derivationWeaveHTML(P);
   box.innerHTML = qs + inner;
   $$("#shieldBox [data-pos]").forEach(el => el.onclick = () => openPos(+el.dataset.pos));
+  $$("#shieldBox [data-weave-pos]").forEach(el => {
+    const activate = () => openPos(+el.dataset.weavePos);
+    el.onclick = activate;
+    el.onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); activate(); } };
+  });
   const J = P[14], SJ = P[15], L = P[12], R = P[13];
   const r = S.reading || {};
   $("#judgeBox").innerHTML = `<h3>Judge, witnesses and sentence</h3>
