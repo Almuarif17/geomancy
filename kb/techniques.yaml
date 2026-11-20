@@ -288,7 +288,9 @@ techniques:
   house_aspects:
     answers: "when the chart does not perfect, do the significators still see each other"
     conf: HIGH
+    status: NAMED_ONLY
     source: "Cattan 1591/1608; Pietro d'Abano's house-chart grammar as restated in the public geomancy literature"
+    note: "The source procedure is documented, but the engine has not wired it into the reading; keep it out of computed results until implemented and tested."
     procedure: |
       Number the houses 1..12. Distance d = min( |a-b|, 12-|a-b| ) in steps of houses apart
       (not counting the starting house).

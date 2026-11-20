@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Execute the `test_case` carried by each technique in kb/techniques.yaml.
 
-A rule is only "computable" if it can be demonstrated, so every HIGH-confidence technique must
-ship a case: a cast, a topic, a dotted path into the exported reading, and the value it must have.
-`library/tools/validate.py` refuses a build where a HIGH rule has no passing case - that is what
-stops the prose and the code from drifting apart.
+A rule is only "computable" if it can be demonstrated, so every HIGH-confidence technique that is
+implemented in the active engine must ship a case: a cast, a topic, a dotted path into the exported reading,
+and the value it must have. Documented-only and non-default comparison techniques are not executable rules;
+`library/tools/validate.py` requires cases for the HIGH rules the engine actually computes.
 
     python3 library/tools/run_rule_tests.py            # all cases
     python3 library/tools/run_rule_tests.py --list     which rules are covered

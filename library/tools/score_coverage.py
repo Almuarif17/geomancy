@@ -42,6 +42,9 @@ TARGETS = {
     "figures_attributed": 16,      # all 16, not 3
 }
 
+# These entries document a technique or alternative tradition but are not computed by the shipped engine.
+NON_IMPLEMENTED_STATUSES = {"NAMED_ONLY", "NAMED_NOT_DEFAULT"}
+
 WEIGHTS = {
     "works_contributing": 0.18,
     "cross_work_keys": 0.18,
@@ -70,7 +73,7 @@ REMEDIES = {
                        "python3 library/tools/sync_corpus.py --only lataille_geomancie"),
     "outcomes": ("Grow the question inventory from 22 to 60 routings using the Catalan and Castilian lists already in kb/.",
                  "python3 scripts/build_question_inventory.py"),
-    "techniques_implemented": ("Two techniques are NAMED_ONLY: write the test, then pin it against the oracle.",
+    "techniques_implemented": ("Promote a documented technique only after its procedure is implemented and an executable case pins it.",
                                "python3 library/tools/run_rule_tests.py --list"),
     "rule_cases_proof": ("Convert the 9 pin cases to proof by adding a second independent witness per rule.",
                          "python3 library/tools/run_rule_tests.py --probe"),
@@ -141,7 +144,8 @@ def compute() -> dict:
                     if (r.get("ruling_fr") or r.get("ruling") or "").strip())
 
     tech = yaml.safe_load((KB / "techniques.yaml").read_text())["techniques"]
-    implemented = sum(1 for v in tech.values() if str(v.get("status", "")) != "NAMED_ONLY")
+    implemented = sum(1 for v in tech.values()
+                      if str(v.get("status", "")).upper() not in NON_IMPLEMENTED_STATUSES)
     cases = yaml.safe_load((KB / "rule_tests.yaml").read_text())["cases"]
     proof = sum(1 for c in cases if c.get("strength") == "proof")
     figs = yaml.safe_load((KB / "figures.yaml").read_text())["figures"]

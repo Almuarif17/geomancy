@@ -15,11 +15,11 @@
     },
     {
      "path": "library/dataset/index/by_figure.jsonl",
-     "bytes": 26459,
-     "sha256": "a612a3d2cf8add2f"
+     "bytes": 26476,
+     "sha256": "1f2b5795d67bc315"
     }
    ],
-   "bytes": 136081
+   "bytes": 136098
   },
   "reading": {
    "files": [
@@ -38,8 +38,8 @@
     },
     {
      "path": "library/dataset/index/by_figure.jsonl",
-     "bytes": 26459,
-     "sha256": "a612a3d2cf8add2f"
+     "bytes": 26476,
+     "sha256": "1f2b5795d67bc315"
     },
     {
      "path": "library/dataset/index/by_house.jsonl",
@@ -48,8 +48,8 @@
     },
     {
      "path": "library/dataset/shards/rules.jsonl",
-     "bytes": 22766,
-     "sha256": "7f07209de5a546b0"
+     "bytes": 25951,
+     "sha256": "9ab7678ec097411d"
     },
     {
      "path": "library/dataset/tables/priors.json",
@@ -62,7 +62,7 @@
      "sha256": "4e98c31d5cb446c2"
     }
    ],
-   "bytes": 222352
+   "bytes": 225554
   },
   "verdict": {
    "files": [
@@ -130,16 +130,16 @@
     },
     {
      "path": "library/dataset/shards/rules.jsonl",
-     "bytes": 22766,
-     "sha256": "7f07209de5a546b0"
+     "bytes": 25951,
+     "sha256": "9ab7678ec097411d"
     },
     {
      "path": "library/dataset/manifest.json",
-     "bytes": 3957,
-     "sha256": "c1e54fae65f78f39"
+     "bytes": 3997,
+     "sha256": "bfe18903ce8efe7c"
     }
    ],
-   "bytes": 359511
+   "bytes": 362736
   }
  }
 }
