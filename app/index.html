@@ -64,6 +64,15 @@
   .audit.bad{background:#fdeeea;border-color:#ecc9c1;color:var(--bad)}
   .link{color:var(--accent);text-decoration:underline;cursor:pointer;font-size:12.5px}
   pre{white-space:pre-wrap;font-size:12px;background:#faf6ec;border:1px solid var(--line);padding:8px;border-radius:7px}
+  .research-result{border-top:1px solid var(--line);padding:10px 0;font-size:13px}
+  .research-result:first-child{border-top:0}
+  .research-result h3{font-size:15px;margin:0 0 3px}
+  .research-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:6px}
+  .research-actions button,.mini{font-size:12px;padding:4px 8px}
+  .shelf-item{font-size:12px;padding:5px 0;border-top:1px solid var(--line)}
+  .ai-note{white-space:pre-wrap;background:#f5f0fa;border-left:3px solid var(--accent);padding:12px;border-radius:6px;margin-top:9px}
+  .readme{max-height:350px;overflow:auto;white-space:pre-wrap;font:12px/1.5 ui-monospace,monospace}
+  .notice{font-size:12px;color:var(--ink2);background:#f7f3e9;padding:8px;border-radius:6px;margin:8px 0}
   @media(max-width:1180px){main{grid-template-columns:1fr;}.shield{max-width:420px}}
 </style>
 </head>
@@ -76,6 +85,7 @@
   <span class="link" id="t-how">how it works</span>
   <span class="link" id="t-prefs">my preferences</span>
   <span class="link" id="t-src">browse sources</span>
+  <span class="link" id="t-research">research desk</span>
   <span class="link" id="btn-share">copy link to this cast</span>
   <span style="flex:1"></span>
   <small>documents what named authorities wrote · not a prediction · not advice</small>
@@ -119,6 +129,9 @@
       <div id="audit" class="audit">cast to read.</div>
       <div id="summary" class="serif" style="margin:10px 0 4px;font-size:16px"></div>
       <div id="claims"></div>
+      <div class="notice"><b>Optional AI study note.</b> The audited reading above stays unchanged. If configured, the model receives this chart and its sourced claims to draft a more connective, expressive note; treat it as commentary, not evidence.</div>
+      <div class="row"><button id="btn-ai">Draft an elaborative note</button><small id="ai-status"></small></div>
+      <div id="ai-note" class="ai-note" hidden></div>
     </div>
     <div class="card panel" id="p-how">
       <h2>How everything works, in eight stages</h2>
@@ -146,12 +159,26 @@
       <div class="row"><select id="sf"></select><select id="sh"></select><button id="sfb">find</button></div>
       <div id="sres" style="margin-top:10px;font-size:13px"></div>
     </div>
+    <div class="card panel" id="p-research">
+      <h2>Research desk · public catalogues</h2>
+      <p class="notice"><strong>Internet Archive search here returns catalogue metadata only—not book pages or OCR text.</strong> Some items have a text layer; others require OCR of scanned pages. This app does not fetch either yet. Discover candidate books and projects, then verify edition, provenance, rights, and actual geomantic content before adding anything to the knowledge base.</p>
+      <label for="research-q"><small>Search phrase</small></label>
+      <input id="research-q" value="advanced geomancy" style="font:inherit;width:100%;padding:8px;border:1px solid var(--line);border-radius:7px">
+      <div class="row" style="margin-top:7px"><button id="search-ia">Search Internet Archive</button><button id="search-gh">Search GitHub</button></div>
+      <small id="research-status" style="display:block;margin:8px 0"></small>
+      <div id="research-results"></div>
+      <div id="readme-box" hidden></div>
+      <h2 style="margin-top:14px">My research shelf <span class="chip" id="shelf-count">0</span></h2>
+      <div id="shelf-items"></div>
+      <div class="row" style="margin-top:8px"><button id="export-shelf" class="mini">Export shelf JSON</button><button id="clear-shelf" class="mini">Clear shelf</button></div>
+    </div>
   </div>
 </main>
 
 <script>
 const $ = s => document.querySelector(s);
-const FIGS = {}, STATE = {mothers: [], topic: "", chart: null};
+const FIGS = {}, STATE = {mothers: [], topic: "", chart: null, reading: null};
+const SHELF_KEY = "geomancy-research-shelf-v1";
 const ROMAN = ["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"];
 
 function el(tag, cls, txt){ const e = document.createElement(tag); if(cls) e.className = cls;
@@ -182,6 +209,15 @@ async function boot(){
       tp.appendChild(o); });
     tp.onchange = () => read();
     $("#sfb").onclick = browse;
+    $("#search-ia").onclick = () => researchSearch("archive");
+    $("#search-gh").onclick = () => researchSearch("github");
+    $("#research-q").onkeydown = e => { if(e.key === "Enter") researchSearch("archive"); };
+    $("#export-shelf").onclick = exportShelf;
+    $("#clear-shelf").onclick = () => { if(confirm("Clear your locally saved research leads?")){ localStorage.removeItem(SHELF_KEY); renderShelf(); } };
+    renderShelf();
+    j("/api/ai/status").then(s => { $("#ai-status").textContent = s.available ? "configured · " + s.model : "not configured · free local Ollama option"; })
+      .catch(() => { $("#ai-status").textContent = "optional model endpoint unavailable"; });
+    $("#btn-ai").onclick = draftAI;
     $("#sf").innerHTML = '<option value="">any figure</option>' + names.map(n=>`<option>${n}</option>`).join("");
     $("#sh").innerHTML = '<option value="">any house</option>' + ROMAN.map((r,i)=>`<option value="${i+1}">${r}</option>`).join("");
     await coverage(); await how();
@@ -229,6 +265,7 @@ async function read(){
   $("#topicnote").textContent = tp ? ("house " + tp.house + " · " + tp.note) : "";
   const url = "/api/reading?mothers=" + STATE.mothers.map(encodeURIComponent).join(",") + "&topic=" + encodeURIComponent(STATE.topic);
   let v; try{ v = await j(url); }catch(e){ $("#audit").className="audit bad"; $("#audit").textContent = e.message; return; }
+  STATE.reading = v; $("#ai-note").hidden = true;
   [...$("#shield").children].forEach(c => c.classList.toggle("quesited", +c.dataset.h === v.quesited_house));
   const a = v.audit || {}, box = $("#audit");
   box.className = "audit " + (a.ok ? "ok" : "bad");
@@ -313,6 +350,103 @@ async function browse(){
   });
 }
 
+async function researchSearch(catalog){
+  const status = $("#research-status"), box = $("#research-results");
+  status.textContent = "Searching " + (catalog === "archive" ? "Internet Archive" : "GitHub") + "…";
+  box.innerHTML = ""; $("#readme-box").hidden = true;
+  try{
+    const p = new URLSearchParams({catalog, q: $("#research-q").value});
+    const data = await j("/api/research/search?" + p.toString());
+    status.textContent = data.results.length + " candidate(s) · " + data.note;
+    data.results.forEach(item => {
+      const d = el("article","research-result");
+      const title = el("h3");
+      const a = el("a"); a.textContent = item.title; a.href = item.url; a.target = "_blank"; a.rel = "noopener noreferrer";
+      title.appendChild(a); d.appendChild(title);
+      const meta = [item.creator, item.date, item.language, item.stars != null ? item.stars + " stars" : ""].filter(Boolean).join(" · ");
+      if(meta) d.appendChild(el("small",null,meta));
+      if(item.description) d.appendChild(el("p",null,item.description));
+      const actions = el("div","research-actions");
+      const save = el("button","mini","Save lead"); save.onclick = () => saveResearch(item);
+      actions.appendChild(save);
+      if(item.catalog === "GitHub"){
+        const read = el("button","mini","Preview README");
+        read.onclick = () => previewReadme(item.id);
+        actions.appendChild(read);
+      }
+      d.appendChild(actions); box.appendChild(d);
+    });
+  }catch(e){
+    status.textContent = e.message + " · Check your connection or try again.";
+    if(catalog === "archive"){
+      const a = el("a"); a.href = new URL("/search?query=" + encodeURIComponent($("#research-q").value), location.protocol + "//archive.org").href;
+      a.textContent = "Open this search on Internet Archive"; a.target = "_blank"; a.rel = "noopener noreferrer";
+      box.appendChild(a);
+    }
+  }
+}
+
+function getShelf(){
+  try{ const rows = JSON.parse(localStorage.getItem(SHELF_KEY) || "[]"); return Array.isArray(rows) ? rows : []; }
+  catch(e){ return []; }
+}
+function saveResearch(item){
+  const rows = getShelf(), key = item.catalog + ":" + item.id;
+  if(!rows.some(x => x.catalog + ":" + x.id === key)) rows.unshift(item);
+  localStorage.setItem(SHELF_KEY, JSON.stringify(rows.slice(0,100)));
+  renderShelf();
+}
+function renderShelf(){
+  const rows = getShelf(), box = $("#shelf-items");
+  if(!box) return;
+  $("#shelf-count").textContent = rows.length;
+  box.innerHTML = "";
+  if(!rows.length){ box.appendChild(el("small",null,"Saved leads stay in this browser only.")); return; }
+  rows.forEach(item => {
+    const d = el("div","shelf-item"), a = el("a");
+    a.textContent = item.title || item.id; a.href = item.url; a.target = "_blank"; a.rel = "noopener noreferrer";
+    d.appendChild(el("span","chip",item.catalog)); d.appendChild(a); box.appendChild(d);
+  });
+}
+function exportShelf(){
+  const blob = new Blob([JSON.stringify({created: new Date().toISOString(), leads: getShelf()}, null, 2)], {type:"application/json"});
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "geomancy-research-leads.json";
+  a.click(); URL.revokeObjectURL(a.href);
+}
+async function previewReadme(repo){
+  const box = $("#readme-box"); box.hidden = false; box.innerHTML = "";
+  box.appendChild(el("small",null,"Loading README from GitHub…"));
+  try{
+    const data = await j("/api/research/github-readme?repo=" + encodeURIComponent(repo));
+    box.innerHTML = ""; const a = el("a"); a.textContent = "Open original README"; a.href = data.url;
+    a.target = "_blank"; a.rel = "noopener noreferrer"; box.appendChild(a);
+    box.appendChild(el("pre","readme",data.text));
+    box.appendChild(el("small",null,"Unvetted repository text · inspect its licence and linked sources."));
+  }catch(e){ box.innerHTML = ""; box.appendChild(el("small",null,e.message)); }
+}
+async function draftAI(){
+  const note = $("#ai-note"), status = $("#ai-status"), button = $("#btn-ai");
+  if(!STATE.reading){ status.textContent = "Cast and read first."; return; }
+  status.textContent = "Drafting from the current chart and sourced claims…"; button.disabled = true; note.hidden = true;
+  try{
+    const chartParams = new URLSearchParams({mothers:STATE.mothers.join(","), topic:STATE.topic});
+    const deepChart = await j("/api/chart16?" + chartParams.toString());
+    const response = await fetch("/api/assist", {method:"POST", headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({topic:STATE.topic, chart:deepChart, claims:STATE.reading.claims})});
+    const result = await response.json(); if(!response.ok) throw new Error(result.error || "AI request failed");
+    note.innerHTML = ""; note.appendChild(el("small",null,result.notice + " · " + result.model + " · " + result.evidence_count + " evidence items"));
+    note.appendChild(el("div",null,result.text));
+    const refs = el("details"); refs.appendChild(el("summary",null,"Evidence label key"));
+    (result.evidence||[]).forEach(e => {
+      const line = el("div","shelf-item", "[E" + e.id + "] " + e.text + (e.works.length ? " — " + e.works.join(", ") : ""));
+      (e.references||[]).forEach(r => line.appendChild(el("small",null," · " + [r.authority, r.work, r.locator, r.id].filter(Boolean).join(" — "))));
+      refs.appendChild(line);
+    });
+    note.appendChild(refs); note.hidden = false; status.textContent = "Draft ready · verify every evidence reference.";
+  }catch(e){ status.textContent = e.message; }
+  finally{ button.disabled = false; }
+}
+
 $("#cast").onclick = cast;
 $("#rand").onclick = () => { const n = Object.keys(FIGS);
   STATE.mothers = [0,0,0,0].map(() => n[Math.floor(Math.random()*n.length)]);
@@ -322,6 +456,7 @@ $("#btn-share").onclick = async () => { const url = location.href;
   catch(e){ prompt("copy this link", url); } };
 const toggle = (link, panel) => $(link).onclick = () => { $(panel).classList.toggle("on"); };
 toggle("#t-how", "#p-how"); toggle("#t-prefs", "#p-prefs"); toggle("#t-src", "#p-src");
+toggle("#t-research", "#p-research");
 boot();
 </script>
 </body>

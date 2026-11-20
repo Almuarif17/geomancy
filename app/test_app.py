@@ -20,6 +20,7 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+from unittest.mock import patch
 
 APP = pathlib.Path(__file__).resolve().parent
 ROOT = APP.parent
@@ -87,11 +88,34 @@ def main() -> int:
     def ck(name: str, cond: bool, detail: str = "") -> None:
         checks.append((name, bool(cond), detail))
 
+    sys.path.insert(0, str(ROOT))
+    from app import server as reader_server                     # noqa: E402
+    archive_payload = {"response": {"docs": [
+        {"identifier": "geomancy_example_1700", "title": "Geomancy example", "creator": "A. Author",
+         "date": "1700", "description": ["A public catalogue description."], "licenseurl": ""},
+        {"identifier": "unsafe/id", "title": "discard me"}]}}
+    with patch.object(reader_server, "_read_json_url", return_value=archive_payload) as mocked:
+        found = reader_server.research_search("advanced geomancy", "archive")
+    ck("Internet Archive catalogue rows normalize to safe, linked research leads",
+       len(found["results"]) == 1 and found["results"][0]["url"].endswith("geomancy_example_1700")
+       and "mediatype:texts" in urllib.parse.unquote(mocked.call_args.args[0]), str(found["results"])[:120])
+    github_payload = {"items": [
+        {"full_name": "reader/geomancy", "name": "geomancy", "description": "A research project",
+         "stargazers_count": 4, "language": "Python", "html_url": "javascript:alert(1)"},
+        {"full_name": "bad/name/extra", "name": "discard"}]}
+    with patch.object(reader_server, "_read_json_url", return_value=github_payload):
+        found = reader_server.research_search("advanced", "github")
+    ck("GitHub search normalizes repository links instead of trusting API-supplied URLs",
+       len(found["results"]) == 1 and found["results"][0]["url"] == "https://github.com/reader/geomancy",
+       str(found["results"])[:120])
+
     code, health = get(port, "/api/health")
     ck("health answers with the live counts", code == 200 and health.get("ok") and health["passages"] > 1000
        and health["voices"] > 1000, str(health)[:120])
-    ck("health reports a version from the CHANGELOG, not a hardcoded string",
-       str(health.get("version", "")).count(".") == 2, str(health.get("version")))
+    expected_version = next((line[3:].split(" -")[0].strip() for line in (ROOT / "CHANGELOG.md").read_text().splitlines()
+                             if line.startswith("## ")), "unreleased")
+    ck("health reports the current CHANGELOG heading, whether release-tagged or unreleased",
+       health.get("version") == expected_version, str(health.get("version")))
 
     code, figs = get(port, "/api/figures")
     ck("16 figures with dot patterns", code == 200 and len(figs) == 16
@@ -158,6 +182,17 @@ def main() -> int:
        calls and all(c.startswith("/") and "://" not in c for c in calls), str(calls[:3]))
     ck("no fetch() to an absolute origin", not re.search("fetch\\([^)]{0,4}https?://", html))
     ck("user text is inserted as text, not HTML", "innerHTML = \"\"" in html and "textContent" in html)
+    ck("research desk and optional evidence-based AI writing surface are present",
+       all(x in html for x in ("p-research", "search-ia", "search-gh", "previewReadme", "draftAI", "SHELF_KEY")))
+    code, bad_search = get(port, "/api/research/search?catalog=unknown&q=geomancy")
+    ck("research catalog rejects unsupported sources without making a network request", code == 400
+       and b"catalog" in (bad_search if isinstance(bad_search, bytes) else json.dumps(bad_search).encode()),
+       str(bad_search)[:100])
+    code, bad_repo = get(port, "/api/research/github-readme?repo=not-a-repo")
+    ck("GitHub README preview accepts only owner/repository identifiers", code == 400, str(bad_repo)[:100])
+    code, ai = get(port, "/api/ai/status")
+    ck("AI status explains the optional compatible endpoint without requiring a key", code == 200
+       and ai.get("provider") and ai.get("default_url"), str(ai)[:100])
 
     # ---------------------------------------------------------- the phone app (see notes/APP.md)
     # It is a separate page over the same routes, so the checks are about the wiring between the two:
@@ -166,6 +201,21 @@ def main() -> int:
     mob = mob if isinstance(mob, str) else ""
     ck("the mobile shell answers at /m", code == 200 and mob.lstrip().startswith("<!doctype") and len(mob) > 20000,
        f"{len(mob)} B")
+    ck("the installable mobile app has the research desk and opt-in AI note, not just the desktop reader",
+       all(x in mob for x in ("id=\"v-research\"", "id=\"researchIA\"", "id=\"researchGH\"",
+                              "id=\"aiDraft\"", "id=\"aiNote\"", "API.assist")))
+    ck("the Android bridge allows enough time for a local AI response", "120000" in
+       (ROOT / "android/src/app/geomancy/Engine.java").read_text())
+    weave_needles = ("function derivationWeaveHTML(P)", "data-weave-pos", "role=\"button\"",
+                     "aria-label=\"Scrollable diagram", "do not claim a separate mystical force")
+    ck("the shield offers an accessible, tappable derivation weave with explicit arithmetic-only framing",
+       all(x in mob for x in weave_needles), f"missing {[x for x in weave_needles if x not in mob]}")
+    ck("the weave describes the actual parent relations through the Reconciler",
+       all(x in mob for x in ("[1,9],[2,9],[3,10],[4,10]", "[13,15],[14,15],[15,16],[1,16]")))
+    ck("the Research desk explicitly says Archive search is metadata-only, not OCR or book contents",
+       "catalogue metadata only—not book pages or OCR text" in mob
+       and "catalogue metadata only—not book pages or OCR text" in (APP / "index.html").read_text()
+       and "Catalog metadata is a discovery lead" in (ROOT / "app/server.py").read_text())
     script = re.search(r"<script>(.*?)</script>", mob, re.S)
     ck("its script is one parseable block", bool(script), "")
     js = script.group(1) if script else ""

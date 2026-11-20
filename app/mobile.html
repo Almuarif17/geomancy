@@ -126,6 +126,22 @@ nav.tabs button[aria-selected=true]::after{content:"";position:absolute;top:1px;
 .prog b{color:var(--ink)}
 
 .shieldwrap{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:13px 9px;margin-bottom:11px}
+.weave{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:12px 10px;margin:12px 0;overflow:hidden}
+.weave h3{margin:0 0 5px;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.weave .weave-scroll{overflow-x:auto;scrollbar-width:thin;padding:5px 0 8px}
+.weave svg{display:block;width:900px;max-width:none;height:auto}
+.weave .thread{stroke:var(--accent);stroke-width:1.5;opacity:.25;stroke-dasharray:5 5;animation:thread-in 1.3s ease-out both}
+.weave .thread.court-thread{stroke:var(--accent2);opacity:.58}
+@keyframes thread-in{from{stroke-dashoffset:60;opacity:0}to{stroke-dashoffset:0}}
+.weave-node{cursor:pointer;outline:none;animation:rise .38s var(--ease) both}
+.weave-node rect{fill:var(--panel2);stroke:var(--line);stroke-width:1.5;transition:fill var(--dur),stroke var(--dur),transform var(--dur)}
+.weave-node:hover rect,.weave-node:focus rect{fill:color-mix(in srgb,var(--accent) 20%,var(--panel2));stroke:var(--accent);stroke-width:2.5}
+.weave-node text{fill:var(--ink);pointer-events:none}
+.weave-node .weave-place{fill:var(--muted);font-size:9px;letter-spacing:.04em}
+.weave-node .weave-name{font-size:10px;font-weight:650}
+.weave .weave-legend{display:flex;gap:7px;flex-wrap:wrap;margin:5px 0 0}
+.weave .weave-legend span{font-size:10px;color:var(--muted);padding:3px 7px;border:1px solid var(--line);border-radius:999px}
+@media(prefers-reduced-motion:reduce){.weave .thread{animation:none;stroke-dasharray:none}.weave-node{animation:none}}
 .shieldq{font-size:13.5px;color:var(--muted);text-align:center;margin:0 6px 11px;font-style:italic;line-height:1.4;
   border-bottom:1px solid var(--line);padding-bottom:9px}
 .shieldq b{color:var(--accent2);font-style:normal}
@@ -203,6 +219,11 @@ select,input[type=number]{background:var(--panel2);border:1px solid var(--line);
 .mini-shield i{display:block;height:5px;border-radius:3px;background:var(--mark)}
 .mini-shield i.s{width:5px}
 .mini-shield i.p{width:14px}
+.research-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+.research-item{padding:11px 0;border-top:1px solid var(--line);line-height:1.4}
+.research-item:first-child{border-top:0}
+.research-note{white-space:pre-wrap;user-select:text;overflow-wrap:anywhere}
+.research-readme{max-height:340px;overflow:auto;white-space:pre-wrap;user-select:text;font:12px/1.45 ui-monospace,monospace}
 </style>
 </head>
 <body>
@@ -286,6 +307,41 @@ select,input[type=number]{background:var(--panel2);border:1px solid var(--line);
         <div id="histList"></div>
       </div>
     </section>
+
+    <section class="view" id="v-research">
+      <div class="scroller">
+        <div class="card">
+          <h3>Research beyond this cast</h3>
+          <p class="mini"><b>Important: Internet Archive search here returns catalogue metadata only—not book pages or OCR text.</b> Some items have a text layer; others require OCR of scanned pages. This app does not fetch either yet. Search public Archive and GitHub catalogues, preview a project's README, and keep candidate leads on this device. A catalogue hit is not a verified edition or rights clearance. Search phrases are sent to the selected catalogue through your geomancy server.</p>
+          <label class="mini" for="researchQ">Search phrase</label>
+          <input class="qbox" id="researchQ" value="advanced geomancy" maxlength="120" style="min-height:0">
+          <div class="row" style="margin-top:8px">
+            <button class="btn ghost" id="researchIA" style="flex:1">Internet Archive</button>
+            <button class="btn ghost" id="researchGH" style="flex:1">GitHub</button>
+          </div>
+          <div class="mini" id="researchStatus" style="margin-top:8px"></div>
+        </div>
+        <div id="researchResults"></div>
+        <div class="card" id="researchReadme" hidden></div>
+        <div class="card">
+          <h3>Saved research leads <span class="pill" id="researchCount">0</span></h3>
+          <div class="mini" id="researchShelf"></div>
+          <div class="row" style="margin-top:8px">
+            <button class="btn ghost" id="researchExport" style="flex:1">Copy shelf JSON</button>
+            <button class="btn ghost" id="researchClear" style="flex:1">Clear shelf</button>
+          </div>
+        </div>
+        <div class="card">
+          <h3>AI study note · optional</h3>
+          <p class="mini">With a model configured on the engine host, ask for a more connective note based on this cast's chart relationships and cited claims. It remains commentary; the audited reading above is unchanged. Nothing is sent until you tap Draft.</p>
+          <div class="row"><button class="btn" id="aiDraft" style="flex:1">Draft from this cast</button></div>
+          <div class="mini" id="aiStatus" style="margin-top:8px">Checking optional model…</div>
+          <div class="research-note" id="aiNote" hidden></div>
+          <details id="aiEvidence" hidden><summary>Evidence label key</summary><div id="aiEvidenceList"></div></details>
+        </div>
+        <div class="note">A free local setup can use Ollama on the machine running the geomancy server. Hosted model endpoints may charge and receive the chart and claims. See the setup notes before enabling one.</div>
+      </div>
+    </section>
   </main>
 
   <nav class="tabs" id="tabs">
@@ -293,6 +349,7 @@ select,input[type=number]{background:var(--panel2);border:1px solid var(--line);
     <button data-v="v-shield"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>Shields</button>
     <button data-v="v-read"><svg viewBox="0 0 24 24"><path d="M5 5h9a3 3 0 0 1 3 3v11a2 2 0 0 0-2-2H5zM19 5h-2v13"/></svg>Reading</button>
     <button data-v="v-hist"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 8v4.5l3 1.5"/></svg>History</button>
+    <button data-v="v-research"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5M8 10.5h5M10.5 8v5"/></svg>Research</button>
   </nav>
 
   <div class="scrim" id="scrim"></div>
@@ -312,8 +369,9 @@ select,input[type=number]{background:var(--panel2);border:1px solid var(--line);
 const $ = (s, r) => (r || document).querySelector(s);
 const $$ = (s, r) => [...(r || document).querySelectorAll(s)];
 const API = { cast: "/api/cast_from_rows", chart16: "/api/chart16", prove: "/api/prove", copy: "/api/copy",
-              prefs: "/api/preferences", figures: "/api/figures", health: "/api/health", topics: "/api/topics" };
-const LS = { sess: "gml.session", prefs: "gml.prefs", hist: "gml.history" };
+              prefs: "/api/preferences", figures: "/api/figures", health: "/api/health", topics: "/api/topics",
+              research: "/api/research/search", readme: "/api/research/github-readme", aiStatus: "/api/ai/status", assist: "/api/assist" };
+const LS = { sess: "gml.session", prefs: "gml.prefs", hist: "gml.history", research: "gml.research" };
 const ROMAN = ["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII","XIII","XIV","XV","XVI"];
 const COURT = { 13: "left witness", 14: "right witness", 15: "Judge", 16: "Sentence / Reconciler" };
 const SENT = ["Should I take this job?","Will the deal close?","Is he speaking truly?","When will this settle?",
@@ -432,6 +490,7 @@ function show(v) {
   if (v === "v-shield") renderShield();
   if (v === "v-read") renderReading();
   if (v === "v-hist") renderHistory();
+  if (v === "v-research") { renderResearchShelf(); refreshAIStatus(); }
 }
 $("#tabs").addEventListener("click", e => { const b = e.target.closest("button"); if (b) { buzz(7); show(b.dataset.v); } });
 
@@ -717,6 +776,35 @@ function cellHTML(p) {
     <div class="dots">${p.pattern.map(v => `<span style="display:flex;gap:2px">${dots([v])}</span>`).join("")}</div>
     <div class="meta">${p.even ? "even" : "odd"} · ${p.dots} pts${p.element ? " · " + esc(p.element[0]) : ""}</div></button>`;
 }
+function derivationWeaveHTML(P) {
+  // Edges encode the arithmetic inputs, not a historical allegory: each visible line has a real parent-child derivation.
+  const box = { 1:[18,22],2:[18,85],3:[18,148],4:[18,211],5:[166,22],6:[166,85],7:[166,148],8:[166,211],
+    9:[314,22],10:[314,85],11:[314,148],12:[314,211],13:[462,66],14:[462,169],15:[610,117],16:[758,117] };
+  const links = [];
+  for (let d = 5; d <= 8; d++) for (let m = 1; m <= 4; m++) links.push([m, d, false]);
+  [[1,9],[2,9],[3,10],[4,10],[5,11],[6,11],[7,12],[8,12],[9,13],[10,13],[11,14],[12,14],[13,15],[14,15],[15,16],[1,16]]
+    .forEach(([a,b]) => links.push([a,b,b >= 13]));
+  const lines = links.map(([a,b,court], i) => {
+    const [x1,y1] = box[a], [x2,y2] = box[b];
+    return `<path class="thread${court ? " court-thread" : ""}" style="animation-delay:${Math.min(i * 13, 260)}ms" d="M${x1+108} ${y1+21} C${x1+132} ${y1+21},${x2-24} ${y2+21},${x2} ${y2+21}"/>`;
+  }).join("");
+  const nodes = P.map(p => {
+    const [x,y] = box[p.position];
+    const name = esc(p.figure || "unknown figure");
+    const place = esc(p.label || ROMAN[p.position-1]);
+    return `<g class="weave-node" data-weave-pos="${p.position}" tabindex="0" role="button" aria-label="Open ${place}, ${name}">
+      <title>${place}: ${name}. Tap to inspect its pattern, derivation and evidence.</title>
+      <rect x="${x}" y="${y}" width="108" height="42" rx="12"/>
+      <text class="weave-place" x="${x+54}" y="${y+15}" text-anchor="middle">${place.toUpperCase()}</text>
+      <text class="weave-name" x="${x+54}" y="${y+32}" text-anchor="middle">${name}</text></g>`;
+  }).join("");
+  return `<section class="weave" aria-labelledby="weaveTitle">
+    <h3 id="weaveTitle">The chart's making · follow the threads</h3>
+    <div class="mini">Tap any figure to inspect it. Lines show which figures enter each calculation; they do not claim a separate mystical force or historical interpretation.</div>
+    <div class="weave-scroll" role="region" aria-label="Scrollable diagram of figure derivations"><svg viewBox="0 0 886 275" role="img" aria-label="Four Mothers lead through Daughters and Nieces to Witnesses, Judge and Reconciler">${lines}${nodes}</svg></div>
+    <div class="weave-legend"><span>Four Mothers</span><span>Daughters · rows read across</span><span>Nieces · pair sums</span><span>Witnesses → Judge → Reconciler</span></div>
+  </section>`;
+}
 function renderShield() {
   const box = $("#shieldBox");
   if (!S.pos) { box.innerHTML = '<div class="mini" style="padding:22px 8px;text-align:center">No cast yet. Pierce, tap, or hold - the shield is built from your marks, never from a sample.</div>';
@@ -742,8 +830,14 @@ function renderShield() {
         <td class="num">${p.even ? "even" : "odd"} ${p.dots}<div class="mini" style="font-size:10px">${p.pattern.join("·")}</div></td>
         <td style="font-size:11.5px;color:var(--muted);line-height:1.35">${esc(p.derived_from || "cast directly from your marks")}</td></tr>`).join("")}</table>`;
   }
+  if (S.layout === "shield") inner += derivationWeaveHTML(P);
   box.innerHTML = qs + inner;
   $$("#shieldBox [data-pos]").forEach(el => el.onclick = () => openPos(+el.dataset.pos));
+  $$("#shieldBox [data-weave-pos]").forEach(el => {
+    const activate = () => openPos(+el.dataset.weavePos);
+    el.onclick = activate;
+    el.onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); activate(); } };
+  });
   const J = P[14], SJ = P[15], L = P[12], R = P[13];
   const r = S.reading || {};
   $("#judgeBox").innerHTML = `<h3>Judge, witnesses and sentence</h3>
@@ -929,6 +1023,133 @@ function renderReading() {
   bindProve();
   $$("#p0 [data-open]").forEach(el => el.onclick = e => { if (e.target.closest(".provebtn") || e.target.closest(".card .btn")) return; openPos(+el.dataset.open); });
 }
+/* =================== RESEARCH + OPTIONAL AI =================== */
+function researchLeads() {
+  const rows = store.get(LS.research, []);
+  return Array.isArray(rows) ? rows.slice(0, 100) : [];
+}
+function renderResearchShelf() {
+  const box = $("#researchShelf");
+  if (!box) return;
+  const rows = researchLeads();
+  $("#researchCount").textContent = String(rows.length);
+  box.innerHTML = "";
+  if (!rows.length) { box.textContent = "Saved leads stay on this device until you clear or export them."; return; }
+  rows.forEach((item, i) => {
+    const d = document.createElement("div"); d.className = "research-item";
+    const title = document.createElement("b"); title.textContent = item.title || item.id || "Research lead";
+    const meta = document.createElement("div"); meta.className = "mini";
+    meta.textContent = [item.catalog, item.creator, item.date, item.language,
+      item.stars != null ? item.stars + " stars" : ""].filter(Boolean).join(" · ");
+    const actions = document.createElement("div"); actions.className = "research-actions";
+    const copy = document.createElement("button"); copy.className = "btn ghost"; copy.textContent = "Copy source link";
+    copy.onclick = async () => { if (await copyText(item.url || "")) toast("Source link copied"); else toast(item.url || "No source link"); };
+    const remove = document.createElement("button"); remove.className = "btn ghost"; remove.textContent = "Remove";
+    remove.onclick = () => { const next = researchLeads(); next.splice(i, 1); store.set(LS.research, next); renderResearchShelf(); };
+    actions.append(copy, remove); d.append(title, meta, actions); box.appendChild(d);
+  });
+}
+function saveResearchLead(item) {
+  const rows = researchLeads(), key = String(item.catalog) + ":" + String(item.id);
+  if (!rows.some(x => String(x.catalog) + ":" + String(x.id) === key)) {
+    rows.unshift(item); store.set(LS.research, rows.slice(0, 100)); renderResearchShelf(); toast("Saved to this device");
+  } else toast("Already on your research shelf");
+}
+async function searchResearch(catalog) {
+  const q = $("#researchQ").value.trim();
+  const status = $("#researchStatus"), box = $("#researchResults");
+  if (!q) { status.textContent = "Enter a search phrase."; return; }
+  status.textContent = "Searching " + (catalog === "archive" ? "Internet Archive" : "GitHub") + "…";
+  box.innerHTML = ""; $("#researchReadme").hidden = true;
+  try {
+    const params = new URLSearchParams({ catalog: catalog, q: q });
+    const data = await api(`${API.research}?${params.toString()}`);
+    status.textContent = `${data.results.length} lead${data.results.length === 1 ? "" : "s"}. ${data.note || "Check each record before relying on it."}`;
+    data.results.forEach(item => {
+      const card = document.createElement("div"); card.className = "card research-item";
+      const title = document.createElement("h3"); title.textContent = item.title || item.id;
+      const meta = document.createElement("div"); meta.className = "mini";
+      meta.textContent = [item.catalog, item.creator, item.date, item.language,
+        item.stars != null ? item.stars + " stars" : ""].filter(Boolean).join(" · ");
+      const desc = document.createElement("p"); desc.className = "mini"; desc.textContent = item.description || "No catalogue summary.";
+      const actions = document.createElement("div"); actions.className = "research-actions";
+      const save = document.createElement("button"); save.className = "btn ghost"; save.textContent = "Save lead";
+      save.onclick = () => saveResearchLead(item);
+      const copy = document.createElement("button"); copy.className = "btn ghost"; copy.textContent = "Copy source link";
+      copy.onclick = async () => { if (await copyText(item.url || "")) toast("Source link copied"); else toast(item.url || "No source link"); };
+      actions.append(save, copy);
+      if (item.catalog === "GitHub") {
+        const readme = document.createElement("button"); readme.className = "btn ghost"; readme.textContent = "Preview README";
+        readme.onclick = () => previewResearchReadme(item.id);
+        actions.appendChild(readme);
+      }
+      card.append(title, meta, desc, actions); box.appendChild(card);
+    });
+  } catch (e) {
+    status.textContent = e.message + " · Ensure the geomancy server is online; catalogue search needs internet on that server.";
+  }
+}
+async function previewResearchReadme(repo) {
+  const card = $("#researchReadme"); card.hidden = false; card.innerHTML = "";
+  card.appendChild(document.createTextNode("Loading README…"));
+  try {
+    const data = await api(`${API.readme}?repo=${encodeURIComponent(repo)}`);
+    card.innerHTML = "";
+    const heading = document.createElement("h3"); heading.textContent = data.repo + " · " + data.name;
+    const text = document.createElement("pre"); text.className = "research-readme"; text.textContent = data.text;
+    const actions = document.createElement("div"); actions.className = "research-actions";
+    const copy = document.createElement("button"); copy.className = "btn ghost"; copy.textContent = "Copy repository link";
+    copy.onclick = async () => { if (await copyText(data.url)) toast("Repository link copied"); };
+    actions.appendChild(copy); card.append(heading, text, actions);
+    const warn = document.createElement("div"); warn.className = "mini";
+    warn.textContent = "Unvetted repository text. Inspect linked sources, licence and maintenance before using it.";
+    card.appendChild(warn);
+  } catch (e) { card.textContent = e.message; }
+}
+async function refreshAIStatus() {
+  const status = $("#aiStatus");
+  try {
+    const s = await api(API.aiStatus);
+    status.textContent = s.available ? "Configured · " + s.model : "Not configured · free local Ollama is an option";
+  } catch (e) { status.textContent = "Optional AI status unavailable · " + e.message; }
+}
+async function draftStudyNote() {
+  const status = $("#aiStatus"), note = $("#aiNote"), evidence = $("#aiEvidence"), button = $("#aiDraft");
+  if (!S.mothers || !S.reading || !S.pos) { status.textContent = "Cast and read a chart first."; return; }
+  button.disabled = true; status.textContent = "Drafting from chart relationships and cited claims…";
+  note.hidden = true; evidence.hidden = true;
+  try {
+    const chart = { mothers: S.mothers, positions: S.pos, techniques: S.tech || {}, topic: S.question || "" };
+    const result = await api(API.assist, { method: "POST", headers: { "content-type": "application/json" },
+      body: JSON.stringify({ topic: S.question || "", chart: chart, claims: S.reading.claims || [] }) });
+    note.textContent = result.text || "No note returned."; note.hidden = false;
+    const list = $("#aiEvidenceList"); list.innerHTML = "";
+    (result.evidence || []).forEach(item => {
+      const line = document.createElement("div"); line.className = "research-item";
+      line.textContent = `[E${item.id}] ${item.text}${(item.works || []).length ? " — " + item.works.join(", ") : ""}`;
+      (item.references || []).forEach(ref => {
+        const cite = document.createElement("div"); cite.className = "mini";
+        cite.textContent = [ref.authority, ref.work, ref.locator, ref.id].filter(Boolean).join(" · ");
+        line.appendChild(cite);
+      });
+      list.appendChild(line);
+    });
+    evidence.hidden = false;
+    status.textContent = result.notice + " · " + result.model + " · verify every [E] reference.";
+  } catch (e) { status.textContent = e.message; }
+  finally { button.disabled = false; }
+}
+$("#researchIA").onclick = () => searchResearch("archive");
+$("#researchGH").onclick = () => searchResearch("github");
+$("#researchQ").addEventListener("keydown", e => { if (e.key === "Enter") searchResearch("archive"); });
+$("#researchExport").onclick = async () => {
+  const payload = JSON.stringify({ created: new Date().toISOString(), leads: researchLeads() }, null, 2);
+  if (await copyText(payload)) toast("Research shelf JSON copied"); else openSheet("Research shelf JSON", `<pre class="arith">${esc(payload)}</pre>`);
+};
+$("#researchClear").onclick = () => { store.del(LS.research); renderResearchShelf(); toast("Research shelf cleared"); };
+$("#aiDraft").onclick = draftStudyNote;
+renderResearchShelf();
+
 function arabicLabel(p) {                       // figures.yaml stores the Arabic name as {name, gloss}, not a string
   const a = p && p.arabic;
   if (!a) return "";

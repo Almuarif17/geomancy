@@ -24,6 +24,12 @@ import argparse
 import json
 import pathlib
 import sys
+import base64
+import os
+import re
+import urllib.error
+import urllib.parse
+import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import parse_qs, urlparse
 
@@ -437,6 +443,135 @@ def copy_text(mothers: list[str], topic: str | None) -> str:
     return "\n".join(L)
 
 
+def _read_json_url(url: str, *, github: bool = False) -> dict:
+    """Small, bounded public-catalog request. URLs are built here, never accepted from clients."""
+    headers = {"User-Agent": "geomancy-research-desk/1.0", "Accept": "application/json"}
+    if github:
+        headers["X-GitHub-Api-Version"] = "2022-11-28"
+    req = urllib.request.Request(url, headers=headers)
+    with urllib.request.urlopen(req, timeout=12) as response:
+        raw = response.read(1_500_001)
+    if len(raw) > 1_500_000:
+        raise ValueError("catalog response was too large")
+    return json.loads(raw.decode("utf-8"))
+
+
+def research_search(query: str, catalog: str) -> dict:
+    query = " ".join((query or "").split())[:120]
+    if not query:
+        raise ValueError("enter a search phrase")
+    if catalog == "archive":
+        q = f'({query}) AND mediatype:texts'
+        params = urllib.parse.urlencode({"q": q, "fl[]": ["identifier", "title", "creator", "date", "description", "licenseurl"],
+                                         "rows": 12, "page": 1, "output": "json"}, doseq=True)
+        payload = _read_json_url("https://archive.org/advancedsearch.php?" + params)
+        docs = payload.get("response", {}).get("docs", [])
+        rows = []
+        for doc in docs:
+            ident = str(doc.get("identifier") or "")
+            if not re.fullmatch(r"[A-Za-z0-9_.-]{1,150}", ident):
+                continue
+            desc = doc.get("description") or ""
+            if isinstance(desc, list):
+                desc = " ".join(str(x) for x in desc[:2])
+            rows.append({"catalog": "Internet Archive", "id": ident, "title": doc.get("title") or ident,
+                         "creator": doc.get("creator") or "", "date": doc.get("date") or "",
+                         "description": str(desc)[:500], "license": doc.get("licenseurl") or "",
+                         "url": f"https://archive.org/details/{ident}"})
+        return {"catalog": "Internet Archive", "query": query, "results": rows,
+                "note": "Catalog metadata is a discovery lead, not a verified edition or permission to redistribute."}
+    if catalog == "github":
+        ghq = f"{query} geomancy in:name,description,readme"
+        params = urllib.parse.urlencode({"q": ghq, "sort": "stars", "order": "desc", "per_page": 10})
+        payload = _read_json_url("https://api.github.com/search/repositories?" + params, github=True)
+        rows = []
+        for repo in payload.get("items", []):
+            full = str(repo.get("full_name") or "")
+            if not re.fullmatch(r"[A-Za-z0-9_.-]{1,100}/[A-Za-z0-9_.-]{1,100}", full):
+                continue
+            rows.append({"catalog": "GitHub", "id": full, "title": repo.get("name") or full,
+                         "description": str(repo.get("description") or "")[:500], "stars": repo.get("stargazers_count", 0),
+                         "language": repo.get("language") or "", "url": f"https://github.com/{full}"})
+        return {"catalog": "GitHub", "query": query, "results": rows,
+                "note": "Repository search is not peer review; inspect code, sources, licences, and maintenance before relying on it."}
+    raise ValueError("catalog must be 'archive' or 'github'")
+
+
+def github_readme(repo: str) -> dict:
+    if not re.fullmatch(r"[A-Za-z0-9_.-]{1,100}/[A-Za-z0-9_.-]{1,100}", repo or ""):
+        raise ValueError("use a GitHub owner/repository name")
+    payload = _read_json_url(f"https://api.github.com/repos/{repo}/readme", github=True)
+    if payload.get("encoding") != "base64":
+        raise ValueError("GitHub did not return a readable README")
+    try:
+        text = base64.b64decode(payload.get("content", ""), validate=False).decode("utf-8", errors="replace")
+    except Exception as exc:  # noqa: BLE001
+        raise ValueError("could not decode this README") from exc
+    return {"repo": repo, "name": payload.get("name") or "README", "text": text[:16000],
+            "url": f"https://github.com/{repo}"}
+
+
+def ai_status() -> dict:
+    return {"available": bool(os.environ.get("GEOMANCY_AI_BASE_URL")),
+            "provider": "OpenAI-compatible local or hosted endpoint",
+            "model": os.environ.get("GEOMANCY_AI_MODEL", "qwen2.5:3b"),
+            "default_url": "http://127.0.0.1:11434/v1 (Ollama)"}
+
+
+def assist_reading(payload: dict) -> dict:
+    """Optional, explicitly configured model adapter; returns commentary separate from grounded output."""
+    base = os.environ.get("GEOMANCY_AI_BASE_URL", "").strip().rstrip("/")
+    if not base:
+        raise ValueError("AI is not configured. For a free local option, run Ollama and set GEOMANCY_AI_BASE_URL=http://127.0.0.1:11434/v1")
+    model = os.environ.get("GEOMANCY_AI_MODEL", "qwen2.5:3b")
+    claims = payload.get("claims") if isinstance(payload.get("claims"), list) else []
+    evidence = []
+    for claim in claims[:24]:
+        if not isinstance(claim, dict):
+            continue
+        text = str(claim.get("text") or "")[:900]
+        if text:
+            evidence.append({"id": len(evidence) + 1, "text": text, "type": str(claim.get("type") or "")[:60],
+                             "figure": str(claim.get("figure") or "")[:80], "house": claim.get("house"),
+                             "works": [str(x)[:160] for x in (claim.get("works") or [])[:8]],
+                             "references": [{"authority": str(q.get("authority") or "")[:120],
+                                             "work": str(q.get("work") or "")[:160],
+                                             "locator": str(q.get("locator") or "")[:160],
+                                             "id": str(q.get("id") or "")[:80]}
+                                            for q in (claim.get("quotes") or [])[:3] if isinstance(q, dict)]})
+    if not evidence:
+        raise ValueError("cast and load a sourced reading before requesting a synthesis")
+    chart = payload.get("chart") if isinstance(payload.get("chart"), dict) else {}
+    topic = str(payload.get("topic") or "")[:160]
+    prompt = ("Write an expressive, elaborative study note for this geomancy chart. Treat this as historical/"
+              "interpretive material, not prediction or advice. Use ONLY the supplied chart and evidence. Connect "
+              "figures, houses, repetitions and relations only when supported by supplied evidence; mark any "
+              "connection that is your own as a tentative reading, not a traditional rule. Do not add historical "
+              "facts, meanings or rules. Cite evidence inline as [E1], [E2], etc. Preserve disagreement and silence; "
+              "do not invent citations. Aim for a clear, nuanced note with a short 'what remains uncertain' ending.\n\n"
+              f"Question/topic: {topic}\nChart and computed relationships: {json.dumps(chart, ensure_ascii=False)[:12000]}\n"
+              f"Evidence: {json.dumps(evidence, ensure_ascii=False)}")
+    req_body = json.dumps({"model": model, "temperature": 0.35,
+                           "messages": [{"role": "system", "content": "You are a careful research-writing assistant."},
+                                        {"role": "user", "content": prompt}], "stream": False}).encode()
+    url = base + "/chat/completions"
+    headers = {"Content-Type": "application/json", "Accept": "application/json"}
+    key = os.environ.get("GEOMANCY_AI_API_KEY")
+    if key:
+        headers["Authorization"] = "Bearer " + key
+    request = urllib.request.Request(url, data=req_body, headers=headers, method="POST")
+    with urllib.request.urlopen(request, timeout=90) as response:
+        raw = response.read(250_001)
+    if len(raw) > 250_000:
+        raise ValueError("AI response was too large")
+    result = json.loads(raw.decode("utf-8"))
+    text = result.get("choices", [{}])[0].get("message", {}).get("content", "")
+    if not isinstance(text, str) or not text.strip():
+        raise ValueError("AI returned an empty note")
+    return {"text": text[:12000], "model": model, "evidence_count": len(evidence), "evidence": evidence,
+            "notice": "AI-generated commentary, not part of the audited source reading. Check every cited evidence label."}
+
+
 class H(BaseHTTPRequestHandler):
     protocol_version = "HTTP/1.1"
 
@@ -458,6 +593,8 @@ class H(BaseHTTPRequestHandler):
     def do_POST(self) -> None:             # noqa: N802
         u = urlparse(self.path)
         n = int(self.headers.get("Content-Length") or 0)
+        if n > 256_000:
+            return self.json_out({"error": "request body is too large"}, 413)
         try:
             body = json.loads(self.rfile.read(n) or b"{}")
         except Exception as e:                                  # noqa: BLE001
@@ -494,9 +631,13 @@ class H(BaseHTTPRequestHandler):
                     rd["audit"] = G.validate(rd, G.VoiceBook())
                     c["reading"] = render(rd, merge_prefs(body.get("prefs")))
                 return self.json_out(c)
+            if u.path == "/api/assist":
+                return self.json_out(assist_reading(body))
             self.json_out({"error": f"no POST route {u.path}"}, 404)
         except ValueError as e:
             self.json_out({"error": str(e)}, 400)
+        except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as e:
+            self.json_out({"error": f"upstream service unavailable: {e}"}, 502)
         except Exception as e:                                  # noqa: BLE001
             sys.stderr.write(f"  error on {u.path}: {e!r}\n")
             self.json_out({"error": f"{type(e).__name__}: {e}", "route": u.path}, 500)
@@ -535,6 +676,22 @@ class H(BaseHTTPRequestHandler):
                     return self.json_out({"error": "give four mothers"}, 400)
                 return self._send(200, copy_text(moms, (q.get("topic") or "").strip() or None).encode(),
                                   "text/plain; charset=utf-8")
+            if u.path == "/api/research/search":
+                try:
+                    return self.json_out(research_search(q.get("q", ""), q.get("catalog", "")))
+                except ValueError as e:
+                    return self.json_out({"error": str(e)}, 400)
+                except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as e:
+                    return self.json_out({"error": f"catalog unavailable: {e}"}, 502)
+            if u.path == "/api/research/github-readme":
+                try:
+                    return self.json_out(github_readme(q.get("repo", "")))
+                except ValueError as e:
+                    return self.json_out({"error": str(e)}, 400)
+                except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as e:
+                    return self.json_out({"error": f"GitHub unavailable: {e}"}, 502)
+            if u.path == "/api/ai/status":
+                return self.json_out(ai_status())
             if u.path == "/api/health":
                 man = manifest()
                 return self.json_out({"ok": True, "dataset": man.get("dataset"), "version": repo_version(),
