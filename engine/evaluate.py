@@ -84,11 +84,14 @@ def main() -> int:
     kb = ROOT / "kb"
     tech = (yaml_load(kb / "techniques.yaml") or {}).get("techniques", {}) if (kb / "techniques.yaml").exists() else {}
     covered = sum(1 for v in tech.values() if isinstance(v, dict) and v.get("conf", "").upper() == "HIGH")
+    non_implemented = {"NAMED_ONLY", "NAMED_NOT_DEFAULT"}
     high_with_case = sum(1 for k, v in tech.items()
                          if isinstance(v, dict) and str(v.get("conf", "")).upper() == "HIGH"
-                         and str(v.get("status", "")).upper() != "NAMED_ONLY" and has_case(k))
+                         and str(v.get("status", "")).upper() not in non_implemented and has_case(k))
     named_only = sum(1 for v in tech.values()
                      if isinstance(v, dict) and str(v.get("status", "")).upper() == "NAMED_ONLY")
+    not_default = sum(1 for v in tech.values()
+                      if isinstance(v, dict) and str(v.get("status", "")).upper() == "NAMED_NOT_DEFAULT")
     ds = ROOT / "library" / "dataset" / "shards" / "passages.jsonl"
     passages = rules = with_loc = 0
     works = set()
@@ -118,6 +121,7 @@ def main() -> int:
     print(f"  passages {passages:,} ({100*with_loc/max(passages,1):.1f}% with a folio/page locator), rules {rules}")
     print(f"  HIGH-confidence techniques {covered}, of which {high_with_case} carry an executable test case")
     print(f"  techniques documented but deliberately not implemented (NAMED_ONLY): {named_only}")
+    print(f"  alternate methods documented but not used as default (NAMED_NOT_DEFAULT): {not_default}")
     print(f"  works cited by passages but absent from registry/works.jsonl: {len(unreg)}"
           + (f" -> {unreg[:6]}" if unreg else ""))
     if a.json:

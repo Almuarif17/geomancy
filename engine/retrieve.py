@@ -377,14 +377,20 @@ def screen(name):
 def coverage():
     """What the library can and cannot answer today - the app renders this instead of guessing."""
     tech = _yaml(KB / "techniques.yaml").get("techniques", {})
-    implemented = [k for k, v in tech.items() if isinstance(v, dict) and str(v.get("status", "")).upper() != "NAMED_ONLY"]
-    named_only = [k for k, v in tech.items() if isinstance(v, dict) and str(v.get("status", "")).upper() == "NAMED_ONLY"]
+    non_implemented = {"NAMED_ONLY", "NAMED_NOT_DEFAULT"}
+    implemented = [k for k, v in tech.items() if isinstance(v, dict)
+                   and str(v.get("status", "")).upper() not in non_implemented]
+    named_only = [k for k, v in tech.items() if isinstance(v, dict)
+                  and str(v.get("status", "")).upper() == "NAMED_ONLY"]
+    not_default = [k for k, v in tech.items() if isinstance(v, dict)
+                   and str(v.get("status", "")).upper() == "NAMED_NOT_DEFAULT"]
     cases = _yaml(ROOT / "kb" / "rule_tests.yaml").get("cases", []) if (ROOT / "kb" / "rule_tests.yaml").exists() else []
     tested = {c.get("rule") for c in cases}
     holes = {}
     for r in _jsonl(IDX / "by_house.jsonl"):
         holes[r["house"]] = len(r.get("missing_figure_rulings") or [])
     return {"techniques": len(tech), "implemented": len(implemented), "named_only": named_only,
+            "not_default": not_default,
             "source_table_holes": {"houses_missing_figure_rulings": holes,
                                    "total_missing_cells": sum(holes.values()),
                                    "meaning": "the extracted ruling grid has no entry here; the app "

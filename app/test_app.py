@@ -163,6 +163,14 @@ def main() -> int:
     code, cov = get(port, "/api/coverage")
     ck("the app can show the coverage scoreboard", code == 200 and 0 < cov["score_of_100"] <= 100
        and cov.get("components"), str(cov.get("score_of_100")))
+    from engine import retrieve as retrieval
+    technique_coverage = retrieval.coverage()
+    ck("coverage does not count unimplemented or non-default techniques as implemented",
+       "house_aspects" in technique_coverage["named_only"]
+       and "agrippa_house_chart" in technique_coverage["not_default"]
+       and technique_coverage["implemented"] == technique_coverage["techniques"]
+       - len(technique_coverage["named_only"]) - len(technique_coverage["not_default"]),
+       str(technique_coverage))
 
     code, how = get(port, "/api/how")
     ck("how-it-works has 8 stages, each with a gate named",

@@ -64,11 +64,11 @@
       "weight": 0.1
     },
     "techniques_implemented": {
-      "achieved": 0.913,
-      "count": 21,
+      "achieved": 0.9565,
+      "count": 22,
       "next_command": "python3 library/tools/run_rule_tests.py --list",
-      "ratio": 0.913,
-      "remedy": "Two techniques are NAMED_ONLY: write the test, then pin it against the oracle.",
+      "ratio": 0.9565,
+      "remedy": "Promote a documented technique only after its procedure is implemented and an executable case pins it.",
       "target": 23,
       "weight": 0.09
     },
@@ -120,12 +120,12 @@
     "figures": 16,
     "measurable_cross_source_disagreements": 4,
     "rule_cases_total": 29,
-    "techniques_named": 23,
+    "techniques_named": 26,
     "voices_rows": 1408,
     "works_fetchable_by_bucket": 16,
     "works_registered": 23
   },
   "schema": "geomancy-coverage/1",
-  "score_of_100": 50.8,
+  "score_of_100": 51.2,
   "weights_sum": 1.0
 }

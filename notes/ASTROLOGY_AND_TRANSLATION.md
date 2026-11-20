@@ -52,7 +52,7 @@ grammar. Base rates for a VII question are already in FINDINGS
 
 | id | status | why it showed up |
 |---|---|---|
-| `house_aspects` | HIGH | Cattan already in the corpus; we had not wired the distance test |
+| `house_aspects` | NAMED_ONLY (HIGH source confidence) | Cattan already in the corpus; the distance test is documented but not wired into the engine yet |
 | `company_kinds` | MED | four kinds; only the house *pairs* were HIGH before |
 | `agrippa_house_chart` | NAMED_NOT_DEFAULT | Agrippa 1655; Digital Ambler 2020-05-04 |
 | `astronomical_geomancy` | NAMED_ONLY | same bucket as suffrages |

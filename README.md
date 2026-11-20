@@ -152,7 +152,7 @@ reproducible with `scripts/` from public identifiers — that is what makes the 
 ## How much of the corpus is here
 
 `kb/coverage.json` is generated from the shipped files and published for exactly this question, with
-denominators instead of adjectives: **<!--num:coverage_score-->50/100** against our own targets today
+denominators instead of adjectives: **<!--num:coverage_score-->51/100** against our own targets today
 (`<!--num:voices-->1,408 attributed voices`, <!--num:outcomes-->22 outcome routings,
 <!--num:grid_cells-->184 of <!--num:grid_possible-->192 Calatarama cells, <!--num:rule_cases-->29 rule cases
 of which 20 are proved twice). The file also lists the next moves, computed worst-component-first, so the

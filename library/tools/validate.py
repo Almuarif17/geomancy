@@ -206,8 +206,11 @@ if techf.exists():
             "a bare list here is how the upstream scaffold broke")
         missing = [k for k, v in t.items() if not (v or {}).get("source")]
         chk("every technique cites a source", not missing, str(missing[:4]))
+        # Confidence describes the source evidence; status describes whether this engine computes the rule.
+        # Named-only material and non-default comparison traditions are documented, not executable rules.
+        non_executable = {"NAMED_ONLY", "NAMED_NOT_DEFAULT"}
         lowconf = [k for k, v in t.items() if (v or {}).get("conf") == "HIGH"
-                    and str((v or {}).get("status", "")).upper() != "NAMED_ONLY"]
+                    and str((v or {}).get("status", "")).upper() not in non_executable]
         covered = set()
         if rt.exists():
             covered = {yaml.safe_load(rt.read_text())["cases"][i].get("rule")
