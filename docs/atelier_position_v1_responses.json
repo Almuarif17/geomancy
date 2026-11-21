@@ -1,0 +1,1416 @@
+[
+  {
+    "name": "position-vii-marriage",
+    "response": {
+      "schema": "atelier.position_reading/1",
+      "status": "confirmed",
+      "mode_used": "grounded",
+      "position": {
+        "id": 7,
+        "label": "marriage, partner, the quesited, open enemies, contracts",
+        "role": "house",
+        "figure": "Conjunctio",
+        "pattern": [
+          2,
+          1,
+          1,
+          2
+        ]
+      },
+      "intent": {
+        "state": "confirmed",
+        "topic": "marriage",
+        "focus_house": 7,
+        "label": "marriage or partnership",
+        "candidates": []
+      },
+      "related_position": null,
+      "pattern_convention": null,
+      "sections": [
+        {
+          "key": "figure_alone",
+          "kind": "calculation",
+          "text": "Conjunctio is the canonical name for the pattern [2, 1, 1, 2] in this chart convention.",
+          "evidence_ids": []
+        },
+        {
+          "key": "literal_name_gloss",
+          "kind": "editorial_gloss",
+          "text": "The literal name gloss is ‘joining’; this is not a source quotation or a divinatory verdict.",
+          "evidence_ids": []
+        },
+        {
+          "key": "general_definition",
+          "kind": "attributed_claim",
+          "text": "The available figure notes record quality: communal, element: Air, planet: Mercury, motion: incoming, gender: feminine.",
+          "evidence_ids": [
+            "figure_attribute:Conjunctio:quality:calatarama",
+            "figure_attribute:Conjunctio:element:calatarama",
+            "figure_attribute:Conjunctio:planet:calatarama",
+            "figure_attribute:Conjunctio:motion:calatarama",
+            "figure_attribute:Conjunctio:gender:calatarama",
+            "planet_attribution:Conjunctio:calatarama"
+          ]
+        },
+        {
+          "key": "in_this_position",
+          "kind": "attributed_claim",
+          "text": "The evidence packet contains exact source record(s) for Conjunctio at position 7 (marriage, partner, the quesited, open enemies, contracts).",
+          "evidence_ids": [
+            "figure_in_house:Conjunctio:7:calatarama"
+          ]
+        },
+        {
+          "key": "for_your_question",
+          "kind": "tentative_application",
+          "text": "In this partnership focus, Conjunctio's literal joining image invites you to ask where both people already agree, and where either may be assuming agreement without saying so. The chart cannot tell us what your partner privately thinks.",
+          "evidence_ids": []
+        }
+      ],
+      "evidence": [
+        {
+          "id": "figure_in_house:Conjunctio:7:calatarama",
+          "scope": "selected_position",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "f.47v (house VII)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": true
+          },
+          "text": "Companionship with a woman in the form of fornication or betrayal",
+          "gloss": null
+        },
+        {
+          "id": "figure_attribute:Conjunctio:quality:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "figures.yaml[Conjunctio].quality (table 2-6 of the thesis)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Conjunctio: quality = communal"
+        },
+        {
+          "id": "figure_attribute:Conjunctio:element:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "figures.yaml[Conjunctio].element (table 2-6 of the thesis)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Conjunctio: element = Air"
+        },
+        {
+          "id": "figure_attribute:Conjunctio:planet:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "figures.yaml[Conjunctio].planet (table 6-6 of the thesis)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Conjunctio: planet = Mercury"
+        },
+        {
+          "id": "figure_attribute:Conjunctio:motion:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "figures.yaml[Conjunctio].motion (table 2-6 of the thesis)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Conjunctio: motion = incoming"
+        },
+        {
+          "id": "figure_attribute:Conjunctio:gender:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "figures.yaml[Conjunctio].gender (table 2-6 of the thesis)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Conjunctio: gender = feminine"
+        },
+        {
+          "id": "planet_attribution:Conjunctio:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "kb/figures.yaml:planet_attribution_conflict.calatarama_f5",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Conjunctio = Mercury according to calatarama_f5 (thesis Table 6, f.5, read out of the days-of-the-week table itself)"
+        }
+      ],
+      "gaps": [],
+      "disagreements": [],
+      "limits": [
+        "This is a symbolic reading, not evidence about another person's private thoughts or a guaranteed outcome.",
+        "Only English evidence and editorial text are currently supported."
+      ],
+      "locale": "en",
+      "available_locale": "en",
+      "fallback_reason": null,
+      "audit_status": {
+        "ok": true,
+        "claims": 25,
+        "cited_voice_ids": 21
+      },
+      "revisions": {
+        "engine_revision": "1b4070086558da71",
+        "dataset_revision": "81c0b8439cc16989"
+      },
+      "model_called": false
+    }
+  },
+  {
+    "name": "same-vii-tile-wealth-focus",
+    "response": {
+      "schema": "atelier.position_reading/1",
+      "status": "confirmed",
+      "mode_used": "grounded",
+      "position": {
+        "id": 7,
+        "label": "marriage, partner, the quesited, open enemies, contracts",
+        "role": "house",
+        "figure": "Conjunctio",
+        "pattern": [
+          2,
+          1,
+          1,
+          2
+        ]
+      },
+      "intent": {
+        "state": "confirmed",
+        "topic": "wealth_money",
+        "focus_house": 2,
+        "label": "personal money and resources",
+        "candidates": []
+      },
+      "related_position": {
+        "id": 2,
+        "figure": "Amissio",
+        "role": "related_position",
+        "evidence_ids": [
+          "figure_in_house:Amissio:2:calatarama"
+        ]
+      },
+      "pattern_convention": null,
+      "sections": [
+        {
+          "key": "figure_alone",
+          "kind": "calculation",
+          "text": "Conjunctio is the canonical name for the pattern [2, 1, 1, 2] in this chart convention.",
+          "evidence_ids": []
+        },
+        {
+          "key": "literal_name_gloss",
+          "kind": "editorial_gloss",
+          "text": "The literal name gloss is ‘joining’; this is not a source quotation or a divinatory verdict.",
+          "evidence_ids": []
+        },
+        {
+          "key": "general_definition",
+          "kind": "attributed_claim",
+          "text": "The available figure notes record quality: communal, element: Air, planet: Mercury, motion: incoming, gender: feminine.",
+          "evidence_ids": [
+            "figure_attribute:Conjunctio:quality:calatarama",
+            "figure_attribute:Conjunctio:element:calatarama",
+            "figure_attribute:Conjunctio:planet:calatarama",
+            "figure_attribute:Conjunctio:motion:calatarama",
+            "figure_attribute:Conjunctio:gender:calatarama",
+            "planet_attribution:Conjunctio:calatarama"
+          ]
+        },
+        {
+          "key": "in_this_position",
+          "kind": "attributed_claim",
+          "text": "The evidence packet contains exact source record(s) for Conjunctio at position 7 (marriage, partner, the quesited, open enemies, contracts).",
+          "evidence_ids": [
+            "figure_in_house:Conjunctio:7:calatarama"
+          ]
+        },
+        {
+          "key": "for_your_question",
+          "kind": "tentative_application",
+          "text": "Your focus is personal resources in house II; this tile is VII, not the focus house, and remains the position of agreement with another party. Conjunctio's joining image can prompt a clear conversation about contributions, expectations and terms; it does not show that combining savings is financially safe.",
+          "evidence_ids": []
+        }
+      ],
+      "evidence": [
+        {
+          "id": "figure_in_house:Conjunctio:7:calatarama",
+          "scope": "selected_position",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "f.47v (house VII)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": true
+          },
+          "text": "Companionship with a woman in the form of fornication or betrayal",
+          "gloss": null
+        },
+        {
+          "id": "figure_in_house:Amissio:2:calatarama",
+          "scope": "related_position",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "f.26v (house II)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": true
+          },
+          "text": "Thieves and robbers Ambushes in order to steal Shops or commodities",
+          "gloss": null
+        },
+        {
+          "id": "figure_attribute:Conjunctio:quality:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "figures.yaml[Conjunctio].quality (table 2-6 of the thesis)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Conjunctio: quality = communal"
+        },
+        {
+          "id": "figure_attribute:Conjunctio:element:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "figures.yaml[Conjunctio].element (table 2-6 of the thesis)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Conjunctio: element = Air"
+        },
+        {
+          "id": "figure_attribute:Conjunctio:planet:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "figures.yaml[Conjunctio].planet (table 6-6 of the thesis)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Conjunctio: planet = Mercury"
+        },
+        {
+          "id": "figure_attribute:Conjunctio:motion:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "figures.yaml[Conjunctio].motion (table 2-6 of the thesis)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Conjunctio: motion = incoming"
+        },
+        {
+          "id": "figure_attribute:Conjunctio:gender:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "figures.yaml[Conjunctio].gender (table 2-6 of the thesis)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Conjunctio: gender = feminine"
+        },
+        {
+          "id": "planet_attribution:Conjunctio:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "kb/figures.yaml:planet_attribution_conflict.calatarama_f5",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Conjunctio = Mercury according to calatarama_f5 (thesis Table 6, f.5, read out of the days-of-the-week table itself)"
+        }
+      ],
+      "gaps": [],
+      "disagreements": [],
+      "limits": [
+        "This is a symbolic reading, not evidence about another person's private thoughts or a guaranteed outcome.",
+        "Only English evidence and editorial text are currently supported."
+      ],
+      "locale": "en",
+      "available_locale": "en",
+      "fallback_reason": null,
+      "audit_status": {
+        "ok": true,
+        "claims": 25,
+        "cited_voice_ids": 21
+      },
+      "revisions": {
+        "engine_revision": "1b4070086558da71",
+        "dataset_revision": "81c0b8439cc16989"
+      },
+      "model_called": false
+    }
+  },
+  {
+    "name": "same-figure-judge-xv",
+    "response": {
+      "schema": "atelier.position_reading/1",
+      "status": "confirmed",
+      "mode_used": "grounded",
+      "position": {
+        "id": 15,
+        "label": "Judge",
+        "role": "judge",
+        "figure": "Conjunctio",
+        "pattern": [
+          2,
+          1,
+          1,
+          2
+        ]
+      },
+      "intent": {
+        "state": "confirmed",
+        "topic": "marriage",
+        "focus_house": 7,
+        "label": "marriage or partnership",
+        "candidates": []
+      },
+      "related_position": {
+        "id": 7,
+        "figure": "Conjunctio",
+        "role": "related_position",
+        "evidence_ids": [
+          "figure_in_house:Conjunctio:7:calatarama"
+        ]
+      },
+      "pattern_convention": null,
+      "sections": [
+        {
+          "key": "figure_alone",
+          "kind": "calculation",
+          "text": "Conjunctio is the canonical name for the pattern [2, 1, 1, 2] in this chart convention.",
+          "evidence_ids": []
+        },
+        {
+          "key": "literal_name_gloss",
+          "kind": "editorial_gloss",
+          "text": "The literal name gloss is ‘joining’; this is not a source quotation or a divinatory verdict.",
+          "evidence_ids": []
+        },
+        {
+          "key": "general_definition",
+          "kind": "attributed_claim",
+          "text": "The available figure notes record quality: communal, element: Air, planet: Mercury, motion: incoming, gender: feminine.",
+          "evidence_ids": [
+            "figure_attribute:Conjunctio:quality:calatarama",
+            "figure_attribute:Conjunctio:element:calatarama",
+            "figure_attribute:Conjunctio:planet:calatarama",
+            "figure_attribute:Conjunctio:motion:calatarama",
+            "figure_attribute:Conjunctio:gender:calatarama",
+            "planet_attribution:Conjunctio:calatarama"
+          ]
+        },
+        {
+          "key": "in_this_position",
+          "kind": "editorial_gloss",
+          "text": "No permitted exact ruling for Conjunctio at position 15 (Judge) is available.",
+          "evidence_ids": []
+        },
+        {
+          "key": "for_your_question",
+          "kind": "tentative_application",
+          "text": "You chose marriage or partnership; this tile is the Judge court role, which summarizes chart structure rather than acting as that topic's house. It cannot be substituted for a position-specific ruling.",
+          "evidence_ids": []
+        }
+      ],
+      "evidence": [
+        {
+          "id": "figure_in_house:Conjunctio:7:calatarama",
+          "scope": "related_position",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "f.47v (house VII)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": true
+          },
+          "text": "Companionship with a woman in the form of fornication or betrayal",
+          "gloss": null
+        },
+        {
+          "id": "figure_attribute:Conjunctio:quality:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "figures.yaml[Conjunctio].quality (table 2-6 of the thesis)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Conjunctio: quality = communal"
+        },
+        {
+          "id": "figure_attribute:Conjunctio:element:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "figures.yaml[Conjunctio].element (table 2-6 of the thesis)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Conjunctio: element = Air"
+        },
+        {
+          "id": "figure_attribute:Conjunctio:planet:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "figures.yaml[Conjunctio].planet (table 6-6 of the thesis)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Conjunctio: planet = Mercury"
+        },
+        {
+          "id": "figure_attribute:Conjunctio:motion:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "figures.yaml[Conjunctio].motion (table 2-6 of the thesis)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Conjunctio: motion = incoming"
+        },
+        {
+          "id": "figure_attribute:Conjunctio:gender:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "figures.yaml[Conjunctio].gender (table 2-6 of the thesis)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Conjunctio: gender = feminine"
+        },
+        {
+          "id": "planet_attribution:Conjunctio:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "kb/figures.yaml:planet_attribution_conflict.calatarama_f5",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Conjunctio = Mercury according to calatarama_f5 (thesis Table 6, f.5, read out of the days-of-the-week table itself)"
+        }
+      ],
+      "gaps": [
+        {
+          "position": 15,
+          "figure": "Conjunctio",
+          "reason": "no position-specific court ruling is established for this role and condition"
+        }
+      ],
+      "disagreements": [],
+      "limits": [
+        "This is a symbolic reading, not evidence about another person's private thoughts or a guaranteed outcome.",
+        "Only English evidence and editorial text are currently supported."
+      ],
+      "locale": "en",
+      "available_locale": "en",
+      "fallback_reason": null,
+      "audit_status": {
+        "ok": true,
+        "claims": 25,
+        "cited_voice_ids": 21
+      },
+      "revisions": {
+        "engine_revision": "1b4070086558da71",
+        "dataset_revision": "81c0b8439cc16989"
+      },
+      "model_called": false
+    }
+  },
+  {
+    "name": "missing-positional-source-carcer-i",
+    "response": {
+      "schema": "atelier.position_reading/1",
+      "status": "general",
+      "mode_used": "grounded",
+      "position": {
+        "id": 1,
+        "label": "life, the querent, body, outward shape, disposition",
+        "role": "house",
+        "figure": "Carcer",
+        "pattern": [
+          1,
+          2,
+          2,
+          1
+        ]
+      },
+      "intent": {
+        "state": "general",
+        "topic": null,
+        "focus_house": null,
+        "label": "general reading",
+        "candidates": []
+      },
+      "related_position": null,
+      "pattern_convention": null,
+      "sections": [
+        {
+          "key": "figure_alone",
+          "kind": "calculation",
+          "text": "Carcer is the canonical name for the pattern [1, 2, 2, 1] in this chart convention.",
+          "evidence_ids": []
+        },
+        {
+          "key": "literal_name_gloss",
+          "kind": "editorial_gloss",
+          "text": "The literal name gloss is ‘enclosure or prison’; this is not a source quotation or a divinatory verdict.",
+          "evidence_ids": []
+        },
+        {
+          "key": "general_definition",
+          "kind": "attributed_claim",
+          "text": "The available figure notes record quality: bad, element: Earth, planet: Saturn, motion: incoming, gender: feminine.",
+          "evidence_ids": [
+            "figure_attribute:Carcer:quality:calatarama",
+            "figure_attribute:Carcer:element:calatarama",
+            "figure_attribute:Carcer:planet:calatarama",
+            "figure_attribute:Carcer:motion:calatarama",
+            "figure_attribute:Carcer:gender:calatarama",
+            "planet_attribution:Carcer:calatarama"
+          ]
+        },
+        {
+          "key": "in_this_position",
+          "kind": "editorial_gloss",
+          "text": "No permitted exact ruling for Carcer at position 1 (life, the querent, body, outward shape, disposition) is available.",
+          "evidence_ids": []
+        },
+        {
+          "key": "for_your_question",
+          "kind": "tentative_application",
+          "text": "No topic has been confirmed. Continue with this general reading or choose a focus; the chart will not be recast.",
+          "evidence_ids": []
+        }
+      ],
+      "evidence": [
+        {
+          "id": "figure_attribute:Carcer:quality:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "figures.yaml[Carcer].quality (table 2-6 of the thesis)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Carcer: quality = bad"
+        },
+        {
+          "id": "figure_attribute:Carcer:element:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "figures.yaml[Carcer].element (table 2-6 of the thesis)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Carcer: element = Earth"
+        },
+        {
+          "id": "figure_attribute:Carcer:planet:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "figures.yaml[Carcer].planet (table 6-6 of the thesis)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Carcer: planet = Saturn"
+        },
+        {
+          "id": "figure_attribute:Carcer:motion:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "figures.yaml[Carcer].motion (table 2-6 of the thesis)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Carcer: motion = incoming"
+        },
+        {
+          "id": "figure_attribute:Carcer:gender:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "figures.yaml[Carcer].gender (table 2-6 of the thesis)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Carcer: gender = feminine"
+        },
+        {
+          "id": "planet_attribution:Carcer:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "kb/figures.yaml:planet_attribution_conflict.calatarama_f5",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Carcer = Saturn according to calatarama_f5 (thesis Table 6, f.5, read out of the days-of-the-week table itself)"
+        }
+      ],
+      "gaps": [
+        {
+          "position": 1,
+          "figure": "Carcer",
+          "reason": "no permitted exact figure-in-house record is available"
+        }
+      ],
+      "disagreements": [],
+      "limits": [
+        "This is a symbolic reading, not evidence about another person's private thoughts or a guaranteed outcome.",
+        "Only English evidence and editorial text are currently supported."
+      ],
+      "locale": "en",
+      "available_locale": "en",
+      "fallback_reason": null,
+      "audit_status": {
+        "ok": true,
+        "claims": 27,
+        "cited_voice_ids": 224
+      },
+      "revisions": {
+        "engine_revision": "1b4070086558da71",
+        "dataset_revision": "81c0b8439cc16989"
+      },
+      "model_called": false
+    }
+  },
+  {
+    "name": "ambiguous-question-general-fallback",
+    "response": {
+      "schema": "atelier.position_reading/1",
+      "status": "needs_confirmation",
+      "mode_used": "grounded",
+      "position": {
+        "id": 7,
+        "label": "marriage, partner, the quesited, open enemies, contracts",
+        "role": "house",
+        "figure": "Conjunctio",
+        "pattern": [
+          2,
+          1,
+          1,
+          2
+        ]
+      },
+      "intent": {
+        "state": "needs_confirmation",
+        "topic": null,
+        "focus_house": null,
+        "label": "choose a focus",
+        "candidates": [
+          {
+            "topic": "job_livelihood",
+            "label": "work and livelihood",
+            "focus_house": 10
+          },
+          {
+            "topic": "property_land",
+            "label": "property and land",
+            "focus_house": 4
+          }
+        ],
+        "notice": "More than one supported focus may fit. Choose one, or continue with a general reading."
+      },
+      "related_position": null,
+      "pattern_convention": null,
+      "sections": [
+        {
+          "key": "figure_alone",
+          "kind": "calculation",
+          "text": "Conjunctio is the canonical name for the pattern [2, 1, 1, 2] in this chart convention.",
+          "evidence_ids": []
+        },
+        {
+          "key": "literal_name_gloss",
+          "kind": "editorial_gloss",
+          "text": "The literal name gloss is ‘joining’; this is not a source quotation or a divinatory verdict.",
+          "evidence_ids": []
+        },
+        {
+          "key": "general_definition",
+          "kind": "attributed_claim",
+          "text": "The available figure notes record quality: communal, element: Air, planet: Mercury, motion: incoming, gender: feminine.",
+          "evidence_ids": [
+            "figure_attribute:Conjunctio:quality:calatarama",
+            "figure_attribute:Conjunctio:element:calatarama",
+            "figure_attribute:Conjunctio:planet:calatarama",
+            "figure_attribute:Conjunctio:motion:calatarama",
+            "figure_attribute:Conjunctio:gender:calatarama",
+            "planet_attribution:Conjunctio:calatarama"
+          ]
+        },
+        {
+          "key": "in_this_position",
+          "kind": "attributed_claim",
+          "text": "The evidence packet contains exact source record(s) for Conjunctio at position 7 (marriage, partner, the quesited, open enemies, contracts).",
+          "evidence_ids": [
+            "figure_in_house:Conjunctio:7:calatarama"
+          ]
+        },
+        {
+          "key": "for_your_question",
+          "kind": "tentative_application",
+          "text": "No topic has been confirmed. Continue with this general reading or choose a focus; the chart will not be recast.",
+          "evidence_ids": []
+        },
+        {
+          "key": "clarification",
+          "kind": "editorial_gloss",
+          "text": "More than one supported focus may fit. Choose one, or continue with a general reading.",
+          "evidence_ids": []
+        }
+      ],
+      "evidence": [
+        {
+          "id": "figure_in_house:Conjunctio:7:calatarama",
+          "scope": "selected_position",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "f.47v (house VII)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": true
+          },
+          "text": "Companionship with a woman in the form of fornication or betrayal",
+          "gloss": null
+        },
+        {
+          "id": "figure_attribute:Conjunctio:quality:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "figures.yaml[Conjunctio].quality (table 2-6 of the thesis)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Conjunctio: quality = communal"
+        },
+        {
+          "id": "figure_attribute:Conjunctio:element:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "figures.yaml[Conjunctio].element (table 2-6 of the thesis)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Conjunctio: element = Air"
+        },
+        {
+          "id": "figure_attribute:Conjunctio:planet:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "figures.yaml[Conjunctio].planet (table 6-6 of the thesis)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Conjunctio: planet = Mercury"
+        },
+        {
+          "id": "figure_attribute:Conjunctio:motion:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "figures.yaml[Conjunctio].motion (table 2-6 of the thesis)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Conjunctio: motion = incoming"
+        },
+        {
+          "id": "figure_attribute:Conjunctio:gender:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "figures.yaml[Conjunctio].gender (table 2-6 of the thesis)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Conjunctio: gender = feminine"
+        },
+        {
+          "id": "planet_attribution:Conjunctio:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "kb/figures.yaml:planet_attribution_conflict.calatarama_f5",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Conjunctio = Mercury according to calatarama_f5 (thesis Table 6, f.5, read out of the days-of-the-week table itself)"
+        }
+      ],
+      "gaps": [],
+      "disagreements": [],
+      "limits": [
+        "This is a symbolic reading, not evidence about another person's private thoughts or a guaranteed outcome.",
+        "Only English evidence and editorial text are currently supported."
+      ],
+      "locale": "en",
+      "available_locale": "en",
+      "fallback_reason": null,
+      "audit_status": {
+        "ok": true,
+        "claims": 27,
+        "cited_voice_ids": 224
+      },
+      "revisions": {
+        "engine_revision": "1b4070086558da71",
+        "dataset_revision": "81c0b8439cc16989"
+      },
+      "model_called": false
+    }
+  },
+  {
+    "name": "unresolved-planet-attribution-comparison",
+    "response": {
+      "schema": "atelier.position_reading/1",
+      "status": "general",
+      "mode_used": "grounded",
+      "position": {
+        "id": 1,
+        "label": "life, the querent, body, outward shape, disposition",
+        "role": "house",
+        "figure": "Puer",
+        "pattern": [
+          1,
+          2,
+          1,
+          1
+        ]
+      },
+      "intent": {
+        "state": "general",
+        "topic": null,
+        "focus_house": null,
+        "label": "general reading",
+        "candidates": []
+      },
+      "related_position": null,
+      "pattern_convention": {
+        "status": "documented_naming_conflict",
+        "canonical_convention": {
+          "name": "Britannica plate / Golden Dawn",
+          "patterns": {
+            "Puer": [
+              1,
+              2,
+              1,
+              1
+            ],
+            "Puella": [
+              1,
+              1,
+              2,
+              1
+            ]
+          }
+        },
+        "alternate_convention": {
+          "name": "Digital Ambler binary table / Skinner line",
+          "patterns": {
+            "Puer": [
+              1,
+              1,
+              2,
+              1
+            ],
+            "Puella": [
+              1,
+              2,
+              1,
+              1
+            ]
+          }
+        },
+        "note": "This reading uses the canonical pattern labels; the alternate convention swaps only the Puer and Puella names, not the arithmetic. Verify the tradition you follow.",
+        "evidence_ids": [
+          "naming:Puer:calatarama",
+          "naming:Puella:calatarama"
+        ]
+      },
+      "sections": [
+        {
+          "key": "figure_alone",
+          "kind": "calculation",
+          "text": "Puer is the canonical name for the pattern [1, 2, 1, 1] in this chart convention.",
+          "evidence_ids": []
+        },
+        {
+          "key": "literal_name_gloss",
+          "kind": "editorial_gloss",
+          "text": "The literal name gloss is ‘boy’; this is not a source quotation or a divinatory verdict.",
+          "evidence_ids": []
+        },
+        {
+          "key": "general_definition",
+          "kind": "attributed_claim",
+          "text": "The available figure notes record quality: good, element: Fire, planet: Mars, motion: outgoing, gender: masculine, planet: Venus.",
+          "evidence_ids": [
+            "figure_attribute:Puer:quality:calatarama",
+            "figure_attribute:Puer:element:calatarama",
+            "figure_attribute:Puer:planet:calatarama",
+            "figure_attribute:Puer:motion:calatarama",
+            "figure_attribute:Puer:gender:calatarama",
+            "naming:Puer:calatarama",
+            "naming:Puella:calatarama",
+            "planet_attribution:Puer:agrippa",
+            "planet_attribution:Puer:calatarama"
+          ]
+        },
+        {
+          "key": "in_this_position",
+          "kind": "editorial_gloss",
+          "text": "No permitted exact ruling for Puer at position 1 (life, the querent, body, outward shape, disposition) is available.",
+          "evidence_ids": []
+        },
+        {
+          "key": "for_your_question",
+          "kind": "tentative_application",
+          "text": "No topic has been confirmed. Continue with this general reading or choose a focus; the chart will not be recast.",
+          "evidence_ids": []
+        },
+        {
+          "key": "pattern_convention",
+          "kind": "editorial_gloss",
+          "text": "This reading uses the canonical pattern labels; the alternate convention swaps only the Puer and Puella names, not the arithmetic. Verify the tradition you follow.",
+          "evidence_ids": [
+            "naming:Puer:calatarama",
+            "naming:Puella:calatarama"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "id": "figure_attribute:Puer:quality:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "figures.yaml[Puer].quality (table 2-6 of the thesis)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Puer: quality = good"
+        },
+        {
+          "id": "figure_attribute:Puer:element:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "figures.yaml[Puer].element (table 2-6 of the thesis)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Puer: element = Fire"
+        },
+        {
+          "id": "figure_attribute:Puer:planet:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "figures.yaml[Puer].planet (table 6-6 of the thesis)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Puer: planet = Mars"
+        },
+        {
+          "id": "figure_attribute:Puer:motion:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "figures.yaml[Puer].motion (table 2-6 of the thesis)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Puer: motion = outgoing"
+        },
+        {
+          "id": "figure_attribute:Puer:gender:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "figures.yaml[Puer].gender (table 2-6 of the thesis)",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Puer: gender = masculine"
+        },
+        {
+          "id": "naming:Puer:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "naming_conflict",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "dots are certain; the label attached to them is not. Verify against the tradition you work in."
+        },
+        {
+          "id": "naming:Puella:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "naming_conflict",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "dots are certain; the label attached to them is not. Verify against the tradition you work in."
+        },
+        {
+          "id": "planet_attribution:Puer:agrippa",
+          "scope": "general_figure",
+          "authority": "Cornelius Agrippa, De occulta philosophia II.31-32 (1553, tr. 1655)",
+          "work": "agrippa",
+          "through": "Internet Archive b20458563",
+          "locator": "kb/figures.yaml:planet_attribution_conflict.gd_and_agrippa",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Puer = Mars according to gd_and_agrippa (the Golden Dawn line, i.e. what most modern books print)"
+        },
+        {
+          "id": "planet_attribution:Puer:calatarama",
+          "scope": "general_figure",
+          "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+          "work": "calatarama",
+          "through": "C. Finan, The Book of the Judgements of Calatarama, 2023, App. 1",
+          "locator": "kb/figures.yaml:planet_attribution_conflict.calatarama_f5",
+          "language": null,
+          "disposition": "full",
+          "permissions": {
+            "licence_bucket": "A",
+            "cite_only": false,
+            "quote_allowed": false
+          },
+          "text": null,
+          "gloss": "Puer = Venus according to calatarama_f5 (thesis Table 6, f.5, read out of the days-of-the-week table itself)"
+        }
+      ],
+      "gaps": [
+        {
+          "position": 1,
+          "figure": "Puer",
+          "reason": "no permitted exact figure-in-house record is available"
+        }
+      ],
+      "disagreements": [
+        {
+          "key": "figure_attribute:Puer:planet",
+          "status": "unresolved_comparison",
+          "note": "The available source passages differ; this is not an adjudicated disagreement.",
+          "source_views": [
+            {
+              "evidence_id": "figure_attribute:Puer:planet:calatarama",
+              "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+              "text": "Puer: planet = Mars"
+            },
+            {
+              "evidence_id": "planet_attribution:Puer:agrippa",
+              "authority": "Cornelius Agrippa, De occulta philosophia II.31-32 (1553, tr. 1655)",
+              "text": "Puer = Mars according to gd_and_agrippa (the Golden Dawn line, i.e. what most modern books print)"
+            },
+            {
+              "evidence_id": "planet_attribution:Puer:calatarama",
+              "authority": "Libro de los juysios de calatarama (Castilian, 13th-c. redaction)",
+              "text": "Puer = Venus according to calatarama_f5 (thesis Table 6, f.5, read out of the days-of-the-week table itself)"
+            }
+          ]
+        }
+      ],
+      "limits": [
+        "This is a symbolic reading, not evidence about another person's private thoughts or a guaranteed outcome.",
+        "Only English evidence and editorial text are currently supported."
+      ],
+      "locale": "en",
+      "available_locale": "en",
+      "fallback_reason": null,
+      "audit_status": {
+        "ok": true,
+        "claims": 27,
+        "cited_voice_ids": 254
+      },
+      "revisions": {
+        "engine_revision": "1b4070086558da71",
+        "dataset_revision": "81c0b8439cc16989"
+      },
+      "model_called": false
+    }
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "fixture": "atelier.position_reading/1",
+  "description": "Pinned arithmetic fixture for the additive position-reading contract; positions are ordered I through XVI and Mother order is significant.",
+  "mothers": ["Carcer", "Amissio", "Caput Draconis", "Populus"],
+  "position_order": ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV", "XVI"],
+  "expected_figures": ["Carcer", "Amissio", "Caput Draconis", "Populus", "Fortuna Minor", "Albus", "Conjunctio", "Amissio", "Fortuna Major", "Caput Draconis", "Cauda Draconis", "Fortuna Minor", "Rubeus", "Albus", "Conjunctio", "Via"],
+  "expected_patterns": [[1,2,2,1],[1,2,1,2],[2,1,1,1],[2,2,2,2],[1,1,2,2],[2,2,1,2],[2,1,1,2],[1,2,1,2],[2,2,1,1],[2,1,1,1],[1,1,1,2],[1,1,2,2],[2,1,2,2],[2,2,1,2],[2,1,1,2],[1,1,1,1]],
+  "expected": {
+    "judge": "Conjunctio",
+    "reconciler": "Via",
+    "figure_in_house_7_voice": "figure_in_house:Conjunctio:7:calatarama",
+    "figure_in_house_7_locator": "f.47v (house VII)",
+    "figure_in_house_2_voice": "figure_in_house:Amissio:2:calatarama",
+    "figure_in_house_2_locator": "f.26v (house II)"
+  }
+}

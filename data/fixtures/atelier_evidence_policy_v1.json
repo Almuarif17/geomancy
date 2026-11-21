@@ -1,0 +1,13 @@
+{
+  "fixture": "atelier.evidence_policy/1",
+  "cite_only_voice_id": "figure_in_house:Albus:4:lataille",
+  "comparison_case": {
+    "key": "fixture:shared-question",
+    "expected_status": "unresolved_comparison",
+    "expected_authorities": ["Fixture Authority A", "Fixture Authority B"],
+    "records": [
+      {"id": "fixture:view-a", "key": "fixture:shared-question", "authority": "Fixture Authority A", "licence": "A", "disposition": "full", "cite_only": false, "quote": "The source describes an affirmative possibility.", "polarity": "positive", "polarity_reliability": "low"},
+      {"id": "fixture:view-b", "key": "fixture:shared-question", "authority": "Fixture Authority B", "licence": "A", "disposition": "full", "cite_only": false, "quote": "The source describes a different possibility.", "polarity": "negative", "polarity_reliability": "low"}
+    ]
+  }
+}

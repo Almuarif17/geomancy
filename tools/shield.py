@@ -21,10 +21,12 @@ Rules (validated against the reference castings in data/fixtures/):
   16th (Sentence/Reconciler) XVI = XV + MOTHER I      <- not Judge + Left Witness
 """
 
+# Keep the maintainer's canonical naming convention in kb/figures.yaml: Britannica / Golden Dawn gives
+# Puer=1-2-1-1 and Puella=1-1-2-1. The alternate Digital Ambler mapping remains documented there.
 FIGURES = {
     "Via":            [1,1,1,1],  "Populus":        [2,2,2,2],
     "Conjunctio":     [2,1,1,2],  "Carcer":         [1,2,2,1],
-    "Puella":         [1,2,1,1],  "Puer":           [1,1,2,1],
+    "Puella":         [1,1,2,1],  "Puer":           [1,2,1,1],
     "Caput Draconis": [2,1,1,1],  "Cauda Draconis": [1,1,1,2],
     "Fortuna Major":  [2,2,1,1],  "Fortuna Minor":  [1,1,2,2],
     "Rubeus":         [2,1,2,2],  "Albus":          [2,2,1,2],

@@ -81,6 +81,12 @@ jobs:
     - name: Run engine self-checks
       run: python engine/test_deep_read.py
 
+    - name: Atelier position reader v1 contract (fixture, schema, topic and position gates)
+      run: python engine/test_position_reading.py
+
+    - name: JavaScript chart arithmetic
+      run: node web/engine.test.js
+
     - name: Differential verification against the independent oracle
       run: python engine/evaluate.py
 

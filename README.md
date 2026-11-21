@@ -73,6 +73,8 @@ gaps are named) is one edit and a reload. `python3 app/test_app.py` exercises th
 works` in the header prints the eight build stages with live counts, generated from the shipped files, so the
 explanation cannot drift from the thing it explains.
 
+For an additive, model-off API that reads one selected position (and keeps it distinct from the confirmed topic focus), see [Atelier position-reading v1](docs/ATELIER_POSITION_V1.md), its [OpenAPI contract](docs/atelier-position-v1.openapi.yaml), and the runnable [request/response examples](examples/atelier_position_v1_requests.json). The existing applet and its interface are unchanged.
+
 The web reader and phone app (`/m`, also packaged by the Android shell) include a **Research desk**: search
 Internet Archive's public catalogue metadata and GitHub's public repository catalogue, preview repository READMEs,
 and save candidate records to a device-local shelf. Archive search does not fetch book pages or OCR text; even when
