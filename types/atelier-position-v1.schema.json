@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "atelier.position_reading/1",
+  "title": "Atelier position reading v1",
+  "description": "Deterministic reading of one server-derived position in a sixteen-place geomantic chart.",
+  "type": "object",
+  "required": ["schema", "status", "mode_used", "position", "intent", "pattern_convention", "sections", "evidence", "gaps", "disagreements", "limits", "locale", "available_locale", "fallback_reason", "audit_status", "revisions", "model_called"],
+  "properties": {
+    "schema": {"const": "atelier.position_reading/1"},
+    "status": {"enum": ["general", "suggested", "needs_confirmation", "confirmed"]},
+    "mode_used": {"const": "grounded"},
+    "position": {"$ref": "#/$defs/position"},
+    "intent": {"$ref": "#/$defs/intent"},
+    "pattern_convention": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/pattern_convention"}]},
+    "related_position": {"oneOf": [{"type": "null"}, {"type": "object", "required": ["id", "figure", "role", "evidence_ids"], "properties": {"id": {"type": "integer", "minimum": 1, "maximum": 12}, "figure": {"type": "string"}, "role": {"const": "related_position"}, "evidence_ids": {"type": "array", "items": {"type": "string"}}}, "additionalProperties": false}]},
+    "sections": {"type": "array", "items": {"$ref": "#/$defs/section"}},
+    "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}},
+    "gaps": {"type": "array", "items": {"type": "object", "required": ["position", "figure", "reason"], "properties": {"position": {"type": "integer", "minimum": 1, "maximum": 16}, "figure": {"type": "string"}, "reason": {"type": "string"}}, "additionalProperties": false}},
+    "disagreements": {"type": "array", "items": {"$ref": "#/$defs/comparison"}},
+    "limits": {"type": "array", "items": {"type": "string"}},
+    "locale": {"type": "string"},
+    "available_locale": {"type": "string"},
+    "fallback_reason": {"type": ["string", "null"]},
+    "audit_status": {"type": "object", "required": ["ok", "claims", "cited_voice_ids"], "properties": {"ok": {"type": "boolean"}, "claims": {"type": "integer", "minimum": 0}, "cited_voice_ids": {"type": "integer", "minimum": 0}}, "additionalProperties": false},
+    "revisions": {"type": "object", "required": ["engine_revision", "dataset_revision"], "properties": {"engine_revision": {"type": "string"}, "dataset_revision": {"type": "string"}}, "additionalProperties": false},
+    "model_called": {"const": false}
+  },
+  "$defs": {
+    "position": {"type": "object", "required": ["id", "label", "role", "figure", "pattern"], "properties": {"id": {"type": "integer", "minimum": 1, "maximum": 16}, "label": {"type": "string"}, "role": {"enum": ["house", "witness_right", "witness_left", "judge", "reconciler"]}, "figure": {"type": "string"}, "pattern": {"type": "array", "items": {"enum": [1, 2]}, "minItems": 4, "maxItems": 4}}, "additionalProperties": false},
+    "intent": {"type": "object", "required": ["state", "topic", "focus_house", "label", "candidates"], "properties": {"state": {"enum": ["general", "suggested", "needs_confirmation", "confirmed"]}, "topic": {"type": ["string", "null"]}, "focus_house": {"type": ["integer", "null"], "minimum": 1, "maximum": 12}, "label": {"type": "string"}, "candidates": {"type": "array", "items": {"$ref": "#/$defs/candidate"}}, "suggestion": {"$ref": "#/$defs/candidate"}, "notice": {"type": "string"}}, "additionalProperties": true},
+    "candidate": {"type": "object", "required": ["topic", "label", "focus_house"], "properties": {"topic": {"type": "string"}, "label": {"type": "string"}, "focus_house": {"type": ["integer", "null"], "minimum": 1, "maximum": 12}}, "additionalProperties": false},
+    "pattern_convention": {"type": "object", "required": ["status", "canonical_convention", "alternate_convention", "note", "evidence_ids"], "properties": {"status": {"const": "documented_naming_conflict"}, "canonical_convention": {"$ref": "#/$defs/naming_view"}, "alternate_convention": {"$ref": "#/$defs/naming_view"}, "note": {"type": "string"}, "evidence_ids": {"type": "array", "items": {"type": "string"}}}, "additionalProperties": false},
+    "naming_view": {"type": "object", "required": ["name", "patterns"], "properties": {"name": {"type": "string"}, "patterns": {"type": "object", "required": ["Puer", "Puella"], "properties": {"Puer": {"type": "array", "items": {"enum": [1, 2]}, "minItems": 4, "maxItems": 4}, "Puella": {"type": "array", "items": {"enum": [1, 2]}, "minItems": 4, "maxItems": 4}}, "additionalProperties": false}}, "additionalProperties": false},
+    "section": {"type": "object", "required": ["key", "kind", "text", "evidence_ids"], "properties": {"key": {"type": "string"}, "kind": {"enum": ["calculation", "definition", "attributed_claim", "editorial_gloss", "tentative_application"]}, "text": {"type": "string"}, "evidence_ids": {"type": "array", "items": {"type": "string"}}}, "additionalProperties": false},
+    "comparison": {"type": "object", "required": ["key", "status", "note", "source_views"], "properties": {"key": {"type": "string"}, "status": {"const": "unresolved_comparison"}, "note": {"type": "string"}, "source_views": {"type": "array", "items": {"type": "object", "required": ["evidence_id", "authority", "text"], "properties": {"evidence_id": {"type": "string"}, "authority": {"type": "string"}, "text": {"type": "string"}}, "additionalProperties": false}}}, "additionalProperties": false},
+    "evidence": {"type": "object", "required": ["id", "scope", "authority", "work", "through", "locator", "language", "disposition", "permissions", "text", "gloss"], "properties": {"id": {"type": "string"}, "scope": {"enum": ["selected_position", "related_position", "general_figure", "multiple_scopes"]}, "authority": {"type": ["string", "null"]}, "work": {"type": ["string", "null"]}, "through": {"type": ["string", "null"]}, "locator": {"type": ["string", "null"]}, "language": {"type": ["string", "null"]}, "disposition": {"type": ["string", "null"]}, "permissions": {"type": "object", "required": ["licence_bucket", "cite_only", "quote_allowed"], "properties": {"licence_bucket": {"type": ["string", "null"]}, "cite_only": {"type": "boolean"}, "quote_allowed": {"type": "boolean"}}, "additionalProperties": false}, "text": {"type": ["string", "null"]}, "gloss": {"type": ["string", "null"]}}, "additionalProperties": false}
+  },
+  "additionalProperties": false
+}

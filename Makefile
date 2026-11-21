@@ -5,7 +5,7 @@ PY ?= python3
 help:
 	@echo "make build   regenerate library/dataset (jsonl + manifest) from kb/ + extracts"
 	@echo "make check   licence + provenance + schema + engine gates (CI runs this)"
-	@echo "make test    engine checks only (23 assertions, incl. exhaustive over all 65,536 casts)"
+	@echo "make test    engine, shield, JS exhaustiveness, and Atelier v1 position-contract tests"
 	@echo "make read    print a sample reading (markdown) for the demo cast"
 	@echo "make json    print the app-facing JSON reading for the demo cast"
 	@echo "make ocr     example: OCR one page of a scan (set PDF= and PAGE=)"
@@ -29,6 +29,8 @@ check: build
 test:
 	$(PY) engine/test_deep_read.py
 	$(PY) tools/test_shield.py
+	$(PY) engine/test_position_reading.py
+	node web/engine.test.js
 
 read:
 	$(PY) engine/deep_read.py --mothers "Carcer,Amissio,Caput Draconis,Populus" \

@@ -1,0 +1,54 @@
+[
+  {
+    "name": "position-vii-marriage",
+    "request": {
+      "mothers": ["Carcer", "Amissio", "Caput Draconis", "Populus"],
+      "selected_position": 7,
+      "confirmed_topic": "marriage",
+      "locale": "en"
+    }
+  },
+  {
+    "name": "same-vii-tile-wealth-focus",
+    "request": {
+      "mothers": ["Carcer", "Amissio", "Caput Draconis", "Populus"],
+      "selected_position": 7,
+      "confirmed_topic": "wealth_money",
+      "locale": "en"
+    }
+  },
+  {
+    "name": "same-figure-judge-xv",
+    "request": {
+      "mothers": ["Carcer", "Amissio", "Caput Draconis", "Populus"],
+      "selected_position": 15,
+      "confirmed_topic": "marriage",
+      "locale": "en"
+    }
+  },
+  {
+    "name": "missing-positional-source-carcer-i",
+    "request": {
+      "mothers": ["Carcer", "Amissio", "Caput Draconis", "Populus"],
+      "selected_position": 1,
+      "locale": "en"
+    }
+  },
+  {
+    "name": "ambiguous-question-general-fallback",
+    "request": {
+      "mothers": ["Carcer", "Amissio", "Caput Draconis", "Populus"],
+      "selected_position": 7,
+      "question": "Should I accept the job or move house?",
+      "locale": "en"
+    }
+  },
+  {
+    "name": "unresolved-planet-attribution-comparison",
+    "request": {
+      "mothers": ["Puer", "Puer", "Puer", "Puer"],
+      "selected_position": 1,
+      "locale": "en"
+    }
+  }
+]

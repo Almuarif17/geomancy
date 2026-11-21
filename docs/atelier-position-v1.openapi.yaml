@@ -1,0 +1,88 @@
+openapi: 3.1.0
+info:
+  title: Geomancy Atelier position reading API
+  version: 1.0.0
+  description: Additive, deterministic, model-off position reading contract. Existing routes are unchanged.
+paths:
+  /api/v1/read-position:
+    post:
+      operationId: readGeomanticPosition
+      summary: Read one server-derived chart position
+      description: |
+        Recomputes the chart from four ordered canonical Mothers. `selected_position` is 1..16 and is
+        independent from the confirmed topic focus. Raw wording can only suggest a topic; it is never
+        silently confirmed. The endpoint does not call a model or accept client-supplied chart/evidence.
+        Atelier positions XIII and XIV are the right and left witnesses respectively; XVI is the single
+        Reconciler/Sentence. Legacy engine witness keys are translated at this boundary only.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [mothers, selected_position]
+              properties:
+                mothers:
+                  type: array
+                  minItems: 4
+                  maxItems: 4
+                  items:
+                    type: string
+                    description: Canonical figure name; order is I, II, III, IV.
+                selected_position:
+                  type: integer
+                  minimum: 1
+                  maximum: 16
+                confirmed_topic:
+                  type: string
+                  description: A recognized key explicitly selected by the reader. Takes precedence over wording.
+                question:
+                  type: string
+                  maxLength: 2000
+                  description: Optional; processed locally for suggestions and never included in the response or sent to a model.
+                locale:
+                  type: string
+                  default: en
+                  description: English is currently the only available locale; unsupported requests fall back explicitly.
+              additionalProperties: false
+            example:
+              mothers: [Carcer, Amissio, Caput Draconis, Populus]
+              selected_position: 7
+              confirmed_topic: marriage
+              locale: en
+      responses:
+        '200':
+          description: Deterministic position reading, including evidence, gaps, audit and revisions.
+          content:
+            application/json:
+              schema:
+                $ref: '../types/atelier-position-v1.schema.json'
+        '400':
+          description: Invalid input; error.field identifies the rejected field.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [error]
+                properties:
+                  error:
+                    type: object
+                    required: [code, field, message]
+                    properties:
+                      code: {const: invalid_input}
+                      field: {type: string}
+                      message: {type: string}
+        '503':
+          description: Internal evidence audit failed; verified claims are withheld.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code: {const: audit_failed}
+                      message: {type: string}
+                  mode_used: {type: 'null'}
+                  evidence: {type: array, maxItems: 0}

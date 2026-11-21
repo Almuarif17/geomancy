@@ -332,6 +332,64 @@ def main() -> int:
        and txt.strip().endswith("not advice, and not a prediction: these are documented claims by named authorities."),
        f'{txt.count(" dots (")} figure lines; last: {txt.strip().splitlines()[-1][:60] if txt else ""}')
 
+    position_mothers = ["Carcer", "Amissio", "Caput Draconis", "Populus"]
+    code, position_vii = post(port, "/api/v1/read-position", {
+        "mothers": position_mothers, "selected_position": 7, "confirmed_topic": "marriage", "locale": "en"})
+    cite_vii = [e for e in position_vii.get("evidence", [])
+                if e.get("id") == "figure_in_house:Conjunctio:7:calatarama"]
+    ck("v1 returns audited position-seven evidence with its folio and no model", code == 200
+       and position_vii.get("schema") == "atelier.position_reading/1"
+       and position_vii["position"]["figure"] == "Conjunctio"
+       and position_vii["audit_status"]["ok"] and position_vii["model_called"] is False
+       and cite_vii and cite_vii[0]["locator"] == "f.47v (house VII)", str(position_vii)[:160])
+    code, changed_topic = post(port, "/api/v1/read-position", {
+        "mothers": position_mothers, "selected_position": 7, "confirmed_topic": "wealth_money"})
+    related_ii = [e for e in changed_topic.get("evidence", [])
+                  if e.get("id") == "figure_in_house:Amissio:2:calatarama"]
+    ck("v1 topic focus changes to II without recasting the selected VII tile", code == 200
+       and changed_topic["position"]["id"] == position_vii["position"]["id"] == 7
+       and changed_topic["position"]["pattern"] == position_vii["position"]["pattern"]
+       and changed_topic["intent"]["focus_house"] == 2 and related_ii
+       and related_ii[0]["scope"] == "related_position", str(changed_topic.get("intent")))
+    code, judge = post(port, "/api/v1/read-position", {
+        "mothers": position_mothers, "selected_position": 15, "confirmed_topic": "marriage"})
+    ck("v1 distinguishes Judge XV from the same figure at VII", code == 200
+       and judge["position"]["figure"] == "Conjunctio" and judge["position"]["role"] == "judge"
+       and any(g["position"] == 15 for g in judge["gaps"])
+       and not any(e["scope"] == "selected_position" and e["id"] == "figure_in_house:Conjunctio:7:calatarama"
+                   for e in judge["evidence"]), str(judge.get("gaps")))
+    code, gap = post(port, "/api/v1/read-position", {
+        "mothers": position_mothers, "selected_position": 1})
+    ck("v1 reports Carcer in I as a gap without borrowing its general notes", code == 200
+       and any(g["position"] == 1 and g["figure"] == "Carcer" for g in gap["gaps"])
+       and any(e["scope"] == "general_figure" for e in gap["evidence"])
+       and not any(e["scope"] == "selected_position" for e in gap["evidence"]), str(gap.get("gaps")))
+    code, suggested = post(port, "/api/v1/read-position", {
+        "mothers": position_mothers, "selected_position": 7,
+        "question": "not a marriage question; I am asking about our savings"})
+    ck("v1 suggests wealth for savings without silently confirming the reader's raw wording", code == 200
+       and suggested["intent"]["state"] == "suggested"
+       and suggested["intent"]["topic"] is None
+       and suggested["intent"]["suggestion"]["topic"] == "wealth_money" and suggested["model_called"] is False,
+       str(suggested.get("intent")))
+    code, mixed = post(port, "/api/v1/read-position", {
+        "mothers": position_mothers, "selected_position": 7,
+        "question": "Should I accept the job or move house?"})
+    ck("v1 ambiguous intent offers choices and still returns a general tile reading", code == 200
+       and mixed["status"] == "needs_confirmation" and len(mixed["intent"]["candidates"]) >= 2
+       and mixed["position"]["id"] == 7, str(mixed.get("intent")))
+    code, invalid = post(port, "/api/v1/read-position", {
+        "mothers": position_mothers, "selected_position": 17})
+    ck("v1 rejects an invalid position as typed 400 input", code == 400 and
+       isinstance(invalid, dict) and invalid.get("error", {}).get("field") == "selected_position",
+       str(invalid)[:120])
+    code, injected = post(port, "/api/v1/read-position", {
+        "mothers": position_mothers, "selected_position": 7, "judge": "Via",
+        "evidence": ["client-supplied claim"]})
+    ck("v1 rejects client-supplied chart/evidence fields instead of trusting them", code == 400
+       and isinstance(injected, dict) and injected.get("error", {}).get("field") == "evidence",
+       str(injected)[:120])
+
     code, err = get(port, "/api/nope")
     ck("unknown route is JSON 404, not an HTML traceback", code == 404, str(err)[:80])
 

@@ -600,6 +600,27 @@ class H(BaseHTTPRequestHandler):
         except Exception as e:                                  # noqa: BLE001
             return self.json_out({"error": f"body must be JSON: {e}"}, 400)
         try:
+            if u.path == "/api/v1/read-position":
+                if not isinstance(body, dict):
+                    return self.json_out({"error": {"code": "invalid_input", "field": "body",
+                                                     "message": "request body must be a JSON object"}}, 400)
+                from engine import position_reading as PR
+                unexpected = sorted(set(body) - {"mothers", "selected_position", "confirmed_topic", "question", "locale"})
+                if unexpected:
+                    return self.json_out({"error": {"code": "invalid_input", "field": unexpected[0],
+                                                     "message": "field is not accepted by the v1 contract"}}, 400)
+                try:
+                    result = PR.render_position(
+                        body.get("mothers"), body.get("selected_position"),
+                        topic=body.get("confirmed_topic"), question=body.get("question"),
+                        locale=body.get("locale", "en"))
+                except PR.InputError as e:
+                    return self.json_out({"error": {"code": "invalid_input", "field": e.field,
+                                                     "message": str(e)}}, 400)
+                except RuntimeError as e:
+                    return self.json_out({"error": {"code": "audit_failed", "message": str(e)},
+                                          "mode_used": None, "evidence": []}, 503)
+                return self.json_out(result)
             if u.path == "/api/cast_from_rows":
                 if "rows" in body:
                     values = rows_to_values(body["rows"])
